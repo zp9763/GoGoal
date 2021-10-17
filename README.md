@@ -1,2 +1,2 @@
-# CMU-67743
-Mobile App Project of Team 17
+# GoGoal
+Mobile app project of CMU 67743 course built by team 17.
