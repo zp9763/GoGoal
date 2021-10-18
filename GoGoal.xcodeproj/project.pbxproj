@@ -3,19 +3,22 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 51;
 	objects = {
 
 /* Begin PBXBuildFile section */
+		39B09B685F652E8DE351C003 /* Pods_GoGoal.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E984E783F86CBF2A328AC6CD /* Pods_GoGoal.framework */; };
 		5773B50B271CC0360029A220 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5773B50A271CC0360029A220 /* AppDelegate.swift */; };
 		5773B50D271CC0360029A220 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5773B50C271CC0360029A220 /* SceneDelegate.swift */; };
 		5773B50F271CC0360029A220 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5773B50E271CC0360029A220 /* ContentView.swift */; };
 		5773B511271CC0370029A220 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5773B510271CC0370029A220 /* Assets.xcassets */; };
 		5773B514271CC0370029A220 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5773B513271CC0370029A220 /* Preview Assets.xcassets */; };
 		5773B517271CC0370029A220 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5773B515271CC0370029A220 /* LaunchScreen.storyboard */; };
+		5773B51F271D01FA0029A220 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 5773B51E271D01FA0029A220 /* GoogleService-Info.plist */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		0EA69621C149F45D0491840F /* Pods-GoGoal.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GoGoal.release.xcconfig"; path = "Target Support Files/Pods-GoGoal/Pods-GoGoal.release.xcconfig"; sourceTree = "<group>"; };
 		5773B507271CC0360029A220 /* GoGoal.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GoGoal.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5773B50A271CC0360029A220 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		5773B50C271CC0360029A220 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -24,6 +27,9 @@
 		5773B513271CC0370029A220 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		5773B516271CC0370029A220 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		5773B518271CC0370029A220 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		5773B51E271D01FA0029A220 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		E984E783F86CBF2A328AC6CD /* Pods_GoGoal.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_GoGoal.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		F3797C70DBDFB3D9A8D814F6 /* Pods-GoGoal.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GoGoal.debug.xcconfig"; path = "Target Support Files/Pods-GoGoal/Pods-GoGoal.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -31,17 +37,37 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				39B09B685F652E8DE351C003 /* Pods_GoGoal.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		159F90CB266B5A6C0C05BE5F /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				E984E783F86CBF2A328AC6CD /* Pods_GoGoal.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		49280052E753AFF43E54CF4A /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				F3797C70DBDFB3D9A8D814F6 /* Pods-GoGoal.debug.xcconfig */,
+				0EA69621C149F45D0491840F /* Pods-GoGoal.release.xcconfig */,
+			);
+			path = Pods;
+			sourceTree = "<group>";
+		};
 		5773B4FE271CC0360029A220 = {
 			isa = PBXGroup;
 			children = (
 				5773B509271CC0360029A220 /* GoGoal */,
 				5773B508271CC0360029A220 /* Products */,
+				49280052E753AFF43E54CF4A /* Pods */,
+				159F90CB266B5A6C0C05BE5F /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -56,6 +82,7 @@
 		5773B509271CC0360029A220 /* GoGoal */ = {
 			isa = PBXGroup;
 			children = (
+				5773B51E271D01FA0029A220 /* GoogleService-Info.plist */,
 				5773B50A271CC0360029A220 /* AppDelegate.swift */,
 				5773B50C271CC0360029A220 /* SceneDelegate.swift */,
 				5773B50E271CC0360029A220 /* ContentView.swift */,
@@ -82,9 +109,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 5773B51B271CC0370029A220 /* Build configuration list for PBXNativeTarget "GoGoal" */;
 			buildPhases = (
+				B28A6D1C5258B49E6BE969FD /* [CP] Check Pods Manifest.lock */,
 				5773B503271CC0360029A220 /* Sources */,
 				5773B504271CC0360029A220 /* Frameworks */,
 				5773B505271CC0360029A220 /* Resources */,
+				A3B1376C846E371484C4BC56 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -133,12 +162,55 @@
 			buildActionMask = 2147483647;
 			files = (
 				5773B517271CC0370029A220 /* LaunchScreen.storyboard in Resources */,
+				5773B51F271D01FA0029A220 /* GoogleService-Info.plist in Resources */,
 				5773B514271CC0370029A220 /* Preview Assets.xcassets in Resources */,
 				5773B511271CC0370029A220 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		A3B1376C846E371484C4BC56 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-GoGoal/Pods-GoGoal-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-GoGoal/Pods-GoGoal-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-GoGoal/Pods-GoGoal-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		B28A6D1C5258B49E6BE969FD /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-GoGoal-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		5773B503271CC0360029A220 /* Sources */ = {
@@ -202,6 +274,7 @@
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
+				EXCLUDED_ARCHS = arm64;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_NO_COMMON_BLOCKS = YES;
@@ -263,6 +336,7 @@
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				EXCLUDED_ARCHS = arm64;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
@@ -283,6 +357,7 @@
 		};
 		5773B51C271CC0370029A220 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = F3797C70DBDFB3D9A8D814F6 /* Pods-GoGoal.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -304,6 +379,7 @@
 		};
 		5773B51D271CC0370029A220 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 0EA69621C149F45D0491840F /* Pods-GoGoal.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
