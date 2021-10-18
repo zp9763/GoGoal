@@ -15,6 +15,11 @@
 		5773B514271CC0370029A220 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5773B513271CC0370029A220 /* Preview Assets.xcassets */; };
 		5773B517271CC0370029A220 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5773B515271CC0370029A220 /* LaunchScreen.storyboard */; };
 		5773B51F271D01FA0029A220 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 5773B51E271D01FA0029A220 /* GoogleService-Info.plist */; };
+		5773B525271D0AAB0029A220 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5773B524271D0AAB0029A220 /* User.swift */; };
+		5773B529271D132D0029A220 /* UserService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5773B528271D132D0029A220 /* UserService.swift */; };
+		5773B52D271D13D00029A220 /* CollectionEnum.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5773B52C271D13D00029A220 /* CollectionEnum.swift */; };
+		5773B530271D1B990029A220 /* FirestoreDecoder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5773B52F271D1B990029A220 /* FirestoreDecoder.swift */; };
+		5773B532271D22DD0029A220 /* ModelRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5773B531271D22DD0029A220 /* ModelRepository.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -28,6 +33,11 @@
 		5773B516271CC0370029A220 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		5773B518271CC0370029A220 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		5773B51E271D01FA0029A220 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		5773B524271D0AAB0029A220 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
+		5773B528271D132D0029A220 /* UserService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserService.swift; sourceTree = "<group>"; };
+		5773B52C271D13D00029A220 /* CollectionEnum.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionEnum.swift; sourceTree = "<group>"; };
+		5773B52F271D1B990029A220 /* FirestoreDecoder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirestoreDecoder.swift; sourceTree = "<group>"; };
+		5773B531271D22DD0029A220 /* ModelRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModelRepository.swift; sourceTree = "<group>"; };
 		E984E783F86CBF2A328AC6CD /* Pods_GoGoal.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_GoGoal.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		F3797C70DBDFB3D9A8D814F6 /* Pods-GoGoal.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GoGoal.debug.xcconfig"; path = "Target Support Files/Pods-GoGoal/Pods-GoGoal.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -65,9 +75,9 @@
 			isa = PBXGroup;
 			children = (
 				5773B509271CC0360029A220 /* GoGoal */,
+				159F90CB266B5A6C0C05BE5F /* Frameworks */,
 				5773B508271CC0360029A220 /* Products */,
 				49280052E753AFF43E54CF4A /* Pods */,
-				159F90CB266B5A6C0C05BE5F /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -82,12 +92,15 @@
 		5773B509271CC0360029A220 /* GoGoal */ = {
 			isa = PBXGroup;
 			children = (
-				5773B51E271D01FA0029A220 /* GoogleService-Info.plist */,
-				5773B50A271CC0360029A220 /* AppDelegate.swift */,
-				5773B50C271CC0360029A220 /* SceneDelegate.swift */,
-				5773B50E271CC0360029A220 /* ContentView.swift */,
+				5773B521271D06BC0029A220 /* Delegates */,
+				5773B522271D06D30029A220 /* Views */,
+				5773B523271D07AD0029A220 /* ViewModels */,
+				5773B527271D0DE00029A220 /* Services */,
+				5773B520271D05F10029A220 /* Models */,
+				5773B52E271D198B0029A220 /* Utilities */,
 				5773B510271CC0370029A220 /* Assets.xcassets */,
 				5773B515271CC0370029A220 /* LaunchScreen.storyboard */,
+				5773B51E271D01FA0029A220 /* GoogleService-Info.plist */,
 				5773B518271CC0370029A220 /* Info.plist */,
 				5773B512271CC0370029A220 /* Preview Content */,
 			);
@@ -100,6 +113,56 @@
 				5773B513271CC0370029A220 /* Preview Assets.xcassets */,
 			);
 			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		5773B520271D05F10029A220 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				5773B524271D0AAB0029A220 /* User.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		5773B521271D06BC0029A220 /* Delegates */ = {
+			isa = PBXGroup;
+			children = (
+				5773B50A271CC0360029A220 /* AppDelegate.swift */,
+				5773B50C271CC0360029A220 /* SceneDelegate.swift */,
+			);
+			path = Delegates;
+			sourceTree = "<group>";
+		};
+		5773B522271D06D30029A220 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				5773B50E271CC0360029A220 /* ContentView.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		5773B523271D07AD0029A220 /* ViewModels */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = ViewModels;
+			sourceTree = "<group>";
+		};
+		5773B527271D0DE00029A220 /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				5773B528271D132D0029A220 /* UserService.swift */,
+			);
+			path = Services;
+			sourceTree = "<group>";
+		};
+		5773B52E271D198B0029A220 /* Utilities */ = {
+			isa = PBXGroup;
+			children = (
+				5773B52C271D13D00029A220 /* CollectionEnum.swift */,
+				5773B52F271D1B990029A220 /* FirestoreDecoder.swift */,
+				5773B531271D22DD0029A220 /* ModelRepository.swift */,
+			);
+			path = Utilities;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -217,7 +280,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5773B525271D0AAB0029A220 /* User.swift in Sources */,
+				5773B532271D22DD0029A220 /* ModelRepository.swift in Sources */,
+				5773B529271D132D0029A220 /* UserService.swift in Sources */,
 				5773B50B271CC0360029A220 /* AppDelegate.swift in Sources */,
+				5773B530271D1B990029A220 /* FirestoreDecoder.swift in Sources */,
+				5773B52D271D13D00029A220 /* CollectionEnum.swift in Sources */,
 				5773B50D271CC0360029A220 /* SceneDelegate.swift in Sources */,
 				5773B50F271CC0360029A220 /* ContentView.swift in Sources */,
 			);
