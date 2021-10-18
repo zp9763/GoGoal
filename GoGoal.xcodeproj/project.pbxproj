@@ -19,7 +19,9 @@
 		5773B529271D132D0029A220 /* UserService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5773B528271D132D0029A220 /* UserService.swift */; };
 		5773B52D271D13D00029A220 /* CollectionEnum.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5773B52C271D13D00029A220 /* CollectionEnum.swift */; };
 		5773B530271D1B990029A220 /* FirestoreDecoder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5773B52F271D1B990029A220 /* FirestoreDecoder.swift */; };
-		5773B532271D22DD0029A220 /* ModelRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5773B531271D22DD0029A220 /* ModelRepository.swift */; };
+		5773B532271D22DD0029A220 /* BaseRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5773B531271D22DD0029A220 /* BaseRepository.swift */; };
+		5773B534271DF2C50029A220 /* QueryHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5773B533271DF2C50029A220 /* QueryHelper.swift */; };
+		5773B537271DF9BE0029A220 /* InitSampleData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5773B536271DF9BE0029A220 /* InitSampleData.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -37,7 +39,9 @@
 		5773B528271D132D0029A220 /* UserService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserService.swift; sourceTree = "<group>"; };
 		5773B52C271D13D00029A220 /* CollectionEnum.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionEnum.swift; sourceTree = "<group>"; };
 		5773B52F271D1B990029A220 /* FirestoreDecoder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirestoreDecoder.swift; sourceTree = "<group>"; };
-		5773B531271D22DD0029A220 /* ModelRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModelRepository.swift; sourceTree = "<group>"; };
+		5773B531271D22DD0029A220 /* BaseRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseRepository.swift; sourceTree = "<group>"; };
+		5773B533271DF2C50029A220 /* QueryHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QueryHelper.swift; sourceTree = "<group>"; };
+		5773B536271DF9BE0029A220 /* InitSampleData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InitSampleData.swift; sourceTree = "<group>"; };
 		E984E783F86CBF2A328AC6CD /* Pods_GoGoal.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_GoGoal.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		F3797C70DBDFB3D9A8D814F6 /* Pods-GoGoal.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GoGoal.debug.xcconfig"; path = "Target Support Files/Pods-GoGoal/Pods-GoGoal.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -96,8 +100,9 @@
 				5773B522271D06D30029A220 /* Views */,
 				5773B523271D07AD0029A220 /* ViewModels */,
 				5773B527271D0DE00029A220 /* Services */,
+				5773B52E271D198B0029A220 /* Repositories */,
 				5773B520271D05F10029A220 /* Models */,
-				5773B52E271D198B0029A220 /* Utilities */,
+				5773B535271DF9A30029A220 /* Utilities */,
 				5773B510271CC0370029A220 /* Assets.xcassets */,
 				5773B515271CC0370029A220 /* LaunchScreen.storyboard */,
 				5773B51E271D01FA0029A220 /* GoogleService-Info.plist */,
@@ -155,12 +160,21 @@
 			path = Services;
 			sourceTree = "<group>";
 		};
-		5773B52E271D198B0029A220 /* Utilities */ = {
+		5773B52E271D198B0029A220 /* Repositories */ = {
 			isa = PBXGroup;
 			children = (
 				5773B52C271D13D00029A220 /* CollectionEnum.swift */,
 				5773B52F271D1B990029A220 /* FirestoreDecoder.swift */,
-				5773B531271D22DD0029A220 /* ModelRepository.swift */,
+				5773B531271D22DD0029A220 /* BaseRepository.swift */,
+				5773B533271DF2C50029A220 /* QueryHelper.swift */,
+			);
+			path = Repositories;
+			sourceTree = "<group>";
+		};
+		5773B535271DF9A30029A220 /* Utilities */ = {
+			isa = PBXGroup;
+			children = (
+				5773B536271DF9BE0029A220 /* InitSampleData.swift */,
 			);
 			path = Utilities;
 			sourceTree = "<group>";
@@ -281,9 +295,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				5773B525271D0AAB0029A220 /* User.swift in Sources */,
-				5773B532271D22DD0029A220 /* ModelRepository.swift in Sources */,
+				5773B532271D22DD0029A220 /* BaseRepository.swift in Sources */,
 				5773B529271D132D0029A220 /* UserService.swift in Sources */,
+				5773B537271DF9BE0029A220 /* InitSampleData.swift in Sources */,
 				5773B50B271CC0360029A220 /* AppDelegate.swift in Sources */,
+				5773B534271DF2C50029A220 /* QueryHelper.swift in Sources */,
 				5773B530271D1B990029A220 /* FirestoreDecoder.swift in Sources */,
 				5773B52D271D13D00029A220 /* CollectionEnum.swift in Sources */,
 				5773B50D271CC0360029A220 /* SceneDelegate.swift in Sources */,

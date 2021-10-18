@@ -1,5 +1,5 @@
 //
-//  Collection.swift
+//  CollectionEnum.swift
 //  GoGoal
 //
 //  Created by Peng Zhao on 10/17/21.

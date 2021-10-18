@@ -1,5 +1,5 @@
 //
-//  ModelRepository.swift
+//  BaseRepository.swift
 //  GoGoal
 //
 //  Created by Peng Zhao on 10/17/21.
@@ -7,7 +7,7 @@
 
 import FirebaseFirestore
 
-class ModelRepository<T: Codable & Identifiable> {
+class BaseRepository<T: Codable & Identifiable> {
   
   let rootRef: CollectionReference
   
@@ -33,12 +33,12 @@ class ModelRepository<T: Codable & Identifiable> {
     return objects
   }
   
-  func getById(_ id: String) -> T? {
+  func getById(id: String) -> T? {
     var object: T?
     
     rootRef.document(id).getDocument() { (document, err) in
       if let err = err {
-        print("Error get documents: \(err)")
+        print("Error get document: \(err)")
       } else {
         object = FirestoreDecoder.decode(document)
       }
@@ -47,20 +47,44 @@ class ModelRepository<T: Codable & Identifiable> {
     return object
   }
   
-  func addOrUpdate(_ object: T) {
+  func createOrUpdate(object: T) {
     do {
       try rootRef.document(object.id as! String).setData(from: object)
     } catch let err {
-      print("Error add or update document: \(err)")
+      print("Error create or update document: \(err)")
     }
   }
   
-  func deleteById(_ id: String) {
+  func deleteById(id: String) {
     rootRef.document(id).delete() { err in
       if let err = err {
         print("Error delete documents: \(err)")
       }
     }
+  }
+  
+  func queryByFields(conditions: [QueryCondition]) -> [T] {
+    var queryRef = rootRef as Query
+    
+    for condition in conditions {
+      queryRef = queryRef.applyCondition(condition)
+    }
+    
+    var objects = [T]()
+    
+    queryRef.getDocuments() { snapshot, err in
+      if let err = err {
+        print("Error get documents: \(err)")
+      } else {
+        for document in snapshot!.documents {
+          if let object: T = FirestoreDecoder.decode(document) {
+            objects.append(object)
+          }
+        }
+      }
+    }
+    
+    return objects
   }
   
 }

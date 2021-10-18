@@ -8,10 +8,25 @@
 import SwiftUI
 
 struct ContentView: View {
+  
   var body: some View {
-    Text("Hello, world!")
-      .padding()
+    VStack {
+      Spacer()
+      Button(action: {
+        InitSampleData.createUser()
+      }, label: {
+        Text("createUser")
+      })
+      Spacer()
+      Button(action: {
+        InitSampleData.getAllUser()
+      }, label: {
+        Text("getAllUser")
+      })
+      Spacer()
+    }
   }
+  
 }
 
 struct ContentView_Previews: PreviewProvider {
