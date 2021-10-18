@@ -12,17 +12,49 @@ struct ContentView: View {
   var body: some View {
     VStack {
       Spacer()
-      Button(action: {
-        InitSampleData.createUser()
-      }, label: {
-        Text("createUser")
-      })
+
+      Group {
+        Button(action: {
+          InitSampleData.createUser()
+        }, label: {
+          Text("createUser")
+        })
+        Spacer()
+        Button(action: {
+          InitSampleData.getAllUser()
+        }, label: {
+          Text("getAllUser")
+        })
+        Spacer()
+        Button(action: {
+          InitSampleData.getById()
+        }, label: {
+          Text("getById")
+        })
+      }
+      
       Spacer()
-      Button(action: {
-        InitSampleData.getAllUser()
-      }, label: {
-        Text("getAllUser")
-      })
+
+      Group{
+        Button(action: {
+          InitSampleData.updateUser()
+        }, label: {
+          Text("updateUser")
+        })
+        Spacer()
+        Button(action: {
+          InitSampleData.deleteById()
+        }, label: {
+          Text("deleteById")
+        })
+        Spacer()
+        Button(action: {
+          InitSampleData.queryUserByLastName()
+        }, label: {
+          Text("queryUserByLastName")
+        })
+      }
+      
       Spacer()
     }
   }

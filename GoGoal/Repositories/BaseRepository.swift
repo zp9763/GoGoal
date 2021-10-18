@@ -15,7 +15,7 @@ class BaseRepository<T: Codable & Identifiable> {
     self.rootRef = rootRef
   }
   
-  func getAll() -> [T] {
+  func getAll(_ completion: @escaping ([T]) -> Void) {
     var objects = [T]()
     
     rootRef.getDocuments() { snapshot, err in
@@ -27,13 +27,12 @@ class BaseRepository<T: Codable & Identifiable> {
             objects.append(object)
           }
         }
+        completion(objects)
       }
     }
-    
-    return objects
   }
   
-  func getById(id: String) -> T? {
+  func getById(id: String, _ completion: @escaping (T?) -> Void) {
     var object: T?
     
     rootRef.document(id).getDocument() { (document, err) in
@@ -41,10 +40,9 @@ class BaseRepository<T: Codable & Identifiable> {
         print("Error get document: \(err)")
       } else {
         object = FirestoreDecoder.decode(document)
+        completion(object)
       }
     }
-    
-    return object
   }
   
   func createOrUpdate(object: T) {
@@ -63,7 +61,7 @@ class BaseRepository<T: Codable & Identifiable> {
     }
   }
   
-  func queryByFields(conditions: [QueryCondition]) -> [T] {
+  func queryByFields(_ conditions: [QueryCondition], _ completion: @escaping ([T]) -> Void) {
     var queryRef = rootRef as Query
     
     for condition in conditions {
@@ -81,10 +79,9 @@ class BaseRepository<T: Codable & Identifiable> {
             objects.append(object)
           }
         }
+        completion(objects)
       }
     }
-    
-    return objects
   }
   
 }

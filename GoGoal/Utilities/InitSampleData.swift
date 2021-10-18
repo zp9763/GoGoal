@@ -9,18 +9,42 @@ class InitSampleData {
   
   static let userService = UserService()
   
+  static var user = User(
+    email: "pzhao2@andrew.cmu.edu",
+    firstName: "Peng",
+    lastName: "Zhao",
+    avatarUrl: nil
+  )
+  
   static func createUser() {
-    userService.createOrUpdate(object: User(
-      email: "zp9763@gmail.com",
-      firstName: "Peng",
-      lastName: "Zhao",
-      avatarUrl: nil
-    ))
+    userService.createOrUpdate(object: user)
   }
   
   static func getAllUser() {
-    let users = userService.getAll()
-    print(users)
+    userService.getAll() { users in
+      print(users)
+    }
   }
   
+  static func getById() {
+    userService.getById(id: user.id!) { user in
+      print(user ?? "not found!")
+    }
+  }
+  
+  static func updateUser() {
+    user.email = "pzhao2@cmu.edu"
+    userService.createOrUpdate(object: user)
+  }
+  
+  static func deleteById() {
+    userService.deleteById(id: user.id!)
+  }
+  
+  static func queryUserByLastName() {
+    userService.queryByLastName(lastName: "Zhao") { users in
+      print(users)
+    }
+  }
+
 }
