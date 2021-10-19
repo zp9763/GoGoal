@@ -41,10 +41,12 @@ class InitSampleData {
     userService.deleteById(id: user.id!)
   }
   
-  static func queryUserByLastName() {
-    userService.queryByLastName(lastName: "Zhao") { users in
+  static func queryUserByName() {
+    userService.queryByName(
+      firstName: "Peng", lastName: "Zhao"
+    ) { users in
       print(users)
     }
   }
-
+  
 }

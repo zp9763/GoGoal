@@ -49,9 +49,9 @@ struct ContentView: View {
         })
         Spacer()
         Button(action: {
-          InitSampleData.queryUserByLastName()
+          InitSampleData.queryUserByName()
         }, label: {
-          Text("queryUserByLastName")
+          Text("queryUserByName")
         })
       }
       

@@ -16,8 +16,10 @@ class UserService: BaseRepository<User> {
     super.init(db.collection(.users))
   }
   
-  func queryByLastName(lastName: String, _ completion: @escaping ([User]) -> Void) {
+  func queryByName(firstName: String, lastName: String,
+                   _ completion: @escaping ([User]) -> Void) {
     let conditions = [
+      QueryCondition(field: "firstName", predicate: .equal, value: firstName),
       QueryCondition(field: "lastName", predicate: .equal, value: lastName)
     ]
     queryByFields(conditions, completion)
