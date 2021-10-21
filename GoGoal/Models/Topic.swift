@@ -11,5 +11,5 @@ import FirebaseFirestoreSwift
 struct Topic: Codable, Identifiable {
   @DocumentID var id: String? = UUID().uuidString
   var name: String
-  var color: String = "black"
+  var iconUrl: String?
 }
