@@ -11,15 +11,14 @@ struct GoalListView: View {
   
   @ObservedObject var viewModel: ViewModel
   
-  @State var displayedGoals = [Goal]()
+//  @State var displayedGoals = [Goal]()
   
   var body: some View {
-    Text("Hello, World!")
-      .onAppear(perform: {
-        viewModel.fetchUserGoals()
-        displayedGoals = Array(viewModel.goalDict.values)
-        print(displayedGoals)
-      })
+    List {
+      ForEach(viewModel.goalList) { goal in
+        Text(goal.title)
+      }
+    }.onAppear(perform: viewModel.fetchUserGoals)
   }
 }
 

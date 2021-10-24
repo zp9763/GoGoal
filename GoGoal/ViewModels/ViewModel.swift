@@ -10,21 +10,18 @@ import Foundation
 class ViewModel: ObservableObject {
   
   @Published var user: User
-  @Published var goalDict = [String: Goal]()
+  @Published var goalList = [Goal]()
+  
+  private let userService = UserService()
+  private let goalService = GoalService()
   
   init(user: User) {
     self.user = user
   }
   
-  private let userService = UserService()
-  private let goalService = GoalService()
-  
   func fetchUserGoals() {
     goalService.getByUserId(userId: user.id!) { goalList in
-      for goal in goalList {
-        self.goalDict[goal.id!] = goal
-      }
-      print(self.goalDict)
+      self.goalList = goalList
     }
   }
   
