@@ -16,4 +16,8 @@ class GoalService: BaseRepository<Goal> {
     super.init(db.collection(.goals))
   }
   
+  func getByUserId(userId: String, _ completion: @escaping ([Goal]) -> Void) {
+    let conditions = [QueryCondition(field: "userId", predicate: .equal, value: userId)]
+    queryByFields(conditions, completion)
+  }
 }

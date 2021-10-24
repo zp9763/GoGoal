@@ -8,13 +8,24 @@
 import SwiftUI
 
 struct GoalListView: View {
-    var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
-    }
+  
+  @ObservedObject var viewModel: ViewModel
+  
+  @State var displayedGoals = [Goal]()
+  
+  var body: some View {
+    Text("Hello, World!")
+      .onAppear(perform: {
+        viewModel.fetchUserGoals()
+        displayedGoals = Array(viewModel.goalDict.values)
+        print(displayedGoals)
+      })
+  }
 }
 
 struct GoalListView_Previews: PreviewProvider {
-    static var previews: some View {
-        GoalListView()
-    }
+  static var previews: some View {
+    let user = InitSampleData.user
+    GoalListView(viewModel: ViewModel(user: user))
+  }
 }

@@ -15,5 +15,9 @@ class TopicService: BaseRepository<Topic> {
     db = Firestore.firestore()
     super.init(db.collection(.topics))
   }
-
+  
+  func getByName(name: String, _ completion: @escaping ([Topic]) -> Void) {
+    let conditions = [QueryCondition(field: "name", predicate: .equal, value: name)]
+    queryByFields(conditions, completion)
+  }
 }

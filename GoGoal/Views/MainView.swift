@@ -7,62 +7,32 @@
 
 import SwiftUI
 
-struct ContentView: View {
+struct MainView: View {
+  
+  @ObservedObject var viewModel = ViewModel(user: InitSampleData.user)
   
   var body: some View {
-    VStack {
-      Spacer()
-
-      Group {
-        Button(action: {
-          InitSampleData.createUser()
-        }, label: {
-          Text("createUser")
-        })
-        Spacer()
-        Button(action: {
-          InitSampleData.getAllUser()
-        }, label: {
-          Text("getAllUser")
-        })
-        Spacer()
-        Button(action: {
-          InitSampleData.getById()
-        }, label: {
-          Text("getById")
-        })
-      }
+    TabView {
+      GoalListView(viewModel: viewModel)
+        .tabItem {
+          Label("Goals", systemImage: "list.dash")
+        }
       
-      Spacer()
-
-      Group{
-        Button(action: {
-          InitSampleData.updateUser()
-        }, label: {
-          Text("updateUser")
-        })
-        Spacer()
-        Button(action: {
-          InitSampleData.deleteById()
-        }, label: {
-          Text("deleteById")
-        })
-        Spacer()
-        Button(action: {
-          InitSampleData.queryUserByName()
-        }, label: {
-          Text("queryUserByName")
-        })
-      }
+      CommunityView()
+        .tabItem {
+          Label("Community", systemImage: "list.dash")
+        }
       
-      Spacer()
-    }
+      ProfileView(viewModel: viewModel)
+        .tabItem {
+          Label("Profile", systemImage: "list.dash")
+        }
+    }.onAppear(perform: InitSampleData.trigger)
   }
-  
 }
 
-struct ContentView_Previews: PreviewProvider {
+struct MainView_Previews: PreviewProvider {
   static var previews: some View {
-    ContentView()
+    MainView()
   }
 }

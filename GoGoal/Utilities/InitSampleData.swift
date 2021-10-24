@@ -8,44 +8,43 @@
 class InitSampleData {
   
   static let userService = UserService()
+  static let topicService = TopicService()
+  static let goalService = GoalService()
   
   static var user = User(
-    email: "sihanc@andrew.cmu.edu",
-    firstName: "Sihan",
-    lastName: "Chen",
-    avatarUrl: nil
+    email: "testuser@example.com",
+    firstName: "Test",
+    lastName: "User"
   )
   
-  static func createUser() {
-    userService.createOrUpdate(object: user)
-  }
+  static var goals = [Goal]()
   
-  static func getAllUser() {
-    userService.getAll() { users in
-      print(users)
+  static func trigger() {
+    var leetCodeTopic: Topic? = nil
+    InitSampleData.topicService.getByName(name: "LeetCode") {
+      topicList in leetCodeTopic = topicList[0]
     }
-  }
-  
-  static func getById() {
-    userService.getById(id: user.id!) { user in
-      print(user ?? "not found!")
-    }
-  }
-  
-  static func updateUser() {
-    user.email = "sihanc@cmu.edu"
-    userService.createOrUpdate(object: user)
-  }
-  
-  static func deleteById() {
-    userService.deleteById(id: user.id!)
-  }
-  
-  static func queryUserByName() {
-    userService.queryByName(
-      firstName: "Sihan", lastName: "Chen"
-    ) { users in
-      print(users)
+    
+    InitSampleData.goals = [
+      Goal(userId: InitSampleData.user.id!,
+           topicId: leetCodeTopic!.id!,
+           title: "learn binary search",
+           description: "some sentences",
+           duration: 10),
+      Goal(userId: InitSampleData.user.id!,
+           topicId: leetCodeTopic!.id!,
+           title: "learn priority queue",
+           description: "some sentences",
+           duration: 20),
+      Goal(userId: InitSampleData.user.id!,
+           topicId: leetCodeTopic!.id!,
+           title: "learn BST",
+           description: "some sentences",
+           duration: 30)
+    ]
+    
+    for goal in InitSampleData.goals {
+      InitSampleData.goalService.createOrUpdate(object: goal)
     }
   }
   
