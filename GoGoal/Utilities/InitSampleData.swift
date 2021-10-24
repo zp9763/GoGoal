@@ -10,9 +10,9 @@ class InitSampleData {
   static let userService = UserService()
   
   static var user = User(
-    email: "pzhao2@andrew.cmu.edu",
-    firstName: "Peng",
-    lastName: "Zhao",
+    email: "sihanc@andrew.cmu.edu",
+    firstName: "Sihan",
+    lastName: "Chen",
     avatarUrl: nil
   )
   
@@ -33,7 +33,7 @@ class InitSampleData {
   }
   
   static func updateUser() {
-    user.email = "pzhao2@cmu.edu"
+    user.email = "sihanc@cmu.edu"
     userService.createOrUpdate(object: user)
   }
   
@@ -43,7 +43,7 @@ class InitSampleData {
   
   static func queryUserByName() {
     userService.queryByName(
-      firstName: "Peng", lastName: "Zhao"
+      firstName: "Sihan", lastName: "Chen"
     ) { users in
       print(users)
     }
