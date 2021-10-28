@@ -12,13 +12,13 @@ struct ProfileView: View {
   @ObservedObject var viewModel: ViewModel
   
   var body: some View {
-    Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+    Text("Hello, World!")
   }
 }
 
 struct ProfileView_Previews: PreviewProvider {
   static var previews: some View {
-    let user = InitSampleData.user
+    let user = GenSampleData.user
     ProfileView(viewModel: ViewModel(user: user))
   }
 }

@@ -16,6 +16,5 @@ struct Post: Codable, Identifiable {
   var content: String?
   var photoUrls: [String]?
   var createDate: Timestamp = Timestamp.init()
-  // TODO: try automatic serialization with subcollection
-  var likes: [Like]?
+  var likes: [String: Like]?
 }

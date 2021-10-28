@@ -9,7 +9,7 @@ import SwiftUI
 
 struct MainView: View {
   
-  @ObservedObject var viewModel = ViewModel(user: InitSampleData.user)
+  @ObservedObject var viewModel = ViewModel(user: GenSampleData.user)
   
   var body: some View {
     TabView {
@@ -27,7 +27,8 @@ struct MainView: View {
         .tabItem {
           Label("Profile", systemImage: "list.dash")
         }
-    }.onAppear(perform: InitSampleData.trigger)
+    }
+    .onAppear(perform: GenSampleData.setUp)
   }
 }
 
