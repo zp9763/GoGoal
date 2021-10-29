@@ -11,8 +11,6 @@ struct GoalListView: View {
   
   @ObservedObject var viewModel: ViewModel
   
-//  @State var displayedGoals = [Goal]()
-  
   var body: some View {
     List {
       ForEach(viewModel.goalList) { goal in
@@ -24,7 +22,7 @@ struct GoalListView: View {
 
 struct GoalListView_Previews: PreviewProvider {
   static var previews: some View {
-    let user = InitSampleData.user
+    let user = GenSampleData.user
     GoalListView(viewModel: ViewModel(user: user))
   }
 }

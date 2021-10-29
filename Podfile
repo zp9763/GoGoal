@@ -10,6 +10,7 @@
    # Pods for HelloFirestore
    pod 'Firebase/Core', :inhibit_warnings => true
    pod 'Firebase/Firestore', :inhibit_warnings => true
+   pod 'Firebase/Storage', :inhibit_warnings => true
    pod 'Firebase/Auth', :inhibit_warnings => true
    pod 'Firebase/Analytics', :inhibit_warnings => true
    pod 'FirebaseFirestoreSwift', '8.8.0-beta'

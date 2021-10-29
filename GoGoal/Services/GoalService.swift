@@ -17,7 +17,16 @@ class GoalService: BaseRepository<Goal> {
   }
   
   func getByUserId(userId: String, _ completion: @escaping ([Goal]) -> Void) {
-    let conditions = [QueryCondition(field: "userId", predicate: .equal, value: userId)]
+    let condition = QueryCondition(field: "userId", predicate: .equal, value: userId)
+    queryByFields([condition], completion)
+  }
+  
+  func getCompletedByTopicId(topicId: String, _ completion: @escaping ([Goal]) -> Void) {
+    let conditions = [
+      QueryCondition(field: "topicId", predicate: .equal, value: topicId),
+      QueryCondition(field: "isCompleted", predicate: .equal, value: true)
+    ]
     queryByFields(conditions, completion)
   }
+  
 }

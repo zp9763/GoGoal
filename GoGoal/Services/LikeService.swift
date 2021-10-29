@@ -9,12 +9,4 @@ import FirebaseFirestore
 
 class LikeService: BaseRepository<Like> {
   
-  let db: Firestore
-  
-  // TODO: change the like collection reference to a sub path under post document
-  init() {
-    db = Firestore.firestore()
-    super.init(db.collection(.likes))
-  }
-  
 }
