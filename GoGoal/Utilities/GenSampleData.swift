@@ -77,7 +77,7 @@ class GenSampleData {
   static func printInfo() {
     goalService.getByUserId(userId: user.id!) { goalList in
       for goal in goalList {
-        goalList.forEach() { print($0); print() }
+        print(goal); print()
         postService.getByGoalId(goalId: goal.id!) { postList in
           postList.forEach() { print($0); print() }
         }

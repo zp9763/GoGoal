@@ -16,5 +16,5 @@ struct Post: Codable, Identifiable {
   var content: String?
   var photoUrls: [String]?
   var createDate: Timestamp = Timestamp.init()
-  var likes: [String: Like]?
+  var likes: [String: Timestamp]?
 }

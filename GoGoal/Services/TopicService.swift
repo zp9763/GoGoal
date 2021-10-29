@@ -19,7 +19,8 @@ class TopicService: BaseRepository<Topic> {
   func getByName(name: String, _ completion: @escaping (Topic?) -> Void) {
     let condition = QueryCondition(field: "name", predicate: .equal, value: name)
     queryByFields([condition]) { topicList in
-      completion(topicList.count == 0 ? nil : topicList[0])
+      let topic = topicList.count == 0 ? nil : topicList[0]
+      completion(topic)
     }
   }
   

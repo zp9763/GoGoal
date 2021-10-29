@@ -20,7 +20,9 @@ class ViewModel: ObservableObject {
   }
   
   func fetchUserGoals() {
-    goalService.getByUserId(userId: user.id!) { self.goalList = $0 }
+    goalService.getByUserId(userId: user.id!) {
+      self.goalList = $0
+    }
   }
   
 }

@@ -18,16 +18,19 @@ class PostService: BaseRepository<Post> {
   
   private func loadPostLikes(_ post: Post, _ completion: @escaping (Post) -> Void) {
     var post = post
-    post.likes = [String: Like]()
-    
     let likeRef = self.rootRef.document(post.id!).collection(.likes)
     let likeService = LikeService(likeRef)
     
     likeService.getAll() { likeList in
-      for like in likeList {
-        post.likes![like.id!] = like
+      if likeList.count == 0 {
+        completion(post)
+      } else {
+        post.likes = [String: Timestamp]()
+        for like in likeList {
+          post.likes![like.id!] = like.createDate
+        }
+        completion(post)
       }
-      completion(post)
     }
   }
   
@@ -40,14 +43,17 @@ class PostService: BaseRepository<Post> {
   override func getAll(_ completion: @escaping ([Post]) -> Void) {
     super.getAll() { postList in
       var postList = postList
+      let dispatchGroup = DispatchGroup()
       
       for i in 0..<postList.count {
+        dispatchGroup.enter()
         self.loadPostLikes(postList[i]) { post in
           postList[i] = post
+          dispatchGroup.leave()
         }
       }
       
-      completion(postList)
+      dispatchGroup.notify(queue: .main) { completion(postList) }
     }
   }
   
@@ -68,14 +74,17 @@ class PostService: BaseRepository<Post> {
   override func queryByFields(_ conditions: [QueryCondition], _ completion: @escaping ([Post]) -> Void) {
     super.queryByFields(conditions) { postList in
       var postList = postList
+      let dispatchGroup = DispatchGroup()
       
       for i in 0..<postList.count {
+        dispatchGroup.enter()
         self.loadPostLikes(postList[i]) { post in
           postList[i] = post
+          dispatchGroup.leave()
         }
       }
       
-      completion(postList)
+      dispatchGroup.notify(queue: .main) { completion(postList) }
     }
   }
   
