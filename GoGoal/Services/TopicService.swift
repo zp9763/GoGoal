@@ -9,11 +9,9 @@ import FirebaseFirestore
 
 class TopicService: BaseRepository<Topic> {
   
-  let db: Firestore
-  
   init() {
-    db = Firestore.firestore()
-    super.init(db.collection(.topics))
+    let rootRef = Firestore.firestore().collection(.topics)
+    super.init(rootRef)
   }
   
   func getByName(name: String, _ completion: @escaping (Topic?) -> Void) {

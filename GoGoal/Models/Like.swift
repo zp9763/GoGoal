@@ -9,6 +9,10 @@ import FirebaseFirestore
 import FirebaseFirestoreSwift
 
 struct Like: Codable, Identifiable {
-  @DocumentID var id: String?  // user id who liked the post
+  
+  // user id who liked the post
+  @DocumentID var id: String?
+  
   var createDate: Timestamp = Timestamp.init()
+  
 }

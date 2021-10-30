@@ -8,12 +8,10 @@
 import FirebaseFirestore
 
 class UserService: BaseRepository<User> {
-  
-  let db: Firestore
-  
+    
   init() {
-    db = Firestore.firestore()
-    super.init(db.collection(.users))
+    let rootRef = Firestore.firestore().collection(.users)
+    super.init(rootRef)
   }
   
 }

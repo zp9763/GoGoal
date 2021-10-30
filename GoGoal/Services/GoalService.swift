@@ -8,12 +8,10 @@
 import FirebaseFirestore
 
 class GoalService: BaseRepository<Goal> {
-  
-  let db: Firestore
-  
+    
   init() {
-    db = Firestore.firestore()
-    super.init(db.collection(.goals))
+    let rootRef = Firestore.firestore().collection(.goals)
+    super.init(rootRef)
   }
   
   func getByUserId(userId: String, _ completion: @escaping ([Goal]) -> Void) {

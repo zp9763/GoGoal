@@ -9,11 +9,9 @@ import FirebaseFirestore
 
 class PostService: BaseRepository<Post> {
   
-  let db: Firestore
-  
   init() {
-    db = Firestore.firestore()
-    super.init(db.collection(.posts))
+    let rootRef = Firestore.firestore().collection(.posts)
+    super.init(rootRef)
   }
   
   private func loadPostLikes(_ post: Post, _ completion: @escaping (Post) -> Void) {
@@ -32,12 +30,6 @@ class PostService: BaseRepository<Post> {
         completion(post)
       }
     }
-  }
-  
-  private func unloadPostLikes(_ post: Post) -> Post {
-    var post = post
-    post.likes = nil
-    return post
   }
   
   override func getAll(_ completion: @escaping ([Post]) -> Void) {
@@ -65,10 +57,6 @@ class PostService: BaseRepository<Post> {
         completion(nil)
       }
     }
-  }
-  
-  override func createOrUpdate(object: Post) {
-    super.createOrUpdate(object: self.unloadPostLikes(object))
   }
   
   override func queryByFields(_ conditions: [QueryCondition], _ completion: @escaping ([Post]) -> Void) {

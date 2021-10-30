@@ -11,6 +11,8 @@ class BaseRepository<T: Codable & Identifiable> {
   
   let rootRef: CollectionReference
   
+  let storage = FileStorage()
+  
   init(_ rootRef: CollectionReference) {
     self.rootRef = rootRef
   }
