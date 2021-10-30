@@ -16,6 +16,7 @@
 		5751AD2C271E4BB8009D94A5 /* GoalService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5751AD2B271E4BB8009D94A5 /* GoalService.swift */; };
 		5751AD2E271E4BEB009D94A5 /* PostService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5751AD2D271E4BEB009D94A5 /* PostService.swift */; };
 		5751AD30271E4C07009D94A5 /* LikeService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5751AD2F271E4C07009D94A5 /* LikeService.swift */; };
+		575A535B272DC601004619FA /* ImageExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 575A535A272DC601004619FA /* ImageExtension.swift */; };
 		5773B50B271CC0360029A220 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5773B50A271CC0360029A220 /* AppDelegate.swift */; };
 		5773B50D271CC0360029A220 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5773B50C271CC0360029A220 /* SceneDelegate.swift */; };
 		5773B50F271CC0360029A220 /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5773B50E271CC0360029A220 /* MainView.swift */; };
@@ -48,6 +49,7 @@
 		5751AD2B271E4BB8009D94A5 /* GoalService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoalService.swift; sourceTree = "<group>"; };
 		5751AD2D271E4BEB009D94A5 /* PostService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostService.swift; sourceTree = "<group>"; };
 		5751AD2F271E4C07009D94A5 /* LikeService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LikeService.swift; sourceTree = "<group>"; };
+		575A535A272DC601004619FA /* ImageExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageExtension.swift; sourceTree = "<group>"; };
 		5773B507271CC0360029A220 /* GoGoal.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GoGoal.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5773B50A271CC0360029A220 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		5773B50C271CC0360029A220 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -209,6 +211,7 @@
 			isa = PBXGroup;
 			children = (
 				5773B536271DF9BE0029A220 /* GenSampleData.swift */,
+				575A535A272DC601004619FA /* ImageExtension.swift */,
 			);
 			path = Utilities;
 			sourceTree = "<group>";
@@ -349,6 +352,7 @@
 				5773B537271DF9BE0029A220 /* GenSampleData.swift in Sources */,
 				5751AD2E271E4BEB009D94A5 /* PostService.swift in Sources */,
 				5773B50B271CC0360029A220 /* AppDelegate.swift in Sources */,
+				575A535B272DC601004619FA /* ImageExtension.swift in Sources */,
 				5751AD28271E4896009D94A5 /* Like.swift in Sources */,
 				5773B534271DF2C50029A220 /* QueryHelper.swift in Sources */,
 				5773B530271D1B990029A220 /* FirestoreDecoder.swift in Sources */,

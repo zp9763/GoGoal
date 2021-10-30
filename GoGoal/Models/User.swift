@@ -16,7 +16,7 @@ struct User: Codable, Identifiable {
   var email: String
   var firstName: String
   var lastName: String
-  var avatarUrl: String?
+  var avatarPath: String?
   var topicIdList: [String]?
   var createDate: Timestamp = Timestamp.init()
   var lastUpdateDate: Timestamp = Timestamp.init()
@@ -27,7 +27,7 @@ struct User: Codable, Identifiable {
     case email
     case firstName
     case lastName
-    case avatarUrl
+    case avatarPath
     case topicIdList
     case createDate
     case lastUpdateDate

@@ -16,8 +16,10 @@ struct GoalListView: View {
       ForEach(viewModel.goalList) { goal in
         Text(goal.title)
       }
-    }.onAppear(perform: viewModel.fetchUserGoals)
+    }
+    .onAppear(perform: viewModel.fetchAllGoalsByUser)
   }
+  
 }
 
 struct GoalListView_Previews: PreviewProvider {

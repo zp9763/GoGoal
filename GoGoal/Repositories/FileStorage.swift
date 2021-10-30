@@ -12,66 +12,85 @@ class FileStorage {
   private static let MAX_SIZE: Int64 = 1 * 1024 * 1024
   
   let storage = Storage.storage()
-  let rootRef: StorageReference
+  let prefixPath: StorageEnum
   
-  init() {
-    rootRef = storage.reference()
+  init(_ prefixPath: StorageEnum) {
+    self.prefixPath = prefixPath
   }
   
-  func uploadFile(filePath: String, file: Data, type: ContentType, _ completion: @escaping (String) -> Void) {
-    let fileRef = rootRef.child(filePath)
+  func uploadFile(subPath: String, file: Data, type: ContentType, _ completion: @escaping (String) -> Void) {
+    let fullPath = "\(prefixPath.rawValue)/\(subPath)"
+    let fileRef = storage.reference(withPath: fullPath)
     
     let metadata = StorageMetadata()
     metadata.contentType = type.rawValue
     
     fileRef.putData(file, metadata: metadata) { (metadata, err) in
       guard err == nil else {
-        print("Error put metadata: \(String(describing: err))")
+        print("Error upload file: \(String(describing: err))")
         return
       }
-      
-      fileRef.downloadURL { (url, err) in
-        guard let url = url else {
-          print("Error get downloadURL: \(String(describing: err))")
-          return
-        }
-        completion(url.absoluteString)
-      }
+      completion(fullPath)
     }
   }
   
-  func uploadFolderFiles(folderPath: String, files: [Data], type: ContentType, _ completion: @escaping ([String]) -> Void) {
-    var urlList = [String]()
+  func uploadFolderFiles(subPath: String, files: [Data], type: ContentType, _ completion: @escaping (String) -> Void) {
     let dispatchGroup = DispatchGroup()
     
     for i in 0..<files.count {
       dispatchGroup.enter()
-      let filePath = "\(folderPath)/file_\(i)"
-      self.uploadFile(filePath: filePath, file: files[i], type: type) { url in
-        urlList.append(url)
+      let filePath = "\(subPath)/file_\(i)"
+      self.uploadFile(subPath: filePath, file: files[i], type: type) { _ in
         dispatchGroup.leave()
       }
     }
     
-    dispatchGroup.notify(queue: .main) { completion(urlList) }
+    let fullPath = "\(prefixPath.rawValue)/\(subPath)"
+    dispatchGroup.notify(queue: .main) { completion(fullPath) }
   }
   
-  func downloadFile(url: String, _ completion: @escaping (Data?) -> Void) {
-    let urlRef = storage.reference(forURL: url)
+  func downloadFile(fullPath: String, _ completion: @escaping (Data?) -> Void) {
+    let fileRef = storage.reference(withPath: fullPath)
     
-    urlRef.getData(maxSize: FileStorage.MAX_SIZE) { data, err in
+    fileRef.getData(maxSize: FileStorage.MAX_SIZE) { data, err in
       if let err = err {
-        print("Error download data from URL: \(err)")
+        print("Error download file: \(err)")
       } else {
         completion(data)
       }
     }
   }
   
-  func deleteFile(url: String) {
-    let urlRef = storage.reference(forURL: url)
+  func downloadFolderFiles(fullPath: String, _ completion: @escaping ([Data]) -> Void) {
+    let folderRef = storage.reference(withPath: fullPath)
     
-    urlRef.delete() { err in
+    folderRef.listAll() { files, err in
+      guard err == nil else {
+        print("Error list all files: \(String(describing: err))")
+        return
+      }
+      
+      var dataList = [Data]()
+      let dispatchGroup = DispatchGroup()
+      
+      for fileRef in files.items {
+        dispatchGroup.enter()
+        self.downloadFile(fullPath: fileRef.fullPath) { data in
+          if let data = data {
+            dataList.append(data)
+          }
+          dispatchGroup.leave()
+        }
+      }
+      
+      dispatchGroup.notify(queue: .main) { completion(dataList) }
+    }
+  }
+  
+  func deletePath(fullPath: String) {
+    let pathRef = storage.reference(withPath: fullPath)
+    
+    pathRef.delete() { err in
       if let err = err {
         print("Error delete file: \(err)")
       }

@@ -17,7 +17,7 @@ struct Post: Codable, Identifiable {
   var goalId: String
   var topicId: String
   var content: String?
-  var photoUrls: [String]?
+  var photosPath: String?
   var createDate: Timestamp = Timestamp.init()
   var likes: [String: Timestamp]?
   var photos: [Image]?
@@ -28,7 +28,7 @@ struct Post: Codable, Identifiable {
     case goalId
     case topicId
     case content
-    case photoUrls
+    case photosPath
     case createDate
   }
   
