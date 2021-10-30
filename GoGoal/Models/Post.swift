@@ -7,14 +7,29 @@
 
 import FirebaseFirestore
 import FirebaseFirestoreSwift
+import SwiftUI
 
 struct Post: Codable, Identifiable {
+  
   @DocumentID var id: String? = UUID().uuidString
+  
   var userId: String
   var goalId: String
   var topicId: String
   var content: String?
-  var photoUrls: [String]?
+  var photosPath: String?
   var createDate: Timestamp = Timestamp.init()
   var likes: [String: Timestamp]?
+  var photos: [Image]?
+  
+  enum CodingKeys: CodingKey {
+    case id
+    case userId
+    case goalId
+    case topicId
+    case content
+    case photosPath
+    case createDate
+  }
+  
 }

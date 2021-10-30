@@ -16,6 +16,7 @@
 		5751AD2C271E4BB8009D94A5 /* GoalService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5751AD2B271E4BB8009D94A5 /* GoalService.swift */; };
 		5751AD2E271E4BEB009D94A5 /* PostService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5751AD2D271E4BEB009D94A5 /* PostService.swift */; };
 		5751AD30271E4C07009D94A5 /* LikeService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5751AD2F271E4C07009D94A5 /* LikeService.swift */; };
+		575A535B272DC601004619FA /* ImageExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 575A535A272DC601004619FA /* ImageExtension.swift */; };
 		5773B50B271CC0360029A220 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5773B50A271CC0360029A220 /* AppDelegate.swift */; };
 		5773B50D271CC0360029A220 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5773B50C271CC0360029A220 /* SceneDelegate.swift */; };
 		5773B50F271CC0360029A220 /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5773B50E271CC0360029A220 /* MainView.swift */; };
@@ -30,10 +31,12 @@
 		5773B532271D22DD0029A220 /* BaseRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5773B531271D22DD0029A220 /* BaseRepository.swift */; };
 		5773B534271DF2C50029A220 /* QueryHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5773B533271DF2C50029A220 /* QueryHelper.swift */; };
 		5773B537271DF9BE0029A220 /* GenSampleData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5773B536271DF9BE0029A220 /* GenSampleData.swift */; };
+		57C06BF5272CD98D00E7D6B4 /* FileStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57C06BF4272CD98D00E7D6B4 /* FileStorage.swift */; };
 		57C52C8A2725E93500E0493B /* GoalListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57C52C892725E93500E0493B /* GoalListView.swift */; };
 		57C52C8C2725E94C00E0493B /* CommunityView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57C52C8B2725E94C00E0493B /* CommunityView.swift */; };
 		57C52C8E2725E95E00E0493B /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57C52C8D2725E95E00E0493B /* ProfileView.swift */; };
 		57C52C912725EE0000E0493B /* ViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57C52C902725EE0000E0493B /* ViewModel.swift */; };
+		57E71E70272B84DE0000DE81 /* StorageEnum.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57E71E6F272B84DE0000DE81 /* StorageEnum.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -46,6 +49,7 @@
 		5751AD2B271E4BB8009D94A5 /* GoalService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoalService.swift; sourceTree = "<group>"; };
 		5751AD2D271E4BEB009D94A5 /* PostService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostService.swift; sourceTree = "<group>"; };
 		5751AD2F271E4C07009D94A5 /* LikeService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LikeService.swift; sourceTree = "<group>"; };
+		575A535A272DC601004619FA /* ImageExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageExtension.swift; sourceTree = "<group>"; };
 		5773B507271CC0360029A220 /* GoGoal.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GoGoal.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5773B50A271CC0360029A220 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		5773B50C271CC0360029A220 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -62,10 +66,12 @@
 		5773B531271D22DD0029A220 /* BaseRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseRepository.swift; sourceTree = "<group>"; };
 		5773B533271DF2C50029A220 /* QueryHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QueryHelper.swift; sourceTree = "<group>"; };
 		5773B536271DF9BE0029A220 /* GenSampleData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenSampleData.swift; sourceTree = "<group>"; };
+		57C06BF4272CD98D00E7D6B4 /* FileStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileStorage.swift; sourceTree = "<group>"; };
 		57C52C892725E93500E0493B /* GoalListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoalListView.swift; sourceTree = "<group>"; };
 		57C52C8B2725E94C00E0493B /* CommunityView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommunityView.swift; sourceTree = "<group>"; };
 		57C52C8D2725E95E00E0493B /* ProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
 		57C52C902725EE0000E0493B /* ViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewModel.swift; sourceTree = "<group>"; };
+		57E71E6F272B84DE0000DE81 /* StorageEnum.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StorageEnum.swift; sourceTree = "<group>"; };
 		E984E783F86CBF2A328AC6CD /* Pods_GoGoal.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_GoGoal.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		F3797C70DBDFB3D9A8D814F6 /* Pods-GoGoal.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GoGoal.debug.xcconfig"; path = "Target Support Files/Pods-GoGoal/Pods-GoGoal.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -195,6 +201,8 @@
 				5773B52F271D1B990029A220 /* FirestoreDecoder.swift */,
 				5773B531271D22DD0029A220 /* BaseRepository.swift */,
 				5773B533271DF2C50029A220 /* QueryHelper.swift */,
+				57E71E6F272B84DE0000DE81 /* StorageEnum.swift */,
+				57C06BF4272CD98D00E7D6B4 /* FileStorage.swift */,
 			);
 			path = Repositories;
 			sourceTree = "<group>";
@@ -203,6 +211,7 @@
 			isa = PBXGroup;
 			children = (
 				5773B536271DF9BE0029A220 /* GenSampleData.swift */,
+				575A535A272DC601004619FA /* ImageExtension.swift */,
 			);
 			path = Utilities;
 			sourceTree = "<group>";
@@ -339,9 +348,11 @@
 				5773B529271D132D0029A220 /* UserService.swift in Sources */,
 				5751AD26271E47C6009D94A5 /* Post.swift in Sources */,
 				5751AD24271E4703009D94A5 /* Goal.swift in Sources */,
+				57E71E70272B84DE0000DE81 /* StorageEnum.swift in Sources */,
 				5773B537271DF9BE0029A220 /* GenSampleData.swift in Sources */,
 				5751AD2E271E4BEB009D94A5 /* PostService.swift in Sources */,
 				5773B50B271CC0360029A220 /* AppDelegate.swift in Sources */,
+				575A535B272DC601004619FA /* ImageExtension.swift in Sources */,
 				5751AD28271E4896009D94A5 /* Like.swift in Sources */,
 				5773B534271DF2C50029A220 /* QueryHelper.swift in Sources */,
 				5773B530271D1B990029A220 /* FirestoreDecoder.swift in Sources */,
@@ -349,6 +360,7 @@
 				5751AD2A271E4B9A009D94A5 /* TopicService.swift in Sources */,
 				5773B50D271CC0360029A220 /* SceneDelegate.swift in Sources */,
 				5773B50F271CC0360029A220 /* MainView.swift in Sources */,
+				57C06BF5272CD98D00E7D6B4 /* FileStorage.swift in Sources */,
 				57C52C8C2725E94C00E0493B /* CommunityView.swift in Sources */,
 				57C52C8E2725E95E00E0493B /* ProfileView.swift in Sources */,
 				57C52C8A2725E93500E0493B /* GoalListView.swift in Sources */,

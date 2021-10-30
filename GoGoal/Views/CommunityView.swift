@@ -8,13 +8,19 @@
 import SwiftUI
 
 struct CommunityView: View {
+  
+  @ObservedObject var viewModel: ViewModel
+  
   var body: some View {
     Text("Hello, World!")
+      .onAppear(perform: GenSampleData.printInfo)
   }
+  
 }
 
 struct CommunityView_Previews: PreviewProvider {
   static var previews: some View {
-    CommunityView()
+    let user = GenSampleData.user
+    CommunityView(viewModel: ViewModel(user: user))
   }
 }

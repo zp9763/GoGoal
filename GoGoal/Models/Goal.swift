@@ -9,7 +9,9 @@ import FirebaseFirestore
 import FirebaseFirestoreSwift
 
 struct Goal: Codable, Identifiable {
+  
   @DocumentID var id: String? = UUID().uuidString
+  
   var userId: String
   var topicId: String
   var title: String
@@ -19,4 +21,5 @@ struct Goal: Codable, Identifiable {
   var isCompleted: Bool = false
   var createDate: Timestamp = Timestamp.init()
   var lastUpdateDate: Timestamp = Timestamp.init()
+  
 }

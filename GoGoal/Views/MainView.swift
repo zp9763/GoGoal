@@ -9,7 +9,7 @@ import SwiftUI
 
 struct MainView: View {
   
-  @ObservedObject var viewModel = ViewModel(user: GenSampleData.user)
+  @ObservedObject var viewModel: ViewModel
   
   var body: some View {
     TabView {
@@ -18,7 +18,7 @@ struct MainView: View {
           Label("Goals", systemImage: "list.dash")
         }
       
-      CommunityView()
+      CommunityView(viewModel: viewModel)
         .tabItem {
           Label("Community", systemImage: "list.dash")
         }
@@ -29,11 +29,14 @@ struct MainView: View {
         }
     }
     .onAppear(perform: GenSampleData.setUp)
+    .onAppear(perform: viewModel.fetchAllTopics)
   }
+  
 }
 
 struct MainView_Previews: PreviewProvider {
   static var previews: some View {
-    MainView()
+    let user = GenSampleData.user
+    MainView(viewModel: ViewModel(user: user))
   }
 }
