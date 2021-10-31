@@ -13,7 +13,6 @@ struct CommunityView: View {
   
   var body: some View {
     Text("Hello, World!")
-      .onAppear(perform: GenSampleData.printInfo)
   }
   
 }

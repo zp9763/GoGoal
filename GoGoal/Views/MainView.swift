@@ -13,7 +13,7 @@ struct MainView: View {
   
   var body: some View {
     TabView {
-      GoalListView(viewModel: viewModel)
+      UserGoalView(viewModel: viewModel)
         .tabItem {
           Label("Goals", systemImage: "list.dash")
         }
@@ -29,7 +29,6 @@ struct MainView: View {
         }
     }
     .onAppear(perform: GenSampleData.setUp)
-    .onAppear(perform: viewModel.fetchAllTopics)
   }
   
 }
