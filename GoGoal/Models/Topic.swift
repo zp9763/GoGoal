@@ -14,7 +14,7 @@ struct Topic: Codable, Identifiable {
   @DocumentID var id: String? = UUID().uuidString
   
   var name: String
-  var iconPath: String?
+  var iconPath: String
   var icon: Image?
   
   enum CodingKeys: CodingKey {

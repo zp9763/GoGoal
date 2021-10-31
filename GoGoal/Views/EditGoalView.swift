@@ -13,7 +13,7 @@ struct EditGoalView: View {
   
   var body: some View {
     Text("Hello, World!")
-      .navigationBarTitle("Edit goal")
+      .navigationBarTitle("Edit goal", displayMode: .inline)
   }
   
 }

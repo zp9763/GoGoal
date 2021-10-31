@@ -10,10 +10,7 @@ import SwiftUI
 struct UserGoalRowView: View {
   
   var goal: Goal
-  
-  @State var optionSelected = false
-  @State var optionView: AnyView?
-  
+    
   @State var topicIcon: Image?
   
   @State var progress: Double = 0
@@ -23,35 +20,6 @@ struct UserGoalRowView: View {
   var body: some View {
     VStack {
       HStack() {
-        Spacer()
-        
-        Menu(content: {
-          Button(action: {
-            self.optionSelected = true
-            self.optionView = AnyView(CheckInGoalView(goal: self.goal))
-          }) {
-            Text("Check-in")
-          }
-          
-          Button(action: {
-            self.optionSelected = true
-            self.optionView = AnyView(EditGoalView(goal: self.goal))
-          }) {
-            Text("Edit")
-          }
-        }) {
-          Text("GO")
-        }
-        .background(
-          NavigationLink(destination: self.optionView, isActive: $optionSelected) {
-            EmptyView()
-          }
-        )
-        
-        Spacer()
-        
-        Text(self.goal.title)
-        
         Spacer()
         
         self.topicIcon?
@@ -64,6 +32,10 @@ struct UserGoalRowView: View {
               .shadow(radius: 40)
           )
           .frame(width: 60, height: 60)
+        
+        Spacer()
+        
+        Text(self.goal.title)
         
         Spacer()
       }

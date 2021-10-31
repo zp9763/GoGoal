@@ -15,17 +15,17 @@ struct MainView: View {
     TabView {
       UserGoalView(viewModel: viewModel)
         .tabItem {
-          Label("Goals", systemImage: "list.dash")
+          Label("Goals", systemImage: "bolt.horizontal.circle")
         }
       
       CommunityView(viewModel: viewModel)
         .tabItem {
-          Label("Community", systemImage: "list.dash")
+          Label("Community", systemImage: "network")
         }
       
       ProfileView(viewModel: viewModel)
         .tabItem {
-          Label("Profile", systemImage: "list.dash")
+          Label("Profile", systemImage: "person")
         }
     }
     .onAppear(perform: GenSampleData.setUp)
