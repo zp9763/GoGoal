@@ -12,24 +12,7 @@ struct ProfileView: View {
   @ObservedObject var viewModel: ViewModel
   
   var body: some View {
-    List {
-      ForEach(viewModel.topicList) { topic in
-        HStack {
-          Text(topic.name)
-          topic.icon!
-            .resizable()
-            .scaledToFit()
-            .clipShape(Rectangle())
-            .overlay(
-              Rectangle()
-                .stroke(Color.white, lineWidth: 2)
-                .shadow(radius: 40)
-            )
-            .frame(width: 100, height: 100)
-            .padding()
-        }
-      }
-    }
+    Text("Hello, World!")
   }
   
 }

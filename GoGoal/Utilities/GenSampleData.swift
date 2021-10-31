@@ -5,6 +5,8 @@
 //  Created by Peng Zhao on 10/18/21.
 //
 
+import FirebaseFirestore
+
 class GenSampleData {
   
   static let userService = UserService()
@@ -12,7 +14,7 @@ class GenSampleData {
   static let goalService = GoalService()
   static let postService = PostService()
   
-  static let user = User(
+  static var user = User(
     email: "testuser@example.com",
     firstName: "Test",
     lastName: "User"
@@ -20,6 +22,7 @@ class GenSampleData {
   
   static func setUp() {
     topicService.getByName(name: "Sports") { topic in
+      user.topicIdList = [topic!.id!]
       userService.createOrUpdate(object: user)
       
       var goals = [
@@ -37,7 +40,9 @@ class GenSampleData {
              topicId: topic!.id!,
              title: "go swimming",
              description: "go swimming every Tuesday",
-             duration: 30)
+             duration: 5,
+             checkInDates: [Timestamp](repeating: Timestamp.init(), count: 5),
+             isCompleted: true)
       ]
       
       for goal in goals {
@@ -47,15 +52,15 @@ class GenSampleData {
       let posts = [
         Post(userId: user.id!,
              goalId: goals[0].id!,
-             topicId: topic!.id!,
+             topicId: goals[0].topicId,
              content: "Today I played football with David"),
         Post(userId: user.id!,
              goalId: goals[0].id!,
-             topicId: topic!.id!,
+             topicId: goals[0].topicId,
              content: "Today I played football with Mike"),
         Post(userId: user.id!,
              goalId: goals[1].id!,
-             topicId: topic!.id!,
+             topicId: goals[1].topicId,
              content: "Today I played basketball with John")
       ]
       
