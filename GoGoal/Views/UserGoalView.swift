@@ -14,14 +14,14 @@ struct UserGoalView: View {
   // display in-progress goals by default
   @State var displayInProgress = true
   @State var displayedGoals = [Goal]()
-      
+  
   let goalService = GoalService()
   
   var body: some View {
     NavigationView {
       VStack {
         Spacer()
-
+        
         List {
           ForEach(self.displayedGoals) { goal in
             NavigationLink(destination: GoalProgressView(goal: goal)) {
@@ -56,7 +56,15 @@ struct UserGoalView: View {
         
         Spacer()
       }
-      .navigationBarTitle("Goals")
+      .navigationBarTitle("Goals", displayMode: .inline)
+      .navigationBarItems(
+        // TODO: complete goal list filter
+        leading: Image(systemName: "equal.circle"),
+        
+        trailing: NavigationLink(destination: EditGoalView()) {
+          Image(systemName: "plus")
+        }
+      )
       .onAppear(perform: fetchAllUserGoals)
     }
   }
@@ -69,9 +77,9 @@ struct UserGoalView: View {
   }
   
   func updateDisplayGoals() {
-    self.displayedGoals = viewModel.userGoals.filter() {
-      $0.isCompleted != self.displayInProgress
-    }
+    self.displayedGoals = viewModel.userGoals
+      .filter() { $0.isCompleted != self.displayInProgress }
+      .sorted() { $0.lastUpdateDate > $1.lastUpdateDate }
   }
   
 }

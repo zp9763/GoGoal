@@ -13,7 +13,7 @@ struct GoalProgressView: View {
   
   var body: some View {
     Text("Hello, World!")
-      .navigationBarTitle("Progress")
+      .navigationBarTitle("Progress", displayMode: .inline)
   }
   
 }

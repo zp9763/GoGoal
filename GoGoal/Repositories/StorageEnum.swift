@@ -8,15 +8,16 @@
 import FirebaseStorage
 
 enum StorageEnum: String {
-  case topics
   case users
   case posts
 }
 
 extension StorageReference {
+  
   func child(_ rootFolder: StorageEnum) -> StorageReference {
     return self.child(rootFolder.rawValue)
   }
+  
 }
 
 enum ContentType: String {
