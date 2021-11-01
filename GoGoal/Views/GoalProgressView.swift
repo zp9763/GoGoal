@@ -86,12 +86,21 @@ struct GoalProgressView: View {
     }
     .navigationBarTitle("Progress", displayMode: .inline)
     .navigationBarItems(
-      trailing: NavigationLink(destination: CheckInGoalView(goal: self.goal)) {
-        Image(systemName: "square.and.pencil")
-      }
+      trailing: checkInView
     )
     .onAppear(perform: self.fetchGoalTopicIcon)
     .onAppear(perform: self.fetchGoalPosts)
+  }
+  
+  var checkInView: some View {
+    if self.goal.isCompleted {
+      // disable check-in for completed goals
+      return AnyView(Image(systemName: "square.and.pencil"))
+    } else {
+      return AnyView(NavigationLink(destination: CheckInGoalView(goal: self.goal)) {
+        Image(systemName: "square.and.pencil")
+      })
+    }
   }
   
   func fetchGoalTopicIcon() {
