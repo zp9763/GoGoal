@@ -13,6 +13,7 @@
 		57409A45272E164400578CD9 /* CheckInGoalView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57409A44272E164400578CD9 /* CheckInGoalView.swift */; };
 		57409A47272E165400578CD9 /* EditGoalView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57409A46272E165400578CD9 /* EditGoalView.swift */; };
 		57409A49272F166A00578CD9 /* TimestampExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57409A48272F166A00578CD9 /* TimestampExtension.swift */; };
+		57409A4B272F6C1C00578CD9 /* PostView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57409A4A272F6C1C00578CD9 /* PostView.swift */; };
 		5751AD22271E46A5009D94A5 /* Topic.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5751AD21271E46A5009D94A5 /* Topic.swift */; };
 		5751AD24271E4703009D94A5 /* Goal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5751AD23271E4703009D94A5 /* Goal.swift */; };
 		5751AD26271E47C6009D94A5 /* Post.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5751AD25271E47C6009D94A5 /* Post.swift */; };
@@ -51,6 +52,7 @@
 		57409A44272E164400578CD9 /* CheckInGoalView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckInGoalView.swift; sourceTree = "<group>"; };
 		57409A46272E165400578CD9 /* EditGoalView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditGoalView.swift; sourceTree = "<group>"; };
 		57409A48272F166A00578CD9 /* TimestampExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimestampExtension.swift; sourceTree = "<group>"; };
+		57409A4A272F6C1C00578CD9 /* PostView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostView.swift; sourceTree = "<group>"; };
 		5751AD21271E46A5009D94A5 /* Topic.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Topic.swift; sourceTree = "<group>"; };
 		5751AD23271E4703009D94A5 /* Goal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Goal.swift; sourceTree = "<group>"; };
 		5751AD25271E47C6009D94A5 /* Post.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Post.swift; sourceTree = "<group>"; };
@@ -188,6 +190,7 @@
 				57C52C892725E93500E0493B /* UserGoalView.swift */,
 				57409A40272E11C900578CD9 /* UserGoalRowView.swift */,
 				57409A42272E161900578CD9 /* GoalProgressView.swift */,
+				57409A4A272F6C1C00578CD9 /* PostView.swift */,
 				57409A44272E164400578CD9 /* CheckInGoalView.swift */,
 				57409A46272E165400578CD9 /* EditGoalView.swift */,
 				57C52C8B2725E94C00E0493B /* CommunityView.swift */,
@@ -370,6 +373,7 @@
 				5773B50B271CC0360029A220 /* AppDelegate.swift in Sources */,
 				575A535B272DC601004619FA /* ImageExtension.swift in Sources */,
 				5751AD28271E4896009D94A5 /* Like.swift in Sources */,
+				57409A4B272F6C1C00578CD9 /* PostView.swift in Sources */,
 				5773B534271DF2C50029A220 /* QueryHelper.swift in Sources */,
 				5773B530271D1B990029A220 /* FirestoreDecoder.swift in Sources */,
 				57409A47272E165400578CD9 /* EditGoalView.swift in Sources */,

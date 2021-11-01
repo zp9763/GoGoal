@@ -13,17 +13,17 @@ struct MainView: View {
   
   var body: some View {
     TabView {
-      UserGoalView(viewModel: viewModel)
+      UserGoalView(viewModel: self.viewModel)
         .tabItem {
           Label("Goals", systemImage: "bolt.horizontal.circle")
         }
       
-      CommunityView(viewModel: viewModel)
+      CommunityView(viewModel: self.viewModel)
         .tabItem {
           Label("Community", systemImage: "network")
         }
       
-      ProfileView(viewModel: viewModel)
+      ProfileView(viewModel: self.viewModel)
         .tabItem {
           Label("Profile", systemImage: "person")
         }

@@ -17,7 +17,7 @@ struct Goal: Codable, Identifiable {
   var title: String
   var description: String?
   var duration: Int
-  var checkInDates: [Timestamp]?
+  var checkInDates: [Timestamp] = []
   var isCompleted: Bool = false
   var createDate: Timestamp = Timestamp.init()
   var lastUpdateDate: Timestamp = Timestamp.init()

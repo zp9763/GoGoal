@@ -17,12 +17,12 @@ class GenSampleData {
   static var user = User(
     email: "testuser@example.com",
     firstName: "Test",
-    lastName: "User"
+    lastName: "User",
+    topicIdList: ["028DA048-5921-4FD4-86A4-10568F088567"]
   )
   
   static func setUp() {
     topicService.getByName(name: "Sports") { topic in
-      user.topicIdList = [topic!.id!]
       userService.createOrUpdate(object: user)
       
       var goals = [
