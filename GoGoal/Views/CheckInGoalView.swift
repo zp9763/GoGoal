@@ -13,7 +13,7 @@ struct CheckInGoalView: View {
   
   var body: some View {
     Text("Hello, World!")
-      .navigationBarTitle("Check-in", displayMode: .inline)
+      .navigationBarTitle("Check In", displayMode: .inline)
   }
   
 }

@@ -19,9 +19,15 @@ class GoalService: BaseRepository<Goal> {
     queryByFields([condition], completion)
   }
   
-  func getCompletedByTopicId(topicId: String, _ completion: @escaping ([Goal]) -> Void) {
+  func getCompletedByTopicIds(topicIds: [String], _ completion: @escaping ([Goal]) -> Void) {
+    // `isIn` query requires a non-empty array
+    guard topicIds.count > 0 else {
+      completion([])
+      return
+    }
+    
     let conditions = [
-      QueryCondition(field: "topicId", predicate: .equal, value: topicId),
+      QueryCondition(field: "topicId", predicate: .isIn, value: topicIds),
       QueryCondition(field: "isCompleted", predicate: .equal, value: true)
     ]
     queryByFields(conditions, completion)

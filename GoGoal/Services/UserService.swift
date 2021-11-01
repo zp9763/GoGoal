@@ -10,6 +10,8 @@ import SwiftUI
 
 class UserService: BaseRepository<User> {
   
+  private static let DEFAULT_AVATAR = "default_avatar"
+  
   let storage = FileStorage(.users)
   
   init() {
@@ -18,13 +20,17 @@ class UserService: BaseRepository<User> {
   }
   
   private func loadAvatar(_ user: User, _ completion: @escaping (User) -> Void) {
+    var user = user
+    
     guard let path = user.avatarPath else {
+      let uiImage = UIImage(named: UserService.DEFAULT_AVATAR)
+      user.avatar = Image.fromUIImage(uiImage: uiImage)
+      
       completion(user)
       return
     }
     
     storage.downloadFile(fullPath: path) { data in
-      var user = user
       user.avatar = Image.fromData(data: data)
       completion(user)
     }

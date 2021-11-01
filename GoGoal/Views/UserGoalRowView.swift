@@ -10,10 +10,8 @@ import SwiftUI
 struct UserGoalRowView: View {
   
   var goal: Goal
-    
-  @State var topicIcon: Image?
   
-  @State var progress: Double = 0
+  @State var topicIcon: Image?
   
   let topicService = TopicService()
   
@@ -40,21 +38,18 @@ struct UserGoalRowView: View {
         Spacer()
       }
       
+      let checkInNum = self.goal.checkInDates.count
+      let progress = Double(checkInNum) / Double(self.goal.duration)
+      
       ProgressView(value: progress)
     }
-    .onAppear(perform: fetchGoalTopicIcon)
-    .onAppear(perform: updateGoalProgressBar)
+    .onAppear(perform: self.fetchGoalTopicIcon)
   }
   
   func fetchGoalTopicIcon() {
-    topicService.getById(id: goal.topicId) {
+    topicService.getById(id: self.goal.topicId) {
       self.topicIcon = $0?.icon
     }
-  }
-  
-  func updateGoalProgressBar() {
-    let checkInNum = Double(self.goal.checkInDates?.count ?? 0)
-    self.progress = checkInNum / Double(self.goal.duration)
   }
   
 }

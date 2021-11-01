@@ -17,7 +17,7 @@ struct User: Codable, Identifiable {
   var firstName: String
   var lastName: String
   var avatarPath: String?
-  var topicIdList: [String]?
+  var topicIdList: [String] = []
   var createDate: Timestamp = Timestamp.init()
   var lastUpdateDate: Timestamp = Timestamp.init()
   var avatar: Image?

@@ -131,7 +131,14 @@ class PostService: BaseRepository<Post> {
     queryByFields([condition], completion)
   }
   
-  func getByTopicIds(topicIds: [String], _ completion: @escaping ([Post]) -> Void) {
+  // TODO: query with lastUpdTime sort and limit
+  func getRecentByTopicIds(topicIds: [String], _ completion: @escaping ([Post]) -> Void) {
+    // `isIn` query requires a non-empty array
+    guard topicIds.count > 0 else {
+      completion([])
+      return
+    }
+    
     let condition = QueryCondition(field: "topicId", predicate: .isIn, value: topicIds)
     queryByFields([condition], completion)
   }

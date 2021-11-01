@@ -27,6 +27,8 @@ struct UserGoalView: View {
             NavigationLink(destination: GoalProgressView(goal: goal)) {
               UserGoalRowView(goal: goal)
             }
+            // fix SwiftUI bug: nested NavigationLink fails on 2nd click
+            .isDetailLink(false)
           }
         }
         
@@ -37,7 +39,7 @@ struct UserGoalView: View {
           
           Button(action: {
             self.displayInProgress = false
-            updateDisplayGoals()
+            self.updateDisplayedGoals()
           }) {
             Text("Completed")
           }
@@ -46,9 +48,9 @@ struct UserGoalView: View {
           
           Button(action: {
             self.displayInProgress = true
-            updateDisplayGoals()
+            self.updateDisplayedGoals()
           }) {
-            Text("In-progress")
+            Text("In-Progress")
           }
           
           Spacer()
@@ -58,26 +60,26 @@ struct UserGoalView: View {
       }
       .navigationBarTitle("Goals", displayMode: .inline)
       .navigationBarItems(
-        // TODO: complete goal list filter
+        // TODO: user goals filter
         leading: Image(systemName: "equal.circle"),
         
         trailing: NavigationLink(destination: EditGoalView()) {
           Image(systemName: "plus")
         }
       )
-      .onAppear(perform: fetchAllUserGoals)
+      .onAppear(perform: self.fetchAllUserGoals)
     }
   }
   
   func fetchAllUserGoals() {
-    goalService.getByUserId(userId: viewModel.user.id!) {
+    goalService.getByUserId(userId: self.viewModel.user.id!) {
       self.viewModel.userGoals = $0
-      updateDisplayGoals()
+      self.updateDisplayedGoals()
     }
   }
   
-  func updateDisplayGoals() {
-    self.displayedGoals = viewModel.userGoals
+  func updateDisplayedGoals() {
+    self.displayedGoals = self.viewModel.userGoals
       .filter() { $0.isCompleted != self.displayInProgress }
       .sorted() { $0.lastUpdateDate > $1.lastUpdateDate }
   }
