@@ -72,7 +72,7 @@ struct UserGoalView: View {
   }
   
   func fetchAllUserGoals() {
-    goalService.getByUserId(userId: self.viewModel.user.id!) {
+    self.goalService.getByUserId(userId: self.viewModel.user.id!) {
       self.viewModel.userGoals = $0
       self.updateDisplayedGoals()
     }

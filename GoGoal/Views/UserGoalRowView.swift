@@ -47,7 +47,7 @@ struct UserGoalRowView: View {
   }
   
   func fetchGoalTopicIcon() {
-    topicService.getById(id: self.goal.topicId) {
+    self.topicService.getById(id: self.goal.topicId) {
       self.topicIcon = $0?.icon
     }
   }

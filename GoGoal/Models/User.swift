@@ -33,4 +33,8 @@ struct User: Codable, Identifiable {
     case lastUpdateDate
   }
   
+  func getFullName() -> String {
+    return "\(self.firstName) \(self.lastName)"
+  }
+  
 }

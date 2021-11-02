@@ -17,8 +17,7 @@ class TopicService: BaseRepository<Topic> {
   
   private func loadIcon(_ topic: Topic) -> Topic {
     var topic = topic
-    let uiImage = UIImage(named: topic.iconPath)
-    topic.icon = Image.fromUIImage(uiImage: uiImage)
+    topic.icon = Image(topic.iconPath)
     return topic
   }
   

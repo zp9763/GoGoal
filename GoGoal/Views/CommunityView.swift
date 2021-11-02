@@ -40,9 +40,10 @@ struct CommunityView: View {
   }
   
   func fetchRecentPosts() {
-    postService.getRecentByTopicIds(topicIds: self.viewModel.user.topicIdList) {
-      let displayedCount = min($0.count, CommunityView.MAX_DISPLAY_NUM)
-      self.displayedPosts = Array($0[0..<displayedCount])
+    self.postService.getRecentByTopicIds(topicIds: self.viewModel.user.topicIdList) { postList in
+      let displayedCount = min(postList.count, CommunityView.MAX_DISPLAY_NUM)
+      self.displayedPosts = Array(postList[0..<displayedCount])
+        .sorted() { $0.createDate > $1.createDate }
     }
   }
   
