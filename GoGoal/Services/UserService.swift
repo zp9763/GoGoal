@@ -23,9 +23,7 @@ class UserService: BaseRepository<User> {
     var user = user
     
     guard let path = user.avatarPath else {
-      let uiImage = UIImage(named: UserService.DEFAULT_AVATAR)
-      user.avatar = Image.fromUIImage(uiImage: uiImage)
-      
+      user.avatar = Image(UserService.DEFAULT_AVATAR)
       completion(user)
       return
     }

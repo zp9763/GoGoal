@@ -62,16 +62,16 @@ struct GoalProgressView: View {
         
         Spacer()
         
-        NavigationLink(destination: EditGoalView(goal: self.goal), tag: 1, selection: $editSelected) {
-          EmptyView()
-        }
-        .hidden()
-        
         Button(action: {
           self.editSelected = 1
         }) {
           Text("Edit Goal")
         }
+        
+        NavigationLink(destination: EditGoalView(goal: self.goal), tag: 1, selection: $editSelected) {
+          EmptyView()
+        }
+        .hidden()
       }
       
       Spacer()
@@ -95,7 +95,7 @@ struct GoalProgressView: View {
   var checkInView: some View {
     if self.goal.isCompleted {
       // disable check-in for completed goals
-      return AnyView(Image(systemName: "square.and.pencil"))
+      return AnyView(EmptyView())
     } else {
       return AnyView(NavigationLink(destination: CheckInGoalView(goal: self.goal)) {
         Image(systemName: "square.and.pencil")
@@ -104,13 +104,13 @@ struct GoalProgressView: View {
   }
   
   func fetchGoalTopicIcon() {
-    topicService.getById(id: self.goal.topicId) {
+    self.topicService.getById(id: self.goal.topicId) {
       self.topicIcon = $0?.icon
     }
   }
   
   func fetchGoalPosts() {
-    postService.getByGoalId(goalId: self.goal.id!) { postList in
+    self.postService.getByGoalId(goalId: self.goal.id!) { postList in
       self.posts = postList
         .sorted() { $0.createDate > $1.createDate }
     }
