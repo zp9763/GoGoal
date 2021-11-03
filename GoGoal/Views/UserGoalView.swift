@@ -63,7 +63,7 @@ struct UserGoalView: View {
         // TODO: user goals filter
         leading: Image(systemName: "equal.circle"),
         
-        trailing: NavigationLink(destination: EditGoalView()) {
+        trailing: NavigationLink(destination: EditGoalView(user: self.viewModel.user)) {
           Image(systemName: "plus")
         }
       )

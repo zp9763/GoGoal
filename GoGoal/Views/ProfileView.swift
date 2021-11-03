@@ -14,12 +14,18 @@ struct ProfileView: View {
   @State var goals = [Goal]()
   
   @State var showChangePwdWindow = false
+  
   @State var oldPassword: String = ""
   @State var newPassword: String = ""
   
+  @State var fireBadPwdAlert = false
+  
   @State var showChangeNameWindow = false
+  
   @State var newFirstName: String = ""
   @State var newLastName: String = ""
+  
+  @State var fireNameEmptyAlert = false
   
   @State var showUpdateSubscribedTopic = false
   @State var allTopics = [Topic]()
@@ -157,7 +163,7 @@ struct ProfileView: View {
         HStack {
           Text("Old Password:")
             .padding(.leading)
-          TextField("please input", text: $oldPassword)
+          TextField("old password", text: $oldPassword)
             .padding(.trailing)
         }
         
@@ -166,17 +172,33 @@ struct ProfileView: View {
         HStack {
           Text("New Password:")
             .padding(.leading)
-          TextField("please input", text: $newPassword)
+          TextField("new password", text: $newPassword)
             .padding(.trailing)
         }
         
         Spacer()
         
         Button(action: {
+          guard self.oldPassword == "123456" else {
+            self.fireBadPwdAlert = true
+            return
+          }
+          
+          guard self.newPassword.count >= 6 else {
+            self.fireBadPwdAlert = true
+            return
+          }
+          
           // TODO: change password
           self.showChangePwdWindow = false
         }) {
           Text("Confirm")
+        }
+        .alert(isPresented: $fireBadPwdAlert) {
+          Alert(
+            title: Text("Password Warning"),
+            message: Text("Old password incorrect or new password too weak.")
+          )
         }
         
         Spacer()
@@ -216,13 +238,22 @@ struct ProfileView: View {
           Spacer()
           
           Button(action: {
+            guard self.newFirstName != "" else {
+              self.fireNameEmptyAlert = true
+              return
+            }
+            
             user.firstName = self.newFirstName
             user.lastName = self.newLastName
             userService.createOrUpdate(object: user)
+            
             self.viewModel.user = user
             self.showChangeNameWindow = false
           }) {
             Text("Confirm")
+          }
+          .alert(isPresented: $fireNameEmptyAlert) {
+            Alert(title: Text("Empty First Name"))
           }
           
           Spacer()
