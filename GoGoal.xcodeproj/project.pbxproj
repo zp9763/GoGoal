@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3348526527333DBB0067D516 /* GoalView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3348526427333DBA0067D516 /* GoalView.swift */; };
 		39B09B685F652E8DE351C003 /* Pods_GoGoal.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E984E783F86CBF2A328AC6CD /* Pods_GoGoal.framework */; };
 		57409A41272E11C900578CD9 /* UserGoalRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57409A40272E11C900578CD9 /* UserGoalRowView.swift */; };
 		57409A43272E161900578CD9 /* GoalProgressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57409A42272E161900578CD9 /* GoalProgressView.swift */; };
@@ -50,6 +51,7 @@
 
 /* Begin PBXFileReference section */
 		0EA69621C149F45D0491840F /* Pods-GoGoal.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GoGoal.release.xcconfig"; path = "Target Support Files/Pods-GoGoal/Pods-GoGoal.release.xcconfig"; sourceTree = "<group>"; };
+		3348526427333DBA0067D516 /* GoalView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoalView.swift; sourceTree = "<group>"; };
 		57409A40272E11C900578CD9 /* UserGoalRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserGoalRowView.swift; sourceTree = "<group>"; };
 		57409A42272E161900578CD9 /* GoalProgressView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoalProgressView.swift; sourceTree = "<group>"; };
 		57409A44272E164400578CD9 /* CheckInGoalView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckInGoalView.swift; sourceTree = "<group>"; };
@@ -201,6 +203,7 @@
 				57409A46272E165400578CD9 /* EditGoalView.swift */,
 				57C52C8B2725E94C00E0493B /* CommunityView.swift */,
 				57C60A1F2730C1BE00E5255E /* AchievementView.swift */,
+				3348526427333DBA0067D516 /* GoalView.swift */,
 				57C52C8D2725E95E00E0493B /* ProfileView.swift */,
 				57C60A1D2730A48900E5255E /* TopicView.swift */,
 				57C60A1B2730A1C500E5255E /* TopicSelectionView.swift */,
@@ -378,6 +381,7 @@
 				5751AD24271E4703009D94A5 /* Goal.swift in Sources */,
 				57E71E70272B84DE0000DE81 /* StorageEnum.swift in Sources */,
 				5773B537271DF9BE0029A220 /* GenSampleData.swift in Sources */,
+				3348526527333DBB0067D516 /* GoalView.swift in Sources */,
 				5751AD2E271E4BEB009D94A5 /* PostService.swift in Sources */,
 				5773B50B271CC0360029A220 /* AppDelegate.swift in Sources */,
 				57C60A1E2730A48900E5255E /* TopicView.swift in Sources */,
