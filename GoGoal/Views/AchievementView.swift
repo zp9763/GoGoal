@@ -10,9 +10,16 @@ import SwiftUI
 struct AchievementView: View {
   
   @ObservedObject var viewModel: ViewModel
-
+  
   var body: some View {
-    Text("Hello, World!")
+    NavigationView {
+      Text("Hello, World!")
+        .navigationBarTitle("Achievement", displayMode: .inline)
+        .navigationBarItems(
+          leading: Image(systemName: "equal.circle"),
+          trailing: Image(systemName: "arrow.clockwise")
+        )
+    }
   }
   
 }
