@@ -62,20 +62,35 @@ struct EditGoalView: View {
 //
 //          }
 //        }
+        HStack{
+          Text("Select a tag: ")
+        }
         Picker(selection: $indice, label: /*@START_MENU_TOKEN@*/Text("Picker")/*@END_MENU_TOKEN@*/, content: {
-          ForEach(allTopics.indices){ indice in
-            allTopics[indice].icon
+          ForEach(allTopics.indices, id: \.self){ indice in
+            HStack{
+              allTopics[indice].icon?
+                .resizable()
+                .scaledToFit()
+              Text(allTopics[indice].name)
+            }
             
-          }
+          }.tag(indice)
         })
+        //.pickerStyle(SegmentedPickerStyle())
+        Spacer()
+        
       }
       
       
     }
     .navigationBarTitle("Edit Goal", displayMode: .inline)
+    .navigationBarItems(trailing: Button(action: {}, label: {
+      Image(systemName: "pencil")
+    }))
     .onAppear(perform: {
       self.fetchAllTopics()
     })
+    
     
     
   }
