@@ -18,12 +18,20 @@ extension Image {
   }
   
   static func fromData(data: Data?) -> Image? {
+    let uiImage = UIImage.fromData(data: data)
+    return fromUIImage(uiImage: uiImage)
+  }
+  
+}
+
+extension UIImage {
+  
+  static func fromData(data: Data?) -> UIImage? {
     guard let data = data else {
       return nil
     }
     
-    let uiImage = UIImage(data: data)
-    return fromUIImage(uiImage: uiImage)
+    return UIImage(data: data)
   }
   
 }

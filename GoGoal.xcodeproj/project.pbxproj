@@ -15,6 +15,7 @@
 		57409A47272E165400578CD9 /* EditGoalView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57409A46272E165400578CD9 /* EditGoalView.swift */; };
 		57409A49272F166A00578CD9 /* TimestampExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57409A48272F166A00578CD9 /* TimestampExtension.swift */; };
 		57409A4B272F6C1C00578CD9 /* PostView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57409A4A272F6C1C00578CD9 /* PostView.swift */; };
+		574369B02734D27F001DA5A7 /* AnyGestureRecognizer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 574369AF2734D27F001DA5A7 /* AnyGestureRecognizer.swift */; };
 		5751AD22271E46A5009D94A5 /* Topic.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5751AD21271E46A5009D94A5 /* Topic.swift */; };
 		5751AD24271E4703009D94A5 /* Goal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5751AD23271E4703009D94A5 /* Goal.swift */; };
 		5751AD26271E47C6009D94A5 /* Post.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5751AD25271E47C6009D94A5 /* Post.swift */; };
@@ -60,6 +61,7 @@
 		57409A46272E165400578CD9 /* EditGoalView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditGoalView.swift; sourceTree = "<group>"; };
 		57409A48272F166A00578CD9 /* TimestampExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimestampExtension.swift; sourceTree = "<group>"; };
 		57409A4A272F6C1C00578CD9 /* PostView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostView.swift; sourceTree = "<group>"; };
+		574369AF2734D27F001DA5A7 /* AnyGestureRecognizer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnyGestureRecognizer.swift; sourceTree = "<group>"; };
 		5751AD21271E46A5009D94A5 /* Topic.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Topic.swift; sourceTree = "<group>"; };
 		5751AD23271E4703009D94A5 /* Goal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Goal.swift; sourceTree = "<group>"; };
 		5751AD25271E47C6009D94A5 /* Post.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Post.swift; sourceTree = "<group>"; };
@@ -191,6 +193,7 @@
 			children = (
 				5773B50A271CC0360029A220 /* AppDelegate.swift */,
 				5773B50C271CC0360029A220 /* SceneDelegate.swift */,
+				574369AF2734D27F001DA5A7 /* AnyGestureRecognizer.swift */,
 			);
 			path = Delegates;
 			sourceTree = "<group>";
@@ -399,6 +402,7 @@
 				5773B530271D1B990029A220 /* FirestoreDecoder.swift in Sources */,
 				57C60A202730C1BE00E5255E /* AchievementView.swift in Sources */,
 				57409A47272E165400578CD9 /* EditGoalView.swift in Sources */,
+				574369B02734D27F001DA5A7 /* AnyGestureRecognizer.swift in Sources */,
 				5773B52D271D13D00029A220 /* CollectionEnum.swift in Sources */,
 				57409A49272F166A00578CD9 /* TimestampExtension.swift in Sources */,
 				5751AD2A271E4B9A009D94A5 /* TopicService.swift in Sources */,
