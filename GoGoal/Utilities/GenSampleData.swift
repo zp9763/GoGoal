@@ -41,8 +41,7 @@ class GenSampleData {
              title: "go swimming",
              description: "go swimming every Tuesday",
              duration: 4,
-             checkInDates: [Timestamp](repeating: Timestamp.init(), count: 4),
-             isCompleted: true)
+             checkInDates: [Timestamp](repeating: Timestamp.init(), count: 3))
       ]
       
       for goal in goals {

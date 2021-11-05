@@ -6,27 +6,33 @@
 //
 
 import SwiftUI
+import FirebaseFirestore
 
 struct PostView: View {
   
-  var post: Post
+  var user: User
   
-  @State var user: User?
+  @State var post: Post
+  
+  @State var owner: User?
   
   @State var topicIcon: Image?
   
+  @State var postIsLiked = false
+  
   let topicService = TopicService()
   let userService = UserService()
+  let postService = PostService()
   
   var body: some View {
     VStack {
       Spacer()
       
-      if let user = self.user {
+      if let owner = self.owner {
         HStack {
           Spacer()
           
-          user.avatar?
+          owner.avatar?
             .resizable()
             .scaledToFit()
             .clipShape(Circle())
@@ -37,8 +43,33 @@ struct PostView: View {
             )
             .frame(width: 60, height: 60)
           
-          Text(user.getFullName())
+          Text(owner.getFullName())
             .bold()
+          
+          Spacer()
+          
+          if let _ = self.post.likes?[self.user.id!] {
+            Button(action: {
+              self.postService.removeUserLike(postId: self.post.id!, userId: self.user.id!)
+              self.post.likes!.removeValue(forKey: self.user.id!)
+              self.postIsLiked = false
+            }) {
+              Image(systemName: "hand.thumbsup.fill")
+            }
+          } else {
+            Button(action: {
+              self.postService.addUserLike(postId: self.post.id!, userId: self.user.id!)
+              if self.post.likes == nil {
+                self.post.likes = [String: Timestamp]()
+              }
+              self.post.likes![self.user.id!] = Timestamp.init()
+              self.postIsLiked = true
+            }) {
+              Image(systemName: "hand.thumbsup")
+            }
+          }
+          
+          Text(String(self.post.likes?.count ?? 0))
           
           Spacer()
         }
@@ -63,11 +94,6 @@ struct PostView: View {
         Text(self.post.content)
         
         Spacer()
-        
-        Image(systemName: "heart.fill")
-        Text(String(self.post.likes?.count ?? 0))
-        
-        Spacer()
       }
       
       if let photos = self.post.photos {
@@ -89,13 +115,13 @@ struct PostView: View {
       
       Spacer()
     }
-    .onAppear(perform: self.fetchPostUser)
+    .onAppear(perform: self.fetchPostOwner)
     .onAppear(perform: self.fetchGoalTopicIcon)
   }
   
-  func fetchPostUser() {
+  func fetchPostOwner() {
     self.userService.getById(id: self.post.userId) {
-      self.user = $0
+      self.owner = $0
     }
   }
   

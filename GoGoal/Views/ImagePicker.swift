@@ -37,7 +37,7 @@ class ImagePickerCordinator: NSObject, UINavigationControllerDelegate, UIImagePi
     _image = image
   }
   
-  func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+  func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey: Any]) {
     image = info[UIImagePickerController.InfoKey.originalImage] as? UIImage
     isShown = false
   }

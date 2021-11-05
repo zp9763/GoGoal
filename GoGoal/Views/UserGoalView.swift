@@ -24,7 +24,7 @@ struct UserGoalView: View {
         
         List {
           ForEach(self.displayedGoals) { goal in
-            NavigationLink(destination: GoalProgressView(goal: goal)) {
+            NavigationLink(destination: GoalProgressView(user: self.viewModel.user, goal: goal)) {
               UserGoalRowView(goal: goal)
             }
             // fix SwiftUI bug: nested NavigationLink fails on 2nd click

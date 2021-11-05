@@ -9,6 +9,8 @@ import SwiftUI
 
 struct GoalProgressView: View {
   
+  var user: User
+
   var goal: Goal
   
   @State var topicIcon: Image?
@@ -78,7 +80,7 @@ struct GoalProgressView: View {
       
       List {
         ForEach(self.posts) {
-          PostView(post: $0)
+          PostView(user: self.user, post: $0)
         }
       }
       

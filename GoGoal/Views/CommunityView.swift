@@ -21,7 +21,7 @@ struct CommunityView: View {
     NavigationView {
       List {
         ForEach(self.displayedPosts) {
-          PostView(post: $0)
+          PostView(user: self.viewModel.user, post: $0)
         }
       }
       .navigationBarTitle("Community", displayMode: .inline)
