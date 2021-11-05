@@ -6,29 +6,35 @@
 //
 
 import SwiftUI
+import FirebaseFirestore
 
 struct CheckInGoalView: View {
   
+  private static let PHOTO_COLUMN = 2
   private static let MAX_PHOTO_NUM = 4
-  
-  @Environment(\.presentationMode) var mode: Binding<PresentationMode>
   
   var goal: Goal
   
   @State var content: String = ""
   
   @State var showImagePicker = false
+  @State var photos = [UIImage]()
   
-  @State var uiImage: UIImage? = nil
+  @Environment(\.presentationMode) var mode: Binding<PresentationMode>
   
-//  @State var photos = [UIImage?]()
-//
-//  var photosBinding: Binding<UIImage?> {
-//    Binding<UIImage?>(
-//      get: { return UIImage() },
-//      set: { self.photos.append($0) }
-//    )
-//  }
+  let goalService = GoalService()
+  let postService = PostService()
+  
+  var photosBinding: Binding<UIImage?> {
+    Binding<UIImage?>(
+      get: { return nil },
+      set: {
+        if let uiImage = $0 {
+          self.photos.append(uiImage)
+        }
+      }
+    )
+  }
   
   var body: some View {
     VStack{
@@ -43,56 +49,85 @@ struct CheckInGoalView: View {
       Spacer()
       
       Group {
-//        var colums = [GridItem(.flexible()), GridItem(.flexible())]
-//
-//        LazyVGrid(columns: colums) {
-//          ForEach(self.photos, id: \.self) { uiImage in
-//            Image.fromUIImage(uiImage: uiImage)?
-//              .resizable()
-//              .scaledToFit()
-//              .clipShape(Rectangle())
-//              .overlay(
-//                Rectangle()
-//                  .stroke(Color.white, lineWidth: 2)
-//                  .shadow(radius: 40)
-//              )
-//              .frame(width: 80, height: 60)
-//          }
-//        }
+        let colums = [GridItem](
+          repeating: GridItem(.flexible()),
+          count: CheckInGoalView.PHOTO_COLUMN
+        )
         
-        Image.fromUIImage(uiImage: uiImage)?
-          .resizable()
-          .scaledToFit()
-//          .clipShape(Rectangle())
-//          .overlay(
-//            Rectangle()
-//              .stroke(Color.white, lineWidth: 2)
-//              .shadow(radius: 40)
-//          )
-//          .frame(width: 80, height: 60)
+        LazyVGrid(columns: colums) {
+          ForEach(self.photos, id: \.self) {
+            Image.fromUIImage(uiImage: $0)?
+              .resizable()
+              .scaledToFit()
+              .clipShape(Rectangle())
+              .frame(width: 80, height: 60)
+          }
+        }
         
-        Button(action: {
-          self.showImagePicker = true
-        }) {
-          Text("add photo")
+        HStack {
+          Spacer()
+          
+          // deactivate button after reaching photo number limit
+          if self.photos.count < CheckInGoalView.MAX_PHOTO_NUM {
+            Button(action: {
+              self.showImagePicker = true
+            }) {
+              Text("Add a photo")
+            }
+          } else {
+            Text("Photos are full")
+          }
+          
+          Spacer()
+          
+          Button(action: {
+            _ = self.photos.popLast()
+          }) {
+            Text("Remove a photo")
+          }
+          
+          Spacer()
         }
       }
       
       Spacer()
       
       Button(action: {
-        let content = self.content == "" ? "Goal: \(self.goal.title)" : self.content
+        var goal = self.goal
+        goal.checkInDates.append(Timestamp.init())
         
+        if goal.checkInDates.count == goal.duration {
+          goal.isCompleted = true
+        }
+        
+        goal.lastUpdateDate = Timestamp.init()
+        goalService.createOrUpdate(object: goal)
+        
+        // add check-in date only if no content and photos
+        guard self.content != "" || self.photos.count > 0 else {
+          self.mode.wrappedValue.dismiss()
+          return
+        }
+        
+        let content = self.content == "" ? "Goal: \(self.goal.title)" : self.content
+        let post = Post(userId: goal.userId, goalId: goal.id!, topicId: goal.topicId, content: content)
+        postService.createOrUpdate(object: post)
+        
+        if self.photos.count > 0 {
+          postService.setPhotos(post: post, images: self.photos)
+        }
+        
+        self.mode.wrappedValue.dismiss()
       }) {
         Text("Submit")
       }
       
       Spacer()
     }
-    .sheet(isPresented: $showImagePicker) {
-      PhotoCaptureView(showImagePicker: self.$showImagePicker, image: self.$uiImage)
-    }
     .navigationBarTitle("Check In", displayMode: .inline)
+    .sheet(isPresented: $showImagePicker) {
+      PhotoCaptureView(showImagePicker: $showImagePicker, image: photosBinding)
+    }
   }
   
 }
