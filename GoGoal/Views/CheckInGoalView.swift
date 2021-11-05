@@ -10,8 +10,8 @@ import FirebaseFirestore
 
 struct CheckInGoalView: View {
   
-  private static let PHOTO_COLUMN = 2
-  private static let MAX_PHOTO_NUM = 4
+  static let PHOTO_COLUMN = 2
+  static let MAX_PHOTO_NUM = 4
   
   var goal: Goal
   
@@ -49,18 +49,18 @@ struct CheckInGoalView: View {
       Spacer()
       
       Group {
-        let colums = [GridItem](
+        let columns = [GridItem](
           repeating: GridItem(.flexible()),
           count: CheckInGoalView.PHOTO_COLUMN
         )
         
-        LazyVGrid(columns: colums) {
+        LazyVGrid(columns: columns) {
           ForEach(self.photos, id: \.self) {
             Image.fromUIImage(uiImage: $0)?
               .resizable()
               .scaledToFit()
               .clipShape(Rectangle())
-              .frame(width: 80, height: 60)
+              .frame(width: 100, height: 80)
           }
         }
         
