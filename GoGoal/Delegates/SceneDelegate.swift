@@ -25,6 +25,13 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     if let windowScene = scene as? UIWindowScene {
       let window = UIWindow(windowScene: windowScene)
       window.rootViewController = UIHostingController(rootView: mainView)
+      
+      let tapGesture = AnyGestureRecognizer(target: window, action:#selector(UIView.endEditing))
+      tapGesture.requiresExclusiveTouchType = false
+      tapGesture.cancelsTouchesInView = false
+      tapGesture.delegate = self
+      window.addGestureRecognizer(tapGesture)
+      
       self.window = window
       window.makeKeyAndVisible()
     }
@@ -56,6 +63,17 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     // Called as the scene transitions from the foreground to the background.
     // Use this method to save data, release shared resources, and store enough scene-specific state information
     // to restore the scene back to its current state.
+  }
+  
+}
+
+extension SceneDelegate: UIGestureRecognizerDelegate {
+  
+  func gestureRecognizer(
+    _ gestureRecognizer: UIGestureRecognizer,
+    shouldRecognizeSimultaneouslyWith otherGestureRecognizer: UIGestureRecognizer
+  ) -> Bool {
+    return true
   }
   
 }

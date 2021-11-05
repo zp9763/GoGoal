@@ -7,7 +7,6 @@
 
 import FirebaseFirestore
 import FirebaseFirestoreSwift
-import SwiftUI
 
 struct Post: Codable, Identifiable {
   
@@ -20,7 +19,7 @@ struct Post: Codable, Identifiable {
   var photosPath: String?
   var createDate: Timestamp = Timestamp.init()
   var likes: [String: Timestamp]?
-  var photos: [Image]?
+  var photos: [UIImage]?
   
   enum CodingKeys: CodingKey {
     case id

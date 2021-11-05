@@ -9,7 +9,8 @@ import FirebaseStorage
 
 class FileStorage {
   
-  private static let MAX_SIZE: Int64 = 1 * 1024 * 1024
+  // loaded photo size limit = 10 MB
+  private static let MAX_SIZE: Int64 = 10 * 1024 * 1024
   
   let storage = Storage.storage()
   let prefixPath: StorageEnum

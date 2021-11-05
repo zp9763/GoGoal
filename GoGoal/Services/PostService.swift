@@ -45,7 +45,8 @@ class PostService: BaseRepository<Post> {
     storage.downloadFolderFiles(fullPath: path) { dataList in
       var post = post
       post.photos = dataList
-        .map() { Image.fromData(data: $0) }
+        .sorted() { $0.count < $1.count }  // avoid random image sequence
+        .map() { UIImage(data: $0) }
         .compactMap() { $0 }
       completion(post)
     }

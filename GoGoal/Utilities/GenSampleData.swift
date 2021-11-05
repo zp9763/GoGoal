@@ -30,18 +30,18 @@ class GenSampleData {
              topicId: topic!.id!,
              title: "play footbal",
              description: "play footbal every Friday",
-             duration: 10),
+             duration: 3),
         Goal(userId: user.id!,
              topicId: topic!.id!,
              title: "play basketball",
              description: "play basketball every Sunday",
-             duration: 20),
+             duration: 3),
         Goal(userId: user.id!,
              topicId: topic!.id!,
              title: "go swimming",
              description: "go swimming every Tuesday",
-             duration: 5,
-             checkInDates: [Timestamp](repeating: Timestamp.init(), count: 5),
+             duration: 4,
+             checkInDates: [Timestamp](repeating: Timestamp.init(), count: 4),
              isCompleted: true)
       ]
       
