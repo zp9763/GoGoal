@@ -1,5 +1,5 @@
 //
-//  GoalView.swift
+//  CompletedGoalView.swift
 //  GoGoal
 //
 //  Created by sj on 11/3/21.
@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct GoalView: View {
+struct CompletedGoalView: View {
   
   var goal : Goal
   

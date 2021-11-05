@@ -8,33 +8,36 @@
 import SwiftUI
 
 struct AchievementView: View {
-  private static let MAX_DISPLAY_NUM = 10
   
   @ObservedObject var viewModel: ViewModel
   
   @State var displayedGoals = [Goal]()
-
-  let goalService = GoalService()
   
+  let goalService = GoalService()
   
   var body: some View {
     NavigationView {
       List {
         ForEach(self.displayedGoals) {
-          GoalView(goal: $0)
+          CompletedGoalView(goal: $0)
         }
       }
-        .navigationBarTitle("Achievement", displayMode: .inline)
-        .navigationBarItems(
-          leading: Image(systemName: "equal.circle"),
-          trailing: Image(systemName: "arrow.clockwise")
-        ).onAppear(perform: self.fetchAllAchievements)
+      .navigationBarTitle("Achievement", displayMode: .inline)
+      .navigationBarItems(
+        leading: Image(systemName: "equal.circle"),
+        trailing: Button(action: {
+          self.fetchCompletedGoals()
+        }) {
+          Image(systemName: "arrow.clockwise")
+        }
+      )
+      .onAppear(perform: self.fetchCompletedGoals)
     }
   }
-  func fetchAllAchievements() {
-    self.goalService.getCompletedByTopicIds(topicIds: self.viewModel.user.topicIdList) { goalList in
-      let displayedCount = min(goalList.count, AchievementView.MAX_DISPLAY_NUM)
-      self.displayedGoals = Array(goalList[0..<displayedCount])
+  
+  func fetchCompletedGoals() {
+    self.goalService.getCompletedByTopicIds(topicIds: self.viewModel.user.topicIdList) {
+      self.displayedGoals = $0
     }
   }
   
