@@ -142,7 +142,7 @@ struct EditGoalView: View {
     if let goal = self.goal {
       return AnyView(
         Button(action: {
-          self.goalService.deleteById(id: goal.id!)
+          self.goalService.deleteGoalCascade(goal: goal)
         }) {
           Image(systemName: "trash")
         }

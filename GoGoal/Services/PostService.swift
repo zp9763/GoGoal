@@ -126,6 +126,28 @@ class PostService: BaseRepository<Post> {
     }
   }
   
+  override func deleteById(id: String) {
+    let likeRef = self.rootRef.document(id).collection(.likes)
+    
+    likeRef.getDocuments() { (snapshot, err) in
+      if let err = err {
+        print("Error get documents: \(err)")
+        return
+      }
+      
+      let dispatchGroup = DispatchGroup()
+      
+      for document in snapshot!.documents {
+        dispatchGroup.enter()
+        document.reference.delete() {_ in
+          dispatchGroup.leave()
+        }
+      }
+      
+      dispatchGroup.notify(queue: .main) { super.deleteById(id: id) }
+    }
+  }
+  
   func getByGoalId(goalId: String, _ completion: @escaping ([Post]) -> Void) {
     let condition = QueryCondition(field: "goalId", predicate: .equal, value: goalId)
     queryByFields([condition], completion)
@@ -155,7 +177,7 @@ class PostService: BaseRepository<Post> {
     likeService.deleteById(id: userId)
   }
   
-  func setPhotos(post: Post, images: [UIImage]) {
+  func addPhotos(post: Post, images: [UIImage]) {
     let dataList = images
       .map() { $0.pngData() }
       .compactMap() { $0 }
@@ -164,6 +186,12 @@ class PostService: BaseRepository<Post> {
       var post = post
       post.photosPath = path
       self.createOrUpdate(object: post)
+    }
+  }
+  
+  func removePhotos(post: Post) {
+    if let path = post.photosPath {
+      storage.deleteFolderFiles(fullPath: path)
     }
   }
   
