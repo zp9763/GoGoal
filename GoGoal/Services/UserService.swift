@@ -6,7 +6,6 @@
 //
 
 import FirebaseFirestore
-import SwiftUI
 
 class UserService: BaseRepository<User> {
   
@@ -23,13 +22,13 @@ class UserService: BaseRepository<User> {
     var user = user
     
     guard let path = user.avatarPath else {
-      user.avatar = Image(UserService.DEFAULT_AVATAR)
+      user.avatar = UIImage(named: UserService.DEFAULT_AVATAR)
       completion(user)
       return
     }
     
     storage.downloadFile(fullPath: path) { data in
-      user.avatar = Image.fromData(data: data)
+      user.avatar = UIImage.fromData(data: data)
       completion(user)
     }
   }

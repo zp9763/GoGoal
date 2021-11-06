@@ -32,7 +32,7 @@ struct PostView: View {
         HStack {
           Spacer()
           
-          owner.avatar?
+          Image.fromUIImage(uiImage: owner.avatar)?
             .resizable()
             .scaledToFit()
             .clipShape(Circle())

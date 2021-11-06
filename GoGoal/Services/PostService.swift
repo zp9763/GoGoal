@@ -6,7 +6,6 @@
 //
 
 import FirebaseFirestore
-import SwiftUI
 
 class PostService: BaseRepository<Post> {
   
