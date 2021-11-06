@@ -132,11 +132,25 @@ struct EditGoalView: View {
     }
     .navigationBarTitle("Edit Goal", displayMode: .inline)
     .navigationBarItems(
-      // TODO: delete goal cascade
-      trailing: Image(systemName: "trash")
+      trailing: deleteGoalView
     )
     .onAppear(perform: self.fetchUserIfGoalPassed)
     .onAppear(perform: self.fetchAllTopics)
+  }
+  
+  var deleteGoalView: some View {
+    if let goal = self.goal {
+      return AnyView(
+        Button(action: {
+          self.goalService.deleteById(id: goal.id!)
+        }) {
+          Image(systemName: "trash")
+        }
+      )
+    } else {
+      // disable delete button when creating a new goal
+      return AnyView(EmptyView())
+    }
   }
   
   func fetchUserIfGoalPassed() {
