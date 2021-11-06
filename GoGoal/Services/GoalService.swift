@@ -8,7 +8,9 @@
 import FirebaseFirestore
 
 class GoalService: BaseRepository<Goal> {
-    
+  
+  let postService = PostService()
+  
   init() {
     let rootRef = Firestore.firestore().collection(.goals)
     super.init(rootRef)
@@ -31,6 +33,16 @@ class GoalService: BaseRepository<Goal> {
       QueryCondition(field: "isCompleted", predicate: .equal, value: true)
     ]
     queryByFields(conditions, completion)
+  }
+  
+  func deleteGoalCascade(goal: Goal) {
+    self.deleteById(id: goal.id!)
+    self.postService.getByGoalId(goalId: goal.id!) { postList in
+      for post in postList {
+        self.postService.removePhotos(post: post)
+        self.postService.deleteById(id: post.id!)
+      }
+    }
   }
   
 }

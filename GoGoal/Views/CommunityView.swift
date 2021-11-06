@@ -26,8 +26,30 @@ struct CommunityView: View {
       }
       .navigationBarTitle("Community", displayMode: .inline)
       .navigationBarItems(
-        // TODO: community posts filter
-        leading: Image(systemName: "equal.circle"),
+        leading: Menu(content: {
+          Button(action: {
+            self.displayedPosts = self.displayedPosts
+              .sorted() { $0.createDate > $1.createDate }
+          }) {
+            Text("Sort by Time")
+          }
+          
+          Button(action: {
+            self.displayedPosts = self.displayedPosts
+              .sorted() { $0.topicId < $1.topicId }
+          }) {
+            Text("Sort by Topic")
+          }
+          
+          Button(action: {
+            self.displayedPosts = self.displayedPosts
+              .sorted() { $0.likes?.count ?? 0 > $1.likes?.count ?? 0 }
+          }) {
+            Text("Sort by Likes")
+          }
+        }) {
+          Image(systemName: "equal.circle")
+        },
         
         trailing: Button(action: {
           self.fetchRecentPosts()

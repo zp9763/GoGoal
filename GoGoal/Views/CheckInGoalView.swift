@@ -114,7 +114,7 @@ struct CheckInGoalView: View {
         postService.createOrUpdate(object: post)
         
         if self.photos.count > 0 {
-          postService.setPhotos(post: post, images: self.photos)
+          postService.addPhotos(post: post, images: self.photos)
         }
         
         self.mode.wrappedValue.dismiss()

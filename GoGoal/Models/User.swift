@@ -7,7 +7,6 @@
 
 import FirebaseFirestore
 import FirebaseFirestoreSwift
-import SwiftUI
 
 struct User: Codable, Identifiable {
   
@@ -20,7 +19,7 @@ struct User: Codable, Identifiable {
   var topicIdList: [String] = []
   var createDate: Timestamp = Timestamp.init()
   var lastUpdateDate: Timestamp = Timestamp.init()
-  var avatar: Image?
+  var avatar: UIImage?
   
   enum CodingKeys: CodingKey {
     case id

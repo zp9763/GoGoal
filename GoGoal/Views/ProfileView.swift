@@ -31,9 +31,24 @@ struct ProfileView: View {
   @State var allTopics = [Topic]()
   @State var subscribedTopicIds = [String]()
   
+  @State var showImagePicker = false
+  @State var avatar: UIImage?
+  
   let userService = UserService()
   let goalService = GoalService()
   let topicService = TopicService()
+  
+  var avatarBinding: Binding<UIImage?> {
+    Binding<UIImage?>(
+      get: { return self.avatar },
+      set: {
+        if let uiImage = $0 {
+          self.avatar = uiImage
+          self.userService.setAvatar(user: self.viewModel.user, image: uiImage)
+        }
+      }
+    )
+  }
   
   var body: some View {
     NavigationView {
@@ -46,16 +61,20 @@ struct ProfileView: View {
           HStack {
             Spacer()
             
-            user.avatar?
-              .resizable()
-              .scaledToFit()
-              .clipShape(Circle())
-              .overlay(
-                Circle()
-                  .stroke(Color.white, lineWidth: 2)
-                  .shadow(radius: 40)
-              )
-              .frame(width: 60, height: 60)
+            Button(action: {
+              self.showImagePicker = true
+            }) {
+              Image.fromUIImage(uiImage: self.avatar)?
+                .resizable()
+                .scaledToFit()
+                .clipShape(Circle())
+                .overlay(
+                  Circle()
+                    .stroke(Color.white, lineWidth: 2)
+                    .shadow(radius: 40)
+                )
+                .frame(width: 60, height: 60)
+            }
             
             Text(user.getFullName())
               .bold()
@@ -144,6 +163,9 @@ struct ProfileView: View {
         Spacer()
       }
       .navigationBarTitle("Profile", displayMode: .inline)
+      .sheet(isPresented: $showImagePicker) {
+        PhotoCaptureView(showImagePicker: $showImagePicker, image: avatarBinding)
+      }
       .onAppear(perform: self.completeUserInfo)
       .onAppear(perform: self.fetchAllUserGoals)
       .onAppear(perform: self.fetchAllTopics)
@@ -267,6 +289,7 @@ struct ProfileView: View {
     self.userService.getById(id: self.viewModel.user.id!) {
       self.viewModel.user = $0!
       self.subscribedTopicIds = $0!.topicIdList
+      self.avatar = $0!.avatar
     }
   }
   

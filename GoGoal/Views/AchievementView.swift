@@ -26,8 +26,30 @@ struct AchievementView: View {
       }
       .navigationBarTitle("Achievement", displayMode: .inline)
       .navigationBarItems(
-        // TODO: achievement goals filter
-        leading: Image(systemName: "equal.circle"),
+        leading: Menu(content: {
+          Button(action: {
+            self.displayedGoals = self.displayedGoals
+              .sorted() { $0.lastUpdateDate > $1.lastUpdateDate }
+          }) {
+            Text("Sort by Time")
+          }
+          
+          Button(action: {
+            self.displayedGoals = self.displayedGoals
+              .sorted() { $0.title < $1.title }
+          }) {
+            Text("Sort by Title")
+          }
+          
+          Button(action: {
+            self.displayedGoals = self.displayedGoals
+              .sorted() { $0.duration < $1.duration }
+          }) {
+            Text("Sort by Duration")
+          }
+        }) {
+          Image(systemName: "equal.circle")
+        },
         
         trailing: Button(action: {
           self.fetchCompletedGoals()

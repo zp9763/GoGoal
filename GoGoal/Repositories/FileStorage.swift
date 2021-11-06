@@ -46,7 +46,7 @@ class FileStorage {
       }
     }
     
-    let fullPath = "\(prefixPath.rawValue)/\(subPath)"
+    let fullPath = "\(prefixPath.rawValue)/\(subPath)/"
     dispatchGroup.notify(queue: .main) { completion(fullPath) }
   }
   
@@ -88,13 +88,35 @@ class FileStorage {
     }
   }
   
-  func deletePath(fullPath: String) {
-    let pathRef = storage.reference(withPath: fullPath)
+  func deleteFile(fullPath: String) {
+    let fileRef = storage.reference(withPath: fullPath)
     
-    pathRef.delete() { err in
+    fileRef.delete() { err in
       if let err = err {
         print("Error delete file: \(err)")
       }
+    }
+  }
+  
+  func deleteFolderFiles(fullPath: String) {
+    let folderRef = storage.reference(withPath: fullPath)
+    
+    folderRef.listAll() { files, err in
+      guard err == nil else {
+        print("Error list all files: \(String(describing: err))")
+        return
+      }
+      
+      let dispatchGroup = DispatchGroup()
+      
+      for fileRef in files.items {
+        dispatchGroup.enter()
+        fileRef.delete() {_ in
+          dispatchGroup.leave()
+        }
+      }
+      
+      dispatchGroup.notify(queue: .main) {}
     }
   }
   
