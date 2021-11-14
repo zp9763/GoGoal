@@ -25,9 +25,14 @@ struct QueryCondition {
   let value: Any
 }
 
+struct OrderCondition {
+  let field: String
+  let descending: Bool
+}
+
 extension Query {
   
-  func applyCondition(_ condition: QueryCondition) -> Query {
+  func applyQuery(_ condition: QueryCondition) -> Query {
     switch condition.predicate {
       case .lessThan:
         return self.whereField(condition.field, isLessThan: condition.value)
@@ -48,6 +53,14 @@ extension Query {
       case .arrayContain:
         return self.whereField(condition.field, arrayContains: condition.value)
     }
+  }
+  
+  func applyOrder(_ condition: OrderCondition) -> Query {
+    return self.order(by: condition.field, descending: condition.descending)
+  }
+  
+  func applyLimit(_ limit: Int) -> Query {
+    return self.limit(to: limit)
   }
   
 }

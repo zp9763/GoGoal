@@ -65,7 +65,6 @@ struct AchievementView: View {
     self.goalService.getCompletedByTopicIds(topicIds: self.viewModel.user.topicIdList) { goalList in
       let displayedCount = min(goalList.count, AchievementView.MAX_DISPLAY_NUM)
       self.displayedGoals = Array(goalList[0..<displayedCount])
-        .sorted() { $0.lastUpdateDate > $1.lastUpdateDate }
     }
   }
   

@@ -60,8 +60,9 @@ class UserService: BaseRepository<User> {
     }
   }
   
-  override func queryByFields(_ conditions: [QueryCondition], _ completion: @escaping ([User]) -> Void) {
-    super.queryByFields(conditions) { userList in
+  override func queryByFields(queries: [QueryCondition], orders: [OrderCondition]? = nil, limit: Int? = nil,
+                              _ completion: @escaping ([User]) -> Void) {
+    super.queryByFields(queries: queries, orders: orders, limit: limit) { userList in
       var userList = userList
       let dispatchGroup = DispatchGroup()
       

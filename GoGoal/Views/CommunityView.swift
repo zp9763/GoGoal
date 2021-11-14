@@ -65,7 +65,6 @@ struct CommunityView: View {
     self.postService.getRecentByTopicIds(topicIds: self.viewModel.user.topicIdList) { postList in
       let displayedCount = min(postList.count, CommunityView.MAX_DISPLAY_NUM)
       self.displayedPosts = Array(postList[0..<displayedCount])
-        .sorted() { $0.createDate > $1.createDate }
     }
   }
   

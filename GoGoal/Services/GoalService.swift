@@ -9,6 +9,8 @@ import FirebaseFirestore
 
 class GoalService: BaseRepository<Goal> {
   
+  private static let COMPLETED_GOAL_QUERY_LIMIT = 50
+  
   let postService = PostService()
   
   init() {
@@ -17,8 +19,8 @@ class GoalService: BaseRepository<Goal> {
   }
   
   func getByUserId(userId: String, _ completion: @escaping ([Goal]) -> Void) {
-    let condition = QueryCondition(field: "userId", predicate: .equal, value: userId)
-    queryByFields([condition], completion)
+    let query = QueryCondition(field: "userId", predicate: .equal, value: userId)
+    queryByFields(queries: [query], completion)
   }
   
   func getCompletedByTopicIds(topicIds: [String], _ completion: @escaping ([Goal]) -> Void) {
@@ -28,11 +30,14 @@ class GoalService: BaseRepository<Goal> {
       return
     }
     
-    let conditions = [
+    let queries = [
       QueryCondition(field: "topicId", predicate: .isIn, value: topicIds),
       QueryCondition(field: "isCompleted", predicate: .equal, value: true)
     ]
-    queryByFields(conditions, completion)
+    
+    let order = OrderCondition(field: "lastUpdateDate", descending: true)
+    
+    queryByFields(queries: queries, orders: [order], limit: GoalService.COMPLETED_GOAL_QUERY_LIMIT, completion)
   }
   
   func deleteGoalCascade(goal: Goal) {

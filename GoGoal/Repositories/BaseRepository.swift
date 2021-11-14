@@ -61,11 +61,22 @@ class BaseRepository<T: Codable & Identifiable> {
     }
   }
   
-  func queryByFields(_ conditions: [QueryCondition], _ completion: @escaping ([T]) -> Void) {
+  func queryByFields(queries: [QueryCondition], orders: [OrderCondition]? = nil, limit: Int? = nil,
+                     _ completion: @escaping ([T]) -> Void) {
     var queryRef = rootRef as Query
     
-    for condition in conditions {
-      queryRef = queryRef.applyCondition(condition)
+    for condition in queries {
+      queryRef = queryRef.applyQuery(condition)
+    }
+    
+    if let orders = orders {
+      for condition in orders {
+        queryRef = queryRef.applyOrder(condition)
+      }
+    }
+    
+    if let limit = limit {
+      queryRef = queryRef.applyLimit(limit)
     }
     
     var objects = [T]()
