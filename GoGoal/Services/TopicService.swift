@@ -44,8 +44,9 @@ class TopicService: BaseRepository<Topic> {
     }
   }
   
-  override func queryByFields(_ conditions: [QueryCondition], _ completion: @escaping ([Topic]) -> Void) {
-    super.queryByFields(conditions) { topicList in
+  override func queryByFields(queries: [QueryCondition], orders: [OrderCondition]? = nil, limit: Int? = nil,
+                              _ completion: @escaping ([Topic]) -> Void) {
+    super.queryByFields(queries: queries, orders: orders, limit: limit) { topicList in
       var topicList = topicList
       
       for i in 0..<topicList.count {
@@ -58,8 +59,8 @@ class TopicService: BaseRepository<Topic> {
   }
   
   func getByName(name: String, _ completion: @escaping (Topic?) -> Void) {
-    let condition = QueryCondition(field: "name", predicate: .equal, value: name)
-    queryByFields([condition]) { topicList in
+    let query = QueryCondition(field: "name", predicate: .equal, value: name)
+    queryByFields(queries: [query]) { topicList in
       let topic = topicList.count == 0 ? nil : topicList[0]
       completion(topic)
     }

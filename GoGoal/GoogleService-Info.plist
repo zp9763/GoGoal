@@ -3,9 +3,9 @@
 <plist version="1.0">
 <dict>
 	<key>CLIENT_ID</key>
-	<string>705826533007-f2orv5b4mao7rednfn6kmbn35c7ktus2.apps.googleusercontent.com</string>
+	<string>705826533007-nm1t4l1qquof0s7t5806cbh0a5fqe462.apps.googleusercontent.com</string>
 	<key>REVERSED_CLIENT_ID</key>
-	<string>com.googleusercontent.apps.705826533007-f2orv5b4mao7rednfn6kmbn35c7ktus2</string>
+	<string>com.googleusercontent.apps.705826533007-nm1t4l1qquof0s7t5806cbh0a5fqe462</string>
 	<key>API_KEY</key>
 	<string>AIzaSyBqtLJTQQv5z3Y5tmKTZ39G_OYpBwRKY08</string>
 	<key>GCM_SENDER_ID</key>
@@ -13,7 +13,7 @@
 	<key>PLIST_VERSION</key>
 	<string>1</string>
 	<key>BUNDLE_ID</key>
-	<string>cmu.mobile.team17.GoGoal</string>
+	<string>cmu.mobiledev.team17.gogoal</string>
 	<key>PROJECT_ID</key>
 	<string>gogoal-ea98f</string>
 	<key>STORAGE_BUCKET</key>
@@ -29,6 +29,6 @@
 	<key>IS_SIGNIN_ENABLED</key>
 	<true></true>
 	<key>GOOGLE_APP_ID</key>
-	<string>1:705826533007:ios:25cfd1532514c849798afa</string>
+	<string>1:705826533007:ios:07f17c0225ce4789798afa</string>
 </dict>
 </plist>

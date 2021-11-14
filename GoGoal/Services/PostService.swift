@@ -9,6 +9,8 @@ import FirebaseFirestore
 
 class PostService: BaseRepository<Post> {
   
+  private static let RECENT_POST_QUERY_LIMIT = 100
+  
   let storage = FileStorage(.posts)
   
   init() {
@@ -101,8 +103,9 @@ class PostService: BaseRepository<Post> {
     }
   }
   
-  override func queryByFields(_ conditions: [QueryCondition], _ completion: @escaping ([Post]) -> Void) {
-    super.queryByFields(conditions) { postList in
+  override func queryByFields(queries: [QueryCondition], orders: [OrderCondition]? = nil, limit: Int? = nil,
+                              _ completion: @escaping ([Post]) -> Void) {
+    super.queryByFields(queries: queries, orders: orders, limit: limit) { postList in
       var postList = postList
       let dispatchGroup = DispatchGroup()
       
@@ -149,11 +152,10 @@ class PostService: BaseRepository<Post> {
   }
   
   func getByGoalId(goalId: String, _ completion: @escaping ([Post]) -> Void) {
-    let condition = QueryCondition(field: "goalId", predicate: .equal, value: goalId)
-    queryByFields([condition], completion)
+    let query = QueryCondition(field: "goalId", predicate: .equal, value: goalId)
+    queryByFields(queries: [query], completion)
   }
   
-  // TODO: query with lastUpdTime sort and limit
   func getRecentByTopicIds(topicIds: [String], _ completion: @escaping ([Post]) -> Void) {
     // `isIn` query requires a non-empty array
     guard topicIds.count > 0 else {
@@ -161,8 +163,10 @@ class PostService: BaseRepository<Post> {
       return
     }
     
-    let condition = QueryCondition(field: "topicId", predicate: .isIn, value: topicIds)
-    queryByFields([condition], completion)
+    let query = QueryCondition(field: "topicId", predicate: .isIn, value: topicIds)
+    let order = OrderCondition(field: "createDate", descending: true)
+    
+    queryByFields(queries: [query], orders: [order], limit: PostService.RECENT_POST_QUERY_LIMIT, completion)
   }
   
   func addUserLike(postId: String, userId: String) {
