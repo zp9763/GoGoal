@@ -34,6 +34,8 @@ struct ProfileView: View {
   @State var showImagePicker = false
   @State var avatar: UIImage?
   
+ 
+  
   let userService = UserService()
   let goalService = GoalService()
   let topicService = TopicService()
@@ -49,8 +51,11 @@ struct ProfileView: View {
       }
     )
   }
+ 
+ 
   
   var body: some View {
+   
     NavigationView {
       VStack {
         var user = self.viewModel.user
@@ -102,7 +107,10 @@ struct ProfileView: View {
           let percent = Double(completedGoalNum) / Double(self.goals.count)
           
           Text("Achieved Goals: \(completedGoalNum) / \(self.goals.count)")
-          ProgressView(value: percent)
+          MyProgressView(percent:percent)
+//          ProgressView(value: percent)
+//            .progressViewStyle(gradientStyle)
+          
         }
         
         Spacer()
@@ -178,6 +186,7 @@ struct ProfileView: View {
     }) {
       Text("Change Password")
     }
+    .buttonStyle(LightButtonstyle())
     .popover(isPresented: $showChangePwdWindow) {
       VStack {
         Spacer()
@@ -237,6 +246,7 @@ struct ProfileView: View {
       }) {
         Text("Change User Name")
       }
+        .buttonStyle(LightButtonstyle())
       .popover(isPresented: $showChangeNameWindow) {
         VStack {
           Spacer()
@@ -274,6 +284,7 @@ struct ProfileView: View {
           }) {
             Text("Confirm")
           }
+          .buttonStyle(RoundedButtonstyle())
           .alert(isPresented: $fireNameEmptyAlert) {
             Alert(title: Text("Empty First Name"))
           }
@@ -290,6 +301,7 @@ struct ProfileView: View {
       self.viewModel.user = $0!
       self.subscribedTopicIds = $0!.topicIdList
       self.avatar = $0!.avatar
+      
     }
   }
   
@@ -308,9 +320,30 @@ struct ProfileView: View {
   
 }
 
-struct ProfileView_Previews: PreviewProvider {
-  static var previews: some View {
-    let user = GenSampleData.user
-    ProfileView(viewModel: ViewModel(user: user))
+struct MyProgressView: View{
+  @State private var gradient = LinearGradient(
+          gradient: Gradient(colors: [.red, .green, .blue]),
+          startPoint: .topLeading,
+          endPoint: .bottomTrailing
+      )
+  var percent:Double
+  var body: some View{
+    let gradientStyle = GradientProgressStyle(
+                stroke: gradient,
+                fill: gradient,
+                caption: "Some fancy caption"
+            )
+    
+    VStack{
+      ProgressView(value: percent)
+                 .progressViewStyle(gradientStyle)
+    }
   }
 }
+
+//struct ProfileView_Previews: PreviewProvider {
+//  static var previews: some View {
+//    let user = GenSampleData.user
+//    ProfileView(viewModel: ViewModel(user: user))
+//  }
+//}

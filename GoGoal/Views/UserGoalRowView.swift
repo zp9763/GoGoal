@@ -13,9 +13,20 @@ struct UserGoalRowView: View {
   
   @State var topicIcon: Image?
   
+  @State private var gradient = LinearGradient(
+          gradient: Gradient(colors: [.red, .green, .blue]),
+          startPoint: .topLeading,
+          endPoint: .bottomTrailing
+      )
+  
   let topicService = TopicService()
   
   var body: some View {
+    let gradientStyle = GradientProgressStyle(
+                stroke: gradient,
+                fill: gradient,
+                caption: "Some fancy caption"
+            )
     VStack {
       HStack() {
         Spacer()
@@ -42,6 +53,8 @@ struct UserGoalRowView: View {
       let progress = Double(checkInNum) / Double(self.goal.duration)
       
       ProgressView(value: progress)
+        .progressViewStyle(gradientStyle) 
+      
     }
     .onAppear(perform: self.fetchGoalTopicIcon)
   }

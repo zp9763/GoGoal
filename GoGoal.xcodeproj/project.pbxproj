@@ -7,6 +7,24 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		330E8FCC274080EB0061C330 /* Pacifico.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 330E8FCB274080EB0061C330 /* Pacifico.ttf */; };
+		330E8FCD274080EB0061C330 /* Pacifico.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 330E8FCB274080EB0061C330 /* Pacifico.ttf */; };
+		330E8FCF2740821B0061C330 /* Roboto-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 330E8FCE2740821A0061C330 /* Roboto-Bold.ttf */; };
+		330E8FD02740821B0061C330 /* Roboto-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 330E8FCE2740821A0061C330 /* Roboto-Bold.ttf */; };
+		330E8FD22740823A0061C330 /* Roboto-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 330E8FD1274082390061C330 /* Roboto-Medium.ttf */; };
+		330E8FD32740823A0061C330 /* Roboto-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 330E8FD1274082390061C330 /* Roboto-Medium.ttf */; };
+		330E8FD5274082530061C330 /* Roboto-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 330E8FD4274082530061C330 /* Roboto-Regular.ttf */; };
+		330E8FD6274082530061C330 /* Roboto-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 330E8FD4274082530061C330 /* Roboto-Regular.ttf */; };
+		330E8FD82740826A0061C330 /* Roboto-Thin.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 330E8FD72740826A0061C330 /* Roboto-Thin.ttf */; };
+		330E8FD92740826A0061C330 /* Roboto-Thin.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 330E8FD72740826A0061C330 /* Roboto-Thin.ttf */; };
+		330E8FDB274087F50061C330 /* UIColorExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 330E8FDA274087F50061C330 /* UIColorExtension.swift */; };
+		330E8FDC274087F50061C330 /* UIColorExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 330E8FDA274087F50061C330 /* UIColorExtension.swift */; };
+		330E8FDF2740889B0061C330 /* LightButtonStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 330E8FDE2740889B0061C330 /* LightButtonStyle.swift */; };
+		330E8FE02740889B0061C330 /* LightButtonStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 330E8FDE2740889B0061C330 /* LightButtonStyle.swift */; };
+		330E8FE2274088E10061C330 /* RoundedButtonStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 330E8FE1274088E10061C330 /* RoundedButtonStyle.swift */; };
+		330E8FE3274088E10061C330 /* RoundedButtonStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 330E8FE1274088E10061C330 /* RoundedButtonStyle.swift */; };
+		330E8FE52740928A0061C330 /* GradientProgressStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 330E8FE42740928A0061C330 /* GradientProgressStyle.swift */; };
+		330E8FE62740928A0061C330 /* GradientProgressStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 330E8FE42740928A0061C330 /* GradientProgressStyle.swift */; };
 		3348526527333DBB0067D516 /* CompletedGoalView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3348526427333DBA0067D516 /* CompletedGoalView.swift */; };
 		39B09B685F652E8DE351C003 /* Pods_GoGoal.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E984E783F86CBF2A328AC6CD /* Pods_GoGoal.framework */; };
 		57409A41272E11C900578CD9 /* UserGoalRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57409A40272E11C900578CD9 /* UserGoalRowView.swift */; };
@@ -68,6 +86,15 @@
 /* Begin PBXFileReference section */
 		0EA69621C149F45D0491840F /* Pods-GoGoal.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GoGoal.release.xcconfig"; path = "Target Support Files/Pods-GoGoal/Pods-GoGoal.release.xcconfig"; sourceTree = "<group>"; };
 		292EF226D0BEDE4A7D414D1C /* Pods_GoGoalTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_GoGoalTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		330E8FCB274080EB0061C330 /* Pacifico.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Pacifico.ttf; sourceTree = "<group>"; };
+		330E8FCE2740821A0061C330 /* Roboto-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Roboto-Bold.ttf"; sourceTree = "<group>"; };
+		330E8FD1274082390061C330 /* Roboto-Medium.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Roboto-Medium.ttf"; sourceTree = "<group>"; };
+		330E8FD4274082530061C330 /* Roboto-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Roboto-Regular.ttf"; sourceTree = "<group>"; };
+		330E8FD72740826A0061C330 /* Roboto-Thin.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Roboto-Thin.ttf"; sourceTree = "<group>"; };
+		330E8FDA274087F50061C330 /* UIColorExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIColorExtension.swift; sourceTree = "<group>"; };
+		330E8FDE2740889B0061C330 /* LightButtonStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LightButtonStyle.swift; sourceTree = "<group>"; };
+		330E8FE1274088E10061C330 /* RoundedButtonStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundedButtonStyle.swift; sourceTree = "<group>"; };
+		330E8FE42740928A0061C330 /* GradientProgressStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GradientProgressStyle.swift; sourceTree = "<group>"; };
 		3348526427333DBA0067D516 /* CompletedGoalView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompletedGoalView.swift; sourceTree = "<group>"; };
 		57409A40272E11C900578CD9 /* UserGoalRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserGoalRowView.swift; sourceTree = "<group>"; };
 		57409A42272E161900578CD9 /* GoalProgressView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoalProgressView.swift; sourceTree = "<group>"; };
@@ -151,6 +178,28 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		330E8FB827406B6A0061C330 /* Style */ = {
+			isa = PBXGroup;
+			children = (
+				330E8FDE2740889B0061C330 /* LightButtonStyle.swift */,
+				330E8FE1274088E10061C330 /* RoundedButtonStyle.swift */,
+				330E8FE42740928A0061C330 /* GradientProgressStyle.swift */,
+			);
+			path = Style;
+			sourceTree = "<group>";
+		};
+		330E8FDD274088300061C330 /* Fonts */ = {
+			isa = PBXGroup;
+			children = (
+				330E8FCB274080EB0061C330 /* Pacifico.ttf */,
+				330E8FCE2740821A0061C330 /* Roboto-Bold.ttf */,
+				330E8FD1274082390061C330 /* Roboto-Medium.ttf */,
+				330E8FD4274082530061C330 /* Roboto-Regular.ttf */,
+				330E8FD72740826A0061C330 /* Roboto-Thin.ttf */,
+			);
+			path = Fonts;
+			sourceTree = "<group>";
+		};
 		49280052E753AFF43E54CF4A /* Pods */ = {
 			isa = PBXGroup;
 			children = (
@@ -185,6 +234,7 @@
 		5773B509271CC0360029A220 /* GoGoal */ = {
 			isa = PBXGroup;
 			children = (
+				330E8FB827406B6A0061C330 /* Style */,
 				5773B521271D06BC0029A220 /* Delegates */,
 				5773B522271D06D30029A220 /* Views */,
 				57C52C8F2725ED6600E0493B /* ViewModels */,
@@ -247,6 +297,7 @@
 				57C60A1F2730C1BE00E5255E /* AchievementView.swift */,
 				3348526427333DBA0067D516 /* CompletedGoalView.swift */,
 				57C52C8D2725E95E00E0493B /* ProfileView.swift */,
+				330E8FDD274088300061C330 /* Fonts */,
 				57C60A1D2730A48900E5255E /* TopicView.swift */,
 				57C60A1B2730A1C500E5255E /* TopicSelectionView.swift */,
 			);
@@ -284,6 +335,7 @@
 				5773B536271DF9BE0029A220 /* GenSampleData.swift */,
 				575A535A272DC601004619FA /* ImageExtension.swift */,
 				57409A48272F166A00578CD9 /* TimestampExtension.swift */,
+				330E8FDA274087F50061C330 /* UIColorExtension.swift */,
 			);
 			path = Utilities;
 			sourceTree = "<group>";
@@ -391,9 +443,14 @@
 			buildActionMask = 2147483647;
 			files = (
 				5773B517271CC0370029A220 /* LaunchScreen.storyboard in Resources */,
+				330E8FCC274080EB0061C330 /* Pacifico.ttf in Resources */,
+				330E8FD5274082530061C330 /* Roboto-Regular.ttf in Resources */,
+				330E8FCF2740821B0061C330 /* Roboto-Bold.ttf in Resources */,
+				330E8FD22740823A0061C330 /* Roboto-Medium.ttf in Resources */,
 				5773B51F271D01FA0029A220 /* GoogleService-Info.plist in Resources */,
 				5773B514271CC0370029A220 /* Preview Assets.xcassets in Resources */,
 				5773B511271CC0370029A220 /* Assets.xcassets in Resources */,
+				330E8FD82740826A0061C330 /* Roboto-Thin.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -401,6 +458,11 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				330E8FD02740821B0061C330 /* Roboto-Bold.ttf in Resources */,
+				330E8FCD274080EB0061C330 /* Pacifico.ttf in Resources */,
+				330E8FD6274082530061C330 /* Roboto-Regular.ttf in Resources */,
+				330E8FD92740826A0061C330 /* Roboto-Thin.ttf in Resources */,
+				330E8FD32740823A0061C330 /* Roboto-Medium.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -494,6 +556,7 @@
 			files = (
 				5751AD2C271E4BB8009D94A5 /* GoalService.swift in Sources */,
 				57C52C912725EE0000E0493B /* ViewModel.swift in Sources */,
+				330E8FE2274088E10061C330 /* RoundedButtonStyle.swift in Sources */,
 				5773B525271D0AAB0029A220 /* User.swift in Sources */,
 				57409A43272E161900578CD9 /* GoalProgressView.swift in Sources */,
 				5773B532271D22DD0029A220 /* BaseRepository.swift in Sources */,
@@ -507,6 +570,7 @@
 				3348526527333DBB0067D516 /* CompletedGoalView.swift in Sources */,
 				5751AD2E271E4BEB009D94A5 /* PostService.swift in Sources */,
 				5773B50B271CC0360029A220 /* AppDelegate.swift in Sources */,
+				330E8FE52740928A0061C330 /* GradientProgressStyle.swift in Sources */,
 				57C60A1E2730A48900E5255E /* TopicView.swift in Sources */,
 				575A535B272DC601004619FA /* ImageExtension.swift in Sources */,
 				5751AD28271E4896009D94A5 /* Like.swift in Sources */,
@@ -522,8 +586,10 @@
 				5751AD2A271E4B9A009D94A5 /* TopicService.swift in Sources */,
 				57409A41272E11C900578CD9 /* UserGoalRowView.swift in Sources */,
 				5773B50D271CC0360029A220 /* SceneDelegate.swift in Sources */,
+				330E8FDF2740889B0061C330 /* LightButtonStyle.swift in Sources */,
 				5773B50F271CC0360029A220 /* MainView.swift in Sources */,
 				57C60A1C2730A1C500E5255E /* TopicSelectionView.swift in Sources */,
+				330E8FDB274087F50061C330 /* UIColorExtension.swift in Sources */,
 				57C06BF5272CD98D00E7D6B4 /* FileStorage.swift in Sources */,
 				57C52C8C2725E94C00E0493B /* CommunityView.swift in Sources */,
 				57C52C8E2725E95E00E0493B /* ProfileView.swift in Sources */,
@@ -539,6 +605,10 @@
 			files = (
 				57B82498273708BA008096A5 /* UserServiceTests.swift in Sources */,
 				57B82490273708A3008096A5 /* GoGoalTests.swift in Sources */,
+				330E8FE3274088E10061C330 /* RoundedButtonStyle.swift in Sources */,
+				330E8FE02740889B0061C330 /* LightButtonStyle.swift in Sources */,
+				330E8FE62740928A0061C330 /* GradientProgressStyle.swift in Sources */,
+				330E8FDC274087F50061C330 /* UIColorExtension.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
