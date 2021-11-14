@@ -45,6 +45,7 @@ struct UserGoalRowView: View {
         Spacer()
         
         Text(self.goal.title)
+          .font(.custom("Roboto-Regular",size:20))
         
         Spacer()
       }

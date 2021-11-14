@@ -19,6 +19,7 @@ struct GoalProgressView: View {
   
   @State var posts = [Post]()
   
+  
   let topicService = TopicService()
   let postService = PostService()
   
@@ -60,7 +61,9 @@ struct GoalProgressView: View {
         let progress = Double(checkInNum) / Double(self.goal.duration)
         
         Text("Progress: \(checkInNum) / \(self.goal.duration)")
-        ProgressView(value: progress)
+        MyProgressView(percent: progress)
+          .padding()
+          
         
         Spacer()
         

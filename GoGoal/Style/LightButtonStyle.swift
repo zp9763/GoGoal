@@ -26,9 +26,9 @@ struct LightButtonstyle:ButtonStyle{
     
     var backgroundColor:Color{
       if(configuration.isPressed){
-        return Color(red: 236, green: 238, blue: 255)
+        return Color(red:196/255,green:222/255,blue:246/255)
       }
-      return Color(red: 236, green: 238, blue: 255)
+      return Color(red:196/255,green:222/255,blue:246/255)
     }
     var labelColor:Color{
       if(configuration.isPressed){

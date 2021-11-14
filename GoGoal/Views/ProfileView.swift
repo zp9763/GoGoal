@@ -82,12 +82,13 @@ struct ProfileView: View {
             }
             
             Text(user.getFullName())
-              .bold()
+              .font(.custom("Roboto-Bold",size:25))
             
             Spacer()
           }
           
           Text(user.email)
+            .font(.custom("Roboto-Regular",size:20))
         }
         
         Spacer()
@@ -98,6 +99,7 @@ struct ProfileView: View {
           Spacer()
           
           changeNameView
+            .padding()
         }
         
         Spacer()
@@ -107,7 +109,10 @@ struct ProfileView: View {
           let percent = Double(completedGoalNum) / Double(self.goals.count)
           
           Text("Achieved Goals: \(completedGoalNum) / \(self.goals.count)")
+            .font(.custom("Roboto-Bold",size:20))
+            .padding()
           MyProgressView(percent:percent)
+            .frame(width: 300)
 //          ProgressView(value: percent)
 //            .progressViewStyle(gradientStyle)
           
@@ -118,7 +123,7 @@ struct ProfileView: View {
         Group {
           VStack {
             Text("Subscribed Topics")
-            
+              .font(.custom("Roboto-Regular",size:20))
             List {
               let subscribedTopics = self.allTopics
                 .filter() { self.subscribedTopicIds.contains($0.id!) }
@@ -134,7 +139,10 @@ struct ProfileView: View {
               self.showUpdateSubscribedTopic = true
             }) {
               Text("Update Topic Subscription")
+                .font(.custom("Roboto-Regular",size:20))
             }
+            .foregroundColor(.black)
+            .frame(width: 300)
             .popover(isPresented: $showUpdateSubscribedTopic) {
               VStack {
                 Spacer()
@@ -161,6 +169,7 @@ struct ProfileView: View {
                 }) {
                   Text("Confirm")
                 }
+                .buttonStyle(RoundedButtonstyle())
                 
                 Spacer()
               }
@@ -186,15 +195,17 @@ struct ProfileView: View {
     }) {
       Text("Change Password")
     }
-    .buttonStyle(LightButtonstyle())
+    .buttonStyle(RoundedButtonstyle())
     .popover(isPresented: $showChangePwdWindow) {
       VStack {
         Spacer()
         
         HStack {
           Text("Old Password:")
+            .font(.custom("Roboto-Bold",size:20))
             .padding(.leading)
           TextField("old password", text: $oldPassword)
+            .textFieldStyle(RoundedBorderTextFieldStyle())
             .padding(.trailing)
         }
         
@@ -202,8 +213,10 @@ struct ProfileView: View {
         
         HStack {
           Text("New Password:")
+            .font(.custom("Roboto-Bold",size:20))
             .padding(.leading)
           TextField("new password", text: $newPassword)
+            .textFieldStyle(RoundedBorderTextFieldStyle())
             .padding(.trailing)
         }
         
@@ -225,6 +238,7 @@ struct ProfileView: View {
         }) {
           Text("Confirm")
         }
+        .buttonStyle(RoundedButtonstyle())
         .alert(isPresented: $fireBadPwdAlert) {
           Alert(
             title: Text("Password Warning"),
@@ -246,13 +260,14 @@ struct ProfileView: View {
       }) {
         Text("Change User Name")
       }
-        .buttonStyle(LightButtonstyle())
+        .buttonStyle(RoundedButtonstyle())
       .popover(isPresented: $showChangeNameWindow) {
         VStack {
           Spacer()
           
           HStack {
             Text("First Name:")
+              .font(.custom("Roboto-Bold",size:20))
               .padding(.leading)
             TextField(user.firstName, text: $newFirstName)
               .padding(.trailing)
@@ -262,6 +277,7 @@ struct ProfileView: View {
           
           HStack {
             Text("Last Name:")
+              .font(.custom("Roboto-Bold",size:20))
               .padding(.leading)
             TextField(user.lastName, text: $newLastName)
               .padding(.trailing)
@@ -341,9 +357,9 @@ struct MyProgressView: View{
   }
 }
 
-//struct ProfileView_Previews: PreviewProvider {
-//  static var previews: some View {
-//    let user = GenSampleData.user
-//    ProfileView(viewModel: ViewModel(user: user))
-//  }
-//}
+struct ProfileView_Previews: PreviewProvider {
+  static var previews: some View {
+    let user = GenSampleData.user
+    ProfileView(viewModel: ViewModel(user: user))
+  }
+}

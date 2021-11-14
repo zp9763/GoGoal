@@ -25,10 +25,10 @@ struct RoundedButtonstyle:ButtonStyle{
     var backgroundColor:Color{
       if(configuration.isPressed){
 //        return Color(red: 95, green: 52, blue: 255)
-        return Color.purple
+        return Color(red:95/255,green:52/255,blue:255/255)
       }
     //return Color(red: 95, green: 52, blue: 255)
-     return Color.purple
+     return Color(red:95/255,green:52/255,blue:255/255)
     }
     var labelColor:Color{
       if(configuration.isPressed){
