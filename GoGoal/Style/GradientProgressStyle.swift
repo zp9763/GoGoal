@@ -32,11 +32,6 @@ struct GradientProgressStyle<Stroke: ShapeStyle, Background: ShapeStyle>: Progre
                 RoundedRectangle(cornerRadius: cornerRadius)
                         .stroke(stroke, lineWidth: 2)
             )
-            
-//            if !caption.isEmpty {
-//                Text("\(caption)")
-//                    .font(.caption)
-//            }
         }
     }
 }

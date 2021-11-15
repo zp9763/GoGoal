@@ -27,6 +27,7 @@ struct UserGoalRowView: View {
                 fill: gradient,
                 caption: "Some fancy caption"
             )
+    
     VStack {
       HStack() {
         Spacer()

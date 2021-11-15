@@ -113,9 +113,6 @@ struct ProfileView: View {
             .padding()
           MyProgressView(percent:percent)
             .frame(width: 300)
-//          ProgressView(value: percent)
-//            .progressViewStyle(gradientStyle)
-          
         }
         
         Spacer()
