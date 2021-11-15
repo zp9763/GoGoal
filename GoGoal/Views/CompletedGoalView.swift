@@ -11,17 +11,17 @@ struct CompletedGoalView: View {
   
   private static let PHOTO_COLUMN = 2
   private static let MAX_PHOTO_NUM = 4
-    
+  
   var goal: Goal
-
+  
   @State var owner: User?
-
+  
   @State var topicIcon: Image?
-
+  
   @State var likesCount = 0
   
   @State var samplePhotos = [UIImage]()
-
+  
   let topicService = TopicService()
   let postService = PostService()
   let userService = UserService()

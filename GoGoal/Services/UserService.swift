@@ -78,6 +78,15 @@ class UserService: BaseRepository<User> {
     }
   }
   
+  func getByEmail(email: String, _ completion: @escaping (User?) -> Void) {
+    let query = QueryCondition(field: "email", predicate: .equal, value: email)
+    
+    queryByFields(queries: [query]) { userList in
+      let user = userList.count == 0 ? nil : userList[0]
+      completion(user)
+    }
+  }
+  
   func setAvatar(user: User, image: UIImage) {
     guard let data = image.pngData() else {
       return

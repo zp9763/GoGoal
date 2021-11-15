@@ -8,10 +8,10 @@
 import SwiftUI
 
 struct AchievementView: View {
-
+  
   private static let MAX_DISPLAY_NUM = 5
   
-  @ObservedObject var viewModel: ViewModel
+  @ObservedObject var userModel: UserModel
   
   @State var displayedGoals = [Goal]()
   
@@ -62,17 +62,10 @@ struct AchievementView: View {
   }
   
   func fetchCompletedGoals() {
-    self.goalService.getCompletedByTopicIds(topicIds: self.viewModel.user.topicIdList) { goalList in
+    self.goalService.getCompletedByTopicIds(topicIds: self.userModel.user.topicIdList) { goalList in
       let displayedCount = min(goalList.count, AchievementView.MAX_DISPLAY_NUM)
       self.displayedGoals = Array(goalList[0..<displayedCount])
     }
   }
   
-}
-
-struct AchievementView_Previews: PreviewProvider {
-  static var previews: some View {
-    let user = GenSampleData.user
-    AchievementView(viewModel: ViewModel(user: user))
-  }
 }
