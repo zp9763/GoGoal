@@ -1,5 +1,5 @@
 //
-//  UserModel.swift
+//  UserViewModel.swift
 //  GoGoal
 //
 //  Created by Peng Zhao on 10/24/21.
@@ -7,7 +7,7 @@
 
 import Foundation
 
-class UserModel: ObservableObject {
+class UserViewModel: ObservableObject {
   
   @Published var user = User(email: "", firstName: "", lastName: "")
   @Published var userGoals = [Goal]()

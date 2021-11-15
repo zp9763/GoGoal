@@ -11,7 +11,7 @@ struct AchievementView: View {
   
   private static let MAX_DISPLAY_NUM = 5
   
-  @ObservedObject var userModel: UserModel
+  @ObservedObject var userViewModel: UserViewModel
   
   @State var displayedGoals = [Goal]()
   
@@ -62,7 +62,7 @@ struct AchievementView: View {
   }
   
   func fetchCompletedGoals() {
-    self.goalService.getCompletedByTopicIds(topicIds: self.userModel.user.topicIdList) { goalList in
+    self.goalService.getCompletedByTopicIds(topicIds: self.userViewModel.user.topicIdList) { goalList in
       let displayedCount = min(goalList.count, AchievementView.MAX_DISPLAY_NUM)
       self.displayedGoals = Array(goalList[0..<displayedCount])
     }

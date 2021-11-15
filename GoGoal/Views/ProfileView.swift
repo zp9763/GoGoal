@@ -12,7 +12,7 @@ struct ProfileView: View {
   
   @EnvironmentObject var authSession: AuthSession
   
-  @ObservedObject var userModel: UserModel
+  @ObservedObject var userViewModel: UserViewModel
   
   @State var goals = [Goal]()
   
@@ -47,7 +47,7 @@ struct ProfileView: View {
       set: {
         if let uiImage = $0 {
           self.avatar = uiImage
-          self.userService.setAvatar(user: self.userModel.user, image: uiImage)
+          self.userService.setAvatar(user: self.userViewModel.user, image: uiImage)
         }
       }
     )
@@ -56,7 +56,7 @@ struct ProfileView: View {
   var body: some View {
     NavigationView {
       VStack {
-        var user = self.userModel.user
+        var user = self.userViewModel.user
         
         Spacer()
         
@@ -152,7 +152,7 @@ struct ProfileView: View {
                 Button(action: {
                   user.topicIdList = self.subscribedTopicIds
                   userService.createOrUpdate(object: user)
-                  self.userModel.user = user
+                  self.userViewModel.user = user
                   self.showUpdateSubscribedTopic = false
                 }) {
                   Text("Confirm")
@@ -248,7 +248,7 @@ struct ProfileView: View {
   }
   
   var changeNameView: some View {
-    var user = self.userModel.user
+    var user = self.userViewModel.user
     
     return AnyView(
       Button(action: {
@@ -288,7 +288,7 @@ struct ProfileView: View {
             user.lastName = self.newLastName
             userService.createOrUpdate(object: user)
             
-            self.userModel.user = user
+            self.userViewModel.user = user
             self.showChangeNameWindow = false
           }) {
             Text("Confirm")
@@ -305,15 +305,15 @@ struct ProfileView: View {
   
   // TODO: temp solution to get full user info
   func completeUserInfo() {
-    self.userService.getById(id: self.userModel.user.id!) {
-      self.userModel.user = $0!
+    self.userService.getById(id: self.userViewModel.user.id!) {
+      self.userViewModel.user = $0!
       self.subscribedTopicIds = $0!.topicIdList
       self.avatar = $0!.avatar
     }
   }
   
   func fetchAllUserGoals() {
-    self.goalService.getByUserId(userId: self.userModel.user.id!) {
+    self.goalService.getByUserId(userId: self.userViewModel.user.id!) {
       self.goals = $0
     }
   }

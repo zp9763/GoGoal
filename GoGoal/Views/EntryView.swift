@@ -13,17 +13,17 @@ struct EntryView: View {
   @EnvironmentObject var authSession: AuthSession
   
   var body: some View {
-    // if login is marked by auth session, toggle on main view
+    // if auth session is logged in, toggle on main view
     if self.authSession.isLoggedin {
-      return AnyView(MainView(userModel: self.authSession.userModel))
+      return AnyView(MainView(userViewModel: self.authSession.userViewModel))
     }
     
-    // try to find returning user from cache when opening app
+    // find return user from local auth cache when opening app
     else if let authUser = Auth.auth().currentUser {
       self.authSession.login(userEmail: authUser.email!)
     }
     
-    // show guest view as long as login has not been marked
+    // show guest view if auth session is logged out
     return AnyView(GuestView())
   }
   
