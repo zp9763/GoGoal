@@ -199,7 +199,7 @@
 				5773B527271D0DE00029A220 /* Services */,
 				5773B52E271D198B0029A220 /* Repositories */,
 				5773B520271D05F10029A220 /* Models */,
-				5773B535271DF9A30029A220 /* Utilities */,
+				5773B535271DF9A30029A220 /* Extensions */,
 				5773B510271CC0370029A220 /* Assets.xcassets */,
 				5773B515271CC0370029A220 /* LaunchScreen.storyboard */,
 				5773B51E271D01FA0029A220 /* GoogleService-Info.plist */,
@@ -242,25 +242,11 @@
 		5773B522271D06D30029A220 /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				5791906E2741C61F009BFAA1 /* EntryView.swift */,
-				5791906C2741B59C009BFAA1 /* GuestView.swift */,
-				579190722741EF70009BFAA1 /* LoginView.swift */,
-				579190742741EF85009BFAA1 /* SignUpView.swift */,
-				57C60A1D2730A48900E5255E /* TopicView.swift */,
-				57C60A1B2730A1C500E5255E /* TopicSelectionView.swift */,
-				5773B50E271CC0360029A220 /* MainView.swift */,
-				57C52C892725E93500E0493B /* UserGoalView.swift */,
-				57409A40272E11C900578CD9 /* UserGoalRowView.swift */,
-				57409A42272E161900578CD9 /* GoalProgressView.swift */,
-				57409A4A272F6C1C00578CD9 /* PostView.swift */,
-				57409A44272E164400578CD9 /* CheckInGoalView.swift */,
-				57DA1F142734699600C77B10 /* PhotoCaptureView.swift */,
-				57DA1F12273457B500C77B10 /* ImagePicker.swift */,
-				57409A46272E165400578CD9 /* EditGoalView.swift */,
-				57C52C8B2725E94C00E0493B /* CommunityView.swift */,
-				57C60A1F2730C1BE00E5255E /* AchievementView.swift */,
-				3348526427333DBA0067D516 /* CompletedGoalView.swift */,
-				57C52C8D2725E95E00E0493B /* ProfileView.swift */,
+				57FC80372742E3BF00441D4C /* LoginPages */,
+				57FC80382742E42D00441D4C /* MainPages */,
+				57FC803A2742E4F200441D4C /* SubPages */,
+				57FC80392742E45F00441D4C /* Components */,
+				57FC803B2742E55D00441D4C /* Utilities */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -290,13 +276,13 @@
 			path = Repositories;
 			sourceTree = "<group>";
 		};
-		5773B535271DF9A30029A220 /* Utilities */ = {
+		5773B535271DF9A30029A220 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
 				575A535A272DC601004619FA /* ImageExtension.swift */,
 				57409A48272F166A00578CD9 /* TimestampExtension.swift */,
 			);
-			path = Utilities;
+			path = Extensions;
 			sourceTree = "<group>";
 		};
 		57B8248E273708A3008096A5 /* GoGoalTests */ = {
@@ -316,6 +302,60 @@
 				57C52C902725EE0000E0493B /* UserViewModel.swift */,
 			);
 			path = ViewModels;
+			sourceTree = "<group>";
+		};
+		57FC80372742E3BF00441D4C /* LoginPages */ = {
+			isa = PBXGroup;
+			children = (
+				5791906E2741C61F009BFAA1 /* EntryView.swift */,
+				5791906C2741B59C009BFAA1 /* GuestView.swift */,
+				579190722741EF70009BFAA1 /* LoginView.swift */,
+				579190742741EF85009BFAA1 /* SignUpView.swift */,
+			);
+			path = LoginPages;
+			sourceTree = "<group>";
+		};
+		57FC80382742E42D00441D4C /* MainPages */ = {
+			isa = PBXGroup;
+			children = (
+				5773B50E271CC0360029A220 /* MainView.swift */,
+				57C52C892725E93500E0493B /* UserGoalView.swift */,
+				57C52C8B2725E94C00E0493B /* CommunityView.swift */,
+				57C60A1F2730C1BE00E5255E /* AchievementView.swift */,
+				57C52C8D2725E95E00E0493B /* ProfileView.swift */,
+			);
+			path = MainPages;
+			sourceTree = "<group>";
+		};
+		57FC80392742E45F00441D4C /* Components */ = {
+			isa = PBXGroup;
+			children = (
+				57409A40272E11C900578CD9 /* UserGoalRowView.swift */,
+				57409A4A272F6C1C00578CD9 /* PostView.swift */,
+				3348526427333DBA0067D516 /* CompletedGoalView.swift */,
+				57C60A1D2730A48900E5255E /* TopicView.swift */,
+			);
+			path = Components;
+			sourceTree = "<group>";
+		};
+		57FC803A2742E4F200441D4C /* SubPages */ = {
+			isa = PBXGroup;
+			children = (
+				57409A42272E161900578CD9 /* GoalProgressView.swift */,
+				57409A44272E164400578CD9 /* CheckInGoalView.swift */,
+				57409A46272E165400578CD9 /* EditGoalView.swift */,
+			);
+			path = SubPages;
+			sourceTree = "<group>";
+		};
+		57FC803B2742E55D00441D4C /* Utilities */ = {
+			isa = PBXGroup;
+			children = (
+				57DA1F142734699600C77B10 /* PhotoCaptureView.swift */,
+				57DA1F12273457B500C77B10 /* ImagePicker.swift */,
+				57C60A1B2730A1C500E5255E /* TopicSelectionView.swift */,
+			);
+			path = Utilities;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
