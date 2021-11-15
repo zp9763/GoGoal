@@ -6,10 +6,13 @@
 //
 
 import SwiftUI
+import FirebaseAuth
 
 struct ProfileView: View {
   
-  @ObservedObject var viewModel: ViewModel
+  @EnvironmentObject var authSession: AuthSession
+  
+  @ObservedObject var userModel: UserModel
   
   @State var goals = [Goal]()
   
@@ -44,7 +47,7 @@ struct ProfileView: View {
       set: {
         if let uiImage = $0 {
           self.avatar = uiImage
-          self.userService.setAvatar(user: self.viewModel.user, image: uiImage)
+          self.userService.setAvatar(user: self.userModel.user, image: uiImage)
         }
       }
     )
@@ -53,7 +56,7 @@ struct ProfileView: View {
   var body: some View {
     NavigationView {
       VStack {
-        var user = self.viewModel.user
+        var user = self.userModel.user
         
         Spacer()
         
@@ -99,7 +102,7 @@ struct ProfileView: View {
         
         Group {
           let completedGoalNum = self.goals.filter() { $0.isCompleted }.count
-          let percent = Double(completedGoalNum) / Double(self.goals.count)
+          let percent = Double(completedGoalNum) / Double(max(self.goals.count, 1))
           
           Text("Achieved Goals: \(completedGoalNum) / \(self.goals.count)")
           ProgressView(value: percent)
@@ -114,6 +117,7 @@ struct ProfileView: View {
             List {
               let subscribedTopics = self.allTopics
                 .filter() { self.subscribedTopicIds.contains($0.id!) }
+                .sorted() { $0.name < $1.name }
               
               ForEach(subscribedTopics) {
                 TopicView(topic: $0)
@@ -146,9 +150,9 @@ struct ProfileView: View {
                 Spacer()
                 
                 Button(action: {
-                  user.topicIdList = Array(self.subscribedTopicIds)
+                  user.topicIdList = self.subscribedTopicIds
                   userService.createOrUpdate(object: user)
-                  self.viewModel.user = user
+                  self.userModel.user = user
                   self.showUpdateSubscribedTopic = false
                 }) {
                   Text("Confirm")
@@ -160,7 +164,22 @@ struct ProfileView: View {
           }
         }
         
-        Spacer()
+        Group {
+          Spacer()
+          
+          Button(action: {
+            do {
+              try Auth.auth().signOut()
+              self.authSession.logout()
+            } catch let err {
+              print("Error sign out: \(err)")
+            }
+          }) {
+            Text("Logout")
+          }
+          
+          Spacer()
+        }
       }
       .navigationBarTitle("Profile", displayMode: .inline)
       .sheet(isPresented: $showImagePicker) {
@@ -229,7 +248,7 @@ struct ProfileView: View {
   }
   
   var changeNameView: some View {
-    var user = self.viewModel.user
+    var user = self.userModel.user
     
     return AnyView(
       Button(action: {
@@ -269,7 +288,7 @@ struct ProfileView: View {
             user.lastName = self.newLastName
             userService.createOrUpdate(object: user)
             
-            self.viewModel.user = user
+            self.userModel.user = user
             self.showChangeNameWindow = false
           }) {
             Text("Confirm")
@@ -286,15 +305,15 @@ struct ProfileView: View {
   
   // TODO: temp solution to get full user info
   func completeUserInfo() {
-    self.userService.getById(id: self.viewModel.user.id!) {
-      self.viewModel.user = $0!
+    self.userService.getById(id: self.userModel.user.id!) {
+      self.userModel.user = $0!
       self.subscribedTopicIds = $0!.topicIdList
       self.avatar = $0!.avatar
     }
   }
   
   func fetchAllUserGoals() {
-    self.goalService.getByUserId(userId: self.viewModel.user.id!) {
+    self.goalService.getByUserId(userId: self.userModel.user.id!) {
       self.goals = $0
     }
   }
@@ -306,11 +325,4 @@ struct ProfileView: View {
     }
   }
   
-}
-
-struct ProfileView_Previews: PreviewProvider {
-  static var previews: some View {
-    let user = GenSampleData.user
-    ProfileView(viewModel: ViewModel(user: user))
-  }
 }

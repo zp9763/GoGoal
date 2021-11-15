@@ -1,5 +1,5 @@
 //
-//  ContentView.swift
+//  MainView.swift
 //  GoGoal
 //
 //  Created by Peng Zhao on 10/17/21.
@@ -9,38 +9,30 @@ import SwiftUI
 
 struct MainView: View {
   
-  @ObservedObject var viewModel: ViewModel
+  @ObservedObject var userModel: UserModel
   
   var body: some View {
     TabView {
-      UserGoalView(viewModel: self.viewModel)
+      UserGoalView(userModel: self.userModel)
         .tabItem {
           Image(systemName: "bolt.horizontal.circle")
         }
       
-      CommunityView(viewModel: self.viewModel)
+      CommunityView(userModel: self.userModel)
         .tabItem {
           Image(systemName: "network")
         }
       
-      AchievementView(viewModel: self.viewModel)
+      AchievementView(userModel: self.userModel)
         .tabItem {
           Image(systemName: "folder.circle")
         }
       
-      ProfileView(viewModel: self.viewModel)
+      ProfileView(userModel: self.userModel)
         .tabItem {
           Image(systemName: "person")
         }
     }
-    .onAppear(perform: GenSampleData.setUp)
   }
   
-}
-
-struct MainView_Previews: PreviewProvider {
-  static var previews: some View {
-    let user = GenSampleData.user
-    MainView(viewModel: ViewModel(user: user))
-  }
 }

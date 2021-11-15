@@ -10,7 +10,7 @@ import SwiftUI
 struct GoalProgressView: View {
   
   var user: User
-
+  
   var goal: Goal
   
   @State var topicIcon: Image?

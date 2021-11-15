@@ -9,7 +9,7 @@ import SwiftUI
 
 struct UserGoalView: View {
   
-  @ObservedObject var viewModel: ViewModel
+  @ObservedObject var userModel: UserModel
   
   // display in-progress goals by default
   @State var displayInProgress = true
@@ -24,7 +24,7 @@ struct UserGoalView: View {
         
         List {
           ForEach(self.displayedGoals) { goal in
-            NavigationLink(destination: GoalProgressView(user: self.viewModel.user, goal: goal)) {
+            NavigationLink(destination: GoalProgressView(user: self.userModel.user, goal: goal)) {
               UserGoalRowView(goal: goal)
             }
             // fix SwiftUI bug: nested NavigationLink fails on 2nd click
@@ -85,7 +85,7 @@ struct UserGoalView: View {
           Image(systemName: "equal.circle")
         },
         
-        trailing: NavigationLink(destination: EditGoalView(user: self.viewModel.user)) {
+        trailing: NavigationLink(destination: EditGoalView(user: self.userModel.user)) {
           Image(systemName: "plus")
         }
       )
@@ -94,23 +94,16 @@ struct UserGoalView: View {
   }
   
   func fetchAllUserGoals() {
-    self.goalService.getByUserId(userId: self.viewModel.user.id!) {
-      self.viewModel.userGoals = $0
+    self.goalService.getByUserId(userId: self.userModel.user.id!) {
+      self.userModel.userGoals = $0
       self.updateDisplayedGoals()
     }
   }
   
   func updateDisplayedGoals() {
-    self.displayedGoals = self.viewModel.userGoals
+    self.displayedGoals = self.userModel.userGoals
       .filter() { $0.isCompleted != self.displayInProgress }
       .sorted() { $0.lastUpdateDate > $1.lastUpdateDate }
   }
   
-}
-
-struct UserGoalView_Previews: PreviewProvider {
-  static var previews: some View {
-    let user = GenSampleData.user
-    UserGoalView(viewModel: ViewModel(user: user))
-  }
 }
