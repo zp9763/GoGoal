@@ -45,19 +45,22 @@ class BaseRepository<T: Codable & Identifiable> {
     }
   }
   
-  func createOrUpdate(object: T) {
+  func createOrUpdate(object: T, _ completion: @escaping () -> Void = {}) {
     do {
-      try rootRef.document(object.id as! String).setData(from: object)
+      try rootRef.document(object.id as! String).setData(from: object) { _ in
+        completion()
+      }
     } catch let err {
       print("Error create or update document: \(err)")
     }
   }
   
-  func deleteById(id: String) {
+  func deleteById(id: String, _ completion: @escaping () -> Void = {}) {
     rootRef.document(id).delete() { err in
       if let err = err {
         print("Error delete documents: \(err)")
       }
+      completion()
     }
   }
   

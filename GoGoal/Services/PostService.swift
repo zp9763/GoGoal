@@ -129,7 +129,7 @@ class PostService: BaseRepository<Post> {
     }
   }
   
-  override func deleteById(id: String) {
+  override func deleteById(id: String, _ completion: @escaping () -> Void = {}) {
     let likeRef = self.rootRef.document(id).collection(.likes)
     
     likeRef.getDocuments() { (snapshot, err) in
@@ -147,7 +147,9 @@ class PostService: BaseRepository<Post> {
         }
       }
       
-      dispatchGroup.notify(queue: .main) { super.deleteById(id: id) }
+      dispatchGroup.notify(queue: .main) {
+        super.deleteById(id: id) { completion() }
+      }
     }
   }
   

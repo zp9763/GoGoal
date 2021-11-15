@@ -88,17 +88,18 @@ class FileStorage {
     }
   }
   
-  func deleteFile(fullPath: String) {
+  func deleteFile(fullPath: String, _ completion: @escaping () -> Void = {}) {
     let fileRef = storage.reference(withPath: fullPath)
     
     fileRef.delete() { err in
       if let err = err {
         print("Error delete file: \(err)")
       }
+      completion()
     }
   }
   
-  func deleteFolderFiles(fullPath: String) {
+  func deleteFolderFiles(fullPath: String, _ completion: @escaping () -> Void = {}) {
     let folderRef = storage.reference(withPath: fullPath)
     
     folderRef.listAll() { files, err in
@@ -116,7 +117,7 @@ class FileStorage {
         }
       }
       
-      dispatchGroup.notify(queue: .main) {}
+      dispatchGroup.notify(queue: .main) { completion() }
     }
   }
   

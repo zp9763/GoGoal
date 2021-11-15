@@ -288,8 +288,8 @@
 		57B8248E273708A3008096A5 /* GoGoalTests */ = {
 			isa = PBXGroup;
 			children = (
-				57B8248F273708A3008096A5 /* GoGoalTests.swift */,
 				57B82491273708A3008096A5 /* Info.plist */,
+				57B8248F273708A3008096A5 /* GoGoalTests.swift */,
 				57B82497273708BA008096A5 /* UserServiceTests.swift */,
 			);
 			path = GoGoalTests;
