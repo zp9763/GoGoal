@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		3348526527333DBB0067D516 /* CompletedGoalView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3348526427333DBA0067D516 /* CompletedGoalView.swift */; };
+		37589B1E2742F289005EECE0 /* Test.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37589B1D2742F289005EECE0 /* Test.swift */; };
 		39B09B685F652E8DE351C003 /* Pods_GoGoal.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E984E783F86CBF2A328AC6CD /* Pods_GoGoal.framework */; };
 		57409A41272E11C900578CD9 /* UserGoalRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57409A40272E11C900578CD9 /* UserGoalRowView.swift */; };
 		57409A43272E161900578CD9 /* GoalProgressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57409A42272E161900578CD9 /* GoalProgressView.swift */; };
@@ -73,6 +74,7 @@
 		0EA69621C149F45D0491840F /* Pods-GoGoal.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GoGoal.release.xcconfig"; path = "Target Support Files/Pods-GoGoal/Pods-GoGoal.release.xcconfig"; sourceTree = "<group>"; };
 		292EF226D0BEDE4A7D414D1C /* Pods_GoGoalTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_GoGoalTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		3348526427333DBA0067D516 /* CompletedGoalView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompletedGoalView.swift; sourceTree = "<group>"; };
+		37589B1D2742F289005EECE0 /* Test.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Test.swift; sourceTree = "<group>"; };
 		57409A40272E11C900578CD9 /* UserGoalRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserGoalRowView.swift; sourceTree = "<group>"; };
 		57409A42272E161900578CD9 /* GoalProgressView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoalProgressView.swift; sourceTree = "<group>"; };
 		57409A44272E164400578CD9 /* CheckInGoalView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckInGoalView.swift; sourceTree = "<group>"; };
@@ -261,6 +263,7 @@
 				57C60A1F2730C1BE00E5255E /* AchievementView.swift */,
 				3348526427333DBA0067D516 /* CompletedGoalView.swift */,
 				57C52C8D2725E95E00E0493B /* ProfileView.swift */,
+				37589B1D2742F289005EECE0 /* Test.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -534,6 +537,7 @@
 				57409A49272F166A00578CD9 /* TimestampExtension.swift in Sources */,
 				5751AD2A271E4B9A009D94A5 /* TopicService.swift in Sources */,
 				57409A41272E11C900578CD9 /* UserGoalRowView.swift in Sources */,
+				37589B1E2742F289005EECE0 /* Test.swift in Sources */,
 				579190752741EF85009BFAA1 /* SignUpView.swift in Sources */,
 				5773B50D271CC0360029A220 /* SceneDelegate.swift in Sources */,
 				5773B50F271CC0360029A220 /* MainView.swift in Sources */,

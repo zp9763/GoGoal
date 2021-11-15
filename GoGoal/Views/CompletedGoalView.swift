@@ -27,12 +27,11 @@ struct CompletedGoalView: View {
   let userService = UserService()
   
   var body: some View {
+    
     VStack {
-      Spacer()
       
       if let owner = self.owner {
         HStack {
-          Spacer()
           
           Image.fromUIImage(uiImage: owner.avatar)?
             .resizable()
@@ -43,10 +42,11 @@ struct CompletedGoalView: View {
                 .stroke(Color.white, lineWidth: 2)
                 .shadow(radius: 40)
             )
-            .frame(width: 60, height: 60)
+            .frame(width: 18, height: 18, alignment: .topLeading)
+            
           
           Text(owner.getFullName())
-            .bold()
+            .font(.system(size: 10))
           
           Spacer()
           
@@ -54,11 +54,24 @@ struct CompletedGoalView: View {
           
           Text(String(self.likesCount))
           
-          Spacer()
         }
       }
       
+      Spacer()
+      
       HStack() {
+        
+        VStack{
+        Text(self.goal.title)
+          .bold()
+          .font(.system(size: 20))
+        
+        if let description = self.goal.description {
+          Text(description)
+            .font(.system(size: 18))
+          
+        }
+        }
         Spacer()
         
         self.topicIcon?
@@ -70,32 +83,31 @@ struct CompletedGoalView: View {
               .stroke(Color.white, lineWidth: 2)
               .shadow(radius: 40)
           )
-          .frame(width: 60, height: 60)
-        
-        Spacer()
-        
-        Text(self.goal.title)
-        
-        Spacer()
+          .frame(width: 15, height: 15)
+
       }
       
-      let columns = [GridItem](
-        repeating: GridItem(.flexible()),
-        count: CompletedGoalView.PHOTO_COLUMN
-      )
+//      let columns = [GridItem](
+//        repeating: GridItem(.flexible()),
+//        count: CompletedGoalView.PHOTO_COLUMN
+//      )
       
-      LazyVGrid(columns: columns) {
-        ForEach(self.samplePhotos, id: \.self) {
-          Image.fromUIImage(uiImage: $0)?
-            .resizable()
-            .scaledToFit()
-            .clipShape(Rectangle())
-            .frame(width: 100, height: 80)
-        }
-      }
+//      LazyVGrid(columns: columns) {
+//        ForEach(self.samplePhotos, id: \.self) {
+//          Image.fromUIImage(uiImage: $0)?
+//            .resizable()
+//            .scaledToFit()
+//            .clipShape(Rectangle())
+//            .frame(width: 100, height: 80)
+//        }
+//      }
       
-      Spacer()
     }
+    .background(Color .white)
+    .clipShape(RoundedRectangle(cornerRadius: 18, style: .circular))
+    .frame(width: 350, height: 250)
+    .shadow(radius: /*@START_MENU_TOKEN@*/10/*@END_MENU_TOKEN@*/)
+    .padding()
     .onAppear(perform: self.fetchPostOwner)
     .onAppear(perform: self.fetchGoalTopicIcon)
     .onAppear(perform: self.fetchGoalPosts)

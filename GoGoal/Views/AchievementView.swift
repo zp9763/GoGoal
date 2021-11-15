@@ -19,11 +19,13 @@ struct AchievementView: View {
   
   var body: some View {
     NavigationView {
-      List {
+      ScrollView(.vertical, showsIndicators: false, content: {
+      VStack {
         ForEach(self.displayedGoals) {
+          Spacer()
           CompletedGoalView(goal: $0)
         }
-      }
+      }})
       .navigationBarTitle("Achievement", displayMode: .inline)
       .navigationBarItems(
         leading: Menu(content: {
