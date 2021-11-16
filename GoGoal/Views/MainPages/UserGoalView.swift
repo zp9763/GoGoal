@@ -15,7 +15,8 @@ struct UserGoalView: View {
   @State var displayInProgress = true
   @State var displayedGoals = [Goal]()
   
-  let goalService = GoalService()
+  // used to return to root view from multi-layer subpages
+  @State var isSubPageActive: Bool = false
   
   var body: some View {
     NavigationView {
@@ -24,7 +25,14 @@ struct UserGoalView: View {
         
         List {
           ForEach(self.displayedGoals) { goal in
-            NavigationLink(destination: GoalProgressView(user: self.userViewModel.user, goal: goal)) {
+            NavigationLink(
+              destination: GoalProgressView(
+                user: self.userViewModel.user,
+                goalViewModel: GoalViewModel(goal: goal),
+                isSubPageActive: self.$isSubPageActive
+              ),
+              isActive: self.$isSubPageActive
+            ) {
               UserGoalRowView(goal: goal)
             }
             // fix SwiftUI bug: nested NavigationLink fails on 2nd click
@@ -85,18 +93,18 @@ struct UserGoalView: View {
           Image(systemName: "equal.circle")
         },
         
-        trailing: NavigationLink(destination: EditGoalView(user: self.userViewModel.user)) {
+        trailing: NavigationLink(
+          destination: EditGoalView(
+            user: self.userViewModel.user,
+            isSubPageActive: self.$isSubPageActive
+          )
+        ) {
           Image(systemName: "plus")
         }
       )
-      .onAppear(perform: self.fetchAllUserGoals)
-    }
-  }
-  
-  func fetchAllUserGoals() {
-    self.goalService.getByUserId(userId: self.userViewModel.user.id!) {
-      self.userViewModel.userGoals = $0
-      self.updateDisplayedGoals()
+      .onAppear(perform: {
+        self.userViewModel.fetchAllUserGoals() { self.updateDisplayedGoals() }
+      })
     }
   }
   

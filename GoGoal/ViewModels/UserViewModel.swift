@@ -18,14 +18,10 @@ class UserViewModel: ObservableObject {
   let goalService = GoalService()
   let topicService = TopicService()
   
-  func loadUserInfoByEmail(email: String, _ completion: @escaping () -> Void) {
-    self.userService.getByEmail(email: email) { user in
-      self.user = user!
-      
-      self.goalService.getByUserId(userId: self.user.id!) {
-        self.userGoals = $0
-        completion()
-      }
+  func loadUserInfoByEmail(email: String, _ completion: @escaping () -> Void = {}) {
+    self.userService.getByEmail(email: email) {
+      self.user = $0!
+      self.fetchAllUserGoals() { completion() }
     }
   }
   
@@ -33,6 +29,13 @@ class UserViewModel: ObservableObject {
     self.topicService.getAll() { topicList in
       self.allTopics = topicList
         .sorted() { $0.name < $1.name }
+    }
+  }
+  
+  func fetchAllUserGoals(_ completion: @escaping () -> Void = {}) {
+    self.goalService.getByUserId(userId: self.user.id!) {
+      self.userGoals = $0
+      completion()
     }
   }
   

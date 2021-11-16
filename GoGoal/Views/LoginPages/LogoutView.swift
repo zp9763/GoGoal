@@ -1,5 +1,5 @@
 //
-//  GuestView.swift
+//  LogoutView.swift
 //  GoGoal
 //
 //  Created by Peng Zhao on 11/14/21.
@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct GuestView: View {
+struct LogoutView: View {
   
   @State var showLoginView: Bool = false
   @State var showSignUpView: Bool = false

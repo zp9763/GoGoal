@@ -1,21 +1,17 @@
 //
-//  GoalProgressView.swift
+//  GoalGuestView.swift
 //  GoGoal
 //
-//  Created by Peng Zhao on 10/30/21.
+//  Created by Peng Zhao on 11/15/21.
 //
 
 import SwiftUI
 
-struct GoalProgressView: View {
+struct GoalGuestView: View {
   
   var user: User
   
   @ObservedObject var goalViewModel: GoalViewModel
-  
-  @State var editSelected: Int? = 0
-  
-  @Binding var isSubPageActive: Bool
   
   var body: some View {
     VStack {
@@ -56,28 +52,6 @@ struct GoalProgressView: View {
         
         Text("Progress: \(checkInNum) / \(self.goalViewModel.goal.duration)")
         ProgressView(value: progress)
-        
-        Spacer()
-        
-        Button(action: {
-          self.editSelected = 1
-        }) {
-          Text("Edit Goal")
-        }
-        
-        NavigationLink(
-          destination: EditGoalView(
-            goalViewModel: self.goalViewModel,
-            isSubPageActive: self.$isSubPageActive
-          ),
-          tag: 1,
-          selection: self.$editSelected
-        ) {
-          EmptyView()
-        }
-        // used to return to root view from multi-layer subpages
-        .isDetailLink(false)
-        .hidden()
       }
       
       Spacer()
@@ -91,22 +65,8 @@ struct GoalProgressView: View {
       Spacer()
     }
     .navigationBarTitle("Progress", displayMode: .inline)
-    .navigationBarItems(
-      trailing: self.checkInView
-    )
     .onAppear(perform: self.goalViewModel.fetchGoalTopicIcon)
     .onAppear(perform: self.goalViewModel.fetchAllGoalPosts)
-  }
-  
-  var checkInView: some View {
-    if self.goalViewModel.goal.isCompleted {
-      // disable check-in for completed goals
-      return AnyView(EmptyView())
-    } else {
-      return AnyView(NavigationLink(destination: CheckInGoalView(goalViewModel: self.goalViewModel)) {
-        Image(systemName: "square.and.pencil")
-      })
-    }
   }
   
 }

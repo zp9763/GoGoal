@@ -9,8 +9,6 @@ import SwiftUI
 
 struct AchievementView: View {
   
-  private static let MAX_DISPLAY_NUM = 5
-  
   @ObservedObject var userViewModel: UserViewModel
   
   @State var displayedGoals = [Goal]()
@@ -20,8 +18,15 @@ struct AchievementView: View {
   var body: some View {
     NavigationView {
       List {
-        ForEach(self.displayedGoals) {
-          CompletedGoalView(goal: $0)
+        ForEach(self.displayedGoals) { goal in
+          NavigationLink(
+            destination: GoalGuestView(
+              user: self.userViewModel.user,
+              goalViewModel: GoalViewModel(goal: goal)
+            )
+          ) {
+            CompletedGoalView(goal: goal)
+          }
         }
       }
       .navigationBarTitle("Achievement", displayMode: .inline)
@@ -51,9 +56,7 @@ struct AchievementView: View {
           Image(systemName: "equal.circle")
         },
         
-        trailing: Button(action: {
-          self.fetchCompletedGoals()
-        }) {
+        trailing: Button(action: self.fetchCompletedGoals) {
           Image(systemName: "arrow.clockwise")
         }
       )
@@ -62,9 +65,8 @@ struct AchievementView: View {
   }
   
   func fetchCompletedGoals() {
-    self.goalService.getCompletedByTopicIds(topicIds: self.userViewModel.user.topicIdList) { goalList in
-      let displayedCount = min(goalList.count, AchievementView.MAX_DISPLAY_NUM)
-      self.displayedGoals = Array(goalList[0..<displayedCount])
+    self.goalService.getCompletedByTopicIds(topicIds: self.userViewModel.user.topicIdList) {
+      self.displayedGoals = $0
     }
   }
   

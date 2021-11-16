@@ -10,31 +10,26 @@ import FirebaseFirestore
 
 struct EditGoalView: View {
   
-  private static let DURATION_LOWER_BOUND = 1
-  private static let DURATION_UPPER_BOUND = 31
+  private static let DURATION_LOWER_BOUND: Int = 1
+  private static let DURATION_UPPER_BOUND: Int = 30
   
   // scenario 1: navigated from user goal page, need to create a new goal
-  @State var user: User?
+  var user: User?
   
   // scenario 2: nagivated from goal progress page, need to edit existing goal
-  var goal: Goal?
+  @ObservedObject var goalViewModel = GoalViewModel()
   
   @State var title: String = ""
-  
   @State var description: String = ""
-  
-  @State var duration: Int = -1
-  
-  @State var allTopics = [Topic]()
+  @State var duration: Int = (EditGoalView.DURATION_LOWER_BOUND + EditGoalView.DURATION_UPPER_BOUND) / 2
   @State var selectedTopicId: String = ""
   
-  @State var fireInputMissingAlert = false
+  @State var fireInputMissingAlert: Bool = false
+  @State var inputMissingAlertReason: String = ""
+  
+  @Binding var isSubPageActive: Bool
   
   @Environment(\.presentationMode) var mode: Binding<PresentationMode>
-  
-  let topicService = TopicService()
-  let userService = UserService()
-  let goalService = GoalService()
   
   var body: some View {
     VStack{
@@ -44,7 +39,7 @@ struct EditGoalView: View {
         HStack {
           Text("Title:")
             .padding(.leading)
-          TextField(self.title, text: $title)
+          TextField(self.title, text: self.$title)
             .padding(.trailing)
         }
         
@@ -53,7 +48,7 @@ struct EditGoalView: View {
         HStack {
           Text("Description:")
             .padding(.leading)
-          TextField(self.description, text: $description)
+          TextField(self.description, text: self.$description)
             .padding(.trailing)
         }
       }
@@ -61,12 +56,12 @@ struct EditGoalView: View {
       Spacer()
       
       Group {
-        let minDuration = max(self.goal?.checkInDates.count ?? 0, EditGoalView.DURATION_LOWER_BOUND)
+        let minDuration = max(self.goalViewModel.goal.checkInDates.count, EditGoalView.DURATION_LOWER_BOUND)
         
         Text("Please choose goal duration:")
         
-        Picker("Duration", selection: $duration) {
-          ForEach(minDuration..<EditGoalView.DURATION_UPPER_BOUND, id: \.self) {
+        Picker("Duration", selection: self.$duration) {
+          ForEach(minDuration...EditGoalView.DURATION_UPPER_BOUND, id: \.self) {
             Text(String($0))
           }
         }
@@ -75,7 +70,7 @@ struct EditGoalView: View {
       Spacer()
       
       List {
-        ForEach(self.allTopics, id: \.self.id!) { topic in
+        ForEach(self.goalViewModel.allTopics, id: \.self.id!) { topic in
           TopicSelectionView(topic: topic, isSelected: self.selectedTopicId == topic.id!) {
             if self.selectedTopicId == topic.id! {
               self.selectedTopicId = ""
@@ -89,42 +84,50 @@ struct EditGoalView: View {
       Spacer()
       
       Button(action: {
-        guard self.selectedTopicId != "" && self.title != "" else {
+        guard self.title != "" else {
+          self.inputMissingAlertReason = "Please enter your goal title."
           self.fireInputMissingAlert = true
           return
         }
         
-        if var goal = self.goal {
-          goal.topicId = self.selectedTopicId
+        guard self.selectedTopicId != "" else {
+          self.inputMissingAlertReason = "Please select a topic for your goal."
+          self.fireInputMissingAlert = true
+          return
+        }
+        
+        if self.user == nil {
+          self.goalViewModel.goal.title = self.title
+          self.goalViewModel.goal.description = self.description == "" ? nil : self.description
+          self.goalViewModel.goal.topicId = self.selectedTopicId
           
-          goal.title = self.title
-          goal.description = self.description == "" ? nil : self.description
+          self.goalViewModel.goal.duration = self.duration
+          self.goalViewModel.goal.isCompleted =
+            self.goalViewModel.goal.checkInDates.count == self.goalViewModel.goal.duration
           
-          goal.duration = self.duration
-          if goal.checkInDates.count == goal.duration {
-            goal.isCompleted = true
-          }
+          self.goalViewModel.goal.lastUpdateDate = Timestamp.init()
+          self.goalViewModel.goalService.createOrUpdate(object: self.goalViewModel.goal)
           
-          goal.lastUpdateDate = Timestamp.init()
-          self.goalService.createOrUpdate(object: goal)
         } else {
-          let goal = Goal(userId: self.user!.id!,
-                          topicId: self.selectedTopicId,
-                          title: self.title,
-                          description: self.description == "" ? nil : self.description,
-                          duration: self.duration)
+          let goal = Goal(
+            userId: self.user!.id!,
+            topicId: self.selectedTopicId,
+            title: self.title,
+            description: self.description == "" ? nil : self.description,
+            duration: self.duration
+          )
           
-          self.goalService.createOrUpdate(object: goal)
+          self.goalViewModel.goalService.createOrUpdate(object: goal)
         }
         
         self.mode.wrappedValue.dismiss()
       }) {
         Text("Confirm")
       }
-      .alert(isPresented: $fireInputMissingAlert) {
+      .alert(isPresented: self.$fireInputMissingAlert) {
         Alert(
           title: Text("Missing Goal Info"),
-          message: Text("Goal title empty or topic not selected.")
+          message: Text(self.inputMissingAlertReason)
         )
       }
       
@@ -132,17 +135,20 @@ struct EditGoalView: View {
     }
     .navigationBarTitle("Edit Goal", displayMode: .inline)
     .navigationBarItems(
-      trailing: deleteGoalView
+      trailing: self.deleteGoalView
     )
-    .onAppear(perform: self.fetchUserIfGoalPassed)
-    .onAppear(perform: self.fetchAllTopics)
+    .onAppear(perform: self.preSetGoalInfoIfPassed)
+    .onAppear(perform: self.goalViewModel.fetchAllTopics)
   }
   
   var deleteGoalView: some View {
-    if let goal = self.goal {
+    if self.user == nil {
       return AnyView(
         Button(action: {
-          self.goalService.deleteGoalCascade(goal: goal)
+          self.goalViewModel.goalService.deleteGoalCascade(goal: self.goalViewModel.goal) {
+            // return to root view: UserGoalView
+            self.isSubPageActive = false
+          }
         }) {
           Image(systemName: "trash")
         }
@@ -153,22 +159,12 @@ struct EditGoalView: View {
     }
   }
   
-  func fetchUserIfGoalPassed() {
-    if let goal = self.goal {
-      self.userService.getById(id: goal.userId) {
-        self.user = $0!
-        self.title = goal.title
-        self.description = goal.description ?? ""
-        self.duration = goal.duration
-        self.selectedTopicId = goal.topicId
-      }
-    }
-  }
-  
-  func fetchAllTopics() {
-    self.topicService.getAll() { topicList in
-      self.allTopics = topicList
-        .sorted() { $0.name < $1.name }
+  func preSetGoalInfoIfPassed() {
+    if self.user == nil {
+      self.title = self.goalViewModel.goal.title
+      self.description = self.goalViewModel.goal.description ?? ""
+      self.duration = self.goalViewModel.goal.duration
+      self.selectedTopicId = self.goalViewModel.goal.topicId
     }
   }
   

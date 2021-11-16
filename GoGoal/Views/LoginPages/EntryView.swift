@@ -13,7 +13,7 @@ struct EntryView: View {
   @EnvironmentObject var authSession: AuthSession
   
   var body: some View {
-    // if auth session is logged in, toggle on main view
+    // if auth session is logged in, toggle on MainView
     if self.authSession.isLoggedin {
       return AnyView(MainView(userViewModel: self.authSession.userViewModel))
     }
@@ -23,8 +23,8 @@ struct EntryView: View {
       self.authSession.login(userEmail: authUser.email!)
     }
     
-    // show guest view if auth session is logged out
-    return AnyView(GuestView())
+    // show LogoutView if auth session is logged out
+    return AnyView(LogoutView())
   }
   
 }
