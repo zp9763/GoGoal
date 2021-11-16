@@ -10,16 +10,16 @@ import Foundation
 class AuthSession: ObservableObject {
   
   @Published var isLoggedin: Bool = false
-  @Published var userModel = UserModel()
+  @Published var userViewModel = UserViewModel()
   
   func login(userEmail: String) {
-    self.userModel.loadUserInfoByEmail(email: userEmail) {
+    self.userViewModel.loadUserInfoByEmail(email: userEmail) {
       self.isLoggedin = true
     }
   }
   
   func logout() {
-    self.userModel = UserModel()
+    self.userViewModel = UserViewModel()
     self.isLoggedin = false
   }
   

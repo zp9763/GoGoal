@@ -9,13 +9,14 @@ import SwiftUI
 
 struct UserGoalView: View {
   
-  @ObservedObject var userModel: UserModel
+  @ObservedObject var userViewModel: UserViewModel
   
   // display in-progress goals by default
   @State var displayInProgress = true
   @State var displayedGoals = [Goal]()
   
-  let goalService = GoalService()
+  // used to return to root view from multi-layer subpages
+  @State var isSubPageActive: Bool = false
   
   var body: some View {
     NavigationView {
@@ -24,7 +25,14 @@ struct UserGoalView: View {
         
         List {
           ForEach(self.displayedGoals) { goal in
-            NavigationLink(destination: GoalProgressView(user: self.userModel.user, goal: goal)) {
+            NavigationLink(
+              destination: GoalProgressView(
+                user: self.userViewModel.user,
+                goalViewModel: GoalViewModel(goal: goal),
+                isSubPageActive: self.$isSubPageActive
+              ),
+              isActive: self.$isSubPageActive
+            ) {
               UserGoalRowView(goal: goal)
             }
             // fix SwiftUI bug: nested NavigationLink fails on 2nd click
@@ -85,23 +93,23 @@ struct UserGoalView: View {
           Image(systemName: "equal.circle")
         },
         
-        trailing: NavigationLink(destination: EditGoalView(user: self.userModel.user)) {
+        trailing: NavigationLink(
+          destination: EditGoalView(
+            user: self.userViewModel.user,
+            isSubPageActive: self.$isSubPageActive
+          )
+        ) {
           Image(systemName: "plus")
         }
       )
-      .onAppear(perform: self.fetchAllUserGoals)
-    }
-  }
-  
-  func fetchAllUserGoals() {
-    self.goalService.getByUserId(userId: self.userModel.user.id!) {
-      self.userModel.userGoals = $0
-      self.updateDisplayedGoals()
+      .onAppear(perform: {
+        self.userViewModel.fetchAllUserGoals() { self.updateDisplayedGoals() }
+      })
     }
   }
   
   func updateDisplayedGoals() {
-    self.displayedGoals = self.userModel.userGoals
+    self.displayedGoals = self.userViewModel.userGoals
       .filter() { $0.isCompleted != self.displayInProgress }
       .sorted() { $0.lastUpdateDate > $1.lastUpdateDate }
   }

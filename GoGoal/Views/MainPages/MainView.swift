@@ -9,26 +9,26 @@ import SwiftUI
 
 struct MainView: View {
   
-  @ObservedObject var userModel: UserModel
+  @ObservedObject var userViewModel: UserViewModel
   
   var body: some View {
     TabView {
-      UserGoalView(userModel: self.userModel)
+      UserGoalView(userViewModel: self.userViewModel)
         .tabItem {
           Image(systemName: "bolt.horizontal.circle")
         }
       
-      CommunityView(userModel: self.userModel)
+      CommunityView(userViewModel: self.userViewModel)
         .tabItem {
           Image(systemName: "network")
         }
       
-      AchievementView(userModel: self.userModel)
+      AchievementView(userViewModel: self.userViewModel)
         .tabItem {
           Image(systemName: "folder.circle")
         }
       
-      ProfileView(userModel: self.userModel)
+      ProfileView(userViewModel: self.userViewModel)
         .tabItem {
           Image(systemName: "person")
         }

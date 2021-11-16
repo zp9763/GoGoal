@@ -16,7 +16,7 @@ struct TopicSelectionView: View {
   var body: some View {
     Button(action: self.action) {
       HStack {
-        TopicView(topic: topic)
+        TopicView(topic: self.topic)
         
         if self.isSelected {
           Image(systemName: "checkmark")

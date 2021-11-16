@@ -9,7 +9,7 @@ import FirebaseFirestore
 
 class GoalService: BaseRepository<Goal> {
   
-  private static let COMPLETED_GOAL_QUERY_LIMIT = 50
+  private static let COMPLETED_GOAL_QUERY_LIMIT: Int = 50
   
   let postService = PostService()
   
@@ -40,8 +40,8 @@ class GoalService: BaseRepository<Goal> {
     queryByFields(queries: queries, orders: [order], limit: GoalService.COMPLETED_GOAL_QUERY_LIMIT, completion)
   }
   
-  func deleteGoalCascade(goal: Goal) {
-    self.deleteById(id: goal.id!)
+  func deleteGoalCascade(goal: Goal, _ completion: @escaping () -> Void = {}) {
+    self.deleteById(id: goal.id!) { completion() }
     self.postService.getByGoalId(goalId: goal.id!) { postList in
       for post in postList {
         self.postService.removePhotos(post: post)

@@ -9,18 +9,15 @@ import SwiftUI
 
 struct CompletedGoalView: View {
   
-  private static let PHOTO_COLUMN = 2
-  private static let MAX_PHOTO_NUM = 4
+  private static let PHOTO_COLUMN: Int = 2
+  private static let MAX_PHOTO_NUM: Int = 6
   
   var goal: Goal
   
   @State var owner: User?
-  
   @State var topicIcon: Image?
-  
-  @State var likesCount = 0
-  
-  @State var samplePhotos = [UIImage]()
+  @State var likesCount: Int = 0
+  @State var selectedPhotos = [UIImage]()
   
   let topicService = TopicService()
   let postService = PostService()
@@ -30,10 +27,10 @@ struct CompletedGoalView: View {
     VStack {
       Spacer()
       
-      if let owner = self.owner {
-        HStack {
-          Spacer()
-          
+      HStack() {
+        Spacer()
+        
+        if let owner = self.owner {
           Image.fromUIImage(uiImage: owner.avatar)?
             .resizable()
             .scaledToFit()
@@ -49,17 +46,7 @@ struct CompletedGoalView: View {
             .bold()
           
           Spacer()
-          
-          Image(systemName: "heart.fill")
-          
-          Text(String(self.likesCount))
-          
-          Spacer()
         }
-      }
-      
-      HStack() {
-        Spacer()
         
         self.topicIcon?
           .resizable()
@@ -72,9 +59,13 @@ struct CompletedGoalView: View {
           )
           .frame(width: 60, height: 60)
         
+        Text(self.goal.title)
+        
         Spacer()
         
-        Text(self.goal.title)
+        Image(systemName: "heart.fill")
+        
+        Text(String(self.likesCount))
         
         Spacer()
       }
@@ -85,7 +76,7 @@ struct CompletedGoalView: View {
       )
       
       LazyVGrid(columns: columns) {
-        ForEach(self.samplePhotos, id: \.self) {
+        ForEach(self.selectedPhotos, id: \.self) {
           Image.fromUIImage(uiImage: $0)?
             .resizable()
             .scaledToFit()
@@ -96,12 +87,12 @@ struct CompletedGoalView: View {
       
       Spacer()
     }
-    .onAppear(perform: self.fetchPostOwner)
+    .onAppear(perform: self.fetchGoalOwner)
     .onAppear(perform: self.fetchGoalTopicIcon)
     .onAppear(perform: self.fetchGoalPosts)
   }
   
-  func fetchPostOwner() {
+  func fetchGoalOwner() {
     self.userService.getById(id: self.goal.userId) {
       self.owner = $0
     }
@@ -114,25 +105,26 @@ struct CompletedGoalView: View {
   }
   
   func fetchGoalPosts() {
-    postService.getByGoalId(goalId: self.goal.id!) { postList in
-      var likes = 0
-      var samplePhotos = [UIImage]()
+    self.postService.getByGoalId(goalId: self.goal.id!) { postList in
+      var likesCount: Int = 0
+      var selectedPhotos = [UIImage]()
       
+      // sum up likes count and collect selected photos from recent posts
       for post in postList.sorted(by: { $0.createDate > $1.createDate }) {
-        likes += post.likes?.count ?? 0
+        likesCount += post.likes?.count ?? 0
         
-        if post.photos != nil && samplePhotos.count < CompletedGoalView.MAX_PHOTO_NUM {
+        if post.photos != nil && selectedPhotos.count < CompletedGoalView.MAX_PHOTO_NUM {
           for photo in post.photos! {
-            samplePhotos.append(photo)
-            if samplePhotos.count == CompletedGoalView.MAX_PHOTO_NUM {
+            selectedPhotos.append(photo)
+            if selectedPhotos.count == CompletedGoalView.MAX_PHOTO_NUM {
               break
             }
           }
         }
       }
       
-      self.likesCount = likes
-      self.samplePhotos = samplePhotos
+      self.likesCount = likesCount
+      self.selectedPhotos = selectedPhotos
     }
   }
   

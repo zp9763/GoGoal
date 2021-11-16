@@ -9,7 +9,7 @@ import FirebaseFirestore
 
 class PostService: BaseRepository<Post> {
   
-  private static let RECENT_POST_QUERY_LIMIT = 100
+  private static let RECENT_POST_QUERY_LIMIT: Int = 100
   
   let storage = FileStorage(.posts)
   
@@ -129,7 +129,7 @@ class PostService: BaseRepository<Post> {
     }
   }
   
-  override func deleteById(id: String) {
+  override func deleteById(id: String, _ completion: @escaping () -> Void = {}) {
     let likeRef = self.rootRef.document(id).collection(.likes)
     
     likeRef.getDocuments() { (snapshot, err) in
@@ -147,7 +147,9 @@ class PostService: BaseRepository<Post> {
         }
       }
       
-      dispatchGroup.notify(queue: .main) { super.deleteById(id: id) }
+      dispatchGroup.notify(queue: .main) {
+        super.deleteById(id: id) { completion() }
+      }
     }
   }
   
@@ -181,7 +183,7 @@ class PostService: BaseRepository<Post> {
     likeService.deleteById(id: userId)
   }
   
-  func addPhotos(post: Post, images: [UIImage]) {
+  func addPhotos(post: Post, images: [UIImage], _ completion: @escaping () -> Void = {}) {
     let dataList = images
       .map() { $0.pngData() }
       .compactMap() { $0 }
@@ -189,7 +191,7 @@ class PostService: BaseRepository<Post> {
     storage.uploadFolderFiles(subPath: post.id!, files: dataList, type: .image) { path in
       var post = post
       post.photosPath = path
-      self.createOrUpdate(object: post)
+      self.createOrUpdate(object: post) { completion() }
     }
   }
   

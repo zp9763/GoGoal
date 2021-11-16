@@ -10,20 +10,17 @@ import FirebaseFirestore
 
 struct CheckInGoalView: View {
   
-  static let PHOTO_COLUMN = 2
-  static let MAX_PHOTO_NUM = 4
+  private static let PHOTO_COLUMN: Int = 2
+  private static let MAX_PHOTO_NUM: Int = 4
   
-  var goal: Goal
+  @ObservedObject var goalViewModel: GoalViewModel
   
   @State var content: String = ""
   
-  @State var showImagePicker = false
+  @State var showImagePicker: Bool = false
   @State var photos = [UIImage]()
   
   @Environment(\.presentationMode) var mode: Binding<PresentationMode>
-  
-  let goalService = GoalService()
-  let postService = PostService()
   
   var photosBinding: Binding<UIImage?> {
     Binding<UIImage?>(
@@ -93,15 +90,14 @@ struct CheckInGoalView: View {
       Spacer()
       
       Button(action: {
-        var goal = self.goal
-        goal.checkInDates.append(Timestamp.init())
+        self.goalViewModel.goal.checkInDates.append(Timestamp.init())
         
-        if goal.checkInDates.count == goal.duration {
-          goal.isCompleted = true
+        if self.goalViewModel.goal.checkInDates.count == self.goalViewModel.goal.duration {
+          self.goalViewModel.goal.isCompleted = true
         }
         
-        goal.lastUpdateDate = Timestamp.init()
-        goalService.createOrUpdate(object: goal)
+        self.goalViewModel.goal.lastUpdateDate = Timestamp.init()
+        self.goalViewModel.goalService.createOrUpdate(object: self.goalViewModel.goal)
         
         // add check-in date only if no content and photos
         guard self.content != "" || self.photos.count > 0 else {
@@ -109,15 +105,22 @@ struct CheckInGoalView: View {
           return
         }
         
-        let content = self.content == "" ? "Goal: \(self.goal.title)" : self.content
-        let post = Post(userId: goal.userId, goalId: goal.id!, topicId: goal.topicId, content: content)
-        postService.createOrUpdate(object: post)
+        let post = Post(
+          userId: self.goalViewModel.goal.userId,
+          goalId: self.goalViewModel.goal.id!,
+          topicId: self.goalViewModel.goal.topicId,
+          content: self.content == "" ? self.goalViewModel.goal.title : self.content
+        )
         
-        if self.photos.count > 0 {
-          postService.addPhotos(post: post, images: self.photos)
+        self.goalViewModel.postService.createOrUpdate(object: post) {
+          if self.photos.count > 0 {
+            self.goalViewModel.postService.addPhotos(post: post, images: self.photos) {
+              self.mode.wrappedValue.dismiss()
+            }
+          } else {
+            self.mode.wrappedValue.dismiss()
+          }
         }
-        
-        self.mode.wrappedValue.dismiss()
       }) {
         Text("Submit")
       }
@@ -125,8 +128,8 @@ struct CheckInGoalView: View {
       Spacer()
     }
     .navigationBarTitle("Check In", displayMode: .inline)
-    .sheet(isPresented: $showImagePicker) {
-      PhotoCaptureView(showImagePicker: $showImagePicker, image: photosBinding)
+    .sheet(isPresented: self.$showImagePicker) {
+      PhotoCaptureView(showImagePicker: self.$showImagePicker, image: self.photosBinding)
     }
   }
   

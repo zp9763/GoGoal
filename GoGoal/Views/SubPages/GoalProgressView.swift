@@ -11,16 +11,11 @@ struct GoalProgressView: View {
   
   var user: User
   
-  var goal: Goal
-  
-  @State var topicIcon: Image?
+  @ObservedObject var goalViewModel: GoalViewModel
   
   @State var editSelected: Int? = 0
   
-  @State var posts = [Post]()
-  
-  let topicService = TopicService()
-  let postService = PostService()
+  @Binding var isSubPageActive: Bool
   
   var body: some View {
     VStack {
@@ -30,7 +25,7 @@ struct GoalProgressView: View {
         HStack {
           Spacer()
           
-          self.topicIcon?
+          self.goalViewModel.topicIcon?
             .resizable()
             .scaledToFit()
             .clipShape(Rectangle())
@@ -43,7 +38,7 @@ struct GoalProgressView: View {
           
           Spacer()
           
-          Text(self.goal.title)
+          Text(self.goalViewModel.goal.title)
             .bold()
           
           Spacer()
@@ -51,15 +46,15 @@ struct GoalProgressView: View {
         
         Spacer()
         
-        if let description = self.goal.description {
+        if let description = self.goalViewModel.goal.description {
           Text(description)
           Spacer()
         }
         
-        let checkInNum = self.goal.checkInDates.count
-        let progress = Double(checkInNum) / Double(self.goal.duration)
+        let checkInNum = self.goalViewModel.goal.checkInDates.count
+        let progress = Double(checkInNum) / Double(self.goalViewModel.goal.duration)
         
-        Text("Progress: \(checkInNum) / \(self.goal.duration)")
+        Text("Progress: \(checkInNum) / \(self.goalViewModel.goal.duration)")
         ProgressView(value: progress)
         
         Spacer()
@@ -70,17 +65,26 @@ struct GoalProgressView: View {
           Text("Edit Goal")
         }
         
-        NavigationLink(destination: EditGoalView(goal: self.goal), tag: 1, selection: $editSelected) {
+        NavigationLink(
+          destination: EditGoalView(
+            goalViewModel: self.goalViewModel,
+            isSubPageActive: self.$isSubPageActive
+          ),
+          tag: 1,
+          selection: self.$editSelected
+        ) {
           EmptyView()
         }
+        // used to return to root view from multi-layer subpages
+        .isDetailLink(false)
         .hidden()
       }
       
       Spacer()
       
       List {
-        ForEach(self.posts) {
-          PostView(user: self.user, post: $0)
+        ForEach(self.goalViewModel.posts) {
+          InnerPostView(user: self.user, post: $0)
         }
       }
       
@@ -88,33 +92,20 @@ struct GoalProgressView: View {
     }
     .navigationBarTitle("Progress", displayMode: .inline)
     .navigationBarItems(
-      trailing: checkInView
+      trailing: self.checkInView
     )
-    .onAppear(perform: self.fetchGoalTopicIcon)
-    .onAppear(perform: self.fetchGoalPosts)
+    .onAppear(perform: self.goalViewModel.fetchGoalTopicIcon)
+    .onAppear(perform: self.goalViewModel.fetchAllGoalPosts)
   }
   
   var checkInView: some View {
-    if self.goal.isCompleted {
+    if self.goalViewModel.goal.isCompleted {
       // disable check-in for completed goals
       return AnyView(EmptyView())
     } else {
-      return AnyView(NavigationLink(destination: CheckInGoalView(goal: self.goal)) {
+      return AnyView(NavigationLink(destination: CheckInGoalView(goalViewModel: self.goalViewModel)) {
         Image(systemName: "square.and.pencil")
       })
-    }
-  }
-  
-  func fetchGoalTopicIcon() {
-    self.topicService.getById(id: self.goal.topicId) {
-      self.topicIcon = $0?.icon
-    }
-  }
-  
-  func fetchGoalPosts() {
-    self.postService.getByGoalId(goalId: self.goal.id!) { postList in
-      self.posts = postList
-        .sorted() { $0.createDate > $1.createDate }
     }
   }
   

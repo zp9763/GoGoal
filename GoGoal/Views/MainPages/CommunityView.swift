@@ -9,9 +9,7 @@ import SwiftUI
 
 struct CommunityView: View {
   
-  private static let MAX_DISPLAY_NUM = 10
-  
-  @ObservedObject var userModel: UserModel
+  @ObservedObject var userViewModel: UserViewModel
   
   @State var displayedPosts = [Post]()
   
@@ -21,7 +19,7 @@ struct CommunityView: View {
     NavigationView {
       List {
         ForEach(self.displayedPosts) {
-          PostView(user: self.userModel.user, post: $0)
+          PostView(user: self.userViewModel.user, post: $0)
         }
       }
       .navigationBarTitle("Community", displayMode: .inline)
@@ -51,9 +49,7 @@ struct CommunityView: View {
           Image(systemName: "equal.circle")
         },
         
-        trailing: Button(action: {
-          self.fetchRecentPosts()
-        }) {
+        trailing: Button(action: self.fetchRecentPosts) {
           Image(systemName: "arrow.clockwise")
         }
       )
@@ -62,9 +58,8 @@ struct CommunityView: View {
   }
   
   func fetchRecentPosts() {
-    self.postService.getRecentByTopicIds(topicIds: self.userModel.user.topicIdList) { postList in
-      let displayedCount = min(postList.count, CommunityView.MAX_DISPLAY_NUM)
-      self.displayedPosts = Array(postList[0..<displayedCount])
+    self.postService.getRecentByTopicIds(topicIds: self.userViewModel.user.topicIdList) {
+      self.displayedPosts = $0
     }
   }
   

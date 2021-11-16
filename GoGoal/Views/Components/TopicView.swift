@@ -15,7 +15,7 @@ struct TopicView: View {
     HStack {
       Spacer()
       
-      topic.icon?
+      self.topic.icon?
         .resizable()
         .scaledToFit()
         .clipShape(Rectangle())
@@ -28,7 +28,7 @@ struct TopicView: View {
       
       Spacer()
       
-      Text(topic.name)
+      Text(self.topic.name)
       
       Spacer()
     }

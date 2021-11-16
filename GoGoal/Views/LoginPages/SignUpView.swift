@@ -10,8 +10,6 @@ import FirebaseAuth
 
 struct SignUpView: View {
   
-  private static let SIGNUP_SUCCESS_DELAY = 1.0
-  
   @EnvironmentObject var authSession: AuthSession
   
   @State var firstName: String = ""
@@ -112,13 +110,11 @@ struct SignUpView: View {
               topicIdList: self.subscribedTopicIds
             )
             
-            self.userService.createOrUpdate(object: newUser)
-            Auth.auth().signIn(withEmail: self.email, password: self.password)
-            
-            // workaround: wait for successful creation in both auth and db
-            DispatchQueue.main.asyncAfter(deadline: .now() + SignUpView.SIGNUP_SUCCESS_DELAY) {
-              self.authSession.login(userEmail: self.email)
-              self.mode.wrappedValue.dismiss()
+            self.userService.createOrUpdate(object: newUser) {
+              Auth.auth().signIn(withEmail: self.email, password: self.password) { _, _ in
+                self.authSession.login(userEmail: self.email)
+                self.mode.wrappedValue.dismiss()
+              }
             }
           }
         }

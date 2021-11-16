@@ -10,25 +10,26 @@ import FirebaseFirestore
 
 struct PostView: View {
   
+  private static let PHOTO_COLUMN: Int = 2
+  
   var user: User
   
   @State var post: Post
   
   @State var owner: User?
-  
+  @State var goal: Goal?
   @State var topicIcon: Image?
-  
-  @State var postIsLiked = false
   
   let topicService = TopicService()
   let userService = UserService()
   let postService = PostService()
+  let goalService = GoalService()
   
   var body: some View {
     VStack {
       Spacer()
       
-      if let owner = self.owner {
+      if let owner = self.owner, let goal = self.goal {
         HStack {
           Spacer()
           
@@ -48,28 +49,18 @@ struct PostView: View {
           
           Spacer()
           
-          if let _ = self.post.likes?[self.user.id!] {
-            Button(action: {
-              self.postService.removeUserLike(postId: self.post.id!, userId: self.user.id!)
-              self.post.likes!.removeValue(forKey: self.user.id!)
-              self.postIsLiked = false
-            }) {
-              Image(systemName: "hand.thumbsup.fill")
-            }
-          } else {
-            Button(action: {
-              self.postService.addUserLike(postId: self.post.id!, userId: self.user.id!)
-              if self.post.likes == nil {
-                self.post.likes = [String: Timestamp]()
-              }
-              self.post.likes![self.user.id!] = Timestamp.init()
-              self.postIsLiked = true
-            }) {
-              Image(systemName: "hand.thumbsup")
-            }
-          }
+          self.topicIcon?
+            .resizable()
+            .scaledToFit()
+            .clipShape(Rectangle())
+            .overlay(
+              Rectangle()
+                .stroke(Color.white, lineWidth: 2)
+                .shadow(radius: 40)
+            )
+            .frame(width: 60, height: 60)
           
-          Text(String(self.post.likes?.count ?? 0))
+          Text(goal.title)
           
           Spacer()
         }
@@ -78,20 +69,30 @@ struct PostView: View {
       HStack {
         Spacer()
         
-        self.topicIcon?
-          .resizable()
-          .scaledToFit()
-          .clipShape(Rectangle())
-          .overlay(
-            Rectangle()
-              .stroke(Color.white, lineWidth: 2)
-              .shadow(radius: 40)
-          )
-          .frame(width: 60, height: 60)
+        Text(self.post.content)
         
         Spacer()
         
-        Text(self.post.content)
+        if let _ = self.post.likes?[self.user.id!] {
+          Button(action: {
+            self.postService.removeUserLike(postId: self.post.id!, userId: self.user.id!)
+            self.post.likes!.removeValue(forKey: self.user.id!)
+          }) {
+            Image(systemName: "hand.thumbsup.fill")
+          }
+        } else {
+          Button(action: {
+            self.postService.addUserLike(postId: self.post.id!, userId: self.user.id!)
+            if self.post.likes == nil {
+              self.post.likes = [String: Timestamp]()
+            }
+            self.post.likes![self.user.id!] = Timestamp.init()
+          }) {
+            Image(systemName: "hand.thumbsup")
+          }
+        }
+        
+        Text(String(self.post.likes?.count ?? 0))
         
         Spacer()
       }
@@ -99,7 +100,7 @@ struct PostView: View {
       if let photos = self.post.photos {
         let columns = [GridItem](
           repeating: GridItem(.flexible()),
-          count: CheckInGoalView.PHOTO_COLUMN
+          count: PostView.PHOTO_COLUMN
         )
         
         LazyVGrid(columns: columns) {
@@ -116,7 +117,8 @@ struct PostView: View {
       Spacer()
     }
     .onAppear(perform: self.fetchPostOwner)
-    .onAppear(perform: self.fetchGoalTopicIcon)
+    .onAppear(perform: self.fetchPostTopicIcon)
+    .onAppear(perform: self.fetchPostGoal)
   }
   
   func fetchPostOwner() {
@@ -125,9 +127,15 @@ struct PostView: View {
     }
   }
   
-  func fetchGoalTopicIcon() {
+  func fetchPostTopicIcon() {
     self.topicService.getById(id: self.post.topicId) {
       self.topicIcon = $0?.icon
+    }
+  }
+  
+  func fetchPostGoal() {
+    self.goalService.getById(id: self.post.goalId) {
+      self.goal = $0
     }
   }
   
