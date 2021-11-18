@@ -13,9 +13,9 @@ struct GoalProgressView: View {
   
   @ObservedObject var goalViewModel: GoalViewModel
   
-  @State var editSelected: Int? = 0
+  @State var gotoEditGoal: Bool = false
   
-  @Binding var isSubPageActive: Bool
+  @Binding var selectedGoalId: String?
   
   var body: some View {
     VStack {
@@ -60,7 +60,7 @@ struct GoalProgressView: View {
         Spacer()
         
         Button(action: {
-          self.editSelected = 1
+          self.gotoEditGoal = true
         }) {
           Text("Edit Goal")
         }
@@ -68,14 +68,13 @@ struct GoalProgressView: View {
         NavigationLink(
           destination: EditGoalView(
             goalViewModel: self.goalViewModel,
-            isSubPageActive: self.$isSubPageActive
+            selectedGoalId: self.$selectedGoalId
           ),
-          tag: 1,
-          selection: self.$editSelected
+          isActive: self.$gotoEditGoal
         ) {
           EmptyView()
         }
-        // used to return to root view from multi-layer subpages
+        // fix SwiftUI bug: nested NavigationLink fails on 2nd click
         .isDetailLink(false)
         .hidden()
       }

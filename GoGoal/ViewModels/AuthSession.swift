@@ -12,9 +12,10 @@ class AuthSession: ObservableObject {
   @Published var isLoggedin: Bool = false
   @Published var userViewModel = UserViewModel()
   
-  func login(userEmail: String) {
+  func login(userEmail: String, _ completion: @escaping () -> Void = {}) {
     self.userViewModel.loadUserInfoByEmail(email: userEmail) {
       self.isLoggedin = true
+      completion()
     }
   }
   

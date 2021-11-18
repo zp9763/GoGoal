@@ -103,17 +103,18 @@ struct SignUpView: View {
             self.signUpFailureReason = err.localizedDescription
             self.fireSignUpFailureAlert = true
           } else {
-            let newUser = User(
-              email: self.email,
-              firstName: self.firstName,
-              lastName: self.lastName,
-              topicIdList: self.subscribedTopicIds
-            )
-            
-            self.userService.createOrUpdate(object: newUser) {
-              Auth.auth().signIn(withEmail: self.email, password: self.password) { _, _ in
-                self.authSession.login(userEmail: self.email)
-                self.mode.wrappedValue.dismiss()
+            Auth.auth().signIn(withEmail: self.email, password: self.password) { _, _ in
+              let newUser = User(
+                email: self.email,
+                firstName: self.firstName,
+                lastName: self.lastName,
+                topicIdList: self.subscribedTopicIds
+              )
+              
+              self.userService.createOrUpdate(object: newUser) {
+                self.authSession.login(userEmail: self.email) {
+                  self.mode.wrappedValue.dismiss()
+                }
               }
             }
           }

@@ -31,18 +31,20 @@ struct InnerPostView: View {
         
         if let _ = self.post.likes?[self.user.id!] {
           Button(action: {
-            self.postService.removeUserLike(postId: self.post.id!, userId: self.user.id!)
-            self.post.likes!.removeValue(forKey: self.user.id!)
+            self.postService.removeUserLike(postId: self.post.id!, userId: self.user.id!) {
+              self.post.likes!.removeValue(forKey: self.user.id!)
+            }
           }) {
             Image(systemName: "hand.thumbsup.fill")
           }
         } else {
           Button(action: {
-            self.postService.addUserLike(postId: self.post.id!, userId: self.user.id!)
-            if self.post.likes == nil {
-              self.post.likes = [String: Timestamp]()
+            self.postService.addUserLike(postId: self.post.id!, userId: self.user.id!) {
+              if self.post.likes == nil {
+                self.post.likes = [String: Timestamp]()
+              }
+              self.post.likes![self.user.id!] = Timestamp.init()
             }
-            self.post.likes![self.user.id!] = Timestamp.init()
           }) {
             Image(systemName: "hand.thumbsup")
           }

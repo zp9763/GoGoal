@@ -27,7 +27,7 @@ struct EditGoalView: View {
   @State var fireInputMissingAlert: Bool = false
   @State var inputMissingAlertReason: String = ""
   
-  @Binding var isSubPageActive: Bool
+  @Binding var selectedGoalId: String?
   
   @Environment(\.presentationMode) var mode: Binding<PresentationMode>
   
@@ -67,21 +67,37 @@ struct EditGoalView: View {
         }
       }
       
-      Spacer()
-      
-      List {
-        ForEach(self.goalViewModel.allTopics, id: \.self.id!) { topic in
-          TopicSelectionView(topic: topic, isSelected: self.selectedTopicId == topic.id!) {
-            if self.selectedTopicId == topic.id! {
-              self.selectedTopicId = ""
-            } else {
-              self.selectedTopicId = topic.id!
+      Group {
+        Spacer()
+        
+        if self.user == nil {
+          // forbidden topic selection for an existing goal
+          let topic = self.goalViewModel.allTopics
+            .filter() { $0.id! == self.goalViewModel.goal.topicId }
+          
+          // show TopicView after topic list has been loaded
+          if topic.count == 1 {
+            TopicView(topic: topic[0])
+          } else {
+            EmptyView()
+          }
+        } else {
+          // allow topic selection only if creating a new goal
+          List {
+            ForEach(self.goalViewModel.allTopics, id: \.self.id!) { topic in
+              TopicSelectionView(topic: topic, isSelected: self.selectedTopicId == topic.id!) {
+                if self.selectedTopicId == topic.id! {
+                  self.selectedTopicId = ""
+                } else {
+                  self.selectedTopicId = topic.id!
+                }
+              }
             }
           }
         }
+        
+        Spacer()
       }
-      
-      Spacer()
       
       Button(action: {
         guard self.title != "" else {
@@ -106,8 +122,9 @@ struct EditGoalView: View {
             self.goalViewModel.goal.checkInDates.count == self.goalViewModel.goal.duration
           
           self.goalViewModel.goal.lastUpdateDate = Timestamp.init()
-          self.goalViewModel.goalService.createOrUpdate(object: self.goalViewModel.goal)
-          
+          self.goalViewModel.goalService.createOrUpdate(object: self.goalViewModel.goal) {
+            self.mode.wrappedValue.dismiss()
+          }
         } else {
           let goal = Goal(
             userId: self.user!.id!,
@@ -117,10 +134,10 @@ struct EditGoalView: View {
             duration: self.duration
           )
           
-          self.goalViewModel.goalService.createOrUpdate(object: goal)
+          self.goalViewModel.goalService.createOrUpdate(object: goal) {
+            self.mode.wrappedValue.dismiss()
+          }
         }
-        
-        self.mode.wrappedValue.dismiss()
       }) {
         Text("Confirm")
       }
@@ -143,23 +160,25 @@ struct EditGoalView: View {
   
   var deleteGoalView: some View {
     if self.user == nil {
+      // show delete goal button if editing an existing goal
       return AnyView(
         Button(action: {
           self.goalViewModel.goalService.deleteGoalCascade(goal: self.goalViewModel.goal) {
             // return to root view: UserGoalView
-            self.isSubPageActive = false
+            self.selectedGoalId = nil
           }
         }) {
           Image(systemName: "trash")
         }
       )
     } else {
-      // disable delete button when creating a new goal
+      // disable delete goal button if creating a new goal
       return AnyView(EmptyView())
     }
   }
   
   func preSetGoalInfoIfPassed() {
+    // fill up goal info fields if editing an existing goal
     if self.user == nil {
       self.title = self.goalViewModel.goal.title
       self.description = self.goalViewModel.goal.description ?? ""

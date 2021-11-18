@@ -15,8 +15,8 @@ struct UserGoalView: View {
   @State var displayInProgress = true
   @State var displayedGoals = [Goal]()
   
-  // used to return to root view from multi-layer subpages
-  @State var isSubPageActive: Bool = false
+  // used to identify subpage navigation and also return to root
+  @State var selectedGoalId: String?
   
   var body: some View {
     NavigationView {
@@ -29,9 +29,10 @@ struct UserGoalView: View {
               destination: GoalProgressView(
                 user: self.userViewModel.user,
                 goalViewModel: GoalViewModel(goal: goal),
-                isSubPageActive: self.$isSubPageActive
+                selectedGoalId: self.$selectedGoalId
               ),
-              isActive: self.$isSubPageActive
+              tag: goal.id!,
+              selection: self.$selectedGoalId
             ) {
               UserGoalRowView(goal: goal)
             }
@@ -96,7 +97,7 @@ struct UserGoalView: View {
         trailing: NavigationLink(
           destination: EditGoalView(
             user: self.userViewModel.user,
-            isSubPageActive: self.$isSubPageActive
+            selectedGoalId: self.$selectedGoalId
           )
         ) {
           Image(systemName: "plus")
