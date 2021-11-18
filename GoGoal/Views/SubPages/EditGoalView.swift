@@ -67,21 +67,37 @@ struct EditGoalView: View {
         }
       }
       
-      Spacer()
-      
-      List {
-        ForEach(self.goalViewModel.allTopics, id: \.self.id!) { topic in
-          TopicSelectionView(topic: topic, isSelected: self.selectedTopicId == topic.id!) {
-            if self.selectedTopicId == topic.id! {
-              self.selectedTopicId = ""
-            } else {
-              self.selectedTopicId = topic.id!
+      Group {
+        Spacer()
+        
+        if self.user == nil {
+          // forbidden topic selection for an existing goal
+          let topic = self.goalViewModel.allTopics
+            .filter() { $0.id! == self.goalViewModel.goal.topicId }
+          
+          // show TopicView after topic list has been loaded
+          if topic.count == 1 {
+            TopicView(topic: topic[0])
+          } else {
+            EmptyView()
+          }
+        } else {
+          // allow topic selection only if creating a new goal
+          List {
+            ForEach(self.goalViewModel.allTopics, id: \.self.id!) { topic in
+              TopicSelectionView(topic: topic, isSelected: self.selectedTopicId == topic.id!) {
+                if self.selectedTopicId == topic.id! {
+                  self.selectedTopicId = ""
+                } else {
+                  self.selectedTopicId = topic.id!
+                }
+              }
             }
           }
         }
+        
+        Spacer()
       }
-      
-      Spacer()
       
       Button(action: {
         guard self.title != "" else {
