@@ -92,18 +92,16 @@ struct SignUpView: View {
       Spacer()
       
       Button(action: {
-        guard self.firstName != "" else {
-          self.signUpFailureReason = "User first name cannot be empty."
-          self.fireSignUpFailureAlert = true
-          return
-        }
-        
         Auth.auth().createUser(withEmail: self.email, password: self.password) { _, err in
           if let err = err {
             self.signUpFailureReason = err.localizedDescription
             self.fireSignUpFailureAlert = true
           } else {
             Auth.auth().signIn(withEmail: self.email, password: self.password) { _, _ in
+              if self.firstName == "" && self.lastName == "" {
+                self.firstName = "Anonymous"
+              }
+              
               let newUser = User(
                 email: self.email,
                 firstName: self.firstName,

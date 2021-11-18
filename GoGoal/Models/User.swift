@@ -33,7 +33,13 @@ struct User: Codable, Identifiable {
   }
   
   func getFullName() -> String {
-    return "\(self.firstName) \(self.lastName)"
+    if self.firstName != "" && self.lastName != "" {
+      return "\(self.firstName) \(self.lastName)"
+    } else if self.lastName != "" {
+      return self.lastName
+    } else {
+      return self.firstName
+    }
   }
   
 }
