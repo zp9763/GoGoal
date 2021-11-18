@@ -27,7 +27,7 @@ struct EditGoalView: View {
   @State var fireInputMissingAlert: Bool = false
   @State var inputMissingAlertReason: String = ""
   
-  @Binding var isSubPageActive: Bool
+  @Binding var selectedGoalId: String?
   
   @Environment(\.presentationMode) var mode: Binding<PresentationMode>
   
@@ -165,7 +165,7 @@ struct EditGoalView: View {
         Button(action: {
           self.goalViewModel.goalService.deleteGoalCascade(goal: self.goalViewModel.goal) {
             // return to root view: UserGoalView
-            self.isSubPageActive = false
+            self.selectedGoalId = nil
           }
         }) {
           Image(systemName: "trash")
