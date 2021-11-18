@@ -40,7 +40,7 @@ struct CheckInGoalView: View {
       Group {
         Text("What have you done today?")
         
-        TextField("mark your progress...", text: $content)
+        TextField("mark your progress...", text: self.$content)
       }
       
       Spacer()
@@ -97,28 +97,28 @@ struct CheckInGoalView: View {
         }
         
         self.goalViewModel.goal.lastUpdateDate = Timestamp.init()
-        self.goalViewModel.goalService.createOrUpdate(object: self.goalViewModel.goal)
-        
-        // add check-in date only if no content and photos
-        guard self.content != "" || self.photos.count > 0 else {
-          self.mode.wrappedValue.dismiss()
-          return
-        }
-        
-        let post = Post(
-          userId: self.goalViewModel.goal.userId,
-          goalId: self.goalViewModel.goal.id!,
-          topicId: self.goalViewModel.goal.topicId,
-          content: self.content == "" ? self.goalViewModel.goal.title : self.content
-        )
-        
-        self.goalViewModel.postService.createOrUpdate(object: post) {
-          if self.photos.count > 0 {
-            self.goalViewModel.postService.addPhotos(post: post, images: self.photos) {
+        self.goalViewModel.goalService.createOrUpdate(object: self.goalViewModel.goal) {
+          // add check-in date only if no content and photos
+          guard self.content != "" || self.photos.count > 0 else {
+            self.mode.wrappedValue.dismiss()
+            return
+          }
+          
+          let post = Post(
+            userId: self.goalViewModel.goal.userId,
+            goalId: self.goalViewModel.goal.id!,
+            topicId: self.goalViewModel.goal.topicId,
+            content: self.content == "" ? self.goalViewModel.goal.title : self.content
+          )
+          
+          self.goalViewModel.postService.createOrUpdate(object: post) {
+            if self.photos.count > 0 {
+              self.goalViewModel.postService.addPhotos(post: post, images: self.photos) {
+                self.mode.wrappedValue.dismiss()
+              }
+            } else {
               self.mode.wrappedValue.dismiss()
             }
-          } else {
-            self.mode.wrappedValue.dismiss()
           }
         }
       }) {

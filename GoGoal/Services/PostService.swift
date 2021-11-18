@@ -171,16 +171,16 @@ class PostService: BaseRepository<Post> {
     queryByFields(queries: [query], orders: [order], limit: PostService.RECENT_POST_QUERY_LIMIT, completion)
   }
   
-  func addUserLike(postId: String, userId: String) {
+  func addUserLike(postId: String, userId: String, _ completion: @escaping () -> Void = {}) {
     let likeRef = self.rootRef.document(postId).collection(.likes)
     let likeService = LikeService(likeRef)
-    likeService.createOrUpdate(object: Like(id: userId))
+    likeService.createOrUpdate(object: Like(id: userId)) { completion() }
   }
   
-  func removeUserLike(postId: String, userId: String) {
+  func removeUserLike(postId: String, userId: String, _ completion: @escaping () -> Void = {}) {
     let likeRef = self.rootRef.document(postId).collection(.likes)
     let likeService = LikeService(likeRef)
-    likeService.deleteById(id: userId)
+    likeService.deleteById(id: userId) { completion() }
   }
   
   func addPhotos(post: Post, images: [UIImage], _ completion: @escaping () -> Void = {}) {
@@ -195,9 +195,11 @@ class PostService: BaseRepository<Post> {
     }
   }
   
-  func removePhotos(post: Post) {
+  func removePhotos(post: Post, _ completion: @escaping () -> Void = {}) {
     if let path = post.photosPath {
-      storage.deleteFolderFiles(fullPath: path)
+      storage.deleteFolderFiles(fullPath: path) { completion() }
+    } else {
+      completion()
     }
   }
   

@@ -41,11 +41,23 @@ class GoalService: BaseRepository<Goal> {
   }
   
   func deleteGoalCascade(goal: Goal, _ completion: @escaping () -> Void = {}) {
-    self.deleteById(id: goal.id!) { completion() }
-    self.postService.getByGoalId(goalId: goal.id!) { postList in
-      for post in postList {
-        self.postService.removePhotos(post: post)
-        self.postService.deleteById(id: post.id!)
+    self.deleteById(id: goal.id!) {
+      self.postService.getByGoalId(goalId: goal.id!) { postList in
+        let dispatchGroup = DispatchGroup()
+        
+        for post in postList {
+          dispatchGroup.enter()
+          self.postService.removePhotos(post: post) {
+            dispatchGroup.leave()
+          }
+          
+          dispatchGroup.enter()
+          self.postService.deleteById(id: post.id!) {
+            dispatchGroup.leave()
+          }
+        }
+        
+        dispatchGroup.notify(queue: .main) { completion() }
       }
     }
   }

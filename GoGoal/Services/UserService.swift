@@ -87,7 +87,7 @@ class UserService: BaseRepository<User> {
     }
   }
   
-  func setAvatar(user: User, image: UIImage) {
+  func setAvatar(user: User, image: UIImage, _ completion: @escaping () -> Void = {}) {
     guard let data = image.pngData() else {
       return
     }
@@ -95,7 +95,7 @@ class UserService: BaseRepository<User> {
     storage.uploadFile(subPath: user.id!, file: data, type: .image) { path in
       var user = user
       user.avatarPath = path
-      self.createOrUpdate(object: user)
+      self.createOrUpdate(object: user) { completion() }
     }
   }
   

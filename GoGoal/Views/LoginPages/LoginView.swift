@@ -48,8 +48,9 @@ struct LoginView: View {
             self.loginFailureReason = err.localizedDescription
             self.fireLoginFailureAlert = true
           } else {
-            self.authSession.login(userEmail: self.email)
-            self.mode.wrappedValue.dismiss()
+            self.authSession.login(userEmail: self.email) {
+              self.mode.wrappedValue.dismiss()
+            }
           }
         }
       }) {

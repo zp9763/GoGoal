@@ -25,17 +25,17 @@ class UserViewModel: ObservableObject {
     }
   }
   
-  func fetchAllTopics() {
-    self.topicService.getAll() { topicList in
-      self.allTopics = topicList
-        .sorted() { $0.name < $1.name }
-    }
-  }
-  
   func fetchAllUserGoals(_ completion: @escaping () -> Void = {}) {
     self.goalService.getByUserId(userId: self.user.id!) {
       self.userGoals = $0
       completion()
+    }
+  }
+  
+  func fetchAllTopics() {
+    self.topicService.getAll() { topicList in
+      self.allTopics = topicList
+        .sorted() { $0.name < $1.name }
     }
   }
   

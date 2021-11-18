@@ -205,7 +205,7 @@
 				5773B527271D0DE00029A220 /* Services */,
 				5773B52E271D198B0029A220 /* Repositories */,
 				5773B520271D05F10029A220 /* Models */,
-				5773B535271DF9A30029A220 /* Extensions */,
+				5773B535271DF9A30029A220 /* Utils */,
 				5773B510271CC0370029A220 /* Assets.xcassets */,
 				5773B515271CC0370029A220 /* LaunchScreen.storyboard */,
 				5773B51E271D01FA0029A220 /* GoogleService-Info.plist */,
@@ -252,7 +252,6 @@
 				57FC80382742E42D00441D4C /* MainPages */,
 				57FC803A2742E4F200441D4C /* SubPages */,
 				57FC80392742E45F00441D4C /* Components */,
-				57FC803B2742E55D00441D4C /* Utilities */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -282,13 +281,13 @@
 			path = Repositories;
 			sourceTree = "<group>";
 		};
-		5773B535271DF9A30029A220 /* Extensions */ = {
+		5773B535271DF9A30029A220 /* Utils */ = {
 			isa = PBXGroup;
 			children = (
 				575A535A272DC601004619FA /* ImageExtension.swift */,
 				57409A48272F166A00578CD9 /* TimestampExtension.swift */,
 			);
-			path = Extensions;
+			path = Utils;
 			sourceTree = "<group>";
 		};
 		57B8248E273708A3008096A5 /* GoGoalTests */ = {
@@ -342,6 +341,9 @@
 				57D06C8827435BB900F8A448 /* InnerPostView.swift */,
 				3348526427333DBA0067D516 /* CompletedGoalView.swift */,
 				57C60A1D2730A48900E5255E /* TopicView.swift */,
+				57DA1F142734699600C77B10 /* PhotoCaptureView.swift */,
+				57DA1F12273457B500C77B10 /* ImagePicker.swift */,
+				57C60A1B2730A1C500E5255E /* TopicSelectionView.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -355,16 +357,6 @@
 				57409A46272E165400578CD9 /* EditGoalView.swift */,
 			);
 			path = SubPages;
-			sourceTree = "<group>";
-		};
-		57FC803B2742E55D00441D4C /* Utilities */ = {
-			isa = PBXGroup;
-			children = (
-				57DA1F142734699600C77B10 /* PhotoCaptureView.swift */,
-				57DA1F12273457B500C77B10 /* ImagePicker.swift */,
-				57C60A1B2730A1C500E5255E /* TopicSelectionView.swift */,
-			);
-			path = Utilities;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
