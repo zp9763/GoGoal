@@ -29,6 +29,8 @@ struct EditGoalView: View {
   
   @Binding var selectedGoalId: String?
   
+  @State var fireDeleteGoalAlert: Bool = false
+  
   @Environment(\.presentationMode) var mode: Binding<PresentationMode>
   
   var body: some View {
@@ -163,12 +165,22 @@ struct EditGoalView: View {
       // show delete goal button if editing an existing goal
       return AnyView(
         Button(action: {
-          self.goalViewModel.goalService.deleteGoalCascade(goal: self.goalViewModel.goal) {
-            // return to root view: UserGoalView
-            self.selectedGoalId = nil
-          }
+          self.fireDeleteGoalAlert = true
         }) {
           Image(systemName: "trash")
+        }
+        .alert(isPresented: self.$fireDeleteGoalAlert) {
+          Alert(
+            title: Text("Please confirm to delete this goal."),
+            message: Text("After deletion, all its historical records cannot be resumed."),
+            primaryButton: .cancel(Text("Cancel")),
+            secondaryButton: .destructive(Text("Delete")) {
+              self.goalViewModel.goalService.deleteGoalCascade(goal: self.goalViewModel.goal) {
+                // return to root view: UserGoalView
+                self.selectedGoalId = nil
+              }
+            }
+          )
         }
       )
     } else {

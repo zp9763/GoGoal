@@ -117,7 +117,7 @@ struct ProfileView: View {
               Alert(
                 title: Text("Change Password"),
                 message: Text(self.changePwdResponse),
-                dismissButton: .destructive(Text("OK")) {
+                dismissButton: .cancel(Text("OK")) {
                   if self.changePwdResponse.contains("success") {
                     do {
                       try Auth.auth().signOut()
