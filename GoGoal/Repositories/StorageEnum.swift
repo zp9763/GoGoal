@@ -15,7 +15,8 @@ enum StorageEnum: String {
 extension StorageReference {
   
   func child(_ rootFolder: StorageEnum) -> StorageReference {
-    return self.child(rootFolder.rawValue)
+    let env: String = ProcessInfo.processInfo.environment["ENV"] ?? "dev"
+    return self.child("\(rootFolder.rawValue)_\(env)")
   }
   
 }
