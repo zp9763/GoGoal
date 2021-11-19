@@ -18,9 +18,7 @@ enum CollectionEnum: String {
 extension Firestore {
   
   func collection(_ collection: CollectionEnum) -> CollectionReference {
-    // use dev env by default if no env variable is passed
-    let env: String = ProcessInfo.processInfo.environment["ENV"] ?? "dev"
-    return self.collection("\(collection.rawValue)_\(env)")
+    return self.collection("\(collection.rawValue)_\(EnvironmentConfig.getEnv().lowercased())")
   }
   
 }

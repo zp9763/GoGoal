@@ -16,9 +16,7 @@ class FileStorage {
   let prefixPath: String
   
   init(_ storageEnum: StorageEnum) {
-    // use dev env by default if no env variable is passed
-    let env: String = ProcessInfo.processInfo.environment["ENV"] ?? "dev"
-    self.prefixPath = "\(storageEnum.rawValue)_\(env)"
+    self.prefixPath = "\(storageEnum.rawValue)_\(EnvironmentConfig.getEnv().lowercased())"
   }
   
   func uploadFile(subPath: String, file: Data, type: ContentType, _ completion: @escaping (String) -> Void) {
