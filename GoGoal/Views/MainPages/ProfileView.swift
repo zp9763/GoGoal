@@ -73,11 +73,14 @@ struct ProfileView: View {
                 let nameSplit = $0.split(separator: " ")
                 
                 if nameSplit.count > 1 {
+                  self.userViewModel.user.firstName = String(nameSplit[0])
                   self.userViewModel.user.lastName = nameSplit[1..<nameSplit.count].joined(separator: " ")
                 } else if nameSplit.count == 1 {
                   self.userViewModel.user.firstName = String(nameSplit[0])
+                  self.userViewModel.user.lastName = ""
                 } else {
                   self.userViewModel.user.firstName = "Anonymous"
+                  self.userViewModel.user.lastName = ""
                 }
                 
                 self.userViewModel.user.lastUpdateDate = Timestamp.init()
@@ -103,19 +106,8 @@ struct ProfileView: View {
           if self.password != ProfileView.DEFAULT_PASSWORD {
             Button(action: {
               Auth.auth().currentUser!.updatePassword(to: self.password) { err in
-                if let err = err {
-                  self.changePwdResponse = err.localizedDescription
-                } else {
-                  do {
-                    try Auth.auth().signOut()
-                    self.authSession.logout()
-                    self.changePwdResponse =
-                      "Password changed successfully! Please login again."
-                  } catch let err {
-                    print("Error sign out: \(err)")
-                  }
-                }
-                
+                self.changePwdResponse = err?.localizedDescription ??
+                  "Password changed successfully! Please login again."
                 self.fireChangePwdAlert = true
               }
             }) {
@@ -124,7 +116,19 @@ struct ProfileView: View {
             .alert(isPresented: self.$fireChangePwdAlert) {
               Alert(
                 title: Text("Change Password"),
-                message: Text(self.changePwdResponse)
+                message: Text(self.changePwdResponse),
+                dismissButton: .destructive(Text("OK")) {
+                  if self.changePwdResponse.contains("success") {
+                    do {
+                      try Auth.auth().signOut()
+                      self.authSession.logout()
+                    } catch let err {
+                      print("Error sign out: \(err)")
+                    }
+                  } else {
+                    self.password = ProfileView.DEFAULT_PASSWORD
+                  }
+                }
               )
             }
           } else {
