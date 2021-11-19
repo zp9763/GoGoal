@@ -28,7 +28,19 @@ class AuthSession: ObservableObject {
           print("Error sign out: \(err)")
         }
         
-        print("Warning: user auth valid but user not exist!")
+        print("""
+        ===========================================
+        
+        Warning: user auth valid but user not exist!
+        
+        Possible reasons:
+          (1) user was deleted in firestore
+          (2) user was active in one env but
+              app now deployed in another env
+        
+        ===========================================
+        """)
+        
         completion()
       }
     }
