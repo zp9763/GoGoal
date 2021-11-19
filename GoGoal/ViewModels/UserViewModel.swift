@@ -18,13 +18,6 @@ class UserViewModel: ObservableObject {
   let goalService = GoalService()
   let topicService = TopicService()
   
-  func loadUserInfoByEmail(email: String, _ completion: @escaping () -> Void = {}) {
-    self.userService.getByEmail(email: email) {
-      self.user = $0!
-      self.fetchAllUserGoals() { completion() }
-    }
-  }
-  
   func fetchAllUserGoals(_ completion: @escaping () -> Void = {}) {
     self.goalService.getByUserId(userId: self.user.id!) {
       self.userGoals = $0

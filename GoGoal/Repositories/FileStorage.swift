@@ -9,18 +9,18 @@ import FirebaseStorage
 
 class FileStorage {
   
-  // loaded photo size limit = 10 MB
-  private static let MAX_SIZE: Int64 = 10 * 1024 * 1024
+  // the maximum photo size the app could load on frontend
+  private static let MAX_SIZE: Int64 = 20 * 1024 * 1024
   
   let storage = Storage.storage()
-  let prefixPath: StorageEnum
+  let prefixPath: String
   
-  init(_ prefixPath: StorageEnum) {
-    self.prefixPath = prefixPath
+  init(_ storageEnum: StorageEnum) {
+    self.prefixPath = "\(storageEnum.rawValue)_\(EnvironmentConfig.getEnv().lowercased())"
   }
   
   func uploadFile(subPath: String, file: Data, type: ContentType, _ completion: @escaping (String) -> Void) {
-    let fullPath = "\(prefixPath.rawValue)/\(subPath)"
+    let fullPath = "\(prefixPath)/\(subPath)"
     let fileRef = storage.reference(withPath: fullPath)
     
     let metadata = StorageMetadata()
@@ -46,7 +46,7 @@ class FileStorage {
       }
     }
     
-    let fullPath = "\(prefixPath.rawValue)/\(subPath)/"
+    let fullPath = "\(prefixPath)/\(subPath)/"
     dispatchGroup.notify(queue: .main) { completion(fullPath) }
   }
   

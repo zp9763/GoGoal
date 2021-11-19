@@ -18,7 +18,7 @@ enum CollectionEnum: String {
 extension Firestore {
   
   func collection(_ collection: CollectionEnum) -> CollectionReference {
-    return self.collection(collection.rawValue)
+    return self.collection("\(collection.rawValue)_\(EnvironmentConfig.getEnv().lowercased())")
   }
   
 }

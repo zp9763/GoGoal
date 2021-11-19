@@ -95,6 +95,7 @@ class UserService: BaseRepository<User> {
     storage.uploadFile(subPath: user.id!, file: data, type: .image) { path in
       var user = user
       user.avatarPath = path
+      user.lastUpdateDate = Timestamp.init()
       self.createOrUpdate(object: user) { completion() }
     }
   }

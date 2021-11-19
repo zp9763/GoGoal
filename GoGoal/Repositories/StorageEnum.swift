@@ -12,14 +12,6 @@ enum StorageEnum: String {
   case posts
 }
 
-extension StorageReference {
-  
-  func child(_ rootFolder: StorageEnum) -> StorageReference {
-    return self.child(rootFolder.rawValue)
-  }
-  
-}
-
 enum ContentType: String {
   case image = "image/png"
 }

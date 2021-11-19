@@ -16,6 +16,13 @@ struct LogoutView: View {
     VStack {
       Spacer()
       
+      // TODO: disable environment tag when releasing app
+      Group {
+        Text("Environment: \(EnvironmentConfig.getEnv())")
+        Text("(toggled on for app developers)")
+        Spacer()
+      }
+      
       Button(action: {
         self.showLoginView = true
       }) {
