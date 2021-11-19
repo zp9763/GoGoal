@@ -7,6 +7,7 @@
 
 import SwiftUI
 import FirebaseAuth
+import FirebaseFirestore
 
 struct ProfileView: View {
   
@@ -79,6 +80,7 @@ struct ProfileView: View {
                   self.userViewModel.user.firstName = "Anonymous"
                 }
                 
+                self.userViewModel.user.lastUpdateDate = Timestamp.init()
                 self.userViewModel.userService.createOrUpdate(object: self.userViewModel.user)
               }
             
@@ -218,6 +220,7 @@ struct ProfileView: View {
       
       Button(action: {
         self.userViewModel.user.topicIdList = self.subscribedTopicIds
+        self.userViewModel.user.lastUpdateDate = Timestamp.init()
         self.userViewModel.userService.createOrUpdate(object: self.userViewModel.user) {
           self.updateSubscribedTopic = false
         }
