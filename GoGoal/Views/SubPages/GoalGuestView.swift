@@ -11,11 +11,41 @@ struct GoalGuestView: View {
   
   var user: User
   
+  @State var owner: User?
+  
   @ObservedObject var goalViewModel: GoalViewModel
+  
+  let userService = UserService()
   
   var body: some View {
     VStack {
       Spacer()
+      
+      Group {
+        HStack() {
+          Spacer()
+          
+          if let owner = self.owner {
+            Image.fromUIImage(uiImage: owner.avatar)?
+              .resizable()
+              .scaledToFit()
+              .clipShape(Circle())
+              .overlay(
+                Circle()
+                  .stroke(Color.white, lineWidth: 2)
+                  .shadow(radius: 40)
+              )
+              .frame(width: 60, height: 60)
+            
+            Text(owner.getFullName())
+              .bold()
+            
+            Spacer()
+          }
+        }
+        
+        Spacer()
+      }
       
       Group {
         HStack {
@@ -65,8 +95,15 @@ struct GoalGuestView: View {
       Spacer()
     }
     .navigationBarTitle("Progress", displayMode: .inline)
+    .onAppear(perform: self.fetchGoalOwner)
     .onAppear(perform: self.goalViewModel.fetchGoalTopicIcon)
     .onAppear(perform: self.goalViewModel.fetchAllGoalPosts)
+  }
+  
+  func fetchGoalOwner() {
+    self.userService.getById(id: self.goalViewModel.goal.userId) {
+      self.owner = $0
+    }
   }
   
 }
