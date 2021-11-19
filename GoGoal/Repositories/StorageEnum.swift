@@ -15,6 +15,7 @@ enum StorageEnum: String {
 extension StorageReference {
   
   func child(_ rootFolder: StorageEnum) -> StorageReference {
+    // use dev env by default if no env variable is passed
     let env: String = ProcessInfo.processInfo.environment["ENV"] ?? "dev"
     return self.child("\(rootFolder.rawValue)_\(env)")
   }
