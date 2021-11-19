@@ -29,16 +29,19 @@ class AuthSession: ObservableObject {
         }
         
         print("""
-        ===========================================
+        =================================================
         
         Warning: user auth valid but user not exist!
         
-        Possible reasons:
-          (1) user was deleted in firestore
-          (2) user was active in one env but
-              app now deployed in another env
+        Account email: \(userEmail)
+        Current env: \(EnvironmentConfig.getEnv())
         
-        ===========================================
+        Possible reasons:
+          (1) user was deleted in current env firestore
+          (2) user has valid local session in another env
+              but app now switched to current env
+        
+        =================================================
         """)
         
         completion()
