@@ -53,10 +53,10 @@ struct LogoutView: View {
         
         Spacer()
         
-      }.alignmentGuide(.bottom, computeValue: { dimension in
+      }
+      .alignmentGuide(.bottom, computeValue: { dimension in
         .leastNonzeroMagnitude
-        })
-
+      })
     }
     .sheet(isPresented: self.$showLoginView) { LoginView() }
     .sheet(isPresented: self.$showSignUpView) { SignUpView() }
