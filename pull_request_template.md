@@ -4,7 +4,7 @@ Please self-check and peer-review all the following items before merging to main
 
 - System setting
   - [ ] If you changed the `DEVELOPMENT_TEAM` in the `project.pbxproj` file, it's fine.
-  - [ ] But make sure you did not change the `PRODUCT_BUNDLE_IDENTIFIER.
+  - [ ] But make sure you did not change the `PRODUCT_BUNDLE_IDENTIFIER`.
   - [ ] Switch back `Environment` to `DEV` in the `Info.plist` if you had changed it to `PROD` in your local test.
 - App functionality
   - [ ] Confirmed by your testing, the existing functionalities are not affected.
@@ -18,4 +18,5 @@ Please self-check and peer-review all the following items before merging to main
   - [ ] Indentation
   - [ ] New line
 
-If all the above items are confirmed, you are ready to go!
+If all of the above items are checked off, you are ready to go!
+
