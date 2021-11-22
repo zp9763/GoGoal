@@ -21,34 +21,34 @@ struct RoundedButtonstyle:ButtonStyle{
       .frame(width: width, height: height, alignment: .center)
   }
   
-struct RoundedButton:View{
+  struct RoundedButton:View{
     
-  let configuration:ButtonStyle.Configuration
-  @Environment(\.isEnabled) private var isEnabled
-  @Environment(\.colorScheme) private var colorScheme
+    let configuration:ButtonStyle.Configuration
+    @Environment(\.isEnabled) private var isEnabled
+    @Environment(\.colorScheme) private var colorScheme
     
-   //two different colors depending on the state of configuration
-  var backgroundColor:Color{
+    //two different colors depending on the state of configuration
+    var backgroundColor:Color{
       if(configuration.isPressed){
         return Color(red:95/255,green:52/255,blue:255/255)
       }
-    //return Color(red: 95, green: 52, blue: 255)
-     return Color(red:95/255,green:52/255,blue:255/255)
+      //return Color(red: 95, green: 52, blue: 255)
+      return Color(red:95/255,green:52/255,blue:255/255)
     }
-  
-  var labelColor:Color{
+    
+    var labelColor:Color{
       if(configuration.isPressed){
         return Color.black
       }
       return Color.white
     }
-  
-  var body:some View{
+    
+    var body:some View{
       RoundedRectangle(cornerRadius:20)
         .overlay(
-        RoundedRectangle(cornerRadius: 18)
-          .fill(backgroundColor)
-          .padding(1)
+          RoundedRectangle(cornerRadius: 18)
+            .fill(backgroundColor)
+            .padding(1)
         )
         .overlay(configuration.label
                   .foregroundColor(labelColor))

@@ -36,15 +36,15 @@ struct CheckInGoalView: View {
   var body: some View {
     VStack{
       
-     
-        Text("What have you done today?")
+      
+      Text("What have you done today?")
         .padding(.leading)
-        
-        TextField("mark your progress...", text: self.$content)
-          .frame(height:150)
-          .background(RoundedRectangle(cornerRadius:20,style: .continuous)
-                        .stroke(Color.black,lineWidth:3))
-          .padding([.leading,.trailing])
+      
+      TextField("mark your progress...", text: self.$content)
+        .frame(height:150)
+        .background(RoundedRectangle(cornerRadius:20,style: .continuous)
+                      .stroke(Color.black,lineWidth:3))
+        .padding([.leading,.trailing])
       
       Spacer()
       
@@ -65,51 +65,51 @@ struct CheckInGoalView: View {
         }
         HStack{
           Spacer()
-        VStack{
-        ZStack{
-          Rectangle()
-            .fill(Color.white)
-            .frame(width:100,height:50)
-            .background(RoundedRectangle(cornerRadius:20,style: .continuous)
-                          .stroke(Color.black,lineWidth:1))
-          Image("imageWaterMark")
-          
-        }
-          // deactivate button after reaching photo number limit
-                    if self.photos.count < CheckInGoalView.MAX_PHOTO_NUM {
-                      Button(action: {
-                        self.showImagePicker = true
-                      }) {
-                        Text("Add a photo")
-                          .foregroundColor(Color.black)
-                      }
-                    } else {
-                      Text("Photos are full")
-                        .foregroundColor(Color.black)
-                    }
-//          Text("add a photo")
-        }
+          VStack{
+            ZStack{
+              Rectangle()
+                .fill(Color.white)
+                .frame(width:100,height:50)
+                .background(RoundedRectangle(cornerRadius:20,style: .continuous)
+                              .stroke(Color.black,lineWidth:1))
+              Image("imageWaterMark")
+              
+            }
+            // deactivate button after reaching photo number limit
+            if self.photos.count < CheckInGoalView.MAX_PHOTO_NUM {
+              Button(action: {
+                self.showImagePicker = true
+              }) {
+                Text("Add a photo")
+                  .foregroundColor(Color.black)
+              }
+            } else {
+              Text("Photos are full")
+                .foregroundColor(Color.black)
+            }
+            //          Text("add a photo")
+          }
           Spacer()
           VStack{
-          ZStack{
-            Rectangle()
-              .fill(Color.white)
-              .frame(width:80,height:50)
-              .background(RoundedRectangle(cornerRadius:20,style: .continuous)
-                            .stroke(Color.black,lineWidth:1))
-            Rectangle()
-              .fill(.gray)
-              .frame(width:50,height:2)
+            ZStack{
+              Rectangle()
+                .fill(Color.white)
+                .frame(width:80,height:50)
+                .background(RoundedRectangle(cornerRadius:20,style: .continuous)
+                              .stroke(Color.black,lineWidth:1))
+              Rectangle()
+                .fill(.gray)
+                .frame(width:50,height:2)
+              
+            }
             
-          }
-
             Button(action: {
               _ = self.photos.popLast()
             }) {
               Text("Remove a photo")
             }
             .foregroundColor(Color.black)
-//            Text("delete a photo")
+            //            Text("delete a photo")
           }
           Spacer()
           

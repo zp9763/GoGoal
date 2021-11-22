@@ -12,30 +12,25 @@ struct TopicGrid: View {
   let columns = [
     GridItem(.adaptive(minimum:80))
   ]
-    var body: some View {
-      ScrollView{
-        LazyVGrid(columns:columns,spacing:20){
-          ForEach(data){item in
-            VStack{
-              item.icon?
-                .resizable()
-                .clipShape(Circle())
-                .shadow(radius:5)
-                .overlay(Circle()
-                .stroke(Color.black,lineWidth:2))
-                .frame(width:30,height:30)
-                
-              Text(item.name)
-                .font(.system(size:10))
-            }
+  var body: some View {
+    ScrollView{
+      LazyVGrid(columns:columns,spacing:20){
+        ForEach(data){item in
+          VStack{
+            item.icon?
+              .resizable()
+              .clipShape(Circle())
+              .shadow(radius:5)
+              .overlay(Circle()
+                        .stroke(Color.black,lineWidth:2))
+              .frame(width:30,height:30)
+            
+            Text(item.name)
+              .font(.system(size:10))
           }
         }
       }
     }
+  }
 }
 
-//struct TopicGrid_Previews: PreviewProvider {
-//    static var previews: some View {
-//        TopicGrid()
-//    }
-//}
