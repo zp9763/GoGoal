@@ -29,8 +29,6 @@ struct ProfileView: View {
   @State var updateSubscribedTopic: Bool = false
   @State var subscribedTopicIds = [String]()
   
-  
-  
   var avatarBinding: Binding<UIImage?> {
     Binding<UIImage?>(
       get: { return self.avatar },

@@ -5,10 +5,10 @@
 //  Created by sj on 11/21/21.
 //
 
-
 import SwiftUI
 
 extension UIColor {
+  
   convenience init(red: Int, green: Int, blue: Int) {
     assert(red >= 0 && red <= 255, "Invalid red component")
     assert(green >= 0 && green <= 255, "Invalid green component")
@@ -24,5 +24,5 @@ extension UIColor {
       blue: rgb & 0xFF
     )
   }
+  
 }
-

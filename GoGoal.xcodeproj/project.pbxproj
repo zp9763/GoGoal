@@ -260,6 +260,7 @@
 				57FC80382742E42D00441D4C /* MainPages */,
 				57FC803A2742E4F200441D4C /* SubPages */,
 				57FC80392742E45F00441D4C /* Components */,
+				57C471B4274B73EA0073A456 /* Styles */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -310,6 +311,14 @@
 			path = GoGoalTests;
 			sourceTree = "<group>";
 		};
+		57C471B4274B73EA0073A456 /* Styles */ = {
+			isa = PBXGroup;
+			children = (
+				335F760E274B2957008D879A /* RoundedButtonstyle.swift */,
+			);
+			path = Styles;
+			sourceTree = "<group>";
+		};
 		57C52C8F2725ED6600E0493B /* ViewModels */ = {
 			isa = PBXGroup;
 			children = (
@@ -355,7 +364,6 @@
 				57DA1F12273457B500C77B10 /* ImagePicker.swift */,
 				57C60A1B2730A1C500E5255E /* TopicSelectionView.swift */,
 				335F7608274B0CEE008D879A /* TopicGrid.swift */,
-				335F760E274B2957008D879A /* RoundedButtonstyle.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -767,7 +775,7 @@
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_ASSET_PATHS = "\"GoGoal/Preview Content\"";
-				DEVELOPMENT_TEAM = 964PTB3V8Z;
+				DEVELOPMENT_TEAM = J54BFXFVS9;
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = GoGoal/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -791,7 +799,7 @@
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_ASSET_PATHS = "\"GoGoal/Preview Content\"";
-				DEVELOPMENT_TEAM = 964PTB3V8Z;
+				DEVELOPMENT_TEAM = J54BFXFVS9;
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = GoGoal/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (

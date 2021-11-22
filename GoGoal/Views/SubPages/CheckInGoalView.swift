@@ -98,7 +98,7 @@ struct CheckInGoalView: View {
                 .background(RoundedRectangle(cornerRadius:20,style: .continuous)
                               .stroke(Color.black,lineWidth:1))
               Rectangle()
-                .fill(.gray)
+//                .fill(.grey)
                 .frame(width:50,height:2)
               
             }
