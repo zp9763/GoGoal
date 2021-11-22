@@ -81,11 +81,11 @@ struct CheckInGoalView: View {
                 self.showImagePicker = true
               }) {
                 Text("Add a photo")
-                  .foregroundColor(Color.black)
+                  .foregroundColor(Color.primary)
               }
             } else {
               Text("Photos are full")
-                .foregroundColor(Color.black)
+                .foregroundColor(Color.primary)
             }
             //          Text("add a photo")
           }
@@ -98,8 +98,8 @@ struct CheckInGoalView: View {
                 .background(RoundedRectangle(cornerRadius:20,style: .continuous)
                               .stroke(Color.black,lineWidth:1))
               Rectangle()
-//                .fill(.grey)
-                .frame(width:50,height:2)
+                .stroke(Color.gray)
+                .frame(width:50,height:1)
               
             }
             
@@ -108,7 +108,7 @@ struct CheckInGoalView: View {
             }) {
               Text("Remove a photo")
             }
-            .foregroundColor(Color.black)
+            .foregroundColor(Color.primary)
             //            Text("delete a photo")
           }
           Spacer()

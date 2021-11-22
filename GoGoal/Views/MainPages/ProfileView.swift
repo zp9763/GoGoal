@@ -91,11 +91,12 @@ struct ProfileView: View {
             HStack {
               Spacer()
               Text("Password:")
-              
+                .offset(x:10,y:0)
               SecureField(self.password, text: self.$password)
+                .offset(x:10,y:0)
               Spacer()
               Text(self.userViewModel.user.email)
-              Spacer()
+                .offset(x:-15,y:0)
               
             }
             if self.password != ProfileView.DEFAULT_PASSWORD {
@@ -107,6 +108,7 @@ struct ProfileView: View {
                 }
               }) {
                 Text("Change Password")
+                  .foregroundColor(Color.primary)
               }
               .alert(isPresented: self.$fireChangePwdAlert) {
                 Alert(
@@ -172,9 +174,8 @@ struct ProfileView: View {
               self.updateSubscribedTopic = true
             }) {
               Text("Update Topic Subscription")
-                .foregroundColor(Color.black)
+                .foregroundColor(Color.primary)
             }
-            
             .popover(isPresented: self.$updateSubscribedTopic) { topicSubscription }
           }
         }
@@ -237,6 +238,7 @@ struct ProfileView: View {
       }) {
         Text("Confirm")
       }
+      .buttonStyle(RoundedButtonstyle())
       
       Spacer()
     }
