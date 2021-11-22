@@ -41,10 +41,10 @@ struct CheckInGoalView: View {
         .padding(.leading)
       
       TextField("mark your progress...", text: self.$content)
-        .frame(height:150)
-        .background(RoundedRectangle(cornerRadius:20,style: .continuous)
-                      .stroke(Color.black,lineWidth:3))
-        .padding([.leading,.trailing])
+        .frame(height: 150)
+        .background(RoundedRectangle(cornerRadius: 20, style: .continuous)
+                      .stroke(Color.black, lineWidth: 3))
+        .padding([.leading, .trailing])
       
       Spacer()
       
@@ -69,9 +69,9 @@ struct CheckInGoalView: View {
             ZStack{
               Rectangle()
                 .fill(Color.white)
-                .frame(width:100,height:50)
-                .background(RoundedRectangle(cornerRadius:20,style: .continuous)
-                              .stroke(Color.black,lineWidth:1))
+                .frame(width: 100, height: 50)
+                .background(RoundedRectangle(cornerRadius: 20, style: .continuous)
+                              .stroke(Color.black, lineWidth: 1))
               Image("imageWaterMark")
               
             }
@@ -94,12 +94,12 @@ struct CheckInGoalView: View {
             ZStack{
               Rectangle()
                 .fill(Color.white)
-                .frame(width:80,height:50)
-                .background(RoundedRectangle(cornerRadius:20,style: .continuous)
-                              .stroke(Color.black,lineWidth:1))
+                .frame(width: 80, height: 50)
+                .background(RoundedRectangle(cornerRadius: 20, style: .continuous)
+                              .stroke(Color.black, lineWidth: 1))
               Rectangle()
                 .stroke(Color.gray)
-                .frame(width:50,height:1)
+                .frame(width: 50, height: 1)
               
             }
             
