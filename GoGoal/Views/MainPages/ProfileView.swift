@@ -91,12 +91,12 @@ struct ProfileView: View {
             HStack {
               Spacer()
               Text("Password:")
-                .offset(x:10,y:0)
+                .offset(x: 10, y: 0)
               SecureField(self.password, text: self.$password)
-                .offset(x:10,y:0)
+                .offset(x: 10, y: 0)
               Spacer()
               Text(self.userViewModel.user.email)
-                .offset(x:-15,y:0)
+                .offset(x: -15, y: 0)
               
             }
             if self.password != ProfileView.DEFAULT_PASSWORD {
