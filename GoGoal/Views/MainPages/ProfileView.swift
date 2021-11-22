@@ -45,137 +45,142 @@ struct ProfileView: View {
   var body: some View {
     NavigationView {
       VStack {
-        Group {
+        HStack{
           Spacer()
-          
-          HStack {
-            Spacer()
-            
-            Button(action: {
-              self.showImagePicker = true
-            }) {
-              Image.fromUIImage(uiImage: self.avatar)?
-                .resizable()
-                .scaledToFit()
-                .clipShape(Circle())
-                .overlay(
-                  Circle()
-                    .stroke(Color.white, lineWidth: 2)
-                    .shadow(radius: 40)
-                )
-                .frame(width: 60, height: 60)
-            }
-            
-            Spacer()
-            
-            TextField(self.fullName, text: self.$fullName)
-              .onChange(of: self.fullName) {
-                let nameSplit = $0.split(separator: " ")
-                
-                if nameSplit.count > 1 {
-                  self.userViewModel.user.firstName = String(nameSplit[0])
-                  self.userViewModel.user.lastName = nameSplit[1..<nameSplit.count].joined(separator: " ")
-                } else if nameSplit.count == 1 {
-                  self.userViewModel.user.firstName = String(nameSplit[0])
-                  self.userViewModel.user.lastName = ""
-                } else {
-                  self.userViewModel.user.firstName = "Anonymous"
-                  self.userViewModel.user.lastName = ""
-                }
-                
-                self.userViewModel.user.lastUpdateDate = Timestamp.init()
-                self.userViewModel.userService.createOrUpdate(object: self.userViewModel.user)
+          Spacer()
+          Spacer()
+          TextField(self.fullName, text: self.$fullName)
+            .font(.system(size:30))
+            .onChange(of: self.fullName) {
+              let nameSplit = $0.split(separator: " ")
+              
+              if nameSplit.count > 1 {
+                self.userViewModel.user.firstName = String(nameSplit[0])
+                self.userViewModel.user.lastName = nameSplit[1..<nameSplit.count].joined(separator: " ")
+              } else if nameSplit.count == 1 {
+                self.userViewModel.user.firstName = String(nameSplit[0])
+                self.userViewModel.user.lastName = ""
+              } else {
+                self.userViewModel.user.firstName = "Anonymous"
+                self.userViewModel.user.lastName = ""
               }
-            
-            Spacer()
+              
+              self.userViewModel.user.lastUpdateDate = Timestamp.init()
+              self.userViewModel.userService.createOrUpdate(object: self.userViewModel.user)
+            }
+          Button(action: {
+            self.showImagePicker = true
+          }) {
+            Image.fromUIImage(uiImage: self.avatar)?
+              .resizable()
+              .scaledToFit()
+              .clipShape(Circle())
+              .overlay(
+                Circle()
+                  .stroke(Color.white, lineWidth: 2)
+                  .shadow(radius: 40)
+              )
+              .frame(width: 80, height: 80)
           }
-          
-          Text(self.userViewModel.user.email)
           
           Spacer()
         }
-        
-        Group {
-          HStack {
-            Text("Password:")
-              .padding(.leading)
-            SecureField(self.password, text: self.$password)
-              .padding(.trailing)
-          }
-          
-          if self.password != ProfileView.DEFAULT_PASSWORD {
-            Button(action: {
-              Auth.auth().currentUser!.updatePassword(to: self.password) { err in
-                self.changePwdResponse = err?.localizedDescription ??
+        .padding()
+        Group{
+          VStack{
+            HStack {
+              Spacer()
+              Text("Password:")
+                .offset(x: 10, y: 0)
+              SecureField(self.password, text: self.$password)
+                .offset(x: 10, y: 0)
+              Spacer()
+              Text(self.userViewModel.user.email)
+                .offset(x: -15, y: 0)
+              
+            }
+            if self.password != ProfileView.DEFAULT_PASSWORD {
+              Button(action: {
+                Auth.auth().currentUser!.updatePassword(to: self.password) { err in
+                  self.changePwdResponse = err?.localizedDescription ??
                   "Password changed successfully! Please login again."
-                self.fireChangePwdAlert = true
+                  self.fireChangePwdAlert = true
+                }
+              }) {
+                Text("Change Password")
+                  .foregroundColor(Color.primary)
               }
-            }) {
+              .alert(isPresented: self.$fireChangePwdAlert) {
+                Alert(
+                  title: Text("Change Password"),
+                  message: Text(self.changePwdResponse),
+                  dismissButton: .cancel(Text("OK")) {
+                    if self.changePwdResponse.contains("success") {
+                      do {
+                        try Auth.auth().signOut()
+                        self.authSession.logout()
+                      } catch let err {
+                        print("Error sign out: \(err)")
+                      }
+                    } else {
+                      self.password = ProfileView.DEFAULT_PASSWORD
+                    }
+                  }
+                )
+              }
+            } else {
               Text("Change Password")
             }
-            .alert(isPresented: self.$fireChangePwdAlert) {
-              Alert(
-                title: Text("Change Password"),
-                message: Text(self.changePwdResponse),
-                dismissButton: .cancel(Text("OK")) {
-                  if self.changePwdResponse.contains("success") {
-                    do {
-                      try Auth.auth().signOut()
-                      self.authSession.logout()
-                    } catch let err {
-                      print("Error sign out: \(err)")
-                    }
-                  } else {
-                    self.password = ProfileView.DEFAULT_PASSWORD
-                  }
-                }
-              )
-            }
-          } else {
-            Text("Change Password")
+          }
+          
+          
+          Group {
+            Spacer()
+            
+            let completedGoalNum = self.userViewModel.userGoals.filter() { $0.isCompleted }.count
+            let percent = Double(completedGoalNum) / Double(max(self.userViewModel.userGoals.count, 1))
+            
+            Text("Achieved Goals: \(completedGoalNum) / \(self.userViewModel.userGoals.count)")
+            ProgressView(value: percent)
+            
+            Spacer()
+          }
+        }
+        Group{
+          Text("Subscribed Topics")
+          VStack{
+            let subscribedTopics = self.userViewModel.allTopics
+              .filter() { self.subscribedTopicIds.contains($0.id!) }
+              .sorted() { $0.name < $1.name }
+            TopicGrid(data:subscribedTopics)
           }
         }
         
-        Group {
-          Spacer()
-          
-          let completedGoalNum = self.userViewModel.userGoals.filter() { $0.isCompleted }.count
-          let percent = Double(completedGoalNum) / Double(max(self.userViewModel.userGoals.count, 1))
-          
-          Text("Achieved Goals: \(completedGoalNum) / \(self.userViewModel.userGoals.count)")
-          ProgressView(value: percent)
-          
-          Spacer()
-        }
         
         Group {
           VStack {
-            Text("Subscribed Topics")
-            
-            List {
-              let subscribedTopics = self.userViewModel.allTopics
-                .filter() { self.subscribedTopicIds.contains($0.id!) }
-                .sorted() { $0.name < $1.name }
-              
-              ForEach(subscribedTopics) {
-                TopicView(topic: $0)
-              }
-            }
-            
-            Spacer()
+            //
+            //            List {
+            //              let subscribedTopics = self.userViewModel.allTopics
+            //                .filter() { self.subscribedTopicIds.contains($0.id!) }
+            //                .sorted() { $0.name < $1.name }
+            //
+            //              ForEach(subscribedTopics) {
+            //                TopicView(topic: $0)
+            //              }
+            //            }
             
             Button(action: {
               self.updateSubscribedTopic = true
             }) {
               Text("Update Topic Subscription")
+                .foregroundColor(Color.primary)
             }
             .popover(isPresented: self.$updateSubscribedTopic) { topicSubscription }
           }
         }
         
         Group {
-          Spacer()
-          
           Button(action: {
             do {
               try Auth.auth().signOut()
@@ -186,11 +191,14 @@ struct ProfileView: View {
           }) {
             Text("Logout")
           }
-          
-          Spacer()
+          .buttonStyle(RoundedButtonstyle())
         }
+        .padding()
+        Spacer()
       }
-      .navigationBarTitle("Profile", displayMode: .inline)
+      //      .background(Image("profile_background").resizable())
+      //      .navigationBarTitle("Profile", displayMode: .inline)
+      .navigationBarHidden(true)
       .sheet(isPresented: self.$showImagePicker) {
         PhotoCaptureView(showImagePicker: self.$showImagePicker, image: self.avatarBinding)
       }
@@ -207,7 +215,6 @@ struct ProfileView: View {
   var topicSubscription: some View {
     VStack {
       Spacer()
-      
       List {
         ForEach(self.userViewModel.allTopics, id: \.self.id!) { topic in
           TopicSelectionView(topic: topic, isSelected: self.subscribedTopicIds.contains(topic.id!)) {
@@ -231,6 +238,7 @@ struct ProfileView: View {
       }) {
         Text("Confirm")
       }
+      .buttonStyle(RoundedButtonstyle())
       
       Spacer()
     }

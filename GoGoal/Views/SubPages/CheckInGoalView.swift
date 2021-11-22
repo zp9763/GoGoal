@@ -35,13 +35,16 @@ struct CheckInGoalView: View {
   
   var body: some View {
     VStack{
-      Spacer()
       
-      Group {
-        Text("What have you done today?")
-        
-        TextField("mark your progress...", text: self.$content)
-      }
+      
+      Text("What have you done today?")
+        .padding(.leading)
+      
+      TextField("mark your progress...", text: self.$content)
+        .frame(height: 150)
+        .background(RoundedRectangle(cornerRadius: 20, style: .continuous)
+                      .stroke(Color.black, lineWidth: 3))
+        .padding([.leading, .trailing])
       
       Spacer()
       
@@ -60,30 +63,56 @@ struct CheckInGoalView: View {
               .frame(width: 100, height: 80)
           }
         }
-        
-        HStack {
+        HStack{
           Spacer()
-          
-          // deactivate button after reaching photo number limit
-          if self.photos.count < CheckInGoalView.MAX_PHOTO_NUM {
-            Button(action: {
-              self.showImagePicker = true
-            }) {
-              Text("Add a photo")
+          VStack{
+            ZStack{
+              Rectangle()
+                .fill(Color.white)
+                .frame(width: 100, height: 50)
+                .background(RoundedRectangle(cornerRadius: 20, style: .continuous)
+                              .stroke(Color.black, lineWidth: 1))
+              Image("imageWaterMark")
+              
             }
-          } else {
-            Text("Photos are full")
+            // deactivate button after reaching photo number limit
+            if self.photos.count < CheckInGoalView.MAX_PHOTO_NUM {
+              Button(action: {
+                self.showImagePicker = true
+              }) {
+                Text("Add a photo")
+                  .foregroundColor(Color.primary)
+              }
+            } else {
+              Text("Photos are full")
+                .foregroundColor(Color.primary)
+            }
+            //          Text("add a photo")
           }
-          
+          Spacer()
+          VStack{
+            ZStack{
+              Rectangle()
+                .fill(Color.white)
+                .frame(width: 80, height: 50)
+                .background(RoundedRectangle(cornerRadius: 20, style: .continuous)
+                              .stroke(Color.black, lineWidth: 1))
+              Rectangle()
+                .stroke(Color.gray)
+                .frame(width: 50, height: 1)
+              
+            }
+            
+            Button(action: {
+              _ = self.photos.popLast()
+            }) {
+              Text("Remove a photo")
+            }
+            .foregroundColor(Color.primary)
+            //            Text("delete a photo")
+          }
           Spacer()
           
-          Button(action: {
-            _ = self.photos.popLast()
-          }) {
-            Text("Remove a photo")
-          }
-          
-          Spacer()
         }
       }
       
@@ -124,6 +153,7 @@ struct CheckInGoalView: View {
       }) {
         Text("Submit")
       }
+      .buttonStyle(RoundedButtonstyle())
       
       Spacer()
     }
@@ -132,5 +162,5 @@ struct CheckInGoalView: View {
       PhotoCaptureView(showImagePicker: self.$showImagePicker, image: self.photosBinding)
     }
   }
-  
 }
+
