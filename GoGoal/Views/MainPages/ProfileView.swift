@@ -29,6 +29,8 @@ struct ProfileView: View {
   @State var updateSubscribedTopic: Bool = false
   @State var subscribedTopicIds = [String]()
   
+
+  
   var avatarBinding: Binding<UIImage?> {
     Binding<UIImage?>(
       get: { return self.avatar },
@@ -45,30 +47,12 @@ struct ProfileView: View {
   var body: some View {
     NavigationView {
       VStack {
-        Group {
+        HStack{
           Spacer()
-          
-          HStack {
-            Spacer()
-            
-            Button(action: {
-              self.showImagePicker = true
-            }) {
-              Image.fromUIImage(uiImage: self.avatar)?
-                .resizable()
-                .scaledToFit()
-                .clipShape(Circle())
-                .overlay(
-                  Circle()
-                    .stroke(Color.white, lineWidth: 2)
-                    .shadow(radius: 40)
-                )
-                .frame(width: 60, height: 60)
-            }
-            
-            Spacer()
-            
+          Spacer()
+          Spacer()
             TextField(self.fullName, text: self.$fullName)
+            .font(.system(size:30))
               .onChange(of: self.fullName) {
                 let nameSplit = $0.split(separator: " ")
                 
@@ -86,24 +70,37 @@ struct ProfileView: View {
                 self.userViewModel.user.lastUpdateDate = Timestamp.init()
                 self.userViewModel.userService.createOrUpdate(object: self.userViewModel.user)
               }
-            
-            Spacer()
-          }
-          
-          Text(self.userViewModel.user.email)
-          
+          Button(action: {
+                            self.showImagePicker = true
+                          }) {
+                            Image.fromUIImage(uiImage: self.avatar)?
+                              .resizable()
+                              .scaledToFit()
+                              .clipShape(Circle())
+                              .overlay(
+                                Circle()
+                                  .stroke(Color.white, lineWidth: 2)
+                                  .shadow(radius: 40)
+                              )
+                              .frame(width: 80, height: 80)
+                          }
+         
           Spacer()
         }
-        
-        Group {
-          HStack {
-            Text("Password:")
-              .padding(.leading)
-            SecureField(self.password, text: self.$password)
-              .padding(.trailing)
-          }
+        .padding()
+        Group{
+          VStack{
+            HStack {
+              Spacer()
+         Text("Password:")
           
-          if self.password != ProfileView.DEFAULT_PASSWORD {
+         SecureField(self.password, text: self.$password)
+              Spacer()
+              Text(self.userViewModel.user.email)
+              Spacer()
+           
+       }
+        if self.password != ProfileView.DEFAULT_PASSWORD {
             Button(action: {
               Auth.auth().currentUser!.updatePassword(to: self.password) { err in
                 self.changePwdResponse = err?.localizedDescription ??
@@ -136,6 +133,7 @@ struct ProfileView: View {
           }
         }
         
+          
         Group {
           Spacer()
           
@@ -147,35 +145,43 @@ struct ProfileView: View {
           
           Spacer()
         }
+        }
+        Group{
+          Text("Subscribed Topics")
+          VStack{
+            let subscribedTopics = self.userViewModel.allTopics
+              .filter() { self.subscribedTopicIds.contains($0.id!) }
+              .sorted() { $0.name < $1.name }
+          TopicGrid(data:subscribedTopics)
+          }
+        }
+        
         
         Group {
           VStack {
-            Text("Subscribed Topics")
-            
-            List {
-              let subscribedTopics = self.userViewModel.allTopics
-                .filter() { self.subscribedTopicIds.contains($0.id!) }
-                .sorted() { $0.name < $1.name }
-              
-              ForEach(subscribedTopics) {
-                TopicView(topic: $0)
-              }
-            }
-            
-            Spacer()
+//
+//            List {
+//              let subscribedTopics = self.userViewModel.allTopics
+//                .filter() { self.subscribedTopicIds.contains($0.id!) }
+//                .sorted() { $0.name < $1.name }
+//
+//              ForEach(subscribedTopics) {
+//                TopicView(topic: $0)
+//              }
+//            }
             
             Button(action: {
               self.updateSubscribedTopic = true
             }) {
               Text("Update Topic Subscription")
+                .foregroundColor(Color.black)
             }
+            
             .popover(isPresented: self.$updateSubscribedTopic) { topicSubscription }
           }
         }
         
         Group {
-          Spacer()
-          
           Button(action: {
             do {
               try Auth.auth().signOut()
@@ -186,11 +192,14 @@ struct ProfileView: View {
           }) {
             Text("Logout")
           }
-          
-          Spacer()
+          .buttonStyle(RoundedButtonstyle())
         }
+        .padding()
+        Spacer()
       }
-      .navigationBarTitle("Profile", displayMode: .inline)
+//      .background(Image("profile_background").resizable())
+//      .navigationBarTitle("Profile", displayMode: .inline)
+      .navigationBarHidden(true)
       .sheet(isPresented: self.$showImagePicker) {
         PhotoCaptureView(showImagePicker: self.$showImagePicker, image: self.avatarBinding)
       }
@@ -207,7 +216,6 @@ struct ProfileView: View {
   var topicSubscription: some View {
     VStack {
       Spacer()
-      
       List {
         ForEach(self.userViewModel.allTopics, id: \.self.id!) { topic in
           TopicSelectionView(topic: topic, isSelected: self.subscribedTopicIds.contains(topic.id!)) {
