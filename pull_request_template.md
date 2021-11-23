@@ -11,7 +11,7 @@ Please self-check and peer-review all the following items before merging to main
   - [ ] Confirmed by your testing, the new features (if any) are working as expected.
 - Frontend UI
   - [ ] The new UI components look clean and easy to understand.
-  - [ ] The colors and font sizes are suiable on common devices (e.g. dark mode compatible).
+  - [ ] The colors and font sizes are suitable on common devices (e.g. dark mode compatible).
   - [ ] The static picture resources are put correctly under the `Assets.xcassets` folder.
 - Coding convention
   - [ ] Spacing
