@@ -26,7 +26,7 @@ struct LoginView: View {
       HStack{
         Text("Go! Goal!")
           .font(.system(size: 30, weight: .bold))
-          .padding(.init(top: 0, leading: 0, bottom:0 , trailing: 170))
+          .padding(.init(top: 0, leading: 0, bottom: 0, trailing: 170))
       }
       
       Spacer()
@@ -36,7 +36,7 @@ struct LoginView: View {
         Text("Achieve everything!")
           .font(.system(size: 20, weight: .bold))
           .foregroundColor(Color(.darkGray))
-          .padding(.init(top: 0, leading: 0, bottom:0 , trailing: 115))
+          .padding(.init(top: 0, leading: 0, bottom: 0, trailing: 115))
       }
       
       Spacer()
@@ -53,7 +53,7 @@ struct LoginView: View {
           .autocapitalization(.none)
           .keyboardType(.emailAddress)
           .foregroundColor(.primary)
-          .padding(.init(top: 0, leading: 55, bottom:0 , trailing: 55))
+          .padding(.init(top: 0, leading: 55, bottom: 0, trailing: 55))
       }
       
       Spacer()
@@ -68,9 +68,8 @@ struct LoginView: View {
               .frame(width: 300, height: 50, alignment: .center)
           )
           .autocapitalization(.none)
-          .keyboardType(.emailAddress)
           .foregroundColor(.primary)
-          .padding(.init(top: 0, leading: 55, bottom:0 , trailing: 55))
+          .padding(.init(top: 0, leading: 55, bottom: 0, trailing: 55))
       }
       
       Spacer()
