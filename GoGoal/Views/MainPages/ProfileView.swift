@@ -22,9 +22,16 @@ struct ProfileView: View {
   @State var showImagePicker: Bool = false
   @State var avatar: UIImage?
   
-  @State var password: String = ProfileView.DEFAULT_PASSWORD
   @State var fireChangePwdAlert: Bool = false
-  @State var changePwdResponse: String = ""
+
+  @State var showChangePwdWindow = false
+  
+  @State var oldPassword: String = ""
+  @State var newPassword: String = ""
+  
+  @State var fireBadPwdAlert = false
+  
+  
   
   @State var updateSubscribedTopic: Bool = false
   @State var subscribedTopicIds = [String]()
@@ -44,121 +51,135 @@ struct ProfileView: View {
   
   var body: some View {
     NavigationView {
-      VStack {
-        HStack{
-          Spacer()
-          Spacer()
-          Spacer()
-          TextField(self.fullName, text: self.$fullName)
-            .font(.system(size:30))
-            .onChange(of: self.fullName) {
-              let nameSplit = $0.split(separator: " ")
-              
-              if nameSplit.count > 1 {
-                self.userViewModel.user.firstName = String(nameSplit[0])
-                self.userViewModel.user.lastName = nameSplit[1..<nameSplit.count].joined(separator: " ")
-              } else if nameSplit.count == 1 {
-                self.userViewModel.user.firstName = String(nameSplit[0])
-                self.userViewModel.user.lastName = ""
-              } else {
-                self.userViewModel.user.firstName = "Anonymous"
-                self.userViewModel.user.lastName = ""
-              }
-              
-              self.userViewModel.user.lastUpdateDate = Timestamp.init()
-              self.userViewModel.userService.createOrUpdate(object: self.userViewModel.user)
-            }
-          Button(action: {
-            self.showImagePicker = true
-          }) {
-            Image.fromUIImage(uiImage: self.avatar)?
-              .resizable()
-              .scaledToFit()
-              .clipShape(Circle())
-              .overlay(
-                Circle()
-                  .stroke(Color.white, lineWidth: 2)
-                  .shadow(radius: 40)
-              )
-              .frame(width: 80, height: 80)
-          }
-          
-          Spacer()
+      VStack{
+      ZStack{
+        Rectangle()
+          .fill(Color.black)
+          .opacity(0.1)
+          .frame(height: 110)
+        Button(action: {
+          self.showImagePicker = true
+        }) {
+          Image.fromUIImage(uiImage: self.avatar)?
+            .resizable()
+            .scaledToFit()
+            .clipShape(Circle())
+            .overlay(
+              Circle()
+                .stroke(Color.white, lineWidth: 7)
+                .shadow(radius: 40)
+            )
+            .frame(width: 100, height: 100, alignment: .center)
+     
+        .offset(x: 0, y: 40)
         }
-        .padding()
-        Group{
-          VStack{
-            HStack {
-              Spacer()
-              Text("Password:")
-                .offset(x: 10, y: 0)
-              SecureField(self.password, text: self.$password)
-                .offset(x: 10, y: 0)
-              Spacer()
-              Text(self.userViewModel.user.email)
-                .offset(x: -15, y: 0)
-              
-            }
-            if self.password != ProfileView.DEFAULT_PASSWORD {
-              Button(action: {
-                Auth.auth().currentUser!.updatePassword(to: self.password) { err in
-                  self.changePwdResponse = err?.localizedDescription ??
-                  "Password changed successfully! Please login again."
-                  self.fireChangePwdAlert = true
-                }
-              }) {
-                Text("Change Password")
-                  .foregroundColor(Color.primary)
-              }
-              .alert(isPresented: self.$fireChangePwdAlert) {
-                Alert(
-                  title: Text("Change Password"),
-                  message: Text(self.changePwdResponse),
-                  dismissButton: .cancel(Text("OK")) {
-                    if self.changePwdResponse.contains("success") {
-                      do {
-                        try Auth.auth().signOut()
-                        self.authSession.logout()
-                      } catch let err {
-                        print("Error sign out: \(err)")
-                      }
+      }
+      VStack {
+        TextField(self.fullName, text: self.$fullName)
+           .font(.title2.bold())
+           .fixedSize()
+                  .onChange(of: self.fullName) {
+                    let nameSplit = $0.split(separator: " ")
+                    
+                    if nameSplit.count > 1 {
+                      self.userViewModel.user.firstName = String(nameSplit[0])
+                      self.userViewModel.user.lastName = nameSplit[1..<nameSplit.count].joined(separator: " ")
+                    } else if nameSplit.count == 1 {
+                      self.userViewModel.user.firstName = String(nameSplit[0])
+                      self.userViewModel.user.lastName = ""
                     } else {
-                      self.password = ProfileView.DEFAULT_PASSWORD
+                      self.userViewModel.user.firstName = "Anonymous"
+                      self.userViewModel.user.lastName = ""
                     }
-                  }
-                )
-              }
-            } else {
-              Text("Change Password")
-            }
-          }
-          
-          
+                    
+                    self.userViewModel.user.lastUpdateDate = Timestamp.init()
+                    self.userViewModel.userService.createOrUpdate(object: self.userViewModel.user)
+                  }.offset(x: 0, y: 20)
+        Text(self.userViewModel.user.email)
+                        .offset(x: 0, y: 20)
+        changePwdView
+          .offset(x: 0, y: 20)
+//previous change password view
+//        Group{
+//          VStack{
+       
+              
+              
+//              Text("Password:")
+//                .offset(x: 10, y: 0)
+//              SecureField(self.password, text: self.$password)
+//                .offset(x: 10, y: 0)
+              
+             
+             
+           
+//            if self.password != ProfileView.DEFAULT_PASSWORD {
+//              Button(action: {
+//                Auth.auth().currentUser!.updatePassword(to: self.password) { err in
+//                  self.changePwdResponse = err?.localizedDescription ??
+//                  "Password changed successfully! Please login again."
+//                  self.fireChangePwdAlert = true
+//                }
+//              }) {
+//                Text("Change Password")
+//                  .foregroundColor(Color.primary)
+//              }
+//              .alert(isPresented: self.$fireChangePwdAlert) {
+//                Alert(
+//                  title: Text("Change Password"),
+//                  message: Text(self.changePwdResponse),
+//                  dismissButton: .cancel(Text("OK")) {
+//                    if self.changePwdResponse.contains("success") {
+//                      do {
+//                        try Auth.auth().signOut()
+//                        self.authSession.logout()
+//                      } catch let err {
+//                        print("Error sign out: \(err)")
+//                      }
+//                    } else {
+//                      self.password = ProfileView.DEFAULT_PASSWORD
+//                    }
+//                  }
+//                )
+//              }
+//            } else {
+//              Text("Change Password")
+//            }
+            
+//          }
+
+//        }
+                    
           Group {
             Spacer()
-            
             let completedGoalNum = self.userViewModel.userGoals.filter() { $0.isCompleted }.count
             let percent = Double(completedGoalNum) / Double(max(self.userViewModel.userGoals.count, 1))
-            
             Text("Achieved Goals: \(completedGoalNum) / \(self.userViewModel.userGoals.count)")
+              .bold()
+              .offset(x: 0,y: 20)
+              
             ProgressView(value: percent)
-            
+              .frame(height: 20)
+              .foregroundColor(Color(UIColor.systemTeal))
+              .padding()
             Spacer()
           }
-        }
         Group{
           Text("Subscribed Topics")
+            .bold()
           VStack{
             let subscribedTopics = self.userViewModel.allTopics
               .filter() { self.subscribedTopicIds.contains($0.id!) }
               .sorted() { $0.name < $1.name }
             TopicGrid(data:subscribedTopics)
+              .padding()
           }
         }
         
         
         Group {
           VStack {
+            //previous list
             //
             //            List {
             //              let subscribedTopics = self.userViewModel.allTopics
@@ -169,17 +190,21 @@ struct ProfileView: View {
             //                TopicView(topic: $0)
             //              }
             //            }
-            
             Button(action: {
               self.updateSubscribedTopic = true
             }) {
               Text("Update Topic Subscription")
-                .foregroundColor(Color.primary)
+                .bold()
+                .foregroundColor(Color.white)
+                
             }
+            .frame(width: 230,height: 15)
+            .padding()
+            .background(RoundedRectangle(cornerRadius: 10).fill(Color(red: 95 / 255, green: 52 / 255, blue: 255 / 255)))
+            .clipShape(Capsule())
             .popover(isPresented: self.$updateSubscribedTopic) { topicSubscription }
           }
         }
-        
         Group {
           Button(action: {
             do {
@@ -190,10 +215,17 @@ struct ProfileView: View {
             }
           }) {
             Text("Logout")
+              .bold()
+              .foregroundColor(Color.white)
           }
-          .buttonStyle(RoundedButtonstyle())
+          .frame(width: 230,height: 10)
+          .padding()
+          .background(RoundedRectangle(cornerRadius: 15)
+                        .fill(Color.gray)
+                        )
+          .clipShape(Capsule())
         }
-        .padding()
+       
         Spacer()
       }
       //      .background(Image("profile_background").resizable())
@@ -209,6 +241,84 @@ struct ProfileView: View {
         self.avatar = self.userViewModel.user.avatar
         self.subscribedTopicIds = self.userViewModel.user.topicIdList
       })
+    }
+    }
+  }
+  var changePwdView: some View{
+    Button(action: {
+      self.showChangePwdWindow = true
+    }) {
+      Text("Change Password")
+        .foregroundColor(Color.black)
+        .padding()
+        
+    }
+    .frame(width: 180,height: 10)
+    .padding()
+    .background(Capsule().stroke(lineWidth: 2))
+    .clipShape(Capsule())
+    .popover(isPresented: $showChangePwdWindow) {
+      VStack {
+        Spacer()
+        Image.fromUIImage(uiImage: self.avatar)?
+                  .resizable()
+                  .scaledToFit()
+                  .clipShape(Circle())
+                  .overlay(
+                    Circle()
+                      .stroke(Color.white, lineWidth: 2)
+                      .shadow(radius: 40)
+                  )
+                  .frame(width: 100, height: 100)
+                 Spacer()
+        HStack {
+        
+          Text("Old Password:")
+            .padding(.leading)
+          TextField("old password", text: $oldPassword)
+            
+            .padding(.trailing)
+            
+        }
+        
+        Spacer()
+        
+        HStack {
+          Text("New Password:")
+            .padding(.leading)
+          TextField("new password", text: $newPassword)
+           
+            .padding(.trailing)
+        }
+        
+        Spacer()
+        
+        Button(action: {
+          guard self.oldPassword == "123456" else {
+            self.fireBadPwdAlert = true
+            return
+          }
+          
+          guard self.newPassword.count >= 6 else {
+            self.fireBadPwdAlert = true
+            return
+          }
+          
+          // TODO: change password
+          self.showChangePwdWindow = false
+        }) {
+          Text("Confirm")
+        }
+        .buttonStyle(RoundedButtonstyle())
+        .alert(isPresented: $fireBadPwdAlert) {
+          Alert(
+            title: Text("Password Warning"),
+            message: Text("Old password incorrect or new password too weak.")
+          )
+        }
+        
+        Spacer()
+      }
     }
   }
   
