@@ -75,7 +75,8 @@ struct SignUpView: View {
       Spacer().frame(height: 40)
       
       HStack {
-        TextField("Email", text: self.$email)
+        TextField("Email", text: self.$email,
+                  onEditingChanged: { _ in self.email = self.email.lowercased() })
           .font(.system(size: 16, weight: .semibold))
           .background(
             RoundedRectangle(cornerRadius: 15)
