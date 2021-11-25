@@ -251,7 +251,7 @@ struct ProfileView: View {
       self.showChangePwdWindow = true
     }) {
       Text("Change Password")
-        .foregroundColor(Color.black)
+        .foregroundColor(Color.primary)
         .padding()
       
     }
