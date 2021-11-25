@@ -11,11 +11,11 @@ struct TopicGrid: View {
   
   let data: [Topic]
   
-  let columns = [GridItem(.adaptive(minimum: 80))]
+  let columns = [GridItem(.adaptive(minimum: 60))]
   
   var body: some View {
     ScrollView{
-      LazyVGrid(columns: columns, spacing: 20) {
+      LazyVGrid(columns: columns, spacing: 30) {
         ForEach(data) { item in
           VStack{
             item.icon?
@@ -24,10 +24,10 @@ struct TopicGrid: View {
               .shadow(radius: 5)
               .overlay(Circle()
                         .stroke(Color.black, lineWidth: 2))
-              .frame(width: 30, height: 30)
+              .frame(width: 40, height: 40)
             
             Text(item.name)
-              .font(.system(size: 10))
+              .font(.system(size: 15))
           }
         }
       }
