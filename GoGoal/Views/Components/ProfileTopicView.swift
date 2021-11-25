@@ -29,7 +29,7 @@ struct ProfileTopicView: View {
       Spacer()
       
       Text(self.topic.name)
-        .foregroundColor(Color.gray)
+        .foregroundColor(Color.primary)
       
       Spacer()
     }

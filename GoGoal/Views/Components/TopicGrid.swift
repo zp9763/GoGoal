@@ -24,7 +24,7 @@ struct TopicGrid: View {
               .shadow(radius: 5)
               .overlay(Circle()
                         .stroke(Color.black, lineWidth: 2))
-              .frame(width: 50, height: 50)
+              .frame(width: 40, height: 40)
             
             Text(item.name)
               .font(.system(size: 15))

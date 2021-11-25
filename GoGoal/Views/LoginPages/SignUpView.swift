@@ -31,65 +31,104 @@ struct SignUpView: View {
   
   var body: some View {
     VStack {
-      Spacer()
+      VStack{
+        Text("Go!Goal!")
+          .font(.system(size: 30, weight: .bold))
+          .padding(.init(top: 0, leading: 0, bottom: 0, trailing: 170))
+        
+        Spacer().frame(height: 10)
+        
+        Text("Join the community!")
+          .font(.system(size: 20, weight: .bold))
+          .foregroundColor(Color(.darkGray))
+          .padding(.init(top: 0, leading: 0, bottom: 0, trailing: 105))
+      }.frame(height: 100)
       
-      Group {
-        HStack {
-          Text("First Name:")
-            .padding(.leading)
-          TextField(self.firstName, text: self.$firstName)
-            .padding(.trailing)
-        }
-        
-        Spacer()
-        
-        HStack {
-          Text("Last Name:")
-            .padding(.leading)
-          TextField(self.lastName, text: self.$lastName)
-            .padding(.trailing)
-        }
+      HStack {
+        TextField("First Name", text: self.$firstName)
+          .font(.system(size: 16, weight: .semibold))
+          .background(
+            RoundedRectangle(cornerRadius: 15)
+              .fill(Color(.systemGray5))
+              .frame(width: 300, height: 50, alignment: .center)
+          )
+          .autocapitalization(.none)
+          .foregroundColor(.primary)
+          .padding(.init(top: 0, leading: 55, bottom: 0, trailing: 55))
       }
       
-      Spacer()
+      Spacer().frame(height: 40)
       
-      Group {
-        HStack {
-          Text("Email:")
-            .padding(.leading)
-          TextField(self.email, text: self.$email)
-            .padding(.trailing)
-        }
-        
-        Spacer()
-        
-        HStack {
-          Text("Password:")
-            .padding(.leading)
-          SecureField(self.password, text: self.$password)
-            .padding(.trailing)
-        }
+      HStack {
+        TextField("Last Name", text: self.$lastName)
+          .font(.system(size: 16, weight: .semibold))
+          .background(
+            RoundedRectangle(cornerRadius: 15)
+              .fill(Color(.systemGray5))
+              .frame(width: 300, height: 50, alignment: .center)
+          )
+          .autocapitalization(.none)
+          .foregroundColor(.primary)
+          .padding(.init(top: 0, leading: 55, bottom: 0, trailing: 55))
       }
       
-      Spacer()
+      Spacer().frame(height: 40)
       
-      Group {
-        Text("Select topics you want to follow:")
-        
-        List {
-          ForEach(self.allTopics, id: \.self.id!) { topic in
-            TopicSelectionView(topic: topic, isSelected: self.subscribedTopicIds.contains(topic.id!)) {
-              if self.subscribedTopicIds.contains(topic.id!) {
-                self.subscribedTopicIds.removeAll() { $0 == topic.id! }
-              } else {
-                self.subscribedTopicIds.append(topic.id!)
+      HStack {
+        TextField("Email", text: self.$email)
+          .font(.system(size: 16, weight: .semibold))
+          .background(
+            RoundedRectangle(cornerRadius: 15)
+              .fill(Color(.systemGray5))
+              .frame(width: 300, height: 50, alignment: .center)
+          )
+          .autocapitalization(.none)
+          .keyboardType(.emailAddress)
+          .foregroundColor(.primary)
+          .padding(.init(top: 0, leading: 55, bottom: 0, trailing: 55))
+      }
+      
+      Spacer().frame(height: 40)
+      
+      HStack {
+        SecureField("Password", text: self.$password)
+          .font(.system(size: 16, weight: .semibold))
+          .background(
+            RoundedRectangle(cornerRadius: 15)
+              .fill(Color(.systemGray5))
+              .frame(width: 300, height: 50, alignment: .center)
+          )
+          .autocapitalization(.none)
+          .foregroundColor(.primary)
+          .padding(.init(top: 0, leading: 55, bottom: 0, trailing: 55))
+      }
+      
+      VStack{
+        ScrollView(.horizontal) {
+          VStack (alignment: .leading){
+            Text("Follow topics")
+              .font(.system(size: 14, weight: .semibold))
+              .padding(.init(top: 0, leading: 20, bottom: 0, trailing: 0))
+            Text("Goals with selected topics will show up in community")
+              .font(.system(size: 12, weight: .regular))
+              .foregroundColor(Color(.darkGray))
+              .padding(.init(top: 0, leading: 20, bottom: 0, trailing: 0))
+            
+            HStack(spacing: 15) {
+              Spacer().frame(width: 3)
+              ForEach(self.allTopics, id: \.self.id!) { topic in
+                TopicSelectionView(topic: topic, isSelected: self.subscribedTopicIds.contains(topic.id!)) {
+                  if self.subscribedTopicIds.contains(topic.id!) {
+                    self.subscribedTopicIds.removeAll() { $0 == topic.id! }
+                  } else {
+                    self.subscribedTopicIds.append(topic.id!)
+                  }
+                }
               }
-            }
+            }.frame(height: 100)
           }
-        }
-      }
-      
-      Spacer()
+        }.frame(height: 150)
+      }.frame(height: 250)
       
       Button(action: {
         Auth.auth().createUser(withEmail: self.email, password: self.password) { _, err in
@@ -118,7 +157,14 @@ struct SignUpView: View {
           }
         }
       }) {
-        Text("Sign Up")
+        RoundedRectangle(cornerRadius: 15)
+          .fill(Color(.systemBlue))
+          .frame(width: 300, height: 50, alignment: .center)
+          .overlay(
+            Text("Sign Up")
+              .foregroundColor(.white)
+              .font(.system(size: 16, weight: .semibold))
+          )
       }
       .alert(isPresented: self.$fireSignUpFailureAlert) {
         Alert(
@@ -126,8 +172,6 @@ struct SignUpView: View {
           message: Text(self.signUpFailureReason)
         )
       }
-      
-      Spacer()
     }
     .onAppear(perform: self.fetchAllTopics)
   }

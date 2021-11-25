@@ -4,7 +4,6 @@
 //
 //  Created by Peng Zhao on 11/1/21.
 //
-
 import SwiftUI
 
 struct TopicView: View {
@@ -12,26 +11,16 @@ struct TopicView: View {
   var topic: Topic
   
   var body: some View {
-    HStack {
-      Spacer()
-      
+    VStack {
       self.topic.icon?
         .resizable()
         .scaledToFit()
-        .clipShape(Rectangle())
-        .overlay(
-          Rectangle()
-            .stroke(Color.white, lineWidth: 2)
-            .shadow(radius: 40)
-        )
-        .frame(width: 60, height: 60)
-      
-      Spacer()
+        .frame(width: 40, height: 40)
       
       Text(self.topic.name)
-      
-      Spacer()
-    }
+        .font(.system(size: 10, weight: .medium))
+        .foregroundColor(.primary)
+    }.frame(width: 70)
   }
   
 }

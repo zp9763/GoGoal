@@ -21,7 +21,7 @@ struct VerticalTopicSelection: View {
         
         if self.isSelected {
           Image(systemName: "checkmark")
-            .foregroundColor(Color.black)
+            .foregroundColor(Color.primary)
           Spacer()
         }
       }

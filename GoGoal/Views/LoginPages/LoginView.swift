@@ -22,25 +22,58 @@ struct LoginView: View {
   
   var body: some View {
     VStack {
-      Spacer()
       
-      HStack {
-        Text("Email:")
-          .padding(.leading)
-        TextField(self.email, text: self.$email)
-          .padding(.trailing)
+      HStack{
+        Text("Go! Goal!")
+          .font(.system(size: 30, weight: .bold))
+          .padding(.init(top: 0, leading: 0, bottom: 0, trailing: 170))
       }
       
       Spacer()
+        .frame(height: 15)
       
-      HStack {
-        Text("Password:")
-          .padding(.leading)
-        SecureField(self.password, text: self.$password)
-          .padding(.trailing)
+      HStack{
+        Text("Achieve everything!")
+          .font(.system(size: 20, weight: .bold))
+          .foregroundColor(Color(.darkGray))
+          .padding(.init(top: 0, leading: 0, bottom: 0, trailing: 115))
       }
       
       Spacer()
+        .frame(height: 40)
+      
+      HStack {
+        TextField("Email", text: self.$email)
+          .font(.system(size: 16, weight: .semibold))
+          .background(
+            RoundedRectangle(cornerRadius: 15)
+              .fill(Color(.systemGray5))
+              .frame(width: 300, height: 50, alignment: .center)
+          )
+          .autocapitalization(.none)
+          .keyboardType(.emailAddress)
+          .foregroundColor(.primary)
+          .padding(.init(top: 0, leading: 55, bottom: 0, trailing: 55))
+      }
+      
+      Spacer()
+        .frame(height: 50)
+      
+      HStack {
+        SecureField("Password", text: self.$password)
+          .font(.system(size: 16, weight: .semibold))
+          .background(
+            RoundedRectangle(cornerRadius: 15)
+              .fill(Color(.systemGray5))
+              .frame(width: 300, height: 50, alignment: .center)
+          )
+          .autocapitalization(.none)
+          .foregroundColor(.primary)
+          .padding(.init(top: 0, leading: 55, bottom: 0, trailing: 55))
+      }
+      
+      Spacer()
+        .frame(height: 38)
       
       Button(action: {
         Auth.auth().signIn(withEmail: self.email, password: self.password) { _, err in
@@ -54,7 +87,14 @@ struct LoginView: View {
           }
         }
       }) {
-        Text("Login")
+        RoundedRectangle(cornerRadius: 15)
+          .fill(Color(.systemBlue))
+          .frame(width: 300, height: 50, alignment: .center)
+          .overlay(
+            Text("Login")
+              .foregroundColor(.white)
+              .font(.system(size: 16, weight: .semibold))
+          )
       }
       .alert(isPresented: self.$fireLoginFailureAlert) {
         Alert(
@@ -64,6 +104,8 @@ struct LoginView: View {
       }
       
       Spacer()
+        .frame(height: 180)
+      
     }
   }
   
