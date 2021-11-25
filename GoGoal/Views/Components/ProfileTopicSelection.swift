@@ -1,5 +1,5 @@
 //
-//  VerticalTopicSelection.swift
+//  ProfileTopicSelection.swift
 //  GoGoal
 //
 //  Created by sj on 11/24/21.
@@ -8,7 +8,7 @@
 
 import SwiftUI
 
-struct VerticalTopicSelection: View {
+struct ProfileTopicSelection: View {
   
   var topic: Topic
   var isSelected: Bool

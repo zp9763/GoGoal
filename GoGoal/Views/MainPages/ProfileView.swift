@@ -345,7 +345,7 @@ struct ProfileView: View {
       Spacer()
       List {
         ForEach(self.userViewModel.allTopics, id: \.self.id!) { topic in
-          VerticalTopicSelection(topic: topic, isSelected: self.subscribedTopicIds.contains(topic.id!)) {
+          ProfileTopicSelection(topic: topic, isSelected: self.subscribedTopicIds.contains(topic.id!)) {
             if self.subscribedTopicIds.contains(topic.id!) {
               self.subscribedTopicIds.removeAll() { $0 == topic.id! }
             } else {
