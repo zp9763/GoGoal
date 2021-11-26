@@ -209,11 +209,12 @@ struct ProfileView: View {
     .background(Capsule().stroke(lineWidth: 2))
     .clipShape(Capsule())
     .popover(isPresented: self.$showChangePwdWindow) {
-      VStack(alignment: .leading) {
+      VStack {
+        VStack(alignment: .leading){
         Text("New Password:")
           .font(.system(size: 20, weight: .bold))
           .foregroundColor(Color(.darkGray))
-//          .padding(.init(top: 0, leading: 55, bottom: 20, trailing: 105))
+          .padding(.init(top: 0, leading: 55, bottom: 20, trailing: 105))
         
         SecureField(self.password, text: self.$password)
           .font(.system(size: 16, weight: .semibold))
@@ -224,8 +225,10 @@ struct ProfileView: View {
           )
           .autocapitalization(.none)
           .foregroundColor(.primary)
-//          .padding(.init(top: 0, leading: 55, bottom: 0, trailing: 55))
+          .padding(.init(top: 0, leading: 55, bottom: 0, trailing: 55))
+        }.frame(height: 100)
         
+        VStack{
         Button(action: {
           Auth.auth().currentUser!.updatePassword(to: self.password) { err in
             self.changePwdResponse = err?.localizedDescription ??
@@ -236,10 +239,10 @@ struct ProfileView: View {
           Text("Change Password")
             .foregroundColor(Color.primary)
         }
-        .frame(width: 230, height: 15)
+        .frame(width: 260, height: 20)
         .padding()
         .background(
-          RoundedRectangle(cornerRadius: 10)
+          RoundedRectangle(cornerRadius: 5)
             .fill(Color(red: 95 / 255, green: 52 / 255, blue: 255 / 255))
         )
         .clipShape(Capsule())
@@ -267,6 +270,7 @@ struct ProfileView: View {
             }
           )
         }
+        }.frame(height: 100)
       }
     }
   }
