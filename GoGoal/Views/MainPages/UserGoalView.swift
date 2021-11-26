@@ -21,36 +21,36 @@ struct UserGoalView: View {
   var body: some View {
     NavigationView {
       VStack {
-        Spacer()
-        
-        List {
-          ForEach(self.displayedGoals) { goal in
-            NavigationLink(
-              destination: GoalProgressView(
-                user: self.userViewModel.user,
-                goalViewModel: GoalViewModel(goal: goal),
-                selectedGoalId: self.$selectedGoalId
-              ),
-              tag: goal.id!,
-              selection: self.$selectedGoalId
-            ) {
-              UserGoalRowView(goal: goal)
-            }
-            // fix SwiftUI bug: nested NavigationLink fails on 2nd click
-            .isDetailLink(false)
-          }
-        }
         
         Spacer()
         
         HStack {
+          
           Spacer()
           
           Button(action: {
             self.displayInProgress = false
             self.updateDisplayedGoals()
           }) {
-            Text("Completed")
+            if displayInProgress {
+              RoundedRectangle(cornerRadius: 40)
+                .fill(Color(.systemGray5))
+                .frame(width: 100, height: 30, alignment: .center)
+                .overlay(
+                  Text("✓ Completed")
+                    .foregroundColor(.primary)
+                    .font(.system(size: 12, weight: .regular))
+                )
+            } else {
+              RoundedRectangle(cornerRadius: 40)
+                .fill(Color(.systemGray2))
+                .frame(width: 100, height: 30, alignment: .center)
+                .overlay(
+                  Text("✓ Completed")
+                    .foregroundColor(.primary)
+                    .font(.system(size: 12, weight: .regular))
+                )
+            }
           }
           
           Spacer()
@@ -59,10 +59,54 @@ struct UserGoalView: View {
             self.displayInProgress = true
             self.updateDisplayedGoals()
           }) {
-            Text("In-Progress")
+            if displayInProgress {
+              RoundedRectangle(cornerRadius: 40)
+                .fill(Color(.systemGray2))
+                .frame(width: 100, height: 30, alignment: .center)
+                .overlay(
+                  Text("↑ In-Progress")
+                    .foregroundColor(.primary)
+                    .font(.system(size: 12, weight: .regular))
+                )
+            } else {
+              RoundedRectangle(cornerRadius: 40)
+                .fill(Color(.systemGray5))
+                .frame(width: 100, height: 30, alignment: .center)
+                .overlay(
+                  Text("↑ In-Progress")
+                    .foregroundColor(.primary)
+                    .font(.system(size: 12, weight: .regular))
+                )
+            }
           }
           
           Spacer()
+        }.frame(height: 50)
+        
+        Spacer()
+        
+        ScrollView(showsIndicators: false){
+          VStack{
+            ForEach(self.displayedGoals) { goal in
+              NavigationLink(
+                destination: GoalProgressView(
+                  user: self.userViewModel.user,
+                  goalViewModel: GoalViewModel(goal: goal),
+                  selectedGoalId: self.$selectedGoalId
+                ),
+                tag: goal.id!,
+                selection: self.$selectedGoalId
+              ) {
+                UserGoalRowView(goal: goal)
+                  .frame(width: 300, height: 110)
+                  .background(Color(white: 0.94))
+                  .clipShape(RoundedRectangle(cornerRadius: 18, style: .circular))
+                  .frame(height: 130)
+              }
+              // fix SwiftUI bug: nested NavigationLink fails on 2nd click
+              .isDetailLink(false)
+            }
+          }
         }
         
         Spacer()
