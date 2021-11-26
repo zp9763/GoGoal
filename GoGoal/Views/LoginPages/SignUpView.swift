@@ -105,7 +105,7 @@ struct SignUpView: View {
       }
       
       VStack{
-        ScrollView(.horizontal) {
+        ScrollView(.horizontal, showsIndicators: false) {
           VStack (alignment: .leading){
             Text("Follow topics")
               .font(.system(size: 14, weight: .semibold))
