@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		331343D12750989C00EB58BD /* StepperView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 331343D02750989C00EB58BD /* StepperView.swift */; };
 		3348526527333DBB0067D516 /* CompletedGoalView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3348526427333DBA0067D516 /* CompletedGoalView.swift */; };
 		335F7609274B0CEF008D879A /* TopicGrid.swift in Sources */ = {isa = PBXBuildFile; fileRef = 335F7608274B0CEE008D879A /* TopicGrid.swift */; };
 		335F760D274B2916008D879A /* UIColorExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 335F760C274B2914008D879A /* UIColorExtension.swift */; };
@@ -83,7 +82,6 @@
 /* Begin PBXFileReference section */
 		0EA69621C149F45D0491840F /* Pods-GoGoal.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GoGoal.release.xcconfig"; path = "Target Support Files/Pods-GoGoal/Pods-GoGoal.release.xcconfig"; sourceTree = "<group>"; };
 		292EF226D0BEDE4A7D414D1C /* Pods_GoGoalTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_GoGoalTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		331343D02750989C00EB58BD /* StepperView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StepperView.swift; sourceTree = "<group>"; };
 		3348526427333DBA0067D516 /* CompletedGoalView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompletedGoalView.swift; sourceTree = "<group>"; };
 		335F7608274B0CEE008D879A /* TopicGrid.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopicGrid.swift; sourceTree = "<group>"; };
 		335F760C274B2914008D879A /* UIColorExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIColorExtension.swift; sourceTree = "<group>"; };
@@ -375,7 +373,6 @@
 				336B679D274F037000CE444F /* ProgressBar.swift */,
 				336B679F274F070600CE444F /* ProfileTopicView.swift */,
 				336B679B274EF96700CE444F /* ProfileTopicSelection.swift */,
-				331343D02750989C00EB58BD /* StepperView.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -598,7 +595,6 @@
 				5773B50B271CC0360029A220 /* AppDelegate.swift in Sources */,
 				57D06C87274353F400F8A448 /* GoalGuestView.swift in Sources */,
 				57D06C8927435BB900F8A448 /* InnerPostView.swift in Sources */,
-				331343D12750989C00EB58BD /* StepperView.swift in Sources */,
 				336B679C274EF96700CE444F /* ProfileTopicSelection.swift in Sources */,
 				57D06C852743035D00F8A448 /* GoalViewModel.swift in Sources */,
 				575A535B272DC601004619FA /* ImageExtension.swift in Sources */,
