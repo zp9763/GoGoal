@@ -16,33 +16,47 @@ struct UserGoalRowView: View {
   let topicService = TopicService()
   
   var body: some View {
-    VStack {
+    ZStack{
+      
       HStack{
-        self.topicIcon?
-          .resizable()
-          .scaledToFit()
-          .frame(width: 25, height: 25)
-          .padding(.init(top: 12, leading: 0, bottom: 0, trailing: 250))
-      }
-      
-      Spacer().frame(height: 14)
-      
-      HStack(alignment: .firstTextBaseline){
-        Text(self.goal.title)
-          .font(.system(size: 15, weight: .semibold, design: .rounded))
-          .foregroundColor(Color(white: 0.2))
-          .padding(.init(top: 0, leading: 45, bottom: 0, trailing: 55))
         Spacer()
+        if(self.goal.isCompleted){
+          Image(systemName: "checkmark.circle")
+            .resizable()
+            .frame(width: 35, height: 35, alignment: .trailing)
+          Spacer().frame(width: 10)
+        }
+        
       }
       
-      Spacer()
-      
-      let checkInNum = self.goal.checkInDates.count
-      let progress = Double(checkInNum) / Double(self.goal.duration)
-      
-      if !self.goal.isCompleted{
-        ProgressView(value: progress)
-      } 
+      VStack {
+        HStack{
+          self.topicIcon?
+            .resizable()
+            .scaledToFit()
+            .frame(width: 25, height: 25)
+            .padding(.init(top: 12, leading: 0, bottom: 0, trailing: 250))
+        }
+        
+        Spacer().frame(height: 14)
+        
+        HStack(alignment: .firstTextBaseline){
+          Text(self.goal.title)
+            .font(.system(size: 15, weight: .semibold, design: .rounded))
+            .foregroundColor(Color(white: 0.2))
+            .padding(.init(top: 0, leading: 45, bottom: 0, trailing: 55))
+          Spacer()
+        }
+        
+        Spacer()
+        
+        let checkInNum = self.goal.checkInDates.count
+        let progress = Double(checkInNum) / Double(self.goal.duration)
+        
+        if !self.goal.isCompleted{
+          ProgressView(value: progress)
+        }
+      }
     }
     .onAppear(perform: self.fetchGoalTopicIcon)
   }
