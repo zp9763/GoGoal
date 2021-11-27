@@ -26,97 +26,103 @@ struct PostView: View {
   let goalService = GoalService()
   
   var body: some View {
+    
     VStack {
-      Spacer()
-      
       if let owner = self.owner, let goal = self.goal {
+        
         HStack {
-          Spacer()
-          
           Image.fromUIImage(uiImage: owner.avatar)?
             .resizable()
             .scaledToFit()
             .clipShape(Circle())
-            .overlay(
-              Circle()
-                .stroke(Color.white, lineWidth: 2)
-                .shadow(radius: 40)
-            )
-            .frame(width: 60, height: 60)
-          
-          Text(owner.getFullName())
-            .bold()
-          
+            .frame(width: 40, height: 40)
+            .padding(.init(top: 10, leading: 10, bottom: 0, trailing: 0))
+          VStack(alignment: .leading){
+            Text(" \(owner.getFullName())")
+              .font(.system(size: 15, weight: .bold))
+              .foregroundColor(.primary)
+            Text(" • \(goal.title)")
+              .font(.system(size: 14, weight: .semibold))
+              .foregroundColor(.secondary)
+          }
           Spacer()
-          
           self.topicIcon?
             .resizable()
             .scaledToFit()
-            .clipShape(Rectangle())
-            .overlay(
-              Rectangle()
-                .stroke(Color.white, lineWidth: 2)
-                .shadow(radius: 40)
-            )
-            .frame(width: 60, height: 60)
-          
-          Text(goal.title)
-          
+            .frame(width: 30, height: 30)
+            .padding(.init(top: 0, leading: 0, bottom: 0, trailing: 20))
+        }
+        
+        HStack {
+          Spacer().frame(width: 60)
+          VStack {
+            Text(self.post.content)
+              .font(.system(size: 14, weight: .regular))
+              .foregroundColor(.primary)
+          }.frame(width: 300, alignment: .leading)
           Spacer()
         }
-      }
-      
-      HStack {
-        Spacer()
         
-        Text(self.post.content)
-        
-        Spacer()
-        
-        if let _ = self.post.likes?[self.user.id!] {
-          Button(action: {
-            self.postService.removeUserLike(postId: self.post.id!, userId: self.user.id!) {
-              self.post.likes!.removeValue(forKey: self.user.id!)
-            }
-          }) {
-            Image(systemName: "hand.thumbsup.fill")
-          }
-        } else {
-          Button(action: {
-            self.postService.addUserLike(postId: self.post.id!, userId: self.user.id!) {
-              if self.post.likes == nil {
-                self.post.likes = [String: Timestamp]()
+        if let photos = self.post.photos {
+          HStack {
+            Spacer()
+            
+            let columns = [GridItem](
+              repeating: GridItem(.flexible()),
+              count: PostView.PHOTO_COLUMN
+            )
+            
+            LazyVGrid(columns: columns) {
+              ForEach(photos, id: \.self) {
+                Image.fromUIImage(uiImage: $0)?
+                  .resizable()
+                  .scaledToFit()
+                  .clipShape(Rectangle())
+                  .frame(width: 100, height: 80)
               }
-              self.post.likes![self.user.id!] = Timestamp.init()
             }
-          }) {
-            Image(systemName: "hand.thumbsup")
+            
+            Spacer().frame(width: 130)
           }
         }
         
-        Text(String(self.post.likes?.count ?? 0))
+        Spacer().frame(height: 10)
         
-        Spacer()
-      }
-      
-      if let photos = self.post.photos {
-        let columns = [GridItem](
-          repeating: GridItem(.flexible()),
-          count: PostView.PHOTO_COLUMN
-        )
-        
-        LazyVGrid(columns: columns) {
-          ForEach(photos, id: \.self) {
-            Image.fromUIImage(uiImage: $0)?
-              .resizable()
-              .scaledToFit()
-              .clipShape(Rectangle())
-              .frame(width: 100, height: 80)
+        HStack {
+          Spacer()
+          
+          if let _ = self.post.likes?[self.user.id!] {
+            Button(action: {
+              self.postService.removeUserLike(postId: self.post.id!, userId: self.user.id!) {
+                self.post.likes!.removeValue(forKey: self.user.id!)
+              }
+            }) {
+              Image(systemName: "hand.thumbsup.fill")
+                .font(.system(size: 15, weight: .regular))
+                .foregroundColor(.secondary)
+            }
+          } else {
+            Button(action: {
+              self.postService.addUserLike(postId: self.post.id!, userId: self.user.id!) {
+                if self.post.likes == nil {
+                  self.post.likes = [String: Timestamp]()
+                }
+                self.post.likes![self.user.id!] = Timestamp.init()
+              }
+            }) {
+              Image(systemName: "hand.thumbsup")
+                .font(.system(size: 15, weight: .regular))
+                .foregroundColor(.secondary)
+            }
           }
+          
+          Text(String(self.post.likes?.count ?? 0))
+            .font(.system(size: 15, weight: .regular))
+            .foregroundColor(.secondary)
+          
+          Spacer().frame(width: 30)
         }
       }
-      
-      Spacer()
     }
     .onAppear(perform: self.fetchPostOwner)
     .onAppear(perform: self.fetchPostTopicIcon)

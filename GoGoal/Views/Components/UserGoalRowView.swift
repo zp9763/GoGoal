@@ -13,10 +13,18 @@ struct UserGoalRowView: View {
   
   @State var topicIcon: Image?
   
+  @Environment(\.colorScheme) var colorScheme
+  
   let topicService = TopicService()
   
   var body: some View {
     ZStack{
+      
+      if colorScheme == .dark {
+        Color(.darkGray).edgesIgnoringSafeArea(.all)
+      } else {
+        Color(white: 0.95).edgesIgnoringSafeArea(.all)
+      }
       
       HStack{
         Spacer()
@@ -43,7 +51,7 @@ struct UserGoalRowView: View {
         HStack(alignment: .firstTextBaseline){
           Text(self.goal.title)
             .font(.system(size: 15, weight: .semibold, design: .rounded))
-            .foregroundColor(Color(white: 0.2))
+            .foregroundColor(Color .primary)
             .padding(.init(top: 0, leading: 45, bottom: 0, trailing: 55))
           Spacer()
         }

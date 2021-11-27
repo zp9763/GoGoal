@@ -99,7 +99,6 @@ struct UserGoalView: View {
               ) {
                 UserGoalRowView(goal: goal)
                   .frame(width: 300, height: 110)
-                  .background(Color(white: 0.94))
                   .clipShape(RoundedRectangle(cornerRadius: 18, style: .circular))
                   .frame(height: 130)
               }
