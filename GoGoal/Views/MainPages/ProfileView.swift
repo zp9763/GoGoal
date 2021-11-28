@@ -289,7 +289,7 @@ struct ProfileView: View {
             }
           }
         }
-      }.listStyle(.plain)
+      }
       
       Spacer()
       
