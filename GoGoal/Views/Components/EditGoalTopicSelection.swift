@@ -30,7 +30,6 @@ struct EditGoalTopicSelection: View {
           Rectangle()
             .fill(Color(red: 95 / 255, green: 52 / 255, blue: 255 / 255))
             .frame(width: 30, height: 5)
-          
         }
         
       }.padding()

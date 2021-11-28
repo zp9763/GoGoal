@@ -39,13 +39,12 @@ struct EditGoalView: View {
       Group {
         HStack {
           Image(systemName: "pencil")
-            
-           
+          
+          
           Text("Title:")
             .font(.system(size: 18))
             .foregroundColor(Color(.darkGray))
             .bold()
-//            .padding(.leading)
           TextField(self.title, text: self.$title)
             .padding(.trailing)
           Spacer()
@@ -73,7 +72,7 @@ struct EditGoalView: View {
           .foregroundColor(Color(.darkGray))
           .bold()
           .padding(.leading)
-       Spacer()
+        Spacer()
       }
       
       VStack{
@@ -118,7 +117,7 @@ struct EditGoalView: View {
             .foregroundColor(Color(.darkGray))
             .bold()
             .padding()
-         Spacer()
+          Spacer()
         }
         Picker("Select a duration", selection: self.$duration) {
           ForEach(minDuration...EditGoalView.DURATION_UPPER_BOUND, id: \.self) {
