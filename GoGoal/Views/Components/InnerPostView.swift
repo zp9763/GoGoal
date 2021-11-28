@@ -21,9 +21,9 @@ struct InnerPostView: View {
   let postService = PostService()
   
   var body: some View {
-    VStack (alignment: .leading){
+    VStack(alignment: .leading) {
       
-      Text("Day \(postIndex + 1)")
+      Text("Day \(self.postIndex)")
         .font(.system(size: 23))
         .bold()
         .padding()
@@ -54,6 +54,7 @@ struct InnerPostView: View {
           }
         }
       }
+      
       HStack{
         Spacer()
         if let _ = self.post.likes?[self.user.id!] {

@@ -38,19 +38,23 @@ struct EditGoalView: View {
       Spacer()
       Group {
         HStack {
+          Image(systemName: "pencil")
+            
+           
           Text("Title:")
-            .font(.system(size: 20))
-            .bold()
-            .padding(.leading)
+            .font(.system(size: 18))
+//            .bold()
+//            .padding(.leading)
           TextField(self.title, text: self.$title)
             .padding(.trailing)
-        }
+          Spacer()
+        }.padding()
         
         
         VStack(alignment: .leading){
           Text("Description:")
-            .font(.system(size: 20))
-            .bold()
+            .font(.system(size: 18))
+//            .bold()
             .padding(.leading)
           TextField("please type a description for your goal", text: self.$description)
             .frame(height: 100)
@@ -63,10 +67,10 @@ struct EditGoalView: View {
       }
       HStack{
         Text("Please choose a topic:")
-          .font(.system(size: 20))
-          .bold()
+          .font(.system(size: 18))
+//          .bold()
           .padding(.leading)
-        Spacer()
+       
       }
       
       VStack{
@@ -107,10 +111,10 @@ struct EditGoalView: View {
         let minDuration = max(self.goalViewModel.goal.checkInDates.count, EditGoalView.DURATION_LOWER_BOUND)
         HStack{
           Text("Please choose a duration:")
-            .font(.system(size: 20))
-            .bold()
+            .font(.system(size: 18))
+//            .bold()
             .padding()
-          Spacer()
+         
         }
         Picker("Select a duration", selection: self.$duration) {
           ForEach(minDuration...EditGoalView.DURATION_UPPER_BOUND, id: \.self) {
@@ -161,7 +165,17 @@ struct EditGoalView: View {
           )
           
           self.goalViewModel.goalService.createOrUpdate(object: goal) {
-            self.mode.wrappedValue.dismiss()
+            if self.user!.topicIdList.contains(self.selectedTopicId) {
+              self.mode.wrappedValue.dismiss()
+            } else {
+              // automatically make user to subscribe the new topic if haven't
+              var user: User = self.user!
+              user.topicIdList.append(self.selectedTopicId)
+              user.lastUpdateDate = Timestamp.init()
+              self.goalViewModel.userService.createOrUpdate(object: user) {
+                self.mode.wrappedValue.dismiss()
+              }
+            }
           }
         }
       }) {

@@ -19,6 +19,7 @@ class GoalViewModel: ObservableObject {
   let goalService = GoalService()
   let postService = PostService()
   let topicService = TopicService()
+  let userService = UserService()
   
   init(goal: Goal? = nil) {
     if let goal = goal {

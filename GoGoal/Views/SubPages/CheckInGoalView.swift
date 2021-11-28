@@ -36,9 +36,12 @@ struct CheckInGoalView: View {
   var body: some View {
     VStack{
       
-      
+      HStack{
       Text("What have you done today?")
+          .font(.title)
         .padding(.leading)
+        Spacer()
+      }.padding()
       
       TextField("mark your progress...", text: self.$content)
         .frame(height: 150)

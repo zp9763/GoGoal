@@ -85,7 +85,7 @@ struct UserGoalView: View {
         
         Spacer()
         
-        ScrollView(showsIndicators: false){
+        ScrollView(showsIndicators: false) {
           VStack{
             ForEach(self.displayedGoals) { goal in
               NavigationLink(

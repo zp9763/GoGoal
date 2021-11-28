@@ -24,7 +24,7 @@ struct GoalGuestView: View {
       Group {
         HStack() {
           Spacer()
-          
+
           if let owner = self.owner {
             Image.fromUIImage(uiImage: owner.avatar)?
               .resizable()
@@ -36,14 +36,14 @@ struct GoalGuestView: View {
                   .shadow(radius: 40)
               )
               .frame(width: 60, height: 60)
-            
+
             Text(owner.getFullName())
               .bold()
-            
+
             Spacer()
           }
         }
-        
+
         Spacer()
       }
       
@@ -87,8 +87,9 @@ struct GoalGuestView: View {
       Spacer()
       
       List {
-        ForEach(self.goalViewModel.posts) {
-          InnerPostView(user: self.user, post: $0, postIndex: 0)
+        let numOfPosts: Int = self.goalViewModel.posts.count
+        ForEach(Array(zip(self.goalViewModel.posts.indices, self.goalViewModel.posts)), id: \.0) {
+          InnerPostView(user: self.user, post: $1, postIndex: numOfPosts - $0)
         }
       }
       
