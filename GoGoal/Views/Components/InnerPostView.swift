@@ -16,43 +16,26 @@ struct InnerPostView: View {
   
   @State var post: Post
   
+  var postIndex: Int
+  
   let postService = PostService()
   
   var body: some View {
-    VStack {
-      Spacer()
+    VStack (alignment: .leading){
+      
+      Text("Day \(postIndex + 1)")
+        .font(.system(size: 23))
+        .bold()
+        .padding()
       
       HStack {
-        Spacer()
+        
+        Image(systemName: "star.fill")
         
         Text(self.post.content)
         
         Spacer()
         
-        if let _ = self.post.likes?[self.user.id!] {
-          Button(action: {
-            self.postService.removeUserLike(postId: self.post.id!, userId: self.user.id!) {
-              self.post.likes!.removeValue(forKey: self.user.id!)
-            }
-          }) {
-            Image(systemName: "hand.thumbsup.fill")
-          }
-        } else {
-          Button(action: {
-            self.postService.addUserLike(postId: self.post.id!, userId: self.user.id!) {
-              if self.post.likes == nil {
-                self.post.likes = [String: Timestamp]()
-              }
-              self.post.likes![self.user.id!] = Timestamp.init()
-            }
-          }) {
-            Image(systemName: "hand.thumbsup")
-          }
-        }
-        
-        Text(String(self.post.likes?.count ?? 0))
-        
-        Spacer()
       }
       
       if let photos = self.post.photos {
@@ -71,8 +54,32 @@ struct InnerPostView: View {
           }
         }
       }
-      
-      Spacer()
+      HStack{
+        Spacer()
+        if let _ = self.post.likes?[self.user.id!] {
+          Button(action: {
+            self.postService.removeUserLike(postId: self.post.id!, userId: self.user.id!) {
+              self.post.likes!.removeValue(forKey: self.user.id!)
+            }
+          }) {
+            Image(systemName: "hand.thumbsup.fill")
+            
+          }
+        } else {
+          Button(action: {
+            self.postService.addUserLike(postId: self.post.id!, userId: self.user.id!) {
+              if self.post.likes == nil {
+                self.post.likes = [String: Timestamp]()
+              }
+              self.post.likes![self.user.id!] = Timestamp.init()
+            }
+          }) {
+            Image(systemName: "hand.thumbsup")
+          }
+        }
+        
+        Text(String(self.post.likes?.count ?? 0))
+      }
     }
   }
   

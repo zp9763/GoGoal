@@ -88,7 +88,7 @@ struct GoalGuestView: View {
       
       List {
         ForEach(self.goalViewModel.posts) {
-          InnerPostView(user: self.user, post: $0)
+          InnerPostView(user: self.user, post: $0, postIndex: 0)
         }
       }
       
