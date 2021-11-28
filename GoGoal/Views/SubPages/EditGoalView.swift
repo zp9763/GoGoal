@@ -43,7 +43,8 @@ struct EditGoalView: View {
            
           Text("Title:")
             .font(.system(size: 18))
-//            .bold()
+            .foregroundColor(Color(.darkGray))
+            .bold()
 //            .padding(.leading)
           TextField(self.title, text: self.$title)
             .padding(.trailing)
@@ -54,9 +55,10 @@ struct EditGoalView: View {
         VStack(alignment: .leading){
           Text("Description:")
             .font(.system(size: 18))
-//            .bold()
+            .foregroundColor(Color(.darkGray))
+            .bold()
             .padding(.leading)
-          TextField("please type a description for your goal", text: self.$description)
+          TextField(self.description, text: self.$description)
             .frame(height: 100)
             .background(RoundedRectangle(cornerRadius: 20, style: .continuous)
                           .stroke(Color.black, lineWidth: 3))
@@ -68,9 +70,10 @@ struct EditGoalView: View {
       HStack{
         Text("Please choose a topic:")
           .font(.system(size: 18))
-//          .bold()
+          .foregroundColor(Color(.darkGray))
+          .bold()
           .padding(.leading)
-       
+       Spacer()
       }
       
       VStack{
@@ -112,9 +115,10 @@ struct EditGoalView: View {
         HStack{
           Text("Please choose a duration:")
             .font(.system(size: 18))
-//            .bold()
+            .foregroundColor(Color(.darkGray))
+            .bold()
             .padding()
-         
+         Spacer()
         }
         Picker("Select a duration", selection: self.$duration) {
           ForEach(minDuration...EditGoalView.DURATION_UPPER_BOUND, id: \.self) {
