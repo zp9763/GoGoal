@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		330EF75C2753F9D300D88363 /* EditGoalTopicSelection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 330EF75B2753F9D300D88363 /* EditGoalTopicSelection.swift */; };
 		3348526527333DBB0067D516 /* CompletedGoalView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3348526427333DBA0067D516 /* CompletedGoalView.swift */; };
 		335F7609274B0CEF008D879A /* TopicGrid.swift in Sources */ = {isa = PBXBuildFile; fileRef = 335F7608274B0CEE008D879A /* TopicGrid.swift */; };
 		335F760D274B2916008D879A /* UIColorExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 335F760C274B2914008D879A /* UIColorExtension.swift */; };
@@ -82,6 +83,7 @@
 /* Begin PBXFileReference section */
 		0EA69621C149F45D0491840F /* Pods-GoGoal.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GoGoal.release.xcconfig"; path = "Target Support Files/Pods-GoGoal/Pods-GoGoal.release.xcconfig"; sourceTree = "<group>"; };
 		292EF226D0BEDE4A7D414D1C /* Pods_GoGoalTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_GoGoalTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		330EF75B2753F9D300D88363 /* EditGoalTopicSelection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditGoalTopicSelection.swift; sourceTree = "<group>"; };
 		3348526427333DBA0067D516 /* CompletedGoalView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompletedGoalView.swift; sourceTree = "<group>"; };
 		335F7608274B0CEE008D879A /* TopicGrid.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopicGrid.swift; sourceTree = "<group>"; };
 		335F760C274B2914008D879A /* UIColorExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIColorExtension.swift; sourceTree = "<group>"; };
@@ -373,6 +375,7 @@
 				336B679D274F037000CE444F /* ProgressBar.swift */,
 				336B679F274F070600CE444F /* ProfileTopicView.swift */,
 				336B679B274EF96700CE444F /* ProfileTopicSelection.swift */,
+				330EF75B2753F9D300D88363 /* EditGoalTopicSelection.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -607,6 +610,7 @@
 				57C60A202730C1BE00E5255E /* AchievementView.swift in Sources */,
 				57409A47272E165400578CD9 /* EditGoalView.swift in Sources */,
 				574369B02734D27F001DA5A7 /* AnyGestureRecognizer.swift in Sources */,
+				330EF75C2753F9D300D88363 /* EditGoalTopicSelection.swift in Sources */,
 				5773B52D271D13D00029A220 /* CollectionEnum.swift in Sources */,
 				57409A49272F166A00578CD9 /* TimestampExtension.swift in Sources */,
 				576CBA6E27477277001BA156 /* EnvironmentConfig.swift in Sources */,

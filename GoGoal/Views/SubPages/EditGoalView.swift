@@ -36,40 +36,40 @@ struct EditGoalView: View {
   var body: some View {
     VStack{
       Spacer()
-      
       Group {
         HStack {
           Text("Title:")
+            .font(.system(size: 20))
+            .bold()
             .padding(.leading)
           TextField(self.title, text: self.$title)
             .padding(.trailing)
         }
         
-        Spacer()
         
-        HStack {
+        VStack(alignment: .leading){
           Text("Description:")
+            .font(.system(size: 20))
+            .bold()
             .padding(.leading)
-          TextField(self.description, text: self.$description)
-            .padding(.trailing)
+          TextField("please type a description for your goal", text: self.$description)
+            .frame(height: 100)
+            .background(RoundedRectangle(cornerRadius: 20, style: .continuous)
+                          .stroke(Color.black, lineWidth: 3))
+            .padding([.leading, .trailing])
+          
         }
+        
+      }
+      HStack{
+        Text("Please choose a topic:")
+          .font(.system(size: 20))
+          .bold()
+          .padding(.leading)
+        Spacer()
       }
       
-      Spacer()
-      
-      Group {
-        let minDuration = max(self.goalViewModel.goal.checkInDates.count, EditGoalView.DURATION_LOWER_BOUND)
-        
-        Text("Please choose goal duration:")
-        
-        Picker("Duration", selection: self.$duration) {
-          ForEach(minDuration...EditGoalView.DURATION_UPPER_BOUND, id: \.self) {
-            Text(String($0))
-          }
-        }
-      }
-      
-      Group {
+      VStack{
         Spacer()
         
         if self.user == nil {
@@ -84,22 +84,46 @@ struct EditGoalView: View {
             EmptyView()
           }
         } else {
+          
+          
           // allow topic selection only if creating a new goal
-          List {
-            ForEach(self.goalViewModel.allTopics, id: \.self.id!) { topic in
-              TopicSelectionView(topic: topic, isSelected: self.selectedTopicId == topic.id!) {
-                if self.selectedTopicId == topic.id! {
-                  self.selectedTopicId = ""
-                } else {
-                  self.selectedTopicId = topic.id!
+          let columns = [GridItem(.adaptive(minimum: 35))]
+          ScrollView{
+            LazyVGrid (columns: columns,spacing: 0){
+              ForEach(self.goalViewModel.allTopics, id: \.self.id!) { topic in
+                EditGoalTopicSelection(topic: topic, isSelected: self.selectedTopicId == topic.id!) {
+                  if self.selectedTopicId == topic.id! {
+                    self.selectedTopicId = ""
+                  } else {
+                    self.selectedTopicId = topic.id!
+                  }
                 }
               }
-            }
+            }.padding()
           }
         }
+        Spacer()
+        
+        let minDuration = max(self.goalViewModel.goal.checkInDates.count, EditGoalView.DURATION_LOWER_BOUND)
+        HStack{
+          Text("Please choose a duration:")
+            .font(.system(size: 20))
+            .bold()
+            .padding()
+          Spacer()
+        }
+        Picker("Select a duration", selection: self.$duration) {
+          ForEach(minDuration...EditGoalView.DURATION_UPPER_BOUND, id: \.self) {
+            Text(String($0))
+          }
+        }
+        .pickerStyle(WheelPickerStyle())
+        .frame(width: 20)
+        .clipped()
         
         Spacer()
       }
+      
       
       Button(action: {
         guard self.title != "" else {
@@ -121,7 +145,7 @@ struct EditGoalView: View {
           
           self.goalViewModel.goal.duration = self.duration
           self.goalViewModel.goal.isCompleted =
-            self.goalViewModel.goal.checkInDates.count == self.goalViewModel.goal.duration
+          self.goalViewModel.goal.checkInDates.count == self.goalViewModel.goal.duration
           
           self.goalViewModel.goal.lastUpdateDate = Timestamp.init()
           self.goalViewModel.goalService.createOrUpdate(object: self.goalViewModel.goal) {
@@ -142,7 +166,16 @@ struct EditGoalView: View {
         }
       }) {
         Text("Confirm")
+          .foregroundColor(Color.white)
       }
+      .frame(width: 230,height: 10)
+      .padding()
+      .background(
+        RoundedRectangle(cornerRadius: 15)
+          .fill(Color(red: 95 / 255, green: 52 / 255, blue: 255 / 255))
+        
+      )
+      .clipShape(Capsule())
       .alert(isPresented: self.$fireInputMissingAlert) {
         Alert(
           title: Text("Missing Goal Info"),
@@ -169,19 +202,19 @@ struct EditGoalView: View {
         }) {
           Image(systemName: "trash")
         }
-        .alert(isPresented: self.$fireDeleteGoalAlert) {
-          Alert(
-            title: Text("Please confirm to delete this goal."),
-            message: Text("After deletion, all its historical records cannot be resumed."),
-            primaryButton: .cancel(Text("Cancel")),
-            secondaryButton: .destructive(Text("Delete")) {
-              self.goalViewModel.goalService.deleteGoalCascade(goal: self.goalViewModel.goal) {
-                // return to root view: UserGoalView
-                self.selectedGoalId = nil
+          .alert(isPresented: self.$fireDeleteGoalAlert) {
+            Alert(
+              title: Text("Please confirm to delete this goal."),
+              message: Text("After deletion, all its historical records cannot be resumed."),
+              primaryButton: .cancel(Text("Cancel")),
+              secondaryButton: .destructive(Text("Delete")) {
+                self.goalViewModel.goalService.deleteGoalCascade(goal: self.goalViewModel.goal) {
+                  // return to root view: UserGoalView
+                  self.selectedGoalId = nil
+                }
               }
-            }
-          )
-        }
+            )
+          }
       )
     } else {
       // disable delete goal button if creating a new goal
