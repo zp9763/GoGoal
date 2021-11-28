@@ -32,4 +32,10 @@ class UserViewModel: ObservableObject {
     }
   }
   
+  func refreshUserInfo() {
+    self.userService.getById(id: self.user.id!) {
+      self.user = $0!
+    }
+  }
+  
 }

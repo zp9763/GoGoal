@@ -87,7 +87,7 @@ struct EditGoalView: View {
           // allow topic selection only if creating a new goal
           List {
             ForEach(self.goalViewModel.allTopics, id: \.self.id!) { topic in
-              TopicSelectionView(topic: topic, isSelected: self.selectedTopicId == topic.id!) {
+              ProfileTopicSelection(topic: topic, isSelected: self.selectedTopicId == topic.id!) {
                 if self.selectedTopicId == topic.id! {
                   self.selectedTopicId = ""
                 } else {
@@ -137,7 +137,17 @@ struct EditGoalView: View {
           )
           
           self.goalViewModel.goalService.createOrUpdate(object: goal) {
-            self.mode.wrappedValue.dismiss()
+            if self.user!.topicIdList.contains(self.selectedTopicId) {
+              self.mode.wrappedValue.dismiss()
+            } else {
+              // automatically make user to subscribe the new topic if haven't
+              var user: User = self.user!
+              user.topicIdList.append(self.selectedTopicId)
+              user.lastUpdateDate = Timestamp.init()
+              self.goalViewModel.userService.createOrUpdate(object: user) {
+                self.mode.wrappedValue.dismiss()
+              }
+            }
           }
         }
       }) {

@@ -185,6 +185,7 @@ struct ProfileView: View {
         .sheet(isPresented: self.$showImagePicker) {
           PhotoCaptureView(showImagePicker: self.$showImagePicker, image: self.avatarBinding)
         }
+        .onAppear(perform: self.userViewModel.refreshUserInfo)
         .onAppear(perform: { self.userViewModel.fetchAllUserGoals() } )
         .onAppear(perform: self.userViewModel.fetchAllTopics)
         .onAppear(perform: {
