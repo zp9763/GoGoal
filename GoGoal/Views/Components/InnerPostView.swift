@@ -40,7 +40,7 @@ struct InnerPostView: View {
       
       if let photos = self.post.photos {
         let columns = [GridItem](
-          repeating: GridItem(.flexible()),
+          repeating: GridItem(.flexible(minimum:100, maximum: 120)),
           count: InnerPostView.PHOTO_COLUMN
         )
         
