@@ -787,7 +787,7 @@
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_ASSET_PATHS = "\"GoGoal/Preview Content\"";
-				DEVELOPMENT_TEAM = 964PTB3V8Z;
+				DEVELOPMENT_TEAM = J54BFXFVS9;
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = GoGoal/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -811,7 +811,7 @@
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_ASSET_PATHS = "\"GoGoal/Preview Content\"";
-				DEVELOPMENT_TEAM = 964PTB3V8Z;
+				DEVELOPMENT_TEAM = J54BFXFVS9;
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = GoGoal/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (

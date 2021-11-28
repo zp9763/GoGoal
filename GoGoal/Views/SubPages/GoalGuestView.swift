@@ -87,8 +87,9 @@ struct GoalGuestView: View {
       Spacer()
       
       List {
-        ForEach(self.goalViewModel.posts) {
-          InnerPostView(user: self.user, post: $0)
+        let numOfPosts: Int = self.goalViewModel.posts.count
+        ForEach(Array(zip(self.goalViewModel.posts.indices, self.goalViewModel.posts)), id: \.0) {
+          InnerPostView(user: self.user, post: $1, postIndex: numOfPosts - $0)
         }
       }
       

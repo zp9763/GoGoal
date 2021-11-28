@@ -16,19 +16,47 @@ struct InnerPostView: View {
   
   @State var post: Post
   
+  var postIndex: Int
+  
   let postService = PostService()
   
   var body: some View {
-    VStack {
-      Spacer()
+    VStack(alignment: .leading) {
+      
+      Text("Day \(self.postIndex)")
+        .font(.system(size: 23))
+        .bold()
+        .padding()
       
       HStack {
-        Spacer()
+        
+        Image(systemName: "star.fill")
         
         Text(self.post.content)
         
         Spacer()
         
+      }
+      
+      if let photos = self.post.photos {
+        let columns = [GridItem](
+          repeating: GridItem(.flexible(minimum:100, maximum: 120)),
+          count: InnerPostView.PHOTO_COLUMN
+        )
+        
+        LazyVGrid(columns: columns) {
+          ForEach(photos, id: \.self) {
+            Image.fromUIImage(uiImage: $0)?
+              .resizable()
+              .scaledToFit()
+              .clipShape(Rectangle())
+              .frame(width: 100, height: 80)
+          }
+        }
+      }
+      
+      HStack{
+        Spacer()
         if let _ = self.post.likes?[self.user.id!] {
           Button(action: {
             self.postService.removeUserLike(postId: self.post.id!, userId: self.user.id!) {
@@ -36,6 +64,7 @@ struct InnerPostView: View {
             }
           }) {
             Image(systemName: "hand.thumbsup.fill")
+            
           }
         } else {
           Button(action: {
@@ -51,28 +80,7 @@ struct InnerPostView: View {
         }
         
         Text(String(self.post.likes?.count ?? 0))
-        
-        Spacer()
       }
-      
-      if let photos = self.post.photos {
-        let columns = [GridItem](
-          repeating: GridItem(.flexible()),
-          count: InnerPostView.PHOTO_COLUMN
-        )
-        
-        LazyVGrid(columns: columns) {
-          ForEach(photos, id: \.self) {
-            Image.fromUIImage(uiImage: $0)?
-              .resizable()
-              .scaledToFit()
-              .clipShape(Rectangle())
-              .frame(width: 100, height: 80)
-          }
-        }
-      }
-      
-      Spacer()
     }
   }
   
