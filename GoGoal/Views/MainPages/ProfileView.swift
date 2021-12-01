@@ -43,12 +43,12 @@ struct ProfileView: View {
   
   var body: some View {
     NavigationView {
-      VStack{
+      VStack {
         ZStack {
-          Image("ProfileBackground")
+          Image("profile_background")
             .resizable()
-            //            .scaledToFit()
             .frame(height: 160)
+          
           Button(action: {
             self.showImagePicker = true
           }) {
@@ -97,7 +97,7 @@ struct ProfileView: View {
             Text(self.userViewModel.user.email)
               .offset(x: 0, y: 20)
             
-            changePwdView
+            self.changePwdView
               .offset(x: 0, y: 20)
           }
           
@@ -109,9 +109,9 @@ struct ProfileView: View {
             
             Text("Achieved Goals: \(completedGoalNum) / \(self.userViewModel.userGoals.count)")
               .bold()
-              .offset(x: 0,y: 20)
+              .offset(x: 0, y: 20)
             
-            ProgressBar(value:percent)
+            ProgressBar(value: percent)
               .frame(height: 20)
               .foregroundColor(Color(UIColor.systemTeal))
               .padding()
@@ -119,16 +119,16 @@ struct ProfileView: View {
             Spacer()
           }
           
-          Group{
+          Group {
             Text("Subscribed Topics")
               .bold()
             
-            VStack{
+            VStack {
               let subscribedTopics = self.userViewModel.allTopics
                 .filter() { self.subscribedTopicIds.contains($0.id!) }
                 .sorted() { $0.name < $1.name }
               
-              TopicGrid(data:subscribedTopics)
+              TopicGrid(data: subscribedTopics)
                 .padding()
             }
           }
@@ -141,7 +141,6 @@ struct ProfileView: View {
                 Text("Update Topic Subscription")
                   .bold()
                   .foregroundColor(Color.white)
-                
               }
               .frame(width: 230, height: 15)
               .padding()
@@ -150,7 +149,9 @@ struct ProfileView: View {
                   .fill(Color(red: 95 / 255, green: 52 / 255, blue: 255 / 255))
               )
               .clipShape(Capsule())
-              .popover(isPresented: self.$updateSubscribedTopic) { topicSubscription }
+              .popover(isPresented: self.$updateSubscribedTopic) {
+                self.topicSubscription
+              }
             }
           }
           
@@ -167,7 +168,7 @@ struct ProfileView: View {
                 .bold()
                 .foregroundColor(Color.white)
             }
-            .frame(width: 230,height: 10)
+            .frame(width: 230, height: 10)
             .padding()
             .background(
               RoundedRectangle(cornerRadius: 15)
@@ -179,8 +180,6 @@ struct ProfileView: View {
           
           Spacer()
         }
-        //      .background(Image("profile_background").resizable())
-        //      .navigationBarTitle("Profile", displayMode: .inline)
         .navigationBarHidden(true)
         .sheet(isPresented: self.$showImagePicker) {
           PhotoCaptureView(showImagePicker: self.$showImagePicker, image: self.avatarBinding)
@@ -211,7 +210,7 @@ struct ProfileView: View {
     .clipShape(Capsule())
     .popover(isPresented: self.$showChangePwdWindow) {
       VStack {
-        VStack(alignment: .leading){
+        VStack(alignment: .leading) {
           Text("New Password:")
             .font(.system(size: 20, weight: .bold))
             .foregroundColor(Color(.darkGray))
@@ -227,9 +226,10 @@ struct ProfileView: View {
             .autocapitalization(.none)
             .foregroundColor(.primary)
             .padding(.init(top: 0, leading: 55, bottom: 0, trailing: 55))
-        }.frame(height: 100)
+        }
+        .frame(height: 100)
         
-        VStack{
+        VStack {
           Button(action: {
             Auth.auth().currentUser!.updatePassword(to: self.password) { err in
               self.changePwdResponse = err?.localizedDescription ??
@@ -256,7 +256,7 @@ struct ProfileView: View {
                   self.showChangePwdWindow = false
                   
                   // workaround to dismiss popover window automatically
-                  // after successfully changing password
+                  // after successfully changing password (delay 2 seconds)
                   DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
                     do {
                       try Auth.auth().signOut()

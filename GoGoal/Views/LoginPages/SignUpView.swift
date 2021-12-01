@@ -31,7 +31,7 @@ struct SignUpView: View {
   
   var body: some View {
     VStack {
-      VStack{
+      VStack {
         Text("Go!Goal!")
           .font(.system(size: 30, weight: .bold))
           .padding(.init(top: 0, leading: 0, bottom: 0, trailing: 170))
@@ -42,7 +42,8 @@ struct SignUpView: View {
           .font(.system(size: 20, weight: .bold))
           .foregroundColor(Color(.darkGray))
           .padding(.init(top: 0, leading: 0, bottom: 0, trailing: 105))
-      }.frame(height: 100)
+      }
+      .frame(height: 100)
       
       HStack {
         TextField("First Name", text: self.$firstName)
@@ -104,12 +105,13 @@ struct SignUpView: View {
           .padding(.init(top: 0, leading: 55, bottom: 0, trailing: 55))
       }
       
-      VStack{
+      VStack {
         ScrollView(.horizontal, showsIndicators: false) {
-          VStack (alignment: .leading){
+          VStack(alignment: .leading) {
             Text("Follow topics")
               .font(.system(size: 14, weight: .semibold))
               .padding(.init(top: 0, leading: 20, bottom: 0, trailing: 0))
+            
             Text("Goals with selected topics will show up in community")
               .font(.system(size: 12, weight: .regular))
               .foregroundColor(Color(.darkGray))
@@ -117,6 +119,7 @@ struct SignUpView: View {
             
             HStack(spacing: 15) {
               Spacer().frame(width: 3)
+              
               ForEach(self.allTopics, id: \.self.id!) { topic in
                 TopicSelectionView(topic: topic, isSelected: self.subscribedTopicIds.contains(topic.id!)) {
                   if self.subscribedTopicIds.contains(topic.id!) {

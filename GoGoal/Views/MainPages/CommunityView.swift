@@ -16,9 +16,7 @@ struct CommunityView: View {
   let postService = PostService()
   
   var body: some View {
-    
     NavigationView {
-      
       ScrollView {
         Divider()
         

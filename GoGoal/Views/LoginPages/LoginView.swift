@@ -22,7 +22,6 @@ struct LoginView: View {
   
   var body: some View {
     VStack {
-      
       HStack{
         Text("Go! Goal!")
           .font(.system(size: 30, weight: .bold))
@@ -106,7 +105,6 @@ struct LoginView: View {
       
       Spacer()
         .frame(height: 180)
-      
     }
   }
   

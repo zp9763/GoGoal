@@ -21,7 +21,8 @@ struct TopicView: View {
       Text(self.topic.name)
         .font(.system(size: 10, weight: .medium))
         .foregroundColor(.primary)
-    }.frame(width: 70)
+    }
+    .frame(width: 70)
   }
   
 }

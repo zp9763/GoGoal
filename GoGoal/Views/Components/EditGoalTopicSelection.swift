@@ -7,16 +7,16 @@
 
 import SwiftUI
 
-
 struct EditGoalTopicSelection: View {
+  
   var topic: Topic
   var isSelected: Bool
   var action: () -> Void
   
   var body: some View {
     Button(action: self.action) {
-      VStack{
-        topic.icon?
+      VStack {
+        self.topic.icon?
           .resizable()
           .scaledToFit()
           .clipShape(Rectangle())
@@ -26,13 +26,14 @@ struct EditGoalTopicSelection: View {
               .shadow(radius: 40)
           )
           .frame(width: 40, height: 40)
-        if (isSelected){
+        
+        if self.isSelected {
           Rectangle()
             .fill(Color(red: 95 / 255, green: 52 / 255, blue: 255 / 255))
             .frame(width: 30, height: 5)
         }
-        
       }.padding()
     }
   }
+
 }

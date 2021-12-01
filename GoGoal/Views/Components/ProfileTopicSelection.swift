@@ -5,7 +5,6 @@
 //  Created by sj on 11/24/21.
 //
 
-
 import SwiftUI
 
 struct ProfileTopicSelection: View {

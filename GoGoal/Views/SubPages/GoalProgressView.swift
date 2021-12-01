@@ -24,7 +24,7 @@ struct GoalProgressView: View {
           Spacer()
             .frame(height: 20)
           
-          HStack{
+          HStack {
             Spacer()
             
             Text(self.goalViewModel.goal.title)
@@ -37,14 +37,18 @@ struct GoalProgressView: View {
               .frame(width: 30, height: 30)
             
             Spacer()
-          }.padding([.top, .leading, .trailing])
+          }
+          .padding([.top, .leading, .trailing])
           
-          HStack{
+          HStack {
             Image(systemName: "star.circle")
               .font(.largeTitle)
+            
             let checkInNum = self.goalViewModel.goal.checkInDates.count
             Text("Progress: \(checkInNum) /")
-            Text("\(self.goalViewModel.goal.duration)").bold()
+              .font(.system(size: 20))
+            
+            Text("\(self.goalViewModel.goal.duration)")
               .font(.system(size: 20))
           }
           
@@ -64,7 +68,7 @@ struct GoalProgressView: View {
         Text("Edit Goal")
           .foregroundColor(Color.white)
       }
-      .frame(width: 280,height: 10)
+      .frame(width: 280, height: 10)
       .padding()
       .background(
         RoundedRectangle(cornerRadius: 15)
@@ -86,12 +90,13 @@ struct GoalProgressView: View {
       .hidden()
       
       if (self.goalViewModel.posts.count >= 1) {
-        ZStack{
+        ZStack {
           Color(red: 95 / 255, green: 52 / 255, blue: 255 / 255)
             .opacity(0.1)
+          
           List {
             Section(header: Text("Posts")
-                      .font(.system(size: 25))
+                      .font(.system(size: 23))
                       .foregroundColor(Color.primary)
             ) {
               let numOfPosts: Int = self.goalViewModel.posts.count
@@ -103,12 +108,14 @@ struct GoalProgressView: View {
         }
       } else {
         Spacer()
-        ZStack{
-          Text ("Make your first post today!")
+        
+        ZStack {
+          Text("Make your first post today!")
             .font(.system(size: 22))
             .italic()
             .padding()
         }
+        
         Spacer()
       }
     }

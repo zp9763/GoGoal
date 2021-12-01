@@ -26,10 +26,8 @@ struct PostView: View {
   let goalService = GoalService()
   
   var body: some View {
-    
     VStack {
       if let owner = self.owner, let goal = self.goal {
-        
         HStack {
           Image.fromUIImage(uiImage: owner.avatar)?
             .resizable()
@@ -37,15 +35,19 @@ struct PostView: View {
             .clipShape(Circle())
             .frame(width: 40, height: 40)
             .padding(.init(top: 10, leading: 10, bottom: 0, trailing: 0))
-          VStack(alignment: .leading){
+          
+          VStack(alignment: .leading) {
             Text(" \(owner.getFullName())")
               .font(.system(size: 15, weight: .bold))
               .foregroundColor(.primary)
+            
             Text(" • \(goal.title)")
               .font(.system(size: 14, weight: .semibold))
               .foregroundColor(.secondary)
           }
+          
           Spacer()
+          
           self.topicIcon?
             .resizable()
             .scaledToFit()
@@ -55,11 +57,14 @@ struct PostView: View {
         
         HStack {
           Spacer().frame(width: 60)
+          
           VStack {
             Text(self.post.content)
               .font(.system(size: 14, weight: .regular))
               .foregroundColor(.primary)
-          }.frame(width: 300, alignment: .leading)
+          }
+          .frame(width: 300, alignment: .leading)
+          
           Spacer()
         }
         
