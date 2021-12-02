@@ -16,16 +16,19 @@ struct EditGoalTopicSelection: View {
   var body: some View {
     Button(action: self.action) {
       VStack {
+        VStack{
         self.topic.icon?
-          .resizable()
-          .scaledToFit()
-          .clipShape(Rectangle())
-          .overlay(
-            Rectangle()
-              .stroke(Color.white, lineWidth: 2)
-              .shadow(radius: 40)
-          )
-          .frame(width: 40, height: 40)
+            .resizable()
+            .clipShape(Circle())
+            .shadow(radius: 5)
+            .overlay(Circle().stroke(Color.black, lineWidth: 2))
+            .frame(width: 40, height: 40)
+          
+          Text(topic.name)
+            .foregroundColor(Color.primary)
+            .font(.system(size: 15))
+            
+        }
         
         if self.isSelected {
           Rectangle()
