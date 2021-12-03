@@ -128,7 +128,7 @@ struct ProfileView: View {
                 .filter() { self.subscribedTopicIds.contains($0.id!) }
                 .sorted() { $0.name < $1.name }
               
-              TopicGrid(data: subscribedTopics)
+              ProfileTopicGrid(data: subscribedTopics)
                 .padding()
             }
           }

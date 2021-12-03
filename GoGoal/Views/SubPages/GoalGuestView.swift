@@ -34,8 +34,10 @@ struct GoalGuestView: View {
                   .shadow(radius: 40)
               )
               .frame(width: 40, height: 40)
+            
             Text(owner.getFullName())
               .bold()
+            
             Spacer()
           }
         }

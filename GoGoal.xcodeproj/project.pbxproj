@@ -9,7 +9,7 @@
 /* Begin PBXBuildFile section */
 		330EF75C2753F9D300D88363 /* EditGoalTopicSelection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 330EF75B2753F9D300D88363 /* EditGoalTopicSelection.swift */; };
 		3348526527333DBB0067D516 /* CompletedGoalView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3348526427333DBA0067D516 /* CompletedGoalView.swift */; };
-		335F7609274B0CEF008D879A /* TopicGrid.swift in Sources */ = {isa = PBXBuildFile; fileRef = 335F7608274B0CEE008D879A /* TopicGrid.swift */; };
+		335F7609274B0CEF008D879A /* ProfileTopicGrid.swift in Sources */ = {isa = PBXBuildFile; fileRef = 335F7608274B0CEE008D879A /* ProfileTopicGrid.swift */; };
 		335F760D274B2916008D879A /* UIColorExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 335F760C274B2914008D879A /* UIColorExtension.swift */; };
 		335F760F274B2957008D879A /* RoundedButtonstyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 335F760E274B2957008D879A /* RoundedButtonstyle.swift */; };
 		336B679C274EF96700CE444F /* ProfileTopicSelection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 336B679B274EF96700CE444F /* ProfileTopicSelection.swift */; };
@@ -85,7 +85,7 @@
 		292EF226D0BEDE4A7D414D1C /* Pods_GoGoalTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_GoGoalTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		330EF75B2753F9D300D88363 /* EditGoalTopicSelection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditGoalTopicSelection.swift; sourceTree = "<group>"; };
 		3348526427333DBA0067D516 /* CompletedGoalView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompletedGoalView.swift; sourceTree = "<group>"; };
-		335F7608274B0CEE008D879A /* TopicGrid.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopicGrid.swift; sourceTree = "<group>"; };
+		335F7608274B0CEE008D879A /* ProfileTopicGrid.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileTopicGrid.swift; sourceTree = "<group>"; };
 		335F760C274B2914008D879A /* UIColorExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIColorExtension.swift; sourceTree = "<group>"; };
 		335F760E274B2957008D879A /* RoundedButtonstyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundedButtonstyle.swift; sourceTree = "<group>"; };
 		336B679B274EF96700CE444F /* ProfileTopicSelection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileTopicSelection.swift; sourceTree = "<group>"; };
@@ -358,7 +358,7 @@
 				3348526427333DBA0067D516 /* CompletedGoalView.swift */,
 				57409A4A272F6C1C00578CD9 /* PostView.swift */,
 				57D06C8827435BB900F8A448 /* InnerPostView.swift */,
-				335F7608274B0CEE008D879A /* TopicGrid.swift */,
+				335F7608274B0CEE008D879A /* ProfileTopicGrid.swift */,
 				336B67A1274F0FBC00CE444F /* TopicView.swift */,
 				336B67A3274F0FFB00CE444F /* TopicSelectionView.swift */,
 				336B679F274F070600CE444F /* ProfileTopicView.swift */,
@@ -620,7 +620,7 @@
 				57C52C8A2725E93500E0493B /* UserGoalView.swift in Sources */,
 				5791906D2741B59C009BFAA1 /* LogoutView.swift in Sources */,
 				57DA1F152734699600C77B10 /* PhotoCaptureView.swift in Sources */,
-				335F7609274B0CEF008D879A /* TopicGrid.swift in Sources */,
+				335F7609274B0CEF008D879A /* ProfileTopicGrid.swift in Sources */,
 				57409A45272E164400578CD9 /* CheckInGoalView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

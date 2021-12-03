@@ -16,18 +16,17 @@ struct EditGoalTopicSelection: View {
   var body: some View {
     Button(action: self.action) {
       VStack {
-        VStack{
-        self.topic.icon?
+        VStack {
+          self.topic.icon?
             .resizable()
             .clipShape(Circle())
             .shadow(radius: 5)
             .overlay(Circle().stroke(Color.black, lineWidth: 2))
             .frame(width: 40, height: 40)
           
-          Text(topic.name)
+          Text(self.topic.name)
             .foregroundColor(Color.primary)
             .font(.system(size: 15))
-            
         }
         
         if self.isSelected {
@@ -38,5 +37,5 @@ struct EditGoalTopicSelection: View {
       }.padding()
     }
   }
-
+  
 }
