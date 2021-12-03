@@ -22,7 +22,7 @@ struct LoginView: View {
   
   var body: some View {
     VStack {
-      HStack{
+      HStack {
         Text("Go! Goal!")
           .font(.system(size: 30, weight: .bold))
           .padding(.init(top: 0, leading: 0, bottom: 0, trailing: 170))
@@ -31,7 +31,7 @@ struct LoginView: View {
       Spacer()
         .frame(height: 15)
       
-      HStack{
+      HStack {
         Text("Achieve everything!")
           .font(.system(size: 20, weight: .bold))
           .foregroundColor(Color(.darkGray))

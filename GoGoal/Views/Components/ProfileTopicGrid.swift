@@ -1,5 +1,5 @@
 //
-//  TopicGrid.swift
+//  ProfileTopicGrid.swift
 //  GoGoal
 //
 //  Created by sj on 11/21/21.
@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct TopicGrid: View {
+struct ProfileTopicGrid: View {
   
   let data: [Topic]
   
@@ -17,7 +17,7 @@ struct TopicGrid: View {
     ScrollView{
       LazyVGrid(columns: self.columns, spacing: 30) {
         ForEach(self.data) { item in
-          VStack{
+          VStack {
             item.icon?
               .resizable()
               .clipShape(Circle())

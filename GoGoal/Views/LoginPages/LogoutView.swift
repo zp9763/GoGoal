@@ -16,7 +16,7 @@ struct LogoutView: View {
     ZStack {
       Color.blue.edgesIgnoringSafeArea(.all)
       
-      VStack{
+      VStack {
         Spacer()
         
         Text("Go!Goal!").font(.largeTitle).bold().foregroundColor(.white)

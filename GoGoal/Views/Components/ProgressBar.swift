@@ -3,7 +3,7 @@
 //  GoGoal
 //
 //  Created by sj on 11/24/21.
-//p
+//
 
 import SwiftUI
 
