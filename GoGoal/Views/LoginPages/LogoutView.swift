@@ -23,7 +23,7 @@ struct LogoutView: View {
         
         Spacer()
         
-        Image("starting_page_image").frame(width: 100, height: 100, alignment: .center)
+        Image("login_background").frame(width: 100, height: 100, alignment: .center)
         
         Spacer()
         
@@ -52,7 +52,6 @@ struct LogoutView: View {
         .clipShape(Capsule())
         
         Spacer()
-        
       }
       .alignmentGuide(.bottom, computeValue: { dimension in
         .leastNonzeroMagnitude

@@ -25,7 +25,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
       let window = UIWindow(windowScene: windowScene)
       window.rootViewController = UIHostingController(rootView: entryView)
       
-      let tapGesture = AnyGestureRecognizer(target: window, action:#selector(UIView.endEditing))
+      let tapGesture = AnyGestureRecognizer(target: window, action: #selector(UIView.endEditing))
       tapGesture.requiresExclusiveTouchType = false
       tapGesture.cancelsTouchesInView = false
       tapGesture.delegate = self

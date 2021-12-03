@@ -32,6 +32,7 @@ class UserServiceTests: XCTestCase {
       XCTAssertEqual($0?.email, self.user.email)
       self.expectation.fulfill()
     }
+    
     waitForExpectations(timeout: self.expired)
   }
   
@@ -40,6 +41,7 @@ class UserServiceTests: XCTestCase {
       XCTAssertTrue(userList.map({ $0.id! }).contains(self.user.id!))
       self.expectation.fulfill()
     }
+    
     waitForExpectations(timeout: self.expired)
   }
 

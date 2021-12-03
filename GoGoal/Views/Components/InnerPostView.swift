@@ -29,18 +29,16 @@ struct InnerPostView: View {
         .padding()
       
       HStack {
-        
         Image(systemName: "star.fill")
         
         Text(self.post.content)
         
         Spacer()
-        
       }
       
       if let photos = self.post.photos {
         let columns = [GridItem](
-          repeating: GridItem(.flexible(minimum:100, maximum: 120)),
+          repeating: GridItem(.flexible(minimum: 100, maximum: 120)),
           count: InnerPostView.PHOTO_COLUMN
         )
         
@@ -55,8 +53,9 @@ struct InnerPostView: View {
         }
       }
       
-      HStack{
+      HStack {
         Spacer()
+        
         if let _ = self.post.likes?[self.user.id!] {
           Button(action: {
             self.postService.removeUserLike(postId: self.post.id!, userId: self.user.id!) {
@@ -64,7 +63,6 @@ struct InnerPostView: View {
             }
           }) {
             Image(systemName: "hand.thumbsup.fill")
-            
           }
         } else {
           Button(action: {

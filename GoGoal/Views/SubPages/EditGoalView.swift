@@ -34,42 +34,43 @@ struct EditGoalView: View {
   @Environment(\.presentationMode) var mode: Binding<PresentationMode>
   
   var body: some View {
-    VStack{
+    VStack {
       Spacer()
       
       Group {
         HStack {
+          Image(systemName: "pencil")
+          
           Text("Title:")
-            .padding(.leading)
+            .font(.system(size: 18))
+            .foregroundColor(Color(.darkGray))
+            .bold()
+          
           TextField(self.title, text: self.$title)
             .padding(.trailing)
+          
+          Spacer()
         }
+        .padding()
         
-        Spacer()
-        
-        HStack {
+        VStack(alignment: .leading) {
           Text("Description:")
+            .font(.system(size: 18))
+            .foregroundColor(Color(.darkGray))
+            .bold()
             .padding(.leading)
+          
           TextField(self.description, text: self.$description)
-            .padding(.trailing)
+            .frame(height: 150)
+            .background(
+              RoundedRectangle(cornerRadius: 20, style: .continuous)
+                .stroke(Color.black, lineWidth: 3)
+            )
+            .padding([.leading, .trailing])
         }
       }
       
-      Spacer()
-      
-      Group {
-        let minDuration = max(self.goalViewModel.goal.checkInDates.count, EditGoalView.DURATION_LOWER_BOUND)
-        
-        Text("Please choose goal duration:")
-        
-        Picker("Duration", selection: self.$duration) {
-          ForEach(minDuration...EditGoalView.DURATION_UPPER_BOUND, id: \.self) {
-            Text(String($0))
-          }
-        }
-      }
-      
-      Group {
+      VStack {
         Spacer()
         
         if self.user == nil {
@@ -79,25 +80,77 @@ struct EditGoalView: View {
           
           // show TopicView after topic list has been loaded
           if topic.count == 1 {
+            
+            HStack{
+              Text("The topic you selected:")
+                .font(.system(size: 18))
+                .foregroundColor(Color(.darkGray))
+                .bold()
+                .padding(.leading)
+              Spacer()
+            }
+            
             TopicView(topic: topic[0])
+              .offset(x: -100, y: 0)
+            
           } else {
             EmptyView()
           }
         } else {
           // allow topic selection only if creating a new goal
-          List {
-            ForEach(self.goalViewModel.allTopics, id: \.self.id!) { topic in
-              ProfileTopicSelection(topic: topic, isSelected: self.selectedTopicId == topic.id!) {
-                if self.selectedTopicId == topic.id! {
-                  self.selectedTopicId = ""
-                } else {
-                  self.selectedTopicId = topic.id!
-                }
-              }
+          VStack{
+            HStack {
+              Text("Click to choose a topic:")
+                .font(.system(size: 18))
+                .foregroundColor(Color(.darkGray))
+                .bold()
+                .padding(.leading)
+              
+              Spacer()
             }
-          }
+            ScrollView(.horizontal, showsIndicators: false) {
+              HStack{
+                ForEach(self.goalViewModel.allTopics, id: \.self.id!) { topic in
+                  EditGoalTopicSelection(topic: topic, isSelected: self.selectedTopicId == topic.id!) {
+                    if self.selectedTopicId == topic.id! {
+                      self.selectedTopicId = ""
+                    } else {
+                      self.selectedTopicId = topic.id!
+                    }
+                  }
+                }
+              }.frame(height: 90)
+            }.frame(height: 100)
+            
+            
+          }.frame(height: 200)
         }
         
+        
+        HStack {
+          Text("Click to choose a duration:")
+            .font(.system(size: 18))
+            .foregroundColor(Color(.darkGray))
+            .bold()
+            .padding()
+          ZStack{
+            Circle()
+              .stroke(Color(red: 95 / 255, green: 52 / 255, blue: 255 / 255), lineWidth: 2)
+              .frame(width: 40, height: 40)
+            
+            Picker(selection: self.$duration, label: Text("choose from the duration")) {
+              let minDuration = max(self.goalViewModel.goal.checkInDates.count, EditGoalView.DURATION_LOWER_BOUND)
+              
+              ForEach(minDuration...EditGoalView.DURATION_UPPER_BOUND, id: \.self) {
+                Text(String($0))
+              }
+            }
+            .pickerStyle(MenuPickerStyle())
+            .frame(width: 20)
+            .clipped()
+          }
+          Spacer()
+        }
         Spacer()
       }
       
@@ -121,7 +174,7 @@ struct EditGoalView: View {
           
           self.goalViewModel.goal.duration = self.duration
           self.goalViewModel.goal.isCompleted =
-            self.goalViewModel.goal.checkInDates.count == self.goalViewModel.goal.duration
+          self.goalViewModel.goal.checkInDates.count == self.goalViewModel.goal.duration
           
           self.goalViewModel.goal.lastUpdateDate = Timestamp.init()
           self.goalViewModel.goalService.createOrUpdate(object: self.goalViewModel.goal) {
@@ -152,7 +205,15 @@ struct EditGoalView: View {
         }
       }) {
         Text("Confirm")
+          .foregroundColor(Color.white)
       }
+      .frame(width: 230, height: 10)
+      .padding()
+      .background(
+        RoundedRectangle(cornerRadius: 15)
+          .fill(Color(red: 95 / 255, green: 52 / 255, blue: 255 / 255))
+      )
+      .clipShape(Capsule())
       .alert(isPresented: self.$fireInputMissingAlert) {
         Alert(
           title: Text("Missing Goal Info"),
@@ -179,19 +240,19 @@ struct EditGoalView: View {
         }) {
           Image(systemName: "trash")
         }
-        .alert(isPresented: self.$fireDeleteGoalAlert) {
-          Alert(
-            title: Text("Please confirm to delete this goal."),
-            message: Text("After deletion, all its historical records cannot be resumed."),
-            primaryButton: .cancel(Text("Cancel")),
-            secondaryButton: .destructive(Text("Delete")) {
-              self.goalViewModel.goalService.deleteGoalCascade(goal: self.goalViewModel.goal) {
-                // return to root view: UserGoalView
-                self.selectedGoalId = nil
+          .alert(isPresented: self.$fireDeleteGoalAlert) {
+            Alert(
+              title: Text("Please confirm to delete this goal."),
+              message: Text("After deletion, all its historical records cannot be resumed."),
+              primaryButton: .cancel(Text("Cancel")),
+              secondaryButton: .destructive(Text("Delete")) {
+                self.goalViewModel.goalService.deleteGoalCascade(goal: self.goalViewModel.goal) {
+                  // return to root view: UserGoalView
+                  self.selectedGoalId = nil
+                }
               }
-            }
-          )
-        }
+            )
+          }
       )
     } else {
       // disable delete goal button if creating a new goal

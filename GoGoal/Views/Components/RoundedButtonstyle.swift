@@ -25,24 +25,16 @@ struct RoundedButtonstyle: ButtonStyle {
   struct RoundedButton: View {
     
     let configuration: ButtonStyle.Configuration
+    
     @Environment(\.isEnabled) private var isEnabled
     @Environment(\.colorScheme) private var colorScheme
     
-    //two different colors depending on the state of configuration
     var backgroundColor: Color {
-      if configuration.isPressed {
-        return Color(red: 95/255, green: 52/255, blue: 255/255)
-      }
-      
-      //return Color(red: 95, green: 52, blue: 255)
-      return Color(red: 95/255, green: 52/255, blue: 255/255)
+      return Color(red: 95 / 255, green: 52 / 255, blue: 255 / 255)
     }
     
     var labelColor: Color {
-      if configuration.isPressed {
-        return Color.black
-      }
-      return Color.white
+      return configuration.isPressed ? Color.black : Color.white
     }
     
     var body: some View {
@@ -52,9 +44,9 @@ struct RoundedButtonstyle: ButtonStyle {
             .fill(backgroundColor)
             .padding(1)
         )
-        .overlay(configuration.label
-                  .foregroundColor(labelColor))
+        .overlay(configuration.label.foregroundColor(labelColor))
         .font(.body)
     }
   }
+  
 }

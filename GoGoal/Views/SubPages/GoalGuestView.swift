@@ -19,12 +19,10 @@ struct GoalGuestView: View {
   
   var body: some View {
     VStack {
-      Spacer()
-      
       Group {
         HStack() {
           Spacer()
-
+          
           if let owner = self.owner {
             Image.fromUIImage(uiImage: owner.avatar)?
               .resizable()
@@ -35,56 +33,51 @@ struct GoalGuestView: View {
                   .stroke(Color.white, lineWidth: 2)
                   .shadow(radius: 40)
               )
-              .frame(width: 60, height: 60)
-
+              .frame(width: 40, height: 40)
             Text(owner.getFullName())
               .bold()
-
             Spacer()
           }
         }
-
-        Spacer()
       }
       
-      Group {
+      VStack {
         HStack {
           Spacer()
+          
+          Text(self.goalViewModel.goal.title)
+            .font(.system(size: 25))
           
           self.goalViewModel.topicIcon?
             .resizable()
             .scaledToFit()
             .clipShape(Rectangle())
-            .overlay(
-              Rectangle()
-                .stroke(Color.white, lineWidth: 2)
-                .shadow(radius: 40)
-            )
-            .frame(width: 60, height: 60)
-          
-          Spacer()
-          
-          Text(self.goalViewModel.goal.title)
-            .bold()
+            .frame(width: 30, height: 30)
           
           Spacer()
         }
+        .padding([.top, .leading, .trailing])
         
-        Spacer()
+        HStack {
+          Image(systemName: "star.circle")
+            .font(.largeTitle)
+          
+          let checkInNum = self.goalViewModel.goal.checkInDates.count
+          Text("Progress: \(checkInNum) /")
+            .font(.system(size: 20))
+          
+          Text("\(self.goalViewModel.goal.duration)")
+            .font(.system(size: 20))
+        }
         
         if let description = self.goalViewModel.goal.description {
           Text(description)
-          Spacer()
+            .lineLimit(7)
+            .fixedSize(horizontal: false, vertical: true)
+            .foregroundColor(Color(.darkGray))
+            .padding()
         }
-        
-        let checkInNum = self.goalViewModel.goal.checkInDates.count
-        let progress = Double(checkInNum) / Double(self.goalViewModel.goal.duration)
-        
-        Text("Progress: \(checkInNum) / \(self.goalViewModel.goal.duration)")
-        ProgressView(value: progress)
       }
-      
-      Spacer()
       
       List {
         let numOfPosts: Int = self.goalViewModel.posts.count

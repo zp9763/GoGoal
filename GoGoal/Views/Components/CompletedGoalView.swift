@@ -25,7 +25,6 @@ struct CompletedGoalView: View {
   let userService = UserService()
   
   var body: some View {
-    
     VStack(alignment: .leading) {
       Spacer().frame(height: 18)
       
@@ -38,13 +37,15 @@ struct CompletedGoalView: View {
             .font(.title)
             .foregroundColor(.white)
             .fixedSize(horizontal: false, vertical: true)
+          
           if let topicName = self.topicName {
             Text("#\(topicName)")
               .font(.system(size: 20, weight: .bold))
               .font(.title)
               .foregroundColor(.white)
           }
-          if let description = self.goal.description{
+          
+          if let description = self.goal.description {
             Text(description)
               .lineLimit(3)
               .font(.system(size: 15, weight: .semibold))
@@ -55,41 +56,29 @@ struct CompletedGoalView: View {
         }
         
         Spacer().frame(width: 18)
-      }.frame(width: 400, alignment: .leading)
+      }
+      .frame(width: 400, alignment: .leading)
       
       Spacer().frame(height: 10)
       
       HStack(alignment: .top) {
         Spacer().frame(width: 24)
         
-        if self.goal.duration > 1 {
-          Text("Completed in \(self.goal.duration) days")
-            .font(.system(size: 13, weight: .bold))
-            .font(.title)
-            .foregroundColor(.white)
-        } else {
-          Text("Completed in \(self.goal.duration) day")
-            .font(.system(size: 13, weight: .bold))
-            .font(.title)
-            .foregroundColor(.white)
-        }
+        Text("Completed in \(self.goal.duration) day(s)")
+          .font(.system(size: 13, weight: .bold))
+          .font(.title)
+          .foregroundColor(.white)
         
         Spacer()
         
-        if self.likesCount == 1 {
-          Text("\(likesCount) like")
-            .font(.system(size: 12, weight: .regular))
-            .font(.body)
-            .foregroundColor(.white)
-        } else if self.likesCount > 1 {
-          Text("\(likesCount) likes")
-            .font(.system(size: 12, weight: .regular))
-            .font(.body)
-            .foregroundColor(.white)
-        }
+        Text("\(likesCount) like(s)")
+          .font(.system(size: 12, weight: .regular))
+          .font(.body)
+          .foregroundColor(.white)
         
         Spacer().frame(width: 30)
-      }.frame(width: 400, alignment: .leading)
+      }
+      .frame(width: 400, alignment: .leading)
       
       Spacer()
       
@@ -110,6 +99,7 @@ struct CompletedGoalView: View {
                     .stroke(Color.white, lineWidth: 0.3)
                 )
                 .frame(width: 18, height: 18, alignment: .leading)
+              
               Text(owner.getFullName())
                 .font(.system(size: 12, weight: .regular))
                 .foregroundColor(.white)
@@ -118,7 +108,8 @@ struct CompletedGoalView: View {
         }
         
         Spacer()
-      }.frame(width: 400, height: 50, alignment: .top)
+      }
+      .frame(width: 400, height: 50, alignment: .top)
       .background(Color(#colorLiteral(red: 0.1376849364, green: 0.4269855777, blue: 0.5450149848, alpha: 1)))
     }
     .onAppear(perform: self.fetchGoalOwner)

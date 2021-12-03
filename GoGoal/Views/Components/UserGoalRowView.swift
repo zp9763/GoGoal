@@ -18,27 +18,27 @@ struct UserGoalRowView: View {
   let topicService = TopicService()
   
   var body: some View {
-    ZStack{
-      
+    ZStack {
       if colorScheme == .dark {
         Color(.darkGray).edgesIgnoringSafeArea(.all)
       } else {
         Color(white: 0.95).edgesIgnoringSafeArea(.all)
       }
       
-      HStack{
+      HStack {
         Spacer()
-        if(self.goal.isCompleted){
+        
+        if self.goal.isCompleted {
           Image(systemName: "checkmark.circle")
             .resizable()
             .frame(width: 35, height: 35, alignment: .trailing)
+          
           Spacer().frame(width: 10)
         }
-        
       }
       
       VStack {
-        HStack{
+        HStack {
           self.topicIcon?
             .resizable()
             .scaledToFit()
@@ -48,11 +48,12 @@ struct UserGoalRowView: View {
         
         Spacer().frame(height: 14)
         
-        HStack(alignment: .firstTextBaseline){
+        HStack(alignment: .firstTextBaseline) {
           Text(self.goal.title)
             .font(.system(size: 15, weight: .semibold, design: .rounded))
             .foregroundColor(Color .primary)
             .padding(.init(top: 0, leading: 45, bottom: 0, trailing: 55))
+          
           Spacer()
         }
         
@@ -61,7 +62,7 @@ struct UserGoalRowView: View {
         let checkInNum = self.goal.checkInDates.count
         let progress = Double(checkInNum) / Double(self.goal.duration)
         
-        if !self.goal.isCompleted{
+        if !self.goal.isCompleted {
           ProgressView(value: progress)
         }
       }

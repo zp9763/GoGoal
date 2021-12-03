@@ -21,36 +21,23 @@ struct UserGoalView: View {
   var body: some View {
     NavigationView {
       VStack {
-        
         Spacer()
         
         HStack {
-          
           Spacer()
           
           Button(action: {
             self.displayInProgress = false
             self.updateDisplayedGoals()
           }) {
-            if displayInProgress {
-              RoundedRectangle(cornerRadius: 40)
-                .fill(Color(.systemGray5))
-                .frame(width: 100, height: 30, alignment: .center)
-                .overlay(
-                  Text("✓ Completed")
-                    .foregroundColor(.primary)
-                    .font(.system(size: 12, weight: .regular))
-                )
-            } else {
-              RoundedRectangle(cornerRadius: 40)
-                .fill(Color(.systemGray2))
-                .frame(width: 100, height: 30, alignment: .center)
-                .overlay(
-                  Text("✓ Completed")
-                    .foregroundColor(.primary)
-                    .font(.system(size: 12, weight: .regular))
-                )
-            }
+            RoundedRectangle(cornerRadius: 40)
+              .fill(Color(self.displayInProgress ? .systemGray5 : .systemGray2))
+              .frame(width: 100, height: 30, alignment: .center)
+              .overlay(
+                Text("✓ Completed")
+                  .foregroundColor(.primary)
+                  .font(.system(size: 12, weight: .regular))
+              )
           }
           
           Spacer()
@@ -59,34 +46,24 @@ struct UserGoalView: View {
             self.displayInProgress = true
             self.updateDisplayedGoals()
           }) {
-            if displayInProgress {
-              RoundedRectangle(cornerRadius: 40)
-                .fill(Color(.systemGray2))
-                .frame(width: 100, height: 30, alignment: .center)
-                .overlay(
-                  Text("↑ In-Progress")
-                    .foregroundColor(.primary)
-                    .font(.system(size: 12, weight: .regular))
-                )
-            } else {
-              RoundedRectangle(cornerRadius: 40)
-                .fill(Color(.systemGray5))
-                .frame(width: 100, height: 30, alignment: .center)
-                .overlay(
-                  Text("↑ In-Progress")
-                    .foregroundColor(.primary)
-                    .font(.system(size: 12, weight: .regular))
-                )
-            }
+            RoundedRectangle(cornerRadius: 40)
+              .fill(Color(self.displayInProgress ? .systemGray2 : .systemGray5))
+              .frame(width: 100, height: 30, alignment: .center)
+              .overlay(
+                Text("↑ In-Progress")
+                  .foregroundColor(.primary)
+                  .font(.system(size: 12, weight: .regular))
+              )
           }
           
           Spacer()
-        }.frame(height: 50)
+        }
+        .frame(height: 50)
         
         Spacer()
         
         ScrollView(showsIndicators: false) {
-          VStack{
+          VStack {
             ForEach(self.displayedGoals) { goal in
               NavigationLink(
                 destination: GoalProgressView(

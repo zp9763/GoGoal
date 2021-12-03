@@ -19,15 +19,20 @@ struct AchievementView: View {
     NavigationView {
       ScrollView {
         Spacer().frame(height: 20)
+        
         VStack(alignment: .leading) {
           Text("So many people achieved their goals")
             .foregroundColor(.primary)
             .font(.system(size: 15, weight: .bold))
+          
           Text("Here are their stories")
             .foregroundColor(.secondary)
             .font(.system(size: 14, weight: .semibold))
-        }.frame(width: 370, alignment: .leading)
+        }
+        .frame(width: 370, alignment: .leading)
+        
         Spacer().frame(height: 20)
+        
         VStack(spacing: 20) {
           ForEach(self.displayedGoals) { goal in
             NavigationLink(
