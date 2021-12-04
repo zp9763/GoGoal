@@ -95,14 +95,8 @@ struct GoalProgressView: View {
             .opacity(0.1)
           
           List {
-            Section(header: Text("Posts")
-                      .font(.system(size: 23))
-                      .foregroundColor(Color.primary)
-            ) {
-              let numOfPosts: Int = self.goalViewModel.posts.count
-              ForEach(Array(zip(self.goalViewModel.posts.indices, self.goalViewModel.posts)), id: \.0) {
-                InnerPostView(user: self.user, post: $1, postIndex: numOfPosts - $0)
-              }
+            ForEach(self.goalViewModel.posts) {
+              InnerPostView(user: self.user, post: $0)
             }
           }
         }

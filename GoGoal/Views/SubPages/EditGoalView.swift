@@ -71,9 +71,9 @@ struct EditGoalView: View {
         }
       }
       
+      Spacer()
+
       VStack {
-        Spacer()
-        
         if self.user == nil {
           // forbidden topic selection for an existing goal
           let topic = self.goalViewModel.allTopics
@@ -91,8 +91,20 @@ struct EditGoalView: View {
               Spacer()
             }
             
-            TopicView(topic: topic[0])
-              .offset(x: -100, y: 0)
+            HStack {
+              topic[0].icon?
+                .resizable()
+                .scaledToFit()
+                .frame(width: 40, height: 40)
+                .padding(.leading)
+                            
+              Text(topic[0].name)
+                .font(.system(size: 18, weight: .medium))
+                .foregroundColor(.primary)
+                .padding(.leading)
+              
+              Spacer()
+            }
           } else {
             EmptyView()
           }
@@ -137,10 +149,13 @@ struct EditGoalView: View {
               .stroke(Color(red: 95 / 255, green: 52 / 255, blue: 255 / 255), lineWidth: 2)
               .frame(width: 40, height: 40)
             
-            Picker(selection: self.$duration, label: Text("Choose from the duration")) {
+            Picker(
+              selection: self.$duration,
+              label: Image(systemName: "timer").frame(width: 30, height: 30, alignment: .center)
+            ) {
               let minDuration = max(self.goalViewModel.goal.checkInDates.count, EditGoalView.DURATION_LOWER_BOUND)
               
-              ForEach(minDuration...EditGoalView.DURATION_UPPER_BOUND, id: \.self) {
+              ForEach((minDuration...EditGoalView.DURATION_UPPER_BOUND).reversed(), id: \.self) {
                 Text(String($0))
               }
             }
@@ -152,9 +167,18 @@ struct EditGoalView: View {
           Spacer()
         }
         
-        Spacer()
+        HStack {
+          Text("\(self.duration) days")
+            .font(.system(size: 18, weight: .medium))
+            .foregroundColor(.primary)
+            .padding(.leading)
+          
+          Spacer()
+        }
       }
       
+      Spacer()
+
       Button(action: {
         guard self.title != "" else {
           self.inputMissingAlertReason = "Please enter your goal title."

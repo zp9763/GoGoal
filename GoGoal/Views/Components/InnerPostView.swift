@@ -15,26 +15,18 @@ struct InnerPostView: View {
   var user: User
   
   @State var post: Post
-  
-  var postIndex: Int
-  
+    
   let postService = PostService()
   
   var body: some View {
     VStack(alignment: .leading) {
       
-      Text("Day \(self.postIndex)")
-        .font(.system(size: 23))
+      Text("\(self.post.createDate.printDate())")
+        .font(.system(size: 20))
         .bold()
         .padding()
       
-      HStack {
-        Image(systemName: "star.fill")
-        
-        Text(self.post.content)
-        
-        Spacer()
-      }
+      Text("\(self.post.content)").padding()
       
       if let photos = self.post.photos {
         let columns = [GridItem](
@@ -50,7 +42,7 @@ struct InnerPostView: View {
               .clipShape(Rectangle())
               .frame(width: 100, height: 80)
           }
-        }
+        }.padding()
       }
       
       HStack {

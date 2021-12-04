@@ -50,6 +50,7 @@ struct CheckInGoalView: View {
           RoundedRectangle(cornerRadius: 20, style: .continuous)
             .stroke(Color.black, lineWidth: 3)
         )
+        .multilineTextAlignment(.center)
         .padding([.leading, .trailing])
       
       Spacer()
@@ -74,27 +75,39 @@ struct CheckInGoalView: View {
           Spacer()
           
           VStack {
-            ZStack {
-              Rectangle()
-                .fill(Color.white)
-                .frame(width: 100, height: 50)
-                .background(
-                  RoundedRectangle(cornerRadius: 20, style: .continuous)
-                    .stroke(Color.black, lineWidth: 1)
-                )
-              
-              Image("new_post_photo")
-            }
-            
             // deactivate button after reaching photo number limit
             if self.photos.count < CheckInGoalView.MAX_PHOTO_NUM {
               Button(action: {
                 self.showImagePicker = true
               }) {
-                Text("Add a photo")
-                  .foregroundColor(Color.primary)
+                ZStack {
+                  Rectangle()
+                    .fill(Color.white)
+                    .frame(width: 100, height: 50)
+                    .background(
+                      RoundedRectangle(cornerRadius: 20, style: .continuous)
+                        .stroke(Color.black, lineWidth: 1)
+                    )
+                  
+                  Image("new_post_photo")
+                }
               }
+              
+              Text("Add a photo")
+                .foregroundColor(Color.primary)
             } else {
+              ZStack {
+                Rectangle()
+                  .fill(Color.white)
+                  .frame(width: 100, height: 50)
+                  .background(
+                    RoundedRectangle(cornerRadius: 20, style: .continuous)
+                      .stroke(Color.black, lineWidth: 1)
+                  )
+                
+                Image("new_post_photo")
+              }
+              
               Text("Photos are full")
                 .foregroundColor(Color.primary)
             }
@@ -103,26 +116,26 @@ struct CheckInGoalView: View {
           Spacer()
           
           VStack {
-            ZStack {
-              Rectangle()
-                .fill(Color.white)
-                .frame(width: 80, height: 50)
-                .background(
-                  RoundedRectangle(cornerRadius: 20, style: .continuous)
-                    .stroke(Color.black, lineWidth: 1)
-                )
-              
-              Rectangle()
-                .stroke(Color.gray)
-                .frame(width: 50, height: 1)
-            }
-            
             Button(action: {
               _ = self.photos.popLast()
             }) {
-              Text("Remove a photo")
+              ZStack {
+                Rectangle()
+                  .fill(Color.white)
+                  .frame(width: 80, height: 50)
+                  .background(
+                    RoundedRectangle(cornerRadius: 20, style: .continuous)
+                      .stroke(Color.black, lineWidth: 1)
+                  )
+                
+                Rectangle()
+                  .stroke(Color.gray)
+                  .frame(width: 50, height: 1)
+              }
             }
-            .foregroundColor(Color.primary)
+            
+            Text("Remove a photo")
+              .foregroundColor(Color.primary)
           }
           
           Spacer()

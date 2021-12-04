@@ -13,4 +13,10 @@ extension Timestamp: Comparable {
     return t1.seconds < t2.seconds
   }
   
+  public func printDate() -> String {
+    let df = DateFormatter()
+    df.dateFormat = "yyyy-MM-dd hh:mm"
+    return df.string(from: self.dateValue())
+  }
+  
 }

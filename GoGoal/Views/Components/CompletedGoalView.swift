@@ -64,14 +64,14 @@ struct CompletedGoalView: View {
       HStack(alignment: .top) {
         Spacer().frame(width: 24)
         
-        Text("Completed in \(self.goal.duration) day(s)")
+        Text("Completed in \(self.goal.duration) days")
           .font(.system(size: 13, weight: .bold))
           .font(.title)
           .foregroundColor(.white)
         
         Spacer()
         
-        Text("\(likesCount) like(s)")
+        Text("\(likesCount) likes")
           .font(.system(size: 12, weight: .regular))
           .font(.body)
           .foregroundColor(.white)

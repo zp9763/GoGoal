@@ -73,7 +73,7 @@ struct PostView: View {
             Spacer()
             
             let columns = [GridItem](
-              repeating: GridItem(.flexible()),
+              repeating: GridItem(.flexible(minimum: 100, maximum: 120)),
               count: PostView.PHOTO_COLUMN
             )
             

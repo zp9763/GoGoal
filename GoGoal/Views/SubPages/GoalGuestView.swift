@@ -19,6 +19,8 @@ struct GoalGuestView: View {
   
   var body: some View {
     VStack {
+      Spacer()
+      
       Group {
         HStack() {
           Spacer()
@@ -82,15 +84,13 @@ struct GoalGuestView: View {
       }
       
       List {
-        let numOfPosts: Int = self.goalViewModel.posts.count
-        ForEach(Array(zip(self.goalViewModel.posts.indices, self.goalViewModel.posts)), id: \.0) {
-          InnerPostView(user: self.user, post: $1, postIndex: numOfPosts - $0)
+        ForEach(self.goalViewModel.posts) {
+          InnerPostView(user: self.user, post: $0)
         }
       }
       
       Spacer()
     }
-    .navigationBarTitle("Progress", displayMode: .inline)
     .onAppear(perform: self.fetchGoalOwner)
     .onAppear(perform: self.goalViewModel.fetchGoalTopicIcon)
     .onAppear(perform: self.goalViewModel.fetchAllGoalPosts)
