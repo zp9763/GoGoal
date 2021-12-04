@@ -121,7 +121,7 @@ struct SignUpView: View {
               Spacer().frame(width: 3)
               
               ForEach(self.allTopics, id: \.self.id!) { topic in
-                TopicSelectionView(topic: topic, isSelected: self.subscribedTopicIds.contains(topic.id!)) {
+                SignUpTopicSelection(topic: topic, isSelected: self.subscribedTopicIds.contains(topic.id!)) {
                   if self.subscribedTopicIds.contains(topic.id!) {
                     self.subscribedTopicIds.removeAll() { $0 == topic.id! }
                   } else {

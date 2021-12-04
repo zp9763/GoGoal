@@ -1,5 +1,5 @@
 //
-//  TopicSelectionView.swift
+//  SignUpTopicSelection.swift
 //  GoGoal
 //
 //  Created by Peng Zhao on 11/1/21.
@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct TopicSelectionView: View {
+struct SignUpTopicSelection: View {
   
   var topic: Topic
   var isSelected: Bool
@@ -16,7 +16,7 @@ struct TopicSelectionView: View {
   var body: some View {
     Button(action: self.action) {
       VStack {
-        TopicView(topic: self.topic)
+        SignUpTopicView(topic: self.topic)
         
         Spacer().frame(height: 5)
         

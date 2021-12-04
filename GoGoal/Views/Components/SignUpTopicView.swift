@@ -1,5 +1,5 @@
 //
-//  TopicView.swift
+//  SignUpTopicView.swift
 //  GoGoal
 //
 //  Created by Peng Zhao on 11/1/21.
@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct TopicView: View {
+struct SignUpTopicView: View {
   
   var topic: Topic
   

@@ -15,8 +15,8 @@
 		336B679C274EF96700CE444F /* ProfileTopicSelection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 336B679B274EF96700CE444F /* ProfileTopicSelection.swift */; };
 		336B679E274F037000CE444F /* ProgressBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 336B679D274F037000CE444F /* ProgressBar.swift */; };
 		336B67A0274F070600CE444F /* ProfileTopicView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 336B679F274F070600CE444F /* ProfileTopicView.swift */; };
-		336B67A2274F0FBC00CE444F /* TopicView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 336B67A1274F0FBC00CE444F /* TopicView.swift */; };
-		336B67A4274F0FFB00CE444F /* TopicSelectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 336B67A3274F0FFB00CE444F /* TopicSelectionView.swift */; };
+		336B67A2274F0FBC00CE444F /* SignUpTopicView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 336B67A1274F0FBC00CE444F /* SignUpTopicView.swift */; };
+		336B67A4274F0FFB00CE444F /* SignUpTopicSelection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 336B67A3274F0FFB00CE444F /* SignUpTopicSelection.swift */; };
 		39B09B685F652E8DE351C003 /* Pods_GoGoal.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E984E783F86CBF2A328AC6CD /* Pods_GoGoal.framework */; };
 		57409A41272E11C900578CD9 /* UserGoalRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57409A40272E11C900578CD9 /* UserGoalRowView.swift */; };
 		57409A43272E161900578CD9 /* GoalProgressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57409A42272E161900578CD9 /* GoalProgressView.swift */; };
@@ -91,8 +91,8 @@
 		336B679B274EF96700CE444F /* ProfileTopicSelection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileTopicSelection.swift; sourceTree = "<group>"; };
 		336B679D274F037000CE444F /* ProgressBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgressBar.swift; sourceTree = "<group>"; };
 		336B679F274F070600CE444F /* ProfileTopicView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileTopicView.swift; sourceTree = "<group>"; };
-		336B67A1274F0FBC00CE444F /* TopicView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = TopicView.swift; path = GoGoal/Views/Components/TopicView.swift; sourceTree = SOURCE_ROOT; };
-		336B67A3274F0FFB00CE444F /* TopicSelectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopicSelectionView.swift; sourceTree = "<group>"; };
+		336B67A1274F0FBC00CE444F /* SignUpTopicView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = SignUpTopicView.swift; path = GoGoal/Views/Components/SignUpTopicView.swift; sourceTree = SOURCE_ROOT; };
+		336B67A3274F0FFB00CE444F /* SignUpTopicSelection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpTopicSelection.swift; sourceTree = "<group>"; };
 		57409A40272E11C900578CD9 /* UserGoalRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserGoalRowView.swift; sourceTree = "<group>"; };
 		57409A42272E161900578CD9 /* GoalProgressView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoalProgressView.swift; sourceTree = "<group>"; };
 		57409A44272E164400578CD9 /* CheckInGoalView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckInGoalView.swift; sourceTree = "<group>"; };
@@ -358,12 +358,12 @@
 				3348526427333DBA0067D516 /* CompletedGoalView.swift */,
 				57409A4A272F6C1C00578CD9 /* PostView.swift */,
 				57D06C8827435BB900F8A448 /* InnerPostView.swift */,
+				336B67A1274F0FBC00CE444F /* SignUpTopicView.swift */,
+				336B67A3274F0FFB00CE444F /* SignUpTopicSelection.swift */,
+				330EF75B2753F9D300D88363 /* EditGoalTopicSelection.swift */,
 				335F7608274B0CEE008D879A /* ProfileTopicGrid.swift */,
-				336B67A1274F0FBC00CE444F /* TopicView.swift */,
-				336B67A3274F0FFB00CE444F /* TopicSelectionView.swift */,
 				336B679F274F070600CE444F /* ProfileTopicView.swift */,
 				336B679B274EF96700CE444F /* ProfileTopicSelection.swift */,
-				330EF75B2753F9D300D88363 /* EditGoalTopicSelection.swift */,
 				336B679D274F037000CE444F /* ProgressBar.swift */,
 				335F760E274B2957008D879A /* RoundedButtonstyle.swift */,
 				57DA1F142734699600C77B10 /* PhotoCaptureView.swift */,
@@ -572,7 +572,7 @@
 				5751AD2C271E4BB8009D94A5 /* GoalService.swift in Sources */,
 				336B679E274F037000CE444F /* ProgressBar.swift in Sources */,
 				57C52C912725EE0000E0493B /* UserViewModel.swift in Sources */,
-				336B67A4274F0FFB00CE444F /* TopicSelectionView.swift in Sources */,
+				336B67A4274F0FFB00CE444F /* SignUpTopicSelection.swift in Sources */,
 				5773B525271D0AAB0029A220 /* User.swift in Sources */,
 				57409A43272E161900578CD9 /* GoalProgressView.swift in Sources */,
 				5773B532271D22DD0029A220 /* BaseRepository.swift in Sources */,
@@ -596,7 +596,7 @@
 				5751AD28271E4896009D94A5 /* Like.swift in Sources */,
 				57DA1F13273457B500C77B10 /* ImagePicker.swift in Sources */,
 				57409A4B272F6C1C00578CD9 /* PostView.swift in Sources */,
-				336B67A2274F0FBC00CE444F /* TopicView.swift in Sources */,
+				336B67A2274F0FBC00CE444F /* SignUpTopicView.swift in Sources */,
 				5773B534271DF2C50029A220 /* QueryHelper.swift in Sources */,
 				5773B530271D1B990029A220 /* FirestoreDecoder.swift in Sources */,
 				57C60A202730C1BE00E5255E /* AchievementView.swift in Sources */,

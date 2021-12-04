@@ -9,14 +9,14 @@ import SwiftUI
 
 struct ProfileTopicGrid: View {
   
-  let data: [Topic]
+  let topics: [Topic]
   
   let columns = [GridItem(.adaptive(minimum: 60))]
   
   var body: some View {
     ScrollView{
       LazyVGrid(columns: self.columns, spacing: 30) {
-        ForEach(self.data) { item in
+        ForEach(self.topics) { item in
           VStack {
             item.icon?
               .resizable()
