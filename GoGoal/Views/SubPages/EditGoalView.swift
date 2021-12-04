@@ -60,7 +60,7 @@ struct EditGoalView: View {
             .bold()
             .padding(.leading)
           
-          TextField(self.description, text: self.$description)
+          TextField("Add description", text: self.$description)
             .frame(height: 150)
             .background(
               RoundedRectangle(cornerRadius: 20, style: .continuous)
@@ -164,7 +164,7 @@ struct EditGoalView: View {
         }
         
         HStack {
-          Text("\(self.duration) days")
+          Text("\(self.duration) day\(self.duration > 1 ? "s" : "")")
             .font(.system(size: 18, weight: .medium))
             .foregroundColor(.primary)
             .padding(.leading)

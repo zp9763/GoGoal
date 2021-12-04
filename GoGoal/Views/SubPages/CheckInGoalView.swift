@@ -37,7 +37,7 @@ struct CheckInGoalView: View {
     VStack {
       HStack {
         Text("What have you done today?")
-          .font(.system(size: 18))
+          .font(.system(size: 20))
           .padding(.leading)
         
         Spacer()

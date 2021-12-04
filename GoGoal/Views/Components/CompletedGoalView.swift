@@ -40,7 +40,7 @@ struct CompletedGoalView: View {
           
           if let topicName = self.topicName {
             Text("#\(topicName)")
-              .font(.system(size: 20, weight: .bold))
+              .font(.system(size: 18, weight: .bold))
               .font(.title)
               .foregroundColor(.white)
           }
@@ -64,14 +64,14 @@ struct CompletedGoalView: View {
       HStack(alignment: .top) {
         Spacer().frame(width: 24)
         
-        Text("Completed in \(self.goal.duration) days")
+        Text("Completed in \(self.goal.duration) day\(self.goal.duration > 1 ? "s" : "")")
           .font(.system(size: 13, weight: .bold))
           .font(.title)
           .foregroundColor(.white)
         
         Spacer()
         
-        Text("\(likesCount) likes")
+        Text("\(self.likesCount) like\(self.likesCount > 1 ? "s" : "")")
           .font(.system(size: 12, weight: .regular))
           .font(.body)
           .foregroundColor(.white)

@@ -69,6 +69,8 @@ struct ProfileView: View {
         VStack {
           Group {
             HStack {
+              Image(systemName: "pencil")
+
               TextField(self.fullName, text: self.$fullName)
                 .font(.title2.bold())
                 .fixedSize()
@@ -89,8 +91,6 @@ struct ProfileView: View {
                   self.userViewModel.user.lastUpdateDate = Timestamp.init()
                   self.userViewModel.userService.createOrUpdate(object: self.userViewModel.user)
                 }
-              
-              Image(systemName: "square.and.pencil")
             }
             .offset(x: 0, y: 20)
             
@@ -142,7 +142,7 @@ struct ProfileView: View {
                   .bold()
                   .foregroundColor(Color.white)
               }
-              .frame(width: 230, height: 15)
+              .frame(width: 250, height: 15)
               .padding()
               .background(
                 RoundedRectangle(cornerRadius: 10)
