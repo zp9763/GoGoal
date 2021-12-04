@@ -33,6 +33,15 @@ struct MainView: View {
           Image(systemName: "person")
         }
     }
+    .onAppear(perform: {
+      NotificationManager.shared.requestAuthorization() { granted in
+        if granted {
+          NotificationManager.shared.scheduleNotification()
+        } else {
+          NotificationManager.shared.clearNotification()
+        }
+      }
+    })
   }
   
 }

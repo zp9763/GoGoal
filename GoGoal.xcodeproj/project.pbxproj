@@ -33,6 +33,8 @@
 		5751AD2C271E4BB8009D94A5 /* GoalService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5751AD2B271E4BB8009D94A5 /* GoalService.swift */; };
 		5751AD2E271E4BEB009D94A5 /* PostService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5751AD2D271E4BEB009D94A5 /* PostService.swift */; };
 		5751AD30271E4C07009D94A5 /* LikeService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5751AD2F271E4C07009D94A5 /* LikeService.swift */; };
+		57557144275C0AA400C569D0 /* NotificationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57557143275C0AA400C569D0 /* NotificationManager.swift */; };
+		57557146275C268C00C569D0 /* NotificationType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57557145275C268C00C569D0 /* NotificationType.swift */; };
 		575A535B272DC601004619FA /* ImageExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 575A535A272DC601004619FA /* ImageExtension.swift */; };
 		576CBA6E27477277001BA156 /* EnvironmentConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = 576CBA6D27477276001BA156 /* EnvironmentConfig.swift */; };
 		5773B50B271CC0360029A220 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5773B50A271CC0360029A220 /* AppDelegate.swift */; };
@@ -108,6 +110,8 @@
 		5751AD2B271E4BB8009D94A5 /* GoalService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoalService.swift; sourceTree = "<group>"; };
 		5751AD2D271E4BEB009D94A5 /* PostService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostService.swift; sourceTree = "<group>"; };
 		5751AD2F271E4C07009D94A5 /* LikeService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LikeService.swift; sourceTree = "<group>"; };
+		57557143275C0AA400C569D0 /* NotificationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationManager.swift; sourceTree = "<group>"; };
+		57557145275C268C00C569D0 /* NotificationType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationType.swift; sourceTree = "<group>"; };
 		575A535A272DC601004619FA /* ImageExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageExtension.swift; sourceTree = "<group>"; };
 		576CBA6D27477276001BA156 /* EnvironmentConfig.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EnvironmentConfig.swift; sourceTree = "<group>"; };
 		5773B507271CC0360029A220 /* GoGoal.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GoGoal.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -192,6 +196,15 @@
 			path = Pods;
 			sourceTree = "<group>";
 		};
+		57557142275C0A9000C569D0 /* Notification */ = {
+			isa = PBXGroup;
+			children = (
+				57557145275C268C00C569D0 /* NotificationType.swift */,
+				57557143275C0AA400C569D0 /* NotificationManager.swift */,
+			);
+			path = Notification;
+			sourceTree = "<group>";
+		};
 		5773B4FE271CC0360029A220 = {
 			isa = PBXGroup;
 			children = (
@@ -215,6 +228,7 @@
 		5773B509271CC0360029A220 /* GoGoal */ = {
 			isa = PBXGroup;
 			children = (
+				57557142275C0A9000C569D0 /* Notification */,
 				5773B521271D06BC0029A220 /* Delegates */,
 				5773B522271D06D30029A220 /* Views */,
 				57C52C8F2725ED6600E0493B /* ViewModels */,
@@ -578,6 +592,7 @@
 				5773B532271D22DD0029A220 /* BaseRepository.swift in Sources */,
 				5751AD22271E46A5009D94A5 /* Topic.swift in Sources */,
 				5751AD30271E4C07009D94A5 /* LikeService.swift in Sources */,
+				57557146275C268C00C569D0 /* NotificationType.swift in Sources */,
 				5791906F2741C61F009BFAA1 /* EntryView.swift in Sources */,
 				5773B529271D132D0029A220 /* UserService.swift in Sources */,
 				5751AD26271E47C6009D94A5 /* Post.swift in Sources */,
@@ -612,6 +627,7 @@
 				335F760F274B2957008D879A /* RoundedButtonstyle.swift in Sources */,
 				5773B50D271CC0360029A220 /* SceneDelegate.swift in Sources */,
 				336B67A0274F070600CE444F /* ProfileTopicView.swift in Sources */,
+				57557144275C0AA400C569D0 /* NotificationManager.swift in Sources */,
 				5773B50F271CC0360029A220 /* MainView.swift in Sources */,
 				57C06BF5272CD98D00E7D6B4 /* FileStorage.swift in Sources */,
 				57C52C8C2725E94C00E0493B /* CommunityView.swift in Sources */,
