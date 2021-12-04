@@ -144,25 +144,21 @@ struct EditGoalView: View {
             .bold()
             .padding()
           
-          ZStack {
-            Circle()
-              .stroke(Color(red: 95 / 255, green: 52 / 255, blue: 255 / 255), lineWidth: 2)
-              .frame(width: 40, height: 40)
+          Picker(
+            selection: self.$duration,
+            label: Image(systemName: "timer")
+              .font(.system(size: 30))
+              .foregroundColor(Color(red: 95 / 255, green: 52 / 255, blue: 255 / 255))
+          ) {
+            let minDuration = max(self.goalViewModel.goal.checkInDates.count, EditGoalView.DURATION_LOWER_BOUND)
             
-            Picker(
-              selection: self.$duration,
-              label: Image(systemName: "timer").frame(width: 30, height: 30, alignment: .center)
-            ) {
-              let minDuration = max(self.goalViewModel.goal.checkInDates.count, EditGoalView.DURATION_LOWER_BOUND)
-              
-              ForEach((minDuration...EditGoalView.DURATION_UPPER_BOUND).reversed(), id: \.self) {
-                Text(String($0))
-              }
+            ForEach((minDuration...EditGoalView.DURATION_UPPER_BOUND).reversed(), id: \.self) {
+              Text(String($0))
             }
-            .pickerStyle(MenuPickerStyle())
-            .frame(width: 20)
-            .clipped()
           }
+          .pickerStyle(MenuPickerStyle())
+          .frame(width: 30)
+          .clipped()
           
           Spacer()
         }
