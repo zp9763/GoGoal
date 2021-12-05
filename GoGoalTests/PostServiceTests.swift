@@ -51,7 +51,7 @@ class PostServiceTests: XCTestCase {
     waitForExpectations(timeout: self.expired)
   }
   
-  func testGetById() {
+  func testGetByPostId() {
     self.postService.getById(id: self.post.id!) {
       XCTAssertEqual($0?.content, self.post.content)
       self.expectation.fulfill()
