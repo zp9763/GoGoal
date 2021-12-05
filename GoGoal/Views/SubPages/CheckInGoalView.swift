@@ -89,7 +89,7 @@ struct CheckInGoalView: View {
                         .stroke(Color.black, lineWidth: 1)
                     )
                   
-                  Image("new_post_photo")
+                  Image("select_photo_button")
                 }
               }
               
@@ -105,7 +105,7 @@ struct CheckInGoalView: View {
                       .stroke(Color.black, lineWidth: 1)
                   )
                 
-                Image("new_post_photo")
+                Image("select_photo_button")
               }
               
               Text("Photos are full")

@@ -35,6 +35,9 @@
 		5751AD30271E4C07009D94A5 /* LikeService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5751AD2F271E4C07009D94A5 /* LikeService.swift */; };
 		57557144275C0AA400C569D0 /* NotificationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57557143275C0AA400C569D0 /* NotificationManager.swift */; };
 		57557146275C268C00C569D0 /* NotificationType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57557145275C268C00C569D0 /* NotificationType.swift */; };
+		57557148275C604A00C569D0 /* GoalServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57557147275C604A00C569D0 /* GoalServiceTests.swift */; };
+		5755714A275C683300C569D0 /* TopicServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57557149275C683300C569D0 /* TopicServiceTests.swift */; };
+		5755714C275C6A3D00C569D0 /* PostServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5755714B275C6A3D00C569D0 /* PostServiceTests.swift */; };
 		575A535B272DC601004619FA /* ImageExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 575A535A272DC601004619FA /* ImageExtension.swift */; };
 		576CBA6E27477277001BA156 /* EnvironmentConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = 576CBA6D27477276001BA156 /* EnvironmentConfig.swift */; };
 		5773B50B271CC0360029A220 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5773B50A271CC0360029A220 /* AppDelegate.swift */; };
@@ -55,7 +58,6 @@
 		579190712741E870009BFAA1 /* AuthSession.swift in Sources */ = {isa = PBXBuildFile; fileRef = 579190702741E870009BFAA1 /* AuthSession.swift */; };
 		579190732741EF70009BFAA1 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 579190722741EF70009BFAA1 /* LoginView.swift */; };
 		579190752741EF85009BFAA1 /* SignUpView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 579190742741EF85009BFAA1 /* SignUpView.swift */; };
-		57B82490273708A3008096A5 /* GoGoalTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57B8248F273708A3008096A5 /* GoGoalTests.swift */; };
 		57B82498273708BA008096A5 /* UserServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57B82497273708BA008096A5 /* UserServiceTests.swift */; };
 		57C06BF5272CD98D00E7D6B4 /* FileStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57C06BF4272CD98D00E7D6B4 /* FileStorage.swift */; };
 		57C52C8A2725E93500E0493B /* UserGoalView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57C52C892725E93500E0493B /* UserGoalView.swift */; };
@@ -112,6 +114,9 @@
 		5751AD2F271E4C07009D94A5 /* LikeService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LikeService.swift; sourceTree = "<group>"; };
 		57557143275C0AA400C569D0 /* NotificationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationManager.swift; sourceTree = "<group>"; };
 		57557145275C268C00C569D0 /* NotificationType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationType.swift; sourceTree = "<group>"; };
+		57557147275C604A00C569D0 /* GoalServiceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoalServiceTests.swift; sourceTree = "<group>"; };
+		57557149275C683300C569D0 /* TopicServiceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopicServiceTests.swift; sourceTree = "<group>"; };
+		5755714B275C6A3D00C569D0 /* PostServiceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostServiceTests.swift; sourceTree = "<group>"; };
 		575A535A272DC601004619FA /* ImageExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageExtension.swift; sourceTree = "<group>"; };
 		576CBA6D27477276001BA156 /* EnvironmentConfig.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EnvironmentConfig.swift; sourceTree = "<group>"; };
 		5773B507271CC0360029A220 /* GoGoal.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GoGoal.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -135,7 +140,6 @@
 		579190722741EF70009BFAA1 /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
 		579190742741EF85009BFAA1 /* SignUpView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpView.swift; sourceTree = "<group>"; };
 		57B8248D273708A3008096A5 /* GoGoalTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = GoGoalTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		57B8248F273708A3008096A5 /* GoGoalTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoGoalTests.swift; sourceTree = "<group>"; };
 		57B82491273708A3008096A5 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		57B82497273708BA008096A5 /* UserServiceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserServiceTests.swift; sourceTree = "<group>"; };
 		57C06BF4272CD98D00E7D6B4 /* FileStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileStorage.swift; sourceTree = "<group>"; };
@@ -326,8 +330,10 @@
 			isa = PBXGroup;
 			children = (
 				57B82491273708A3008096A5 /* Info.plist */,
-				57B8248F273708A3008096A5 /* GoGoalTests.swift */,
 				57B82497273708BA008096A5 /* UserServiceTests.swift */,
+				57557149275C683300C569D0 /* TopicServiceTests.swift */,
+				57557147275C604A00C569D0 /* GoalServiceTests.swift */,
+				5755714B275C6A3D00C569D0 /* PostServiceTests.swift */,
 			);
 			path = GoGoalTests;
 			sourceTree = "<group>";
@@ -646,7 +652,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				57B82498273708BA008096A5 /* UserServiceTests.swift in Sources */,
-				57B82490273708A3008096A5 /* GoGoalTests.swift in Sources */,
+				5755714A275C683300C569D0 /* TopicServiceTests.swift in Sources */,
+				57557148275C604A00C569D0 /* GoalServiceTests.swift in Sources */,
+				5755714C275C6A3D00C569D0 /* PostServiceTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
