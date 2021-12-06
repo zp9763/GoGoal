@@ -15,7 +15,7 @@ struct UserGoalRowView: View {
   
   @Environment(\.colorScheme) var colorScheme
   
-  let topicService = TopicService()
+  let topicService = TopicService.shared
   
   var body: some View {
     ZStack {

@@ -13,8 +13,8 @@ class GoalServiceTests: XCTestCase {
   let expired: TimeInterval = 5
   var expectation: XCTestExpectation!
   
-  let goalService = GoalService()
-  let postService = PostService()
+  let goalService = GoalService.shared
+  let postService = PostService.shared
   
   let goal = Goal(
     userId: UUID().uuidString,

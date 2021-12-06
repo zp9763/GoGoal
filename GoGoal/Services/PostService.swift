@@ -9,6 +9,8 @@ import FirebaseFirestore
 
 class PostService: BaseRepository<Post> {
   
+  static let shared = PostService()
+  
   private static let RECENT_POST_QUERY_LIMIT: Int = 100
   
   let storage = FileStorage(.posts)

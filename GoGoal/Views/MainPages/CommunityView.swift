@@ -13,7 +13,7 @@ struct CommunityView: View {
   
   @State var displayedPosts = [Post]()
   
-  let postService = PostService()
+  let postService = PostService.shared
   
   var body: some View {
     NavigationView {

@@ -20,10 +20,10 @@ struct PostView: View {
   @State var goal: Goal?
   @State var topicIcon: Image?
   
-  let topicService = TopicService()
-  let userService = UserService()
-  let postService = PostService()
-  let goalService = GoalService()
+  let topicService = TopicService.shared
+  let userService = UserService.shared
+  let postService = PostService.shared
+  let goalService = GoalService.shared
   
   var body: some View {
     VStack {

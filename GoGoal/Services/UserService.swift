@@ -9,6 +9,8 @@ import FirebaseFirestore
 
 class UserService: BaseRepository<User> {
   
+  static let shared = UserService()
+  
   private static let DEFAULT_AVATAR: String = "default_user_avatar"
   
   let storage = FileStorage(.users)

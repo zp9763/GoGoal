@@ -13,7 +13,7 @@ class PostServiceTests: XCTestCase {
   let expired: TimeInterval = 5
   var expectation: XCTestExpectation!
   
-  let postService = PostService()
+  let postService = PostService.shared
   
   let post = Post(
     userId: UUID().uuidString,

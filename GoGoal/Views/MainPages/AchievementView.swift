@@ -13,7 +13,7 @@ struct AchievementView: View {
   
   @State var displayedGoals = [Goal]()
   
-  let goalService = GoalService()
+  let goalService = GoalService.shared
   
   var body: some View {
     NavigationView {

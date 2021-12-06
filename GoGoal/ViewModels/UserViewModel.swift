@@ -14,9 +14,9 @@ class UserViewModel: ObservableObject {
   
   @Published var allTopics = [Topic]()
   
-  let userService = UserService()
-  let goalService = GoalService()
-  let topicService = TopicService()
+  let userService = UserService.shared
+  let goalService = GoalService.shared
+  let topicService = TopicService.shared
   
   func fetchAllUserGoals(_ completion: @escaping () -> Void = {}) {
     self.goalService.getByUserId(userId: self.user.id!) {

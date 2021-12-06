@@ -9,9 +9,11 @@ import FirebaseFirestore
 
 class GoalService: BaseRepository<Goal> {
   
+  static let shared = GoalService()
+  
   private static let COMPLETED_GOAL_QUERY_LIMIT: Int = 50
   
-  let postService = PostService()
+  let postService = PostService.shared
   
   init() {
     let rootRef = Firestore.firestore().collection(.goals)

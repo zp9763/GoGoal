@@ -13,7 +13,7 @@ class UserServiceTests: XCTestCase {
   let expired: TimeInterval = 5
   var expectation: XCTestExpectation!
   
-  let userService = UserService()
+  let userService = UserService.shared
   
   let user = User(
     email: "testuser@example.com",

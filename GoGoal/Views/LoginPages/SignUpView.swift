@@ -26,8 +26,8 @@ struct SignUpView: View {
   
   @Environment(\.presentationMode) var mode: Binding<PresentationMode>
   
-  let userService = UserService()
-  let topicService = TopicService()
+  let userService = UserService.shared
+  let topicService = TopicService.shared
   
   var body: some View {
     VStack {

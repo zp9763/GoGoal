@@ -9,6 +9,8 @@ import FirebaseFirestore
 import SwiftUI
 
 class TopicService: BaseRepository<Topic> {
+  
+  static let shared = TopicService()
     
   init() {
     let rootRef = Firestore.firestore().collection(.topics)

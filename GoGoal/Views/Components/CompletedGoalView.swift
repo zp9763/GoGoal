@@ -19,9 +19,9 @@ struct CompletedGoalView: View {
   @State var topicName: String?
   @State var likesCount: Int = 0
   
-  let topicService = TopicService()
-  let postService = PostService()
-  let userService = UserService()
+  let topicService = TopicService.shared
+  let postService = PostService.shared
+  let userService = UserService.shared
   
   var body: some View {
     VStack(alignment: .leading) {

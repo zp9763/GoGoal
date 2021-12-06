@@ -15,7 +15,7 @@ struct GoalGuestView: View {
   
   @ObservedObject var goalViewModel: GoalViewModel
   
-  let userService = UserService()
+  let userService = UserService.shared
   
   var body: some View {
     VStack {

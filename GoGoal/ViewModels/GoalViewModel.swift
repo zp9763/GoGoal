@@ -16,10 +16,10 @@ class GoalViewModel: ObservableObject {
   
   @Published var allTopics = [Topic]()
   
-  let goalService = GoalService()
-  let postService = PostService()
-  let topicService = TopicService()
-  let userService = UserService()
+  let goalService = GoalService.shared
+  let postService = PostService.shared
+  let topicService = TopicService.shared
+  let userService = UserService.shared
   
   init(goal: Goal? = nil) {
     if let goal = goal {

@@ -16,7 +16,7 @@ struct InnerPostView: View {
   
   @State var post: Post
     
-  let postService = PostService()
+  let postService = PostService.shared
   
   var body: some View {
     VStack(alignment: .leading) {

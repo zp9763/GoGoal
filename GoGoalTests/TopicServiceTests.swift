@@ -13,7 +13,7 @@ class TopicServiceTests: XCTestCase {
   let expired: TimeInterval = 5
   var expectation: XCTestExpectation!
   
-  let topicService = TopicService()
+  let topicService = TopicService.shared
   
   override func setUp() {
     self.expectation = expectation(description: "Able to CRUD with Firestore")
