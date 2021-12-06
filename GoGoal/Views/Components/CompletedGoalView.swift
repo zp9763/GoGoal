@@ -18,7 +18,6 @@ struct CompletedGoalView: View {
   @State var topicIcon: Image?
   @State var topicName: String?
   @State var likesCount: Int = 0
-  @State var selectedPhotos = [UIImage]()
   
   let topicService = TopicService()
   let postService = PostService()
@@ -114,7 +113,7 @@ struct CompletedGoalView: View {
     }
     .onAppear(perform: self.fetchGoalOwner)
     .onAppear(perform: self.fetchGoalTopicIcon)
-    .onAppear(perform: self.fetchGoalPosts)
+    .onAppear(perform: self.sumGoalPostsLikes)
   }
   
   func fetchGoalOwner() {
@@ -130,27 +129,9 @@ struct CompletedGoalView: View {
     }
   }
   
-  func fetchGoalPosts() {
+  func sumGoalPostsLikes() {
     self.postService.getByGoalId(goalId: self.goal.id!) { postList in
-      var likesCount: Int = 0
-      var selectedPhotos = [UIImage]()
-      
-      // sum up likes count and collect selected photos from recent posts
-      for post in postList.sorted(by: { $0.createDate > $1.createDate }) {
-        likesCount += post.likes?.count ?? 0
-        
-        if post.photos != nil && selectedPhotos.count < CompletedGoalView.MAX_PHOTO_NUM {
-          for photo in post.photos! {
-            selectedPhotos.append(photo)
-            if selectedPhotos.count == CompletedGoalView.MAX_PHOTO_NUM {
-              break
-            }
-          }
-        }
-      }
-      
-      self.likesCount = likesCount
-      self.selectedPhotos = selectedPhotos
+      self.likesCount = postList.reduce(0, { $0 + ($1.likes?.count ?? 0) })
     }
   }
   
