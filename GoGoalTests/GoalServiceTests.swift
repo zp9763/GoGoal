@@ -84,7 +84,7 @@ class GoalServiceTests: XCTestCase {
       }
     }
     
-    waitForExpectations(timeout: self.expired)
+    waitForExpectations(timeout: self.expired * 2)
   }
   
   func testGetCompletedByTopicIds() {
