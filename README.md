@@ -17,7 +17,7 @@ GoGoal is an innovative app that helps people track, achieve and share their goa
 
 Please take the following steps to deploy and run your own app:
 
-1. Install Xcode (recommend version 12,x)
+1. Install Xcode (recommend version 12.x)
 
 2. Git clone this repository to your local machine
 
