@@ -1,17 +1,15 @@
 # GoGoal
-## Introduction
+## Overview
 
 GoGoal is an innovative app that helps people track, achieve and share their goals. Featured by an interactive community, users can connect by the same subscribed topics and get motivated by each other's progress and achievements.
 
-## Useful links
+## App demo
 
-[Final project presentation](https://docs.google.com/presentation/d/1SRsgQ4quoIOuaUlc-RLGU8klx2Eesj9jjpp4KJIZx5U/edit?usp=sharing) (including app demo)
+[Project presentation](https://docs.google.com/presentation/d/1SRsgQ4quoIOuaUlc-RLGU8klx2Eesj9jjpp4KJIZx5U/edit?usp=sharing)
 
-[Final project poster](https://drive.google.com/file/d/1HOKqadc8QaHQm11j3liEKsnSTrIhLoSs/view?usp=sharing)
+[Project poster](https://drive.google.com/file/d/1HOKqadc8QaHQm11j3liEKsnSTrIhLoSs/view?usp=sharing)
 
-[Figma wireframes and prototype](https://www.figma.com/file/BJBHb090zgX1U1znavqm7e/GoGoal!?node-id=0%3A1)
-
-[Cloud Firestore project](https://console.firebase.google.com/u/0/project/gogoal-ea98f/overview)
+[Wireframes and prototype](https://www.figma.com/file/BJBHb090zgX1U1znavqm7e/GoGoal!?node-id=0%3A1)
 
 ## App setup
 
@@ -49,15 +47,3 @@ Please take the following steps to deploy and run your own app:
 10. To run the test suite, switch to the Test navigator. It always uses the `DEV` environment.
 
 Now you are ready to go!
-
-## Developers
-
-+ [Peng Zhao](https://github.com/zp9763)
-+ [Sihan Chen](https://github.com/coderballer)
-+ [Shen Jie](https://github.com/susanilmh)
-
-## Acknowledge
-
-+ [Prof. Heimann](https://github.com/profh)
-+ [Edward Cho](https://github.com/eycho97)
-+ Charlie Ma
