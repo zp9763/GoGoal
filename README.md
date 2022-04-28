@@ -3,6 +3,8 @@
 
 GoGoal is an innovative app that helps people track, achieve and share their goals. Featured by an interactive community, users can connect by the same subscribed topics and get motivated by each other's progress and achievements.
 
+**Tech stack: Swift, Xcode, Google Firebase**
+
 ## App demo
 
 [Project presentation](https://docs.google.com/presentation/d/1SRsgQ4quoIOuaUlc-RLGU8klx2Eesj9jjpp4KJIZx5U/edit?usp=sharing)
